@@ -1,0 +1,2 @@
+# resources
+good study
