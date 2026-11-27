@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>阶段 D · 获取流量与客户 | 跨境电商全体系自学指南</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="stage-d" data-base="../" data-mod="m10">
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" type="button" aria-label="打开目录">
+    <svg viewBox="0 0 20 20" fill="none"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+  </button>
+  <a class="brand" href="../index.html">
+    <span class="brand-mark">跨</span>
+    <span>跨境电商全体系自学指南<small>阶段 D · 获取流量与客户</small></span>
+  </a>
+  <div class="topbar-spacer"></div>
+  <button class="search-trigger" type="button">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.6"/><path d="M11 11l3.2 3.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <span class="st-label">搜索模块 / 术语 / 工具</span> <kbd>Ctrl K</kbd>
+  </button>
+  <div class="prog-pill"><div class="bar"><i style="width:0%"></i></div><span class="txt">0 / 25 模块</span></div>
+</header>
+
+<div class="mask" id="mask"></div>
+<div class="layout">
+  <aside class="sidebar" id="sidebar"><nav id="sidebarNav" aria-label="课程目录"></nav></aside>
+
+  <main class="main" id="main">
+    <div class="wrap">
+      <div class="crumb"><a href="../index.html">首页</a><span class="sep">/</span>阶段 D · 获取流量与客户<span class="sep">/</span>模块 10–14</div>
+
+      <!-- ==================== 模块 10 ==================== -->
+      <section class="module module-anchor" id="m10">
+        <header class="module-head">
+          <div class="module-meta">
+            <span class="meta-chip">模块 10</span>
+            <span class="meta-chip">阶段 D</span>
+            <span class="meta-chip pri-p1">优先级 P1</span>
+            <span class="meta-chip">约 10–15 学时（参考）</span>
+          </div>
+          <h1><span class="term" data-term="SEO">SEO</span> 搜索引擎优化</h1>
+          <p class="module-goal">学完本模块后，你能够：完成关键词研究与搜索意图分层；执行页面 SEO 与技术 SEO 基础设置；用 Search Console 诊断曝光/点击/转化问题；在 Google 搜索政策框架内管理内容生产。</p>
+          <div class="module-actions">
+            <button class="btn btn-primary mod-done-btn" type="button" data-mod="m10">标记本模块为已掌握</button>
+            <button class="btn btn-ghost mod-ex-btn" type="button" data-mod="m10">标记本模块练习已完成</button>
+          </div>
+        </header>
+
+        <h2><span class="no">1</span>学习目标</h2>
+        <ul class="checklist">
+          <li>能够解释抓取、索引、排序三阶段，并说明各阶段常见阻塞点。</li>
+          <li>能够将关键词按意图分类并映射到正确页面类型。</li>
+          <li>能够完成一个产品页与一个分类页的 On-page SEO 设置。</li>
+          <li>能够配置技术 SEO 基础项（canonical、重定向、sitemap、robots、<span class="term" data-term="结构化数据">结构化数据</span>）。</li>
+          <li>能够用 GSC 数据诊断三类典型问题并给出动作。</li>
+        </ul>
+
+        <h2><span class="no">2</span>核心概念与基础原理</h2>
+        <div class="cards">
+          <div class="kcard"><div class="kt">三阶段</div><p>抓取（Googlebot 发现并读取页面）→ 索引（入库）→ 排序（查询时匹配）。页面不被索引，一切免谈；被索引不排名，先查质量与意图匹配。</p></div>
+          <div class="kcard"><div class="kt">搜索意图</div><p>信息型（怎么选/是什么）、导航型（品牌名）、交易型（买/价格/免邮）、商业调查型（best/top/vs）。同一关键词不同意图对应不同页面，错配即低转化。</p></div>
+          <div class="kcard"><div class="kt">关键词类型</div><p>品类词（yoga mat）、产品词（cork yoga mat）、问题词（how to clean cork mat）、对比词（cork vs rubber mat）、长尾（cork yoga mat for hot yoga）。意图从宽到窄，转化率通常递增、量递减。</p></div>
+          <div class="kcard"><div class="kt"><span class="term" data-term="E-E-A-T">E-E-A-T</span></div><p>Google 质量指南框架：经验、专业、权威、可信。不直接作为排名信号，但在内容策略中是可靠的自检标准（详见 Google 官方文档）。</p></div>
+        </div>
+
+        <h2><span class="no">3</span>关键词研究与页面映射</h2>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>关键词类型</th><th>意图</th><th>落地页面</th><th>优化重点</th></tr></thead>
+          <tbody>
+            <tr><td>品类词</td><td>商业调查</td><td>集合/分类页</td><td>分类文案、筛选、内链</td></tr>
+            <tr><td>产品词</td><td>交易</td><td>产品页</td><td>标题、规格、评论、结构化数据</td></tr>
+            <tr><td>问题词</td><td>信息</td><td>博客/指南</td><td>直接回答问题、内链到产品</td></tr>
+            <tr><td>对比词</td><td>商业调查</td><td>比较页</td><td>客观对比表、透明方法论</td></tr>
+            <tr><td>品牌词</td><td>导航</td><td>首页/对应页</td><td>确保官网第一</td></tr>
+          </tbody>
+        </table></div>
+        <div class="tpl"><div class="tt">关键词研究表（可直接复制使用）</div><div class="tpl-body">关键词 | 月均搜索量 | 意图类型 | 当前排名 | 目标页面 | 难度初判 | 优先级 | 备注<br>
+（示例行）cork yoga mat | 1,900 | 产品词 | 无 | 产品页 | 中 | P1 | 主推 SKU<br>
+（示例行）how to clean a cork mat | 260 | 问题词 | 无 | 博客 | 低 | P2 | 内链到保养套装</div></div>
+
+        <h2><span class="no">4</span>页面 SEO 与技术 SEO</h2>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>项目</th><th>做法</th><th>常见错误</th></tr></thead>
+          <tbody>
+            <tr><td>Title</td><td>核心词+利益点，≤60 字符可见完整</td><td>堆词、品牌名占一半</td></tr>
+            <tr><td>Meta Description</td><td>含利益与差异化，吸引点击</td><td>空着或复制首页</td></tr>
+            <tr><td>标题层级</td><td>一个 H1，H2/H3 逻辑分层</td><td>用标题标签做样式</td></tr>
+            <tr><td>URL</td><td>短、含词、全小写连字符</td><td>参数串、中文直拼</td></tr>
+            <tr><td>内链</td><td>相关产品与文章互链，锚文本自然</td><td>孤岛页面</td></tr>
+            <tr><td>图片 alt</td><td>描述内容（含必要时关键词）</td><td>alt 空或关键词堆砌</td></tr>
+            <tr><td>canonical</td><td>指定规范版本，处理筛选参数重复</td><td>全部指向首页</td></tr>
+            <tr><td>重定向</td><td>301 永久重定向，避免链式</td><td>302 误用、死链</td></tr>
+            <tr><td>sitemap / robots</td><td>提交 XML sitemap；robots 不误屏蔽</td><td>屏蔽 CSS/JS 导致渲染异常</td></tr>
+            <tr><td>结构化数据</td><td>Product 结构化数据（价格、库存、评分）；与 Merchant Center 配合</td><td>标注内容与页面可见内容不一致（违反政策）</td></tr>
+          </tbody>
+        </table></div>
+        <div class="note"><strong>SEO 与 Merchant Center 的关系：</strong>Product 结构化数据帮助搜索引擎理解商品信息并争取富媒体结果；Merchant Center 商品数据源服务于 Google Shopping 与免费商品详情。两者数据应一致，且都必须符合 Google 商品政策。</div>
+
+        <h2><span class="no">5</span>内容策略与外链</h2>
+        <ul>
+          <li><strong>主题集群：</strong>1 个支柱页（如“cork yoga mats guide”）+ 多个集群文章（清洁、比较、尺寸），互相内链，建立主题权威。</li>
+          <li><strong>产品页 SEO vs 内容 SEO：</strong>前者优化有限 SKU 的转化页，后者扩大信息覆盖获取上游流量；两者用内链衔接。</li>
+          <li><strong>外链：</strong>来自相关站点的自然链接仍是排名因素之一；购买链接、私人博客网络（PBN）、大规模交换属于 Google 政策禁止的操纵行为，风险远大于收益。替代做法：原创数据/工具、媒体报道、真实合作。</li>
+          <li><strong>重复内容与关键词蚕食：</strong>多个页面竞争同一词会互相稀释；用 canonical 或内容合并解决，并建立“一页一词”映射表。</li>
+        </ul>
+        <div class="warn"><strong>AI 内容政策边界：</strong>Google 明确不禁止 AI 生成内容本身，但禁止“为操纵排名而大量生成的低价值页面”（scaled content abuse）。可用 AI 辅助研究与初稿，但发布前必须人工事实核查、补充一手经验与原创数据（详见 Google Search Central 垃圾政策文档）。</div>
+
+        <h2><span class="no">6</span>SEO 诊断工作流</h2>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>症状</th><th>检查顺序</th><th>典型原因</th></tr></thead>
+          <tbody>
+            <tr><td>页面无曝光</td><td>GSC 网址检查→索引状态→robots/canonical→手动操作</td><td>noindex、屏蔽、新站权重低、重复被忽略</td></tr>
+            <tr><td>曝光高点击低</td><td>对比 SERP 同行标题与富媒体结果</td><td>标题无差异化、缺评分/价格富媒体</td></tr>
+            <tr><td>流量高不转化</td><td>意图匹配→落地页一致性→价格/信任→结账</td><td>信息词承接页缺产品路径、流量不精准</td></tr>
+            <tr><td>排名下滑</td><td>时间点对算法更新/内容变更/外链变动</td><td>内容过期、竞品提升、技术故障</td></tr>
+          </tbody>
+        </table></div>
+
+        <h2><span class="no">7</span>实际操作流程</h2>
+        <div class="steps">
+          <div class="step"><h4>基建</h4><p>验证 GSC 与 <span class="term" data-term="GA4">GA4</span>、提交 sitemap、检查收录状态。</p></div>
+          <div class="step"><h4>关键词库</h4><p>用 Keyword Planner+竞品词+评论词建库，按意图分类与页面映射。</p></div>
+          <div class="step"><h4>页面优化</h4><p>优先交易型关键词对应的产品/分类页；按上表逐项设置。</p></div>
+          <div class="step"><h4>内容生产</h4><p>按集群写问题词/比较词内容，每篇回答一个具体问题并内链产品。</p></div>
+          <div class="step"><h4>监测迭代</h4><p>每月看 GSC 查询与页面报表，更新低点击标题、扩表现好主题、合并蚕食页面。</p><span class="io">产出：关键词库 + 优化记录 + 月度 SEO 报表</span></div>
+        </div>
+
+        <h2><span class="no">8</span>工具与数据资源</h2>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>工具</th><th>用途</th><th>限制</th></tr></thead>
+          <tbody>
+            <tr><td>Google Search Console</td><td>索引、查询、页面表现（官方数据）</td><td>数据约 2–3 天延迟；仅 Google</td></tr>
+            <tr><td>GA4</td><td>自然流量行为与转化</td><td>需事件规划（模块 19）</td></tr>
+            <tr><td>Keyword Planner</td><td>搜索量与竞价</td><td>区间值；需 Ads 账户</td></tr>
+            <tr><td>Ahrefs/Semrush</td><td>竞品词与外链估算</td><td>付费；估算误差</td></tr>
+            <tr><td>Screaming Frog</td><td>站点爬取审计（免费 500 URL）</td><td>桌面端渲染有限</td></tr>
+          </tbody>
+        </table></div>
+
+        <h2><span class="no">9</span>案例与反例</h2>
+        <div class="case">
+          <div class="case-head"><span class="case-type sim">模拟案例</span>诊断闭环</div>
+          <div class="case-body">
+            <p>现象：产品页月曝光 12,000、点击 90（CTR 0.75%）。排查：SERP 前三名均显示评分星级与价格，本页无 Product 结构化数据；标题为“XX 品牌官方店”。动作：补结构化数据、改标题为“软木瑜伽垫 | 防滑耐抓 | 90 天试睡”。6 周后 CTR 升至 2.9%。</p>
+            <div class="src">教学模拟。</div>
+          </div>
+        </div>
+        <div class="case">
+          <div class="case-head"><span class="case-type fail">失败反例</span>规模化 AI 内容</div>
+          <div class="case-body">
+            <p>用 AI 日产 30 篇“城市+品类”落地页，无原创数据与本地信息，3 个月后整组页面被 Google 判定为 scaled content abuse，收录清零。<strong>对策：</strong>程序化页面必须有真实差异信息（库存、价格、本地履约），否则不做。</p>
+            <div class="src">依据 Google 垃圾政策的典型违规模式（政策原文见参考资料）。</div>
+          </div>
+        </div>
+
+        <h2><span class="no">10</span>练习与自我检验</h2>
+        <div class="exercise">
+          <div class="ex-t"><span class="lv">基础</span>概念题（5 道）</div>
+          <ol>
+            <li>抓取、索引、排序分别可能被什么阻塞？</li>
+            <li>四类搜索意图各对应什么页面？</li>
+            <li>关键词蚕食是什么？怎么处理？</li>
+            <li>为什么购买外链风险高？</li>
+            <li>Google 对 AI 生成内容的官方立场是什么？</li>
+          </ol>
+          <details><summary>查看参考答案与评分标准</summary><div class="ans">
+            <p>1）抓取：robots 屏蔽、服务器错误、无入口链接；索引：noindex、重复内容、低质量判定；排序：意图错配、权威不足、竞争更强。</p>
+            <p>2）信息→博客/指南；导航→品牌页；交易→产品页；商业调查→分类/比较页。</p>
+            <p>3）多页争同一词互相稀释。处理：确定唯一目标页，其他合并/重定向/canonical，并建立映射表。</p>
+            <p>4）购买链接属于操纵排名行为，违反 Google 垃圾政策，可能导致人工处罚，且链接市场充斥垃圾站点。</p>
+            <p>5）不禁止 AI 内容；禁止的是“为操纵排名批量生成低价值页面”。质量与对用户有帮助是判断标准。</p>
+            <p><strong>评分：</strong>每题 2 分。</p>
+          </div></details>
+        </div>
+        <div class="exercise">
+          <div class="ex-t"><span class="lv a">应用</span>分析题（3 道）</div>
+          <ol>
+            <li>为“可重复使用蜂蜡保鲜布”建立 15 词关键词库并完成页面映射。</li>
+            <li>某分类页排名从第 5 跌到第 18，给出按顺序的 6 步排查清单。</li>
+            <li>设计一个主题集群（1 支柱 + 5 集群）并画出内链结构。</li>
+          </ol>
+          <details><summary>查看参考答案与评分标准</summary><div class="ans">
+            <p>1）须含品类/产品/问题/比较/品牌词，标注意图与目标页；问题词如“how to wash beeswraps”指向博客并内链产品。</p>
+            <p>2）①确认仍被索引；②检查 GSC 时间线与算法更新；③检查外链丢失；④检查页面改动历史；⑤对比 SERP 新竞品；⑥检查技术故障（速度/渲染/结构化数据报错）。</p>
+            <p>3）示例：支柱“可持续厨房储存完全指南”；集群：蜂蜡布 vs 塑料袋、如何清洗、能用多久、DIY 是否值得、最佳尺寸选择。每篇内链支柱与相关产品页。</p>
+            <p><strong>评分：</strong>每题 5 分。</p>
+          </div></details>
+        </div>
+        <div class="exercise">
+          <div class="ex-t"><span class="lv p">实战</span>综合任务</div>
+          <ol>
+            <li>为你的独立站输出《SEO 行动方案》：关键词库（≥15 词）、页面映射表、技术 SEO 检查项、3 个月内容日历、监测指标。</li>
+          </ol>
+          <details><summary>查看评分标准</summary><div class="ans"><p><strong>合格线：</strong>四要素齐全，关键词有意图分类，内容日历有主题集群逻辑。优秀：包含 GSC 基线数据与 3 个月目标（非排名承诺）。</p></div></details>
+        </div>
+
+        <h2><span class="no">11</span>章节总结与知识关联</h2>
+        <p><strong>核心结论：</strong>SEO 是“可抓取、可理解、可信任”的系统工程；没有秘诀，只有意图匹配、技术基建与持续内容。</p>
+        <p><strong>掌握后你能独立完成：</strong>关键词研究、页面与技术优化、GSC 诊断、内容规划。</p>
+        <p><strong>仍不能解决：</strong>AI 搜索可见性（模块 11）、付费放大（模块 12）、数据归因（模块 19）。</p>
+        <p><strong>下一步：</strong>模块 11 <span class="term" data-term="GEO">GEO</span>。</p>
+
+        <h2><span class="no">12</span>参考资料</h2>
+        <div class="src-grid">
+          <div class="src-card"><div class="st">Google Search Central — SEO Starter Guide</div><div class="sm">Google 官方 · 官方文档</div><a href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide" target="_blank" rel="noopener">developers.google.com</a><div class="use">支持：SEO 基础全流程 · 官方入门指南</div></div>
+          <div class="src-card"><div class="st">Google — Spam Policies</div><div class="sm">Google 官方 · 政策</div><a href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener">developers.google.com</a><div class="use">支持：scaled content abuse 等政策原文</div></div>
+          <div class="src-card"><div class="st">Google — Structured Data 入门</div><div class="sm">Google 官方 · 官方文档</div><a href="https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data" target="_blank" rel="noopener">developers.google.com</a><div class="use">支持：Product 等结构化数据 · 商品数据须符合政策</div></div>
+          <div class="src-card"><div class="st">Google Search Central — AI 功能与您的网站</div><div class="sm">Google 官方 · 官方文档</div><a href="https://developers.google.com/search/docs/appearance/ai-features" target="_blank" rel="noopener">developers.google.com</a><div class="use">支持：AI 概览/AI 模式机制与技术要求</div></div>
+          <div class="src-card"><div class="st">Google Search Console</div><div class="sm">Google 官方 · 官方工具</div><a href="https://search.google.com/search-console/about" target="_blank" rel="noopener">search.google.com</a><div class="use">支持：索引与表现诊断</div></div>
+          <div class="src-card"><div class="st">Google Merchant Center 帮助</div><div class="sm">Google 官方 · 官方文档</div><a href="https://support.google.com/merchants" target="_blank" rel="noopener">support.google.com/merchants</a><div class="use">支持：商品数据源与商品政策</div></div>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- ==================== 模块 11 ==================== -->
+      <section class="module module-anchor" id="m11">
+        <header class="module-head">
+          <div class="module-meta">
+            <span class="meta-chip">模块 11</span>
+            <span class="meta-chip">阶段 D</span>
+            <span class="meta-chip pri-p2">优先级 P2</span>
+            <span class="meta-chip">约 4–6 学时（参考）</span>
+          </div>
+          <h1>GEO、AI 搜索与生成式引擎可见性</h1>
+          <p class="module-goal">学完本模块后，你能够：解释 AI 概览与 AI 模式的工作原理；说明 SEO 与 GEO 的重叠与差异；设计可复现的 AI 搜索监测方法；区分真实引用、品牌提及与流量增长；对未经验证的 GEO 说法保持审慎。</p>
+          <div class="module-actions">
+            <button class="btn btn-primary mod-done-btn" type="button" data-mod="m11">标记本模块为已掌握</button>
+            <button class="btn btn-ghost mod-ex-btn" type="button" data-mod="m11">标记本模块练习已完成</button>
+          </div>
+        </header>
+
+        <h2><span class="no">1</span>学习目标</h2>
+        <ul class="checklist">
+          <li>能够解释 AI Overviews、AI Mode 与传统搜索的机制差异（含 query fan-out）。</li>
+          <li>能够引用 Google 官方文档说明“在 AI 功能中展示”的技术要求。</li>
+          <li>能够列出提高内容可引用性的结构性做法，并说明哪些没有证据支持。</li>
+          <li>能够设计一个可复现的 AI 搜索监测方案（查询集、记录字段、频率）。</li>
+          <li>能够区分引用、品牌提及、流量增长与商业转化四类结果。</li>
+        </ul>
+
+        <h2><span class="no">2</span>核心概念与基础原理</h2>
+        <div class="cards">
+          <div class="kcard"><div class="kt">GEO 的定义与争议</div><p>GEO（Generative Engine Optimization）指针对生成式 AI 搜索/助手的可见性优化。注意：这是一个尚无统一标准、未被充分验证的领域。不同产品（Google AI Overviews/AI Mode、ChatGPT 搜索、Perplexity 等）机制不同，不存在通用的“GEO 排名公式”。</p></div>
+          <div class="kcard"><div class="kt">Query Fan-out</div><p>Google 官方说明：AI 功能可能把一个查询拆成多个相关子查询分别检索，再综合成回答。因此被引用的页面不一定是原查询排名第一的页面，可能在子查询上有好内容。</p></div>
+          <div class="kcard"><div class="kt">官方技术要求</div><p>Google 明确：页面必须已被索引、符合展示摘要（snippet）的资格并遵循搜索技术要求——没有额外技术要求、没有专属“AI 标记”。用 Google-Extended 屏蔽训练不影响 AI 概览展示；nosnippet 会同时阻止 AI 功能与常规摘要。</p></div>
+          <div class="kcard"><div class="kt">引用 vs 提及 vs 流量</div><p>引用=AI 回答中链接到你的页面；提及=回答提到品牌名但不给链接；流量增长=引用的后续效果；商业转化=最终收益。四者可能背离（有提及无流量、有流量无转化）。</p></div>
+        </div>
+
+        <h2><span class="no">3</span>与 SEO 的重叠和差异</h2>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>维度</th><th>SEO</th><th>GEO（当前认知）</th></tr></thead>
+          <tbody>
+            <tr><td>索引要求</td><td>必需</td><td>同样必需（Google 官方明确无额外要求）</td></tr>
+            <tr><td>内容单元</td><td>页面级</td><td>段落/答案级（query fan-out 下段落可被单独引用）</td></tr>
+            <tr><td>结构要求</td><td>标题层级、内链</td><td>更强调直接回答问题、事实清晰、可摘录</td></tr>
+            <tr><td>权威信号</td><td>外链、品牌</td><td>同样重要；第三方站点被引用频率高（评测、论坛、媒体）</td></tr>
+            <tr><td>监测工具</td><td>GSC 成熟</td><td>官方粒度有限；需自建采样监测</td></tr>
+          </tbody>
+        </table></div>
+
+        <h2><span class="no">4</span>可引用性优化原则（有依据的部分）</h2>
+        <ul>
+          <li>回答具体问题：标题即问题，首段即答案（可被摘录的短段落）。</li>
+          <li>事实与数据可验证：标注来源与日期；原创数据（测评、统计）比转述更易被引用。</li>
+          <li>实体一致性：品牌名、产品名、规格在各页面与第三方资料中写法一致（利于实体识别）。</li>
+          <li>作者与专业信息：真实署名、资历说明（符合 E-E-A-T 精神）。</li>
+          <li>覆盖子问题：按 fan-out 逻辑，把主题的相关子问题都覆盖到。</li>
+        </ul>
+        <div class="danger"><strong>没有充分证据支持的说法（审慎对待）：</strong>“在内容里写某句话就能让 AI 推荐你”“存在 GEO 专用标签/代码”“保证进入 AI 回答”——目前均无官方证据。营销机构常把自然搜索的常规优化包装成 GEO 秘诀售卖；对任何“排名保证”保持警惕。</div>
+
+        <h2><span class="no">5</span>监测与验证方法</h2>
+        <div class="steps">
+          <div class="step"><h4>建查询集</h4><p>选 20–50 个目标查询（品类/品牌/比较/问题词），固定措辞与地区设置。</p></div>
+          <div class="step"><h4>采样记录</h4><p>每月固定日期、无痕模式、目标地区，记录：是否出现 AI 回答、引用来源域名、是否包含你的品牌/页面。</p></div>
+          <div class="step"><h4>GSC 辅助</h4><p>GSC 效果报告中可查看 AI 功能带来的点击与展示（数据颗粒度以官方当前说明为准）；CTR 稳定而点击下滑常是 AI 回答出现的信号。</p></div>
+          <div class="step"><h4>结论分级</h4><p>把结果分为：被引用（有链接）/被提及（无链接）/无出现。据此决定投入，而不是凭单次截图下结论。</p><span class="io">产出：月度 AI 可见性采样表</span></div>
+        </div>
+
+        <h2><span class="no">6</span>练习与自我检验</h2>
+        <div class="exercise">
+          <div class="ex-t"><span class="lv">基础</span>概念题（5 道）</div>
+          <ol>
+            <li>Query fan-out 为什么意味着“页面不一定靠原查询排名也能被引用”？</li>
+            <li>Google 官方对“在 AI 概览中展示”的技术要求是什么？</li>
+            <li>nosnippet 与 Google-Extended 分别影响什么？</li>
+            <li>引用、品牌提及、流量增长的区别？</li>
+            <li>为什么“GEO 秘诀”类说法应被审慎对待？</li>
+          </ol>
+          <details><summary>查看参考答案与评分标准</summary><div class="ans">
+            <p>1）AI 功能会拆出多个子查询分别检索再综合；页面在子查询上的好表现即可进入综合结果，与原查询排名无必然关系。</p>
+            <p>2）页面需已被索引、具备展示摘要资格并遵循搜索技术要求；无其他特殊要求。</p>
+            <p>3）nosnippet 同时阻止常规摘要与 AI 功能使用你的内容；Google-Extended 控制 Gemini 等产品的训练/接地，不影响 AI 概览展示。</p>
+            <p>4）引用=回答给出你页面链接；提及=提到品牌不给链接；流量增长=引用带来的后续访问变化。三者需分别测量。</p>
+            <p>5）该领域机制不透明、无统一标准与官方文档支持的排名公式；宣称“保证被 AI 推荐”的无法验证，应以其是否给出可复现方法与数据为准。</p>
+            <p><strong>评分：</strong>每题 2 分。</p>
+          </div></details>
+        </div>
+        <div class="exercise">
+          <div class="ex-t"><span class="lv a">应用</span>分析题（3 道）</div>
+          <ol>
+            <li>为你的品类设计 30 个查询的监测集，列出记录字段与频率。</li>
+            <li>发现品牌在 AI 回答中频繁被提及但无链接。列出三个可能原因与对应动作。</li>
+            <li>某机构报价“GEO 优化包”声称保证进入 AI 回答。写出你的三个质疑问题。</li>
+          </ol>
+          <details><summary>查看参考答案与评分标准</summary><div class="ans">
+            <p>1）字段：查询、日期、地区、是否出现 AI 回答、引用域名（前 5）、是否提及品牌、是否给出我方链接、截屏存档。频率：月度固定日。</p>
+            <p>2）可能：被引用来源为第三方（评测/论坛）；我方内容缺可摘录的答案结构；实体信息不一致。动作：在第三方渠道建立准确资料、优化答案结构、统一品牌实体信息。</p>
+            <p>3）①保证的机制依据是什么（引哪个官方文档/研究）？②如何复现与验证（给我可自己跑的监测方法）？③历史案例的可验证数据是什么（抽样复查）？</p>
+            <p><strong>评分：</strong>每题 5 分。</p>
+          </div></details>
+        </div>
+        <div class="exercise">
+          <div class="ex-t"><span class="lv p">实战</span>综合任务</div>
+          <ol>
+            <li>执行一个月度采样（≥20 查询），输出《AI 可见性首月报告》：被引/被提/无出现的分布、最常被引用的第三方来源、三条改进假设。</li>
+          </ol>
+          <details><summary>查看评分标准</summary><div class="ans"><p><strong>合格线：</strong>有固定方法与记录；区分四类结果；改进假设可执行。优秀：与 GSC 数据交叉验证引用与流量关系。</p></div></details>
+        </div>
+
+        <h2><span class="no">7</span>章节总结与知识关联</h2>
+        <p><strong>核心结论：</strong>当前可验证的 GEO ≈ “让内容可被干净地摘录与信任”+“建立可复现的监测”；警惕把常规 SEO 包装成 GEO 秘诀的营销。</p>
+        <p><strong>掌握后你能独立完成：</strong>AI 搜索机制解释、可引用性优化、自建监测。</p>
+        <p><strong>仍不能解决：</strong>自然搜索基本功（模块 10）、流量到转化的归因（模块 19）。</p>
+        <p><strong>下一步：</strong>模块 12 Google Ads。</p>
+
+        <h2><span class="no">8</span>参考资料</h2>
+        <div class="src-grid">
+          <div class="src-card"><div class="st">Google Search Central — AI 功能和您的网站</div><div class="sm">Google 官方 · 官方文档</div><a href="https://developers.google.com/search/docs/appearance/ai-features" target="_blank" rel="noopener">developers.google.com</a><div class="use">支持：AI 概览/AI 模式机制、query fan-out、技术要求 · 核验于 2026-10</div></div>
+          <div class="src-card"><div class="st">Google — snippet 控制（nosnippet 等）</div><div class="sm">Google 官方 · 官方文档</div><a href="https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag" target="_blank" rel="noopener">developers.google.com</a><div class="use">支持：预览控制对 AI 功能的影响</div></div>
+          <div class="src-card"><div class="st">GEO: Generative Engine Optimization（学术论文）</div><div class="sm">学术预印本 · 待核验</div><a href="https://arxiv.org/abs/2311.09735" target="_blank" rel="noopener">arxiv.org/abs/2311.09735</a><div class="use">支持：GEO 概念早期学术研究 · 结论为实验性，使用前请核验全文</div></div>
+          <div class="src-card"><div class="st">Google — 搜索生成体验帮助</div><div class="sm">Google 官方 · 帮助中心</div><a href="https://support.google.com/websearch" target="_blank" rel="noopener">support.google.com/websearch</a><div class="use">支持：用户侧 AI 功能说明</div></div>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- ==================== 模块 12 ==================== -->
+      <section class="module module-anchor" id="m12">
+        <header class="module-head">
+          <div class="module-meta">
+            <span class="meta-chip">模块 12</span>
+            <span class="meta-chip">阶段 D</span>
+            <span class="meta-chip pri-p1">优先级 P1</span>
+            <span class="meta-chip">约 8–12 学时（参考）</span>
+          </div>
+          <h1>Google Ads 付费广告</h1>
+          <p class="module-goal">学完本模块后，你能够：规划账户结构与关键词策略；配置转化跟踪；理解出价机制与质量因素；用 <span class="term" data-term="CPA">CPA</span>/<span class="term" data-term="ROAS">ROAS</span> 诊断投放问题；管理品牌词与非品牌词预算分配。</p>
+          <div class="module-actions">
+            <button class="btn btn-primary mod-done-btn" type="button" data-mod="m12">标记本模块为已掌握</button>
+            <button class="btn btn-ghost mod-ex-btn" type="button" data-mod="m12">标记本模块练习已完成</button>
+          </div>
+        </header>
+
+        <h2><span class="no">1</span>学习目标</h2>
+        <ul class="checklist">
+          <li>能够说明五种主要广告类型的适用场景与投放逻辑。</li>
+          <li>能够设计账户结构并管理关键词匹配方式与否定关键词。</li>
+          <li>能够完成 Merchant Center 商品数据源配置并理解商品政策。</li>
+          <li>能够解释出价策略、质量因素与学习阶段的关系。</li>
+          <li>能够诊断“无曝光/CPC 高/点击无转化”三类问题并给出动作。</li>
+        </ul>
+
+        <h2><span class="no">2</span>核心概念与基础原理</h2>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>广告类型</th><th>触发逻辑</th><th>适用</th></tr></thead>
+          <tbody>
+            <tr><td>搜索广告</td><td>关键词匹配查询</td><td>捕获明确需求（交易/商业调查词）</td></tr>
+            <tr><td>购物广告</td><td>商品数据源匹配查询</td><td>电商主力，图文+价格直接展示</td></tr>
+            <tr><td>Performance Max</td><td>自动化跨渠道投放</td><td>放量；但可控性与透明度低，需人工监督</td></tr>
+            <tr><td>展示广告</td><td>受众/主题/位置</td><td><span class="term" data-term="再营销">再营销</span>与上层认知</td></tr>
+            <tr><td>再营销（RLSA/展示）</td><td>访问过网站的用户</td><td>收割高意向，ROAS 通常高于冷获客</td></tr>
+          </tbody>
+        </table></div>
+        <div class="cards">
+          <div class="kcard"><div class="kt">账户结构</div><p>账户 → 广告系列（目标/预算/地区）→ 广告组（主题/受众/出价）→ 广告与素材。结构混乱是优化困难的根源：按“国家×产品线×意图”设计。</p></div>
+          <div class="kcard"><div class="kt">匹配方式</div><p>广泛/词组/完全匹配 + 否定关键词。广泛匹配已与受众信号结合，更依赖搜索词报告清洗；每周看搜索词报告是基本功。</p></div>
+          <div class="kcard"><div class="kt">质量因素</div><p>广告相关性、预期点击率、落地页体验共同影响广告评级与有效 CPC。低质量着陆页会同时推高成本、压低排名。</p></div>
+          <div class="kcard"><div class="kt">学习阶段</div><p>新系列/新出价需要积累转化数据进入学习期；频繁大改会反复重置。测试期给系统稳定运行的时间。</p></div>
+        </div>
+
+        <h2><span class="no">3</span>Merchant Center 与商品数据</h2>
+        <ul>
+          <li>商品数据源（Feed）字段：id、title、description、link、image_link、availability、price、brand、gtin/mpn 等；字段质量直接影响购物广告资格。</li>
+          <li>商品政策：禁售品类、误导性声明、价格与落地页一致性等违规会导致商品被拒登或账号处罚。</li>
+          <li>与结构化数据、Shopify 商品信息保持一致，避免三处价格/库存不一致。</li>
+        </ul>
+
+        <h2><span class="no">4</span>指标、预算与增量</h2>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>指标</th><th>口径</th><th>使用注意</th></tr></thead>
+          <tbody>
+            <tr><td>CPC</td><td>单次点击成本</td><td>受竞争与质量影响，单独看无意义</td></tr>
+            <tr><td>CPA</td><td>单次转化成本（按订单）</td><td>与 CAC（按客户）口径不同</td></tr>
+            <tr><td>ROAS</td><td>广告收入÷广告花费</td><td>平台口径含点击后转化，需与 MER 对账</td></tr>
+            <tr><td>转化价值</td><td>跟踪到的转化金额</td><td>依赖转化跟踪准确性</td></tr>
+            <tr><td>增量效果</td><td>相对对照组的真实提升</td><td>用地理实验/受众留出测量，避免把自然转化记功于广告</td></tr>
+          </tbody>
+        </table></div>
+        <div class="note"><strong>预算权衡：</strong>品牌词转化率高但量有限；非品牌词是增量主战场但成本高。常见结构：非品牌 70–85%，品牌 5–15%，再营销 10–20%（按品类调整），再营销预算过高常是“收割自然需求”的幻觉。</div>
+
+        <h2><span class="no">5</span>诊断与优化工作流</h2>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>症状</th><th>排查顺序</th><th>典型原因</th></tr></thead>
+          <tbody>
+            <tr><td>无曝光</td><td>出价/预算→广告评级→关键词相关性→账户状态</td><td>出价过低、预算受限、新账户审核、关键词过窄</td></tr>
+            <tr><td>CPC 高</td><td>质量因素→竞争度→匹配与受众</td><td>落地页体验差、广告相关性低、竞争激烈时段</td></tr>
+            <tr><td>点击无转化</td><td>搜索词报告→落地页一致性→价格/信任→转化跟踪</td><td>流量不精准、页面错配、跟踪丢失</td></tr>
+            <tr><td>ROAS 下滑</td><td>拆分新老客→季节→竞争→落地页变动</td><td>再营销占比过高造成幻觉、竞品加价</td></tr>
+          </tbody>
+        </table></div>
+        <div class="warn"><strong>无效流量与政策：</strong>不要点击自己或竞争对手广告（无效点击会推高成本且违反政策）；警惕自动生成的垃圾展示位置；品牌安全可用 placement 排除。违规（如误导性声明、仿冒）会导致账户停用。</div>
+
+        <h2><span class="no">6</span>实际操作流程</h2>
+        <div class="steps">
+          <div class="step"><h4>转化跟踪</h4><p>GA4 导入或 Ads 代码，验证购买事件价值准确（先于任何投放）。</p></div>
+          <div class="step"><h4>Merchant Center</h4><p>连接商店、校验 Feed、修复商品警告。</p></div>
+          <div class="step"><h4>结构设计</h4><p>按国家×产品线×意图建系列；品牌与非品牌分离。</p></div>
+          <div class="step"><h4>冷启动</h4><p>小预算多组测试（关键词/受众/素材），给学习期 2–4 周，看搜索词与页面报告迭代。</p></div>
+          <div class="step"><h4>放量与监督</h4><p>只放量已验证赢家；PMAX 需每周看素材报告与受众信号，防止跑偏。</p><span class="io">产出：广告账户 + 周报模板</span></div>
+        </div>
+
+        <h2><span class="no">7</span>案例与反例</h2>
+        <div class="case">
+          <div class="case-head"><span class="case-type sim">模拟案例</span>诊断闭环</div>
+          <div class="case-body">
+            <p>搜索系列 CPC $1.8、CVR 0.6%。搜索词报告发现 38% 花费在“free/cheap/diy”类查询。动作：加否定关键词、把预算移到购物广告（产品词直接带价格）。两周后 CPC $1.1、CVR 1.4%。</p>
+            <div class="src">教学模拟。</div>
+          </div>
+        </div>
+        <div class="case">
+          <div class="case-head"><span class="case-type fail">失败反例</span>PMAX 黑箱放量</div>
+          <div class="case-body">
+            <p>全押 PMAX，月耗 $20,000，ROAS 1.6；停投后自然销量反升——证明大部分“广告转化”本会发生。<strong>对策：</strong>PMAX 与品牌搜索分系列运行，定期做增量测试（关停对照），别把归因当增量。</p>
+            <div class="src">行业常见情形归纳。</div>
+          </div>
+        </div>
+
+        <h2><span class="no">8</span>练习与自我检验</h2>
+        <div class="exercise">
+          <div class="ex-t"><span class="lv">基础</span>概念题（5 道）</div>
+          <ol>
+            <li>购物广告与搜索广告的资格依据有何不同？</li>
+            <li>质量因素包含什么？如何影响成本？</li>
+            <li>CPA 与 CAC 的口径差异？</li>
+            <li>为什么再营销 ROAS 高不等于增量高？</li>
+            <li>品牌词与非品牌词的预算权衡逻辑？</li>
+          </ol>
+          <details><summary>查看参考答案与评分标准</summary><div class="ans">
+            <p>1）搜索广告看关键词匹配与广告质量；购物广告看商品数据源（Feed）与商品政策符合度。</p>
+            <p>2）广告相关性、预期点击率、落地页体验；决定广告评级，影响排名与有效 CPC。</p>
+            <p>3）CPA 按转化（通常订单）计；CAC 按新客户计。一客多单时两者不同。</p>
+            <p>4）再营销触达的是已产生意向的用户，其中很多本来就会购买；平台归因会把这些自然转化记给广告。需增量实验验证。</p>
+            <p>5）品牌词防御性投放保护流量与竞品截流；非品牌词带来增量但成本高。比例随品牌力变化，成熟品牌品牌词占比更高。</p>
+            <p><strong>评分：</strong>每题 2 分。</p>
+          </div></details>
+        </div>
+        <div class="exercise">
+          <div class="ex-t"><span class="lv a">应用</span>分析题（3 道）</div>
+          <ol>
+            <li>为一个 $60 客单、贡献利润率 45% 的产品设计 Google Ads 结构：系列划分、预算分配、出价策略选择理由。</li>
+            <li>账户显示“广告展示受限：需要验证”。列出排查与解决步骤。</li>
+            <li>ROAS 从 3.2 降到 2.4，其他未变。给出按顺序的排查清单。</li>
+          </ol>
+          <details><summary>查看参考答案与评分标准</summary><div class="ans">
+            <p>1）结构：美国×非品牌搜索、美国×购物、美国×PMAX、品牌、再营销展示。预算：非品牌 60%、购物 15%、PMAX 15%、品牌 5%、再营销 5%。出价：冷启动用手动或 tCPA（目标≈盈亏平衡 CPA 的 70%），积累 30+ 转化/月后考虑 tROAS（目标 ≥盈亏平衡 ROAS×1.1）。</p>
+            <p>2）步骤：完成账户验证（身份/业务信息）→检查政策问题通知→确认付款方式→等待审核（通常数日）→期间不要重复提交。</p>
+            <p>3）①搜索词报告（新否词）②竞争与 CPC 变化③季节与促销④落地页改动⑤转化跟踪故障⑥新客/老客结构变化（再营销占比上升造成口径幻觉）。</p>
+            <p><strong>评分：</strong>每题 5 分。</p>
+          </div></details>
+        </div>
+        <div class="exercise">
+          <div class="ex-t"><span class="lv p">实战</span>综合任务</div>
+          <ol>
+            <li>输出《Google Ads 投放计划》：结构图、关键词与否定词初表、转化跟踪方案、4 周测试矩阵、周报模板与止损规则。</li>
+          </ol>
+          <details><summary>查看评分标准</summary><div class="ans"><p><strong>合格线：</strong>五要素齐全；止损规则用 CPA/ROAS 与盈亏平衡挂钩。优秀：包含 PMAX 与品牌分离设计及增量测试计划。</p></div></details>
+        </div>
+
+        <h2><span class="no">9</span>章节总结与知识关联</h2>
+        <p><strong>核心结论：</strong>Google Ads 是“需求捕获”系统：结构先行、跟踪先行、按诊断表迭代；归因高估靠增量测试纠偏。</p>
+        <p><strong>掌握后你能独立完成：</strong>账户搭建、关键词管理、Merchant Center 配置、投放诊断。</p>
+        <p><strong>仍不能解决：</strong>素材与社交创意（模块 13/14）、整体归因（模块 19）、广告预算上限（模块 20）。</p>
+        <p><strong>下一步：</strong>模块 13 Meta Ads。</p>
+
+        <h2><span class="no">10</span>参考资料</h2>
+        <div class="src-grid">
+          <div class="src-card"><div class="st">Google Ads 帮助中心</div><div class="sm">Google 官方 · 官方文档</div><a href="https://support.google.com/google-ads" target="_blank" rel="noopener">support.google.com/google-ads</a><div class="use">支持：广告类型、出价、政策全部核验</div></div>
+          <div class="src-card"><div class="st">Google Merchant Center 帮助</div><div class="sm">Google 官方 · 官方文档</div><a href="https://support.google.com/merchants" target="_blank" rel="noopener">support.google.com/merchants</a><div class="use">支持：Feed 字段与商品政策</div></div>
+          <div class="src-card"><div class="st">Google Ads — 转化跟踪</div><div class="sm">Google 官方 · 官方文档</div><a href="https://support.google.com/google-ads/answer/6095821" target="_blank" rel="noopener">support.google.com</a><div class="use">支持：转化跟踪配置 · 路径可能调整</div></div>
+          <div class="src-card"><div class="st">Google Ads 政策中心</div><div class="sm">Google 官方 · 政策</div><a href="https://support.google.com/adspolicy" target="_blank" rel="noopener">support.google.com/adspolicy</a><div class="use">支持：广告政策与 prohibited content</div></div>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- ==================== 模块 13 ==================== -->
+      <section class="module module-anchor" id="m13">
+        <header class="module-head">
+          <div class="module-meta">
+            <span class="meta-chip">模块 13</span>
+            <span class="meta-chip">阶段 D</span>
+            <span class="meta-chip pri-p1">优先级 P1</span>
+            <span class="meta-chip">约 8–12 学时（参考）</span>
+          </div>
+          <h1>Meta Ads 与社交广告</h1>
+          <p class="module-goal">学完本模块后，你能够：搭建广告系列结构与受众策略；配置 <span class="term" data-term="Pixel">Pixel</span> 与 Conversions API；建立创意测试与迭代机制；用归因对账判断真实投放效果。</p>
+          <div class="module-actions">
+            <button class="btn btn-primary mod-done-btn" type="button" data-mod="m13">标记本模块为已掌握</button>
+            <button class="btn btn-ghost mod-ex-btn" type="button" data-mod="m13">标记本模块练习已完成</button>
+          </div>
+        </header>
+
+        <h2><span class="no">1</span>学习目标</h2>
+        <ul class="checklist">
+          <li>能够说明账户、广告系列、广告组、广告四层关系与决策分配。</li>
+          <li>能够配置 Pixel、Conversions API 与事件匹配，并说明隐私限制的影响。</li>
+          <li>能够设计创意测试矩阵（钩子/形式/受众）与迭代节奏。</li>
+          <li>能够用平台报表与 Shopify 对账，识别归因高估。</li>
+          <li>能够用诊断树区分受众、创意、产品、页面、价格问题。</li>
+        </ul>
+
+        <h2><span class="no">2</span>核心概念与基础原理</h2>
+        <div class="cards">
+          <div class="kcard"><div class="kt">四层结构</div><p>商务管理平台（BM）→ 广告系列（目标：销量/流量/互动）→ 广告组（受众、预算、版位、优化事件）→ 广告（创意素材）。系列定目标，广告组定“给谁看、花多少、优化什么”，广告定“看到什么”。</p></div>
+          <div class="kcard"><div class="kt">Pixel + <span class="term" data-term="CAPI">CAPI</span></div><p>Pixel 在浏览器端回传事件；Conversions API 从服务端回传，两者互补以减少 iOS 隐私与拦截导致的数据丢失。事件匹配质量（EMQ）影响优化效果。</p></div>
+          <div class="kcard"><div class="kt">归因窗口与局限</div><p>Meta 默认归因含点击后 7 天与浏览后 1 天等口径，会把部分自然/其他渠道转化算给广告。跨设备与隐私限制使报表天然高估，需与 Shopify/GA4 对账。</p></div>
+          <div class="kcard"><div class="kt">创意为王</div><p>Meta 系统自动找受众，素材（尤其是前 3 秒钩子）是最大杠杆。衰减的素材靠迭代而非只调受众。</p></div>
+        </div>
+
+        <h2><span class="no">3</span>受众策略</h2>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>受众层</th><th>来源</th><th>用途</th></tr></thead>
+          <tbody>
+            <tr><td>冷受众</td><td>兴趣/行为/类似受众（Lookalike）</td><td>拉新；宽受众+强素材常优于窄受众</td></tr>
+            <tr><td>温受众</td><td>视频观看者、页面互动者、邮件列表匹配</td><td>中层培育与再营销</td></tr>
+            <tr><td>热受众</td><td>网站访问（近 30/60/90 天）、加购未购、老客</td><td>收割；注意预算占比防止幻觉</td></tr>
+            <tr><td>客户名单</td><td>上传邮箱/手机号匹配（Custom Audiences）</td><td>复购、排除已购、分层出价</td></tr>
+          </tbody>
+        </table></div>
+
+        <h2><span class="no">4</span>创意测试机制</h2>
+        <div class="steps">
+          <div class="step"><h4>建立素材库</h4><p>按“钩子×形式×卖点”三维拆解；每条素材只测一个变量。</p></div>
+          <div class="step"><h4>测试期</h4><p>每组预算覆盖最小学习量（通常每广告组每周 50 次转化事件附近；事件少时用更浅层事件）。</p></div>
+          <div class="step"><h4>迭代</h4><p>保留胜出元素（钩子/形式），替换败点；UGC 风格素材通常优于精修广告。</p></div>
+          <div class="step"><h4>放量</h4><p>对验证胜出的素材系列加预算（每次 ≤20–30% 幅度，避免重新学习）。</p></div>
+        </div>
+
+        <h2><span class="no">5</span>诊断树与对账</h2>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>现象</th><th>先查</th><th>再查</th><th>后查</th></tr></thead>
+          <tbody>
+            <tr><td>CTR 低</td><td>素材钩子</td><td>受众匹配</td><td>版位/频率</td></tr>
+            <tr><td>CTR 高 CVR 低</td><td>落地页一致性</td><td>价格/信任</td><td>产品本身</td></tr>
+            <tr><td>CPM 突涨</td><td>受众疲劳（频率）</td><td>竞争季节</td><td>素材衰减</td></tr>
+            <tr><td>报表 ROAS 高但 Shopify 低</td><td>归因口径差异</td><td>事件丢失/重复</td><td>自然单被记功</td></tr>
+          </tbody>
+        </table></div>
+        <div class="note"><strong>对账方法：</strong>每周比较 Meta 报表转化数与 Shopify 按 <span class="term" data-term="UTM">UTM</span> 归因的订单数；差异长期 &gt;30% 需检查事件配置与链接参数，而不是直接相信平台数字。</div>
+
+        <h2><span class="no">6</span>案例与反例</h2>
+        <div class="case">
+          <div class="case-head"><span class="case-type sim">模拟案例</span>创意迭代</div>
+          <div class="case-body">
+            <p>素材 A（精修产品图）CTR 0.9%、CPA $34；素材 B（UGC 开箱+前 3 秒痛点）CTR 2.4%、CPA $17。保留 B 的钩子结构，替换场景与出镜人产出 C/D，CPA 降至 $13。<strong>结构：</strong>赢的是“钩子结构”，不是某一条素材。</p>
+            <div class="src">教学模拟。</div>
+          </div>
+        </div>
+        <div class="case">
+          <div class="case-head"><span class="case-type fail">失败反例</span>只调受众不换素材</div>
+          <div class="case-body">
+            <p>素材跑了 8 周、频率 4.8，团队每周换受众，CPA 从 $14 涨到 $41。<strong>信号：</strong>频率上升+CTR 下滑=素材疲劳。对策：素材迭代优先于受众细调。</p>
+            <div class="src">行业常见情形归纳。</div>
+          </div>
+        </div>
+
+        <h2><span class="no">7</span>练习与自我检验</h2>
+        <div class="exercise">
+          <div class="ex-t"><span class="lv">基础</span>概念题（5 道）</div>
+          <ol>
+            <li>广告系列、广告组、广告各自决定什么？</li>
+            <li>Pixel 与 CAPI 的互补关系？</li>
+            <li>为什么 Meta 报表 ROAS 通常高于真实增量？</li>
+            <li>素材疲劳的三个信号？</li>
+            <li>为什么一客多单时 CPA 与 CAC 会背离？</li>
+          </ol>
+          <details><summary>查看参考答案与评分标准</summary><div class="ans">
+            <p>1）系列定目标与预算方式；广告组定受众/预算/版位/优化事件；广告定创意素材。</p>
+            <p>2）Pixel 浏览器端、CAPI 服务端回传；互补覆盖不同丢失场景，提高事件匹配质量与优化稳定性。</p>
+            <p>3）归因窗口把点击后 7 天/浏览后 1 天内甚至其他渠道的转化都算给广告；跨设备丢失进一步扭曲。</p>
+            <p>4）频率上升、CTR 下滑、CPM/CPA 上升。</p>
+            <p>5）CPA 按订单计，CAC 按客户计；复购客户的后续订单不计入新客成本，CAC 更接近真实获客代价。</p>
+            <p><strong>评分：</strong>每题 2 分。</p>
+          </div></details>
+        </div>
+        <div class="exercise">
+          <div class="ex-t"><span class="lv a">应用</span>分析题（3 道）</div>
+          <ol>
+            <li>设计一个 $1,500/月预算的 Meta 测试方案：分层、素材数量、指标与周期。</li>
+            <li>报表显示购买 320 次，Shopify 按 UTM 只有 210 单。列出排查步骤。</li>
+            <li>CTR 2.1% 但 CVR 0.4%。按诊断树给出下一步三个动作。</li>
+          </ol>
+          <details><summary>查看参考答案与评分标准</summary><div class="ans">
+            <p>1）分层：冷受众宽定向 40%、类似受众 30%、再营销（30 天访问）20%、老客排除已购 10%；素材 4–6 条测钩子；指标用微转化（加购）提速学习；周期 2–3 周。</p>
+            <p>2）步骤：①核对 UTM 是否完整一致；②检查 Pixel/CAPI 是否重复回传；③检查归因窗口口径差异；④用时间窗对比（同日 vs 7 日）；⑤确认 Shopify 端过滤（测试单/取消）。</p>
+            <p>3）①查落地页与广告承诺一致性；②查价格与信任证据（评论/保障）；③查结账流程与支付失败（模块 16）；仍无效则怀疑产品与市场匹配。</p>
+            <p><strong>评分：</strong>每题 5 分。</p>
+          </div></details>
+        </div>
+        <div class="exercise">
+          <div class="ex-t"><span class="lv p">实战</span>综合任务</div>
+          <ol>
+            <li>输出《Meta Ads 投放与对账方案》：账户结构、受众分层、创意测试矩阵、事件配置清单、周对账表。</li>
+          </ol>
+          <details><summary>查看评分标准</summary><div class="ans"><p><strong>合格线：</strong>五要素齐全；对账表有固定口径与阈值。优秀：包含素材疲劳判定规则与增量测试设计。</p></div></details>
+        </div>
+
+        <h2><span class="no">8</span>章节总结与知识关联</h2>
+        <p><strong>核心结论：</strong>Meta Ads 的杠杆在创意与数据回传质量；所有报表数字都要与一方数据对账后再决策。</p>
+        <p><strong>掌握后你能独立完成：</strong>账户搭建、事件配置、创意测试、归因对账。</p>
+        <p><strong>仍不能解决：</strong>自然社交运营（模块 14）、整体归因模型（模块 19）。</p>
+        <p><strong>下一步：</strong>模块 14 社交媒体营销。</p>
+
+        <h2><span class="no">9</span>参考资料</h2>
+        <div class="src-grid">
+          <div class="src-card"><div class="st">Meta Business Help Center</div><div class="sm">Meta 官方 · 官方文档</div><a href="https://www.facebook.com/business/help" target="_blank" rel="noopener">facebook.com/business/help</a><div class="use">支持：广告结构、政策与功能核验</div></div>
+          <div class="src-card"><div class="st">Meta for Developers — Conversions API</div><div class="sm">Meta 官方 · 开发者文档</div><a href="https://developers.facebook.com/docs/marketing-api/conversions-api" target="_blank" rel="noopener">developers.facebook.com</a><div class="use">支持：CAPI 与事件匹配 · 路径可能调整</div></div>
+          <div class="src-card"><div class="st">Meta Ad Library</div><div class="sm">Meta 官方 · 公开工具</div><a href="https://www.facebook.com/ads/library" target="_blank" rel="noopener">facebook.com/ads/library</a><div class="use">支持：竞品创意与在投信息</div></div>
+          <div class="src-card"><div class="st">Meta — 关于归因</div><div class="sm">Meta 官方 · 官方文档</div><a href="https://www.facebook.com/business/help/1173963011326836" target="_blank" rel="noopener">facebook.com/business/help</a><div class="use">支持：归因窗口与对账口径 · 编号如有变动请站内检索</div></div>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- ==================== 模块 14 ==================== -->
+      <section class="module module-anchor" id="m14">
+        <header class="module-head">
+          <div class="module-meta">
+            <span class="meta-chip">模块 14</span>
+            <span class="meta-chip">阶段 D</span>
+            <span class="meta-chip pri-p2">优先级 P2</span>
+            <span class="meta-chip">约 5–8 学时（参考）</span>
+          </div>
+          <h1>社交媒体营销与内容策略</h1>
+          <p class="module-goal">学完本模块后，你能够：比较主要平台的内容机制与用户行为差异；设计内容支柱与选题体系；管理创作者合作与内容授权；用业务指标而非播放量评估内容。</p>
+          <div class="module-actions">
+            <button class="btn btn-primary mod-done-btn" type="button" data-mod="m14">标记本模块为已掌握</button>
+            <button class="btn btn-ghost mod-ex-btn" type="button" data-mod="m14">标记本模块练习已完成</button>
+          </div>
+        </header>
+
+        <h2><span class="no">1</span>学习目标</h2>
+        <ul class="checklist">
+          <li>能够比较 Instagram、TikTok、YouTube、Pinterest、Facebook 的用户行为与内容形式差异。</li>
+          <li>能够设计内容支柱与选题体系，并建立生产-发布-复用流程。</li>
+          <li>能够执行创作者筛选、合作与授权管理。</li>
+          <li>能够建立从曝光到销售的效果评估层级。</li>
+          <li>能够说明平台算法信息应以什么来源核验。</li>
+        </ul>
+
+        <h2><span class="no">2</span>核心概念与基础原理</h2>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>平台</th><th>用户心智</th><th>内容形式</th><th>对电商的价值</th></tr></thead>
+          <tbody>
+            <tr><td>TikTok</td><td>娱乐发现</td><td>短平快视频、UGC 风</td><td>冷启动曝光、爆款潜力、广告素材库</td></tr>
+            <tr><td>Instagram</td><td>灵感与身份</td><td>Reels、图文、Stories</td><td>品牌视觉、社群、创作者合作主阵地</td></tr>
+            <tr><td>YouTube</td><td>搜索+长内容</td><td>长视频、Shorts</td><td>深度教育、评测、长尾搜索流量</td></tr>
+            <tr><td>Pinterest</td><td>计划与灵感收集</td><td>图文、视频 Pin</td><td>高购买意图视觉发现（家居、时尚）</td></tr>
+            <tr><td>Facebook</td><td>社群与熟人</td><td>图文、视频、群组</td><td>年长受众、社群运营、广告配套</td></tr>
+          </tbody>
+        </table></div>
+
+        <h2><span class="no">3</span>内容体系与生产流程</h2>
+        <ul>
+          <li><strong>内容支柱（建议 4–5 个）：</strong>产品教育（怎么用/怎么选）、场景内容（生活方式代入）、品牌故事（为什么存在）、用户评价与 UGC、创作者合作内容。</li>
+          <li><strong>选题来源：</strong>客服高频问题、评论关键词、搜索问题词（模块 10 关键词库直接复用）、竞品爆款结构拆解。</li>
+          <li><strong>生产流程：</strong>批量策划（月度选题会）→ 集中拍摄 → 模板化剪辑 → 排期发布 → 数据复盘 → 复用（一条素材多平台改编）。</li>
+          <li><strong>自然 vs 付费：</strong>自然内容建设品牌资产与素材库；付费放大验证过的素材。用自然数据筛选素材，用付费数据放大胜者。</li>
+        </ul>
+
+        <h2><span class="no">4</span>创作者合作与 UGC</h2>
+        <div class="steps">
+          <div class="step"><h4>筛选</h4><p>看受众匹配度（不是粉丝量）、互动质量、历史合作内容、受众地域；要求受众与转化数据截图。</p></div>
+          <div class="step"><h4>合作形式</h4><p>固定费、佣金（affiliate）、产品置换、混合。小品牌优先“产品+佣金”降低现金风险。</p></div>
+          <div class="step"><h4>合同要点</h4><p>交付物清单、发布时间窗、内容授权范围（付费广告使用权！）、独占期、付款与内容修改权。</p></div>
+          <div class="step"><h4>评估</h4><p>用独立追踪链接/折扣码归因；看加购与销售而非仅播放；保留内容资产库供广告复用。</p></div>
+        </div>
+        <div class="warn"><strong>披露合规：</strong>付费合作关系在许多市场需要明确披露（如 FTC 背书指南要求清晰标注 #ad/Paid partnership；欧盟与各国亦有类似规则）。未披露既是合规风险也是信任风险。</div>
+
+        <h2><span class="no">5</span>效果评估层级</h2>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>层级</th><th>指标</th><th>解释</th></tr></thead>
+          <tbody>
+            <tr><td>曝光</td><td>播放、覆盖、展示</td><td>只说明被看到，不说明有效</td></tr>
+            <tr><td>注意</td><td>3 秒观看率、完播率、停留</td><td>钩子质量</td></tr>
+            <tr><td>互动</td><td>点赞、评论、收藏、分享</td><td>共鸣度；收藏/分享权重通常高于点赞</td></tr>
+            <tr><td>行动</td><td>点击、主页访问、加购、独立码使用</td><td>与业务的衔接点</td></tr>
+            <tr><td>结果</td><td>获客、销售、复购、UGC 增量</td><td>最终裁决指标</td></tr>
+          </tbody>
+        </table></div>
+        <div class="danger"><strong>算法核验原则：</strong>平台算法与功能频繁变化且常有不实传言。以各平台官方创作者/商业帮助中心与官方博客为准；对“算法秘籍”类内容默认存疑，要求对方给出可复现证据。</div>
+
+        <h2><span class="no">6</span>练习与自我检验</h2>
+        <div class="exercise">
+          <div class="ex-t"><span class="lv">基础</span>概念题（5 道）</div>
+          <ol>
+            <li>TikTok 与 Pinterest 的用户心智差异？</li>
+            <li>内容支柱一般包含哪几类？</li>
+            <li>创作者合同中为什么必须约定“付费广告使用权”？</li>
+            <li>为什么收藏/分享比点赞更能预示内容价值？</li>
+            <li>平台算法信息应从哪里核验？</li>
+          </ol>
+          <details><summary>查看参考答案与评分标准</summary><div class="ans">
+            <p>1）TikTok 是娱乐化发现流，用户被动接受推荐；Pinterest 是主动计划与灵感收集，购买意图更靠后但更强。</p>
+            <p>2）产品教育、场景内容、品牌故事、用户评价/UGC、创作者合作。</p>
+            <p>3）否则内容只能自然发布，不能投广告放大；投放权是创作者合作的核心商业条款之一，需明确范围、期限与渠道。</p>
+            <p>4）收藏=认为有用于己，分享=愿意背书，二者付出的社交成本高于点赞，与后续转化相关性更强。</p>
+            <p>5）各平台官方创作者中心/商业帮助中心/官方博客；要求可复现证据。</p>
+            <p><strong>评分：</strong>每题 2 分。</p>
+          </div></details>
+        </div>
+        <div class="exercise">
+          <div class="ex-t"><span class="lv a">应用</span>分析题（3 道）</div>
+          <ol>
+            <li>为家居小物品牌设计 4 个内容支柱与 12 个首月选题。</li>
+            <li>某条视频播放 80 万但带来 0 销售。给出诊断步骤与三个可能原因。</li>
+            <li>设计一个 5 人创作者合作方案（筛选标准、合作形式、授权条款、评估方式）。</li>
+          </ol>
+          <details><summary>查看参考答案与评分标准</summary><div class="ans">
+            <p>1）示例：收纳技巧（教育）、小空间改造（场景）、品牌故事（工厂/材料）、用户晒单（UGC）；选题对应客服高频问题与搜索词。</p>
+            <p>2）步骤：①看受众地域与画像匹配②看内容品类与产品相关度③看转化路径（主页链接/独立码）④看评论关键词。可能：娱乐化内容吸引无关流量、无明确 CTA 与落地路径、受众非目标市场。</p>
+            <p>3）筛选：受众匹配&gt;互动率&gt;粉丝量；形式：产品+佣金；授权：含 90 天付费广告使用权；评估：独立码+UTM，按销售结算并记录内容资产。</p>
+            <p><strong>评分：</strong>每题 5 分。</p>
+          </div></details>
+        </div>
+        <div class="exercise">
+          <div class="ex-t"><span class="lv p">实战</span>综合任务</div>
+          <ol>
+            <li>输出《社媒内容作战手册》：平台选择与理由、内容支柱、30 天选题日历、生产 SOP、创作者合作模板、效果报表模板。</li>
+          </ol>
+          <details><summary>查看评分标准</summary><div class="ans"><p><strong>合格线：</strong>六要素齐全；选题与关键词库/客服问题挂钩；报表含业务指标。优秀：包含素材复用矩阵（一源多用）。</p></div></details>
+        </div>
+
+        <h2><span class="no">7</span>章节总结与知识关联</h2>
+        <p><strong>核心结论：</strong>社媒是品牌资产与素材库的建设过程；用自然数据选素材、用付费数据放大、用销售数据裁决。</p>
+        <p><strong>掌握后你能独立完成：</strong>平台选择、内容体系、创作者合作、效果评估。</p>
+        <p><strong>仍不能解决：</strong>付费广告细节（模块 12/13）、邮件留存（模块 15）、数据整合（模块 19）。</p>
+        <p><strong>下一步：</strong>阶段 E 交付与留存。</p>
+
+        <h2><span class="no">8</span>参考资料</h2>
+        <div class="src-grid">
+          <div class="src-card"><div class="st">TikTok for Business — Academy</div><div class="sm">TikTok 官方 · 学习资源</div><a href="https://www.tiktok.com/business" target="_blank" rel="noopener">tiktok.com/business</a><div class="use">支持：平台机制与商业工具核验</div></div>
+          <div class="src-card"><div class="st">Instagram for Business — 帮助</div><div class="sm">Meta 官方 · 帮助中心</div><a href="https://www.facebook.com/business/help" target="_blank" rel="noopener">facebook.com/business/help</a><div class="use">支持：IG/FB 功能与政策</div></div>
+          <div class="src-card"><div class="st">YouTube Creators — Academy</div><div class="sm">YouTube 官方 · 学习资源</div><a href="https://creatoracademy.youtube.com/" target="_blank" rel="noopener">creatoracademy.youtube.com</a><div class="use">支持：内容与算法官方信息</div></div>
+          <div class="src-card"><div class="st">Pinterest Business</div><div class="sm">Pinterest 官方 · 商业资源</div><a href="https://business.pinterest.com/" target="_blank" rel="noopener">business.pinterest.com</a><div class="use">支持：Pin 机制与购物功能</div></div>
+          <div class="src-card"><div class="st">FTC — Endorsement Guides</div><div class="sm">FTC · 官方指南</div><a href="https://www.ftc.gov/business-guidance/resources/ftcs-endorsement-guides-what-people-are-asking" target="_blank" rel="noopener">ftc.gov</a><div class="use">支持：网红合作披露规则 · 美国适用</div></div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <p>阶段 D 完成。建议进入 <a href="stage-e.html#m17">阶段 E · 模块 17 物流履约</a> 继续学习。</p>
+      </footer>
+    </div>
+  </main>
+  <aside class="page-toc" id="pageToc" aria-label="本页目录"></aside>
+</div>
+
+<div class="search-modal" id="searchModal" role="dialog" aria-label="全局搜索">
+  <div class="search-box">
+    <input id="searchInput" type="text" placeholder="搜索模块、章节、术语或工具…（Ctrl/⌘ + K）" autocomplete="off">
+    <div class="search-results" id="searchResults"></div>
+    <div class="search-foot"><span>↑↓ 选择</span><span>Enter 打开</span><span>Esc 关闭</span></div>
+  </div>
+</div>
+<div class="gloss-pop" id="glossaryPop"></div>
+<button class="to-top" id="toTop" type="button" aria-label="返回顶部">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 13V3M3.5 7.5L8 3l4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>
