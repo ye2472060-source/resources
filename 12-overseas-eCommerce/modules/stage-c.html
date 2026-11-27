@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>阶段 C · 建设销售基础设施 | 跨境电商全体系自学指南</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body data-page="stage-c" data-base="../" data-mod="m08">
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" type="button" aria-label="打开目录">
+    <svg viewBox="0 0 20 20" fill="none"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+  </button>
+  <a class="brand" href="../index.html">
+    <span class="brand-mark">跨</span>
+    <span>跨境电商全体系自学指南<small>阶段 C · 建设销售基础设施</small></span>
+  </a>
+  <div class="topbar-spacer"></div>
+  <button class="search-trigger" type="button">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.6"/><path d="M11 11l3.2 3.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <span class="st-label">搜索模块 / 术语 / 工具</span> <kbd>Ctrl K</kbd>
+  </button>
+  <div class="prog-pill"><div class="bar"><i style="width:0%"></i></div><span class="txt">0 / 25 模块</span></div>
+</header>
+
+<div class="mask" id="mask"></div>
+<div class="layout">
+  <aside class="sidebar" id="sidebar"><nav id="sidebarNav" aria-label="课程目录"></nav></aside>
+
+  <main class="main" id="main">
+    <div class="wrap">
+      <div class="crumb"><a href="../index.html">首页</a><span class="sep">/</span>阶段 C · 建设销售基础设施<span class="sep">/</span>模块 08 · 09 · 16</div>
+
+      <!-- ==================== 模块 08 ==================== -->
+      <section class="module module-anchor" id="m08">
+        <header class="module-head">
+          <div class="module-meta">
+            <span class="meta-chip">模块 08</span>
+            <span class="meta-chip">阶段 C</span>
+            <span class="meta-chip pri-p0">优先级 P0</span>
+            <span class="meta-chip">约 8–12 学时（参考）</span>
+          </div>
+          <h1>Shopify 独立站建设与技术基础</h1>
+          <p class="module-goal">学完本模块后，你能够：独立完成 Shopify 商店初始化、页面结构与商品管理；配置多语言/多币种市场；理解订阅、应用与交易费的成本结构；按上线清单完成测试与安全检查。</p>
+          <div class="module-actions">
+            <button class="btn btn-primary mod-done-btn" type="button" data-mod="m08">标记本模块为已掌握</button>
+            <button class="btn btn-ghost mod-ex-btn" type="button" data-mod="m08">标记本模块练习已完成</button>
+          </div>
+        </header>
+
+        <h2><span class="no">1</span>学习目标</h2>
+        <ul class="checklist">
+          <li>能够解释域名、DNS、托管与 SaaS 平台的关系，并完成域名解析。</li>
+          <li>能够搭建商店导航、商品目录、集合页与搜索筛选。</li>
+          <li>能够配置 Shopify Markets 实现多语言/多币种销售，并说明本地化要点。</li>
+          <li>能够核算 Shopify 月度总成本（套餐+应用+交易费+主题）。</li>
+          <li>能够执行上线前测试清单（功能、速度、支付、政策、安全）。</li>
+        </ul>
+
+        <h2><span class="no">2</span>核心概念与基础原理</h2>
+        <div class="cards">
+          <div class="kcard"><div class="kt">SaaS 建站 vs 自建站</div><p>Shopify 是托管 SaaS：服务器、安全、结账基础设施由平台维护，你通过后台配置而非写代码经营。与 WordPress+WooCommerce 相比控制更深但维护负担与技术风险也更高。选型取决于技术能力与定制需求。</p></div>
+          <div class="kcard"><div class="kt">域名与 DNS</div><p>域名是品牌资产，建议在品牌确定后尽早注册（含主要变体与常见后缀）。DNS 记录（A/CNAME/MX/TXT）决定域名指向、邮件与验证；修改传播需数小时。</p></div>
+          <div class="kcard"><div class="kt">主题 / 应用 / 代码</div><p>主题决定视觉与页面结构；应用（App）扩展功能（评论、订阅、弹窗等）；代码定制通过 Liquid/JS/CSS 实现。优先级：配置 &gt; 应用 &gt; 定制代码。</p></div>
+          <div class="kcard"><div class="kt"><span class="term" data-term="SKU">SKU</span> 与变体</div><p>SKU 是最小库存单位；同一产品的颜色/尺寸通常作为变体管理。变体过多会让库存与报表复杂化，命名规则要提前设计。</p></div>
+        </div>
+
+        <h2><span class="no">3</span>商店结构与页面体系</h2>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>页面</th><th>核心任务</th><th>必备要素</th></tr></thead>
+          <tbody>
+            <tr><td>首页</td><td>3 秒内说清“你是谁、给谁、有何不同”</td><td>价值主张、主推品、信任证据、导航清晰</td></tr>
+            <tr><td>产品页</td><td>完成说服与转化</td><td>详见模块 09</td></tr>
+            <tr><td>集合/分类页</td><td>帮助浏览与筛选</td><td>分类逻辑、筛选、SEO 文案</td></tr>
+            <tr><td>关于我们</td><td>建立信任与故事</td><td>真实团队/工厂信息、联系方式</td></tr>
+            <tr><td>FAQ</td><td>消除购买阻力</td><td>物流时效、退换、关税、安全</td></tr>
+            <tr><td>政策页</td><td>合规与信任</td><td>隐私政策、退货政策、服务条款、配送政策（欧盟等市场对信息公示有强制要求）</td></tr>
+            <tr><td>联系页</td><td>可触达</td><td>邮箱/表单/时效承诺</td></tr>
+          </tbody>
+        </table></div>
+
+        <h2><span class="no">4</span>多语言、多币种与 Shopify Markets</h2>
+        <ul>
+          <li>用 Markets 为不同国家/地区设置独立域名或子目录、语言、货币与定价；结账自动按市场显示对应语言与货币。</li>
+          <li>本地化不只是翻译：价格心理（整数 vs .99）、单位（英制/公制）、日期格式、支付方式、退货预期都要适配。</li>
+          <li>多语言站点需正确配置 hreflang 与 sitemap（SEO 细节见模块 10）；机器翻译可用于起步，但法律政策页（退货、隐私）必须人工审校。</li>
+        </ul>
+
+        <h2><span class="no">5</span>成本结构</h2>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>项目</th><th>价格（2026-10 核验，以官网为准）</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td>Basic</td><td>$39/月（年付约 $29/月）</td><td>新店默认选择，含在线商店与基础报表</td></tr>
+            <tr><td>Grow（原 Shopify 套餐）</td><td>$105/月（年付约 $79/月）</td><td>更多员工账户与专业报表</td></tr>
+            <tr><td>Advanced</td><td>$399/月（年付约 $299/月）</td><td>高级报表、第三方计算运费、更多市场</td></tr>
+            <tr><td>Shopify Payments 费率</td><td>约 2.5%–2.9% + $0.30（按套餐与卡种）</td><td>国际卡与货币转换另有加价，具体以结账设置显示为准</td></tr>
+            <tr><td>第三方网关附加费</td><td>约 0.5%–2%（按套餐）</td><td>不用 Shopify Payments 时收取，叠加网关自身费率</td></tr>
+            <tr><td>主题</td><td>官方免费主题多款；付费主题约 $180–$400 一次性</td><td>优先用免费官方主题+定制</td></tr>
+            <tr><td>应用</td><td>免费至 $50+/月/个不等</td><td>每个应用都可能拖慢速度并读取数据，按需安装</td></tr>
+            <tr><td>域名</td><td>约 $10–20/年</td><td>Shopify 内可购买</td></tr>
+          </tbody>
+        </table></div>
+        <div class="warn"><strong>时效性提示：</strong>Shopify 套餐名称、价格与费率随地区与时间调整（2026-10 核验如上）。下单前以 shopify.com/pricing 与后台报价为准，本表不构成承诺。</div>
+
+        <h2><span class="no">6</span>上线前测试清单</h2>
+        <div class="tpl"><div class="tt">上线检查清单（可直接复制使用）</div><div class="tpl-body">□ 下单全流程测试（含测试订单、退款、弃购邮件触发）<br>
+□ 支付：Shopify Payments/第三方网关小额真实交易测试；多币种显示正确<br>
+□ 移动端：各核心页面真机检查（iOS/Android）<br>
+□ 速度：主题图片压缩、应用清理、Core Web Vitals 抽检<br>
+□ 政策页齐全（隐私/退货/条款/配送），联系信息真实可达<br>
+□ 邮件通知：发件域名 SPF/DKIM 配置（见模块 15）<br>
+□ 税务：按目标市场设置税率/含税展示（见模块 23）<br>
+□ 数据：GA4/Pixel 事件验证（见模块 19）<br>
+□ 备份与权限：员工账户最小权限、双因素认证开启<br>
+□ 客服：FAQ、退换入口、响应时效声明</div></div>
+
+        <h2><span class="no">7</span>实际操作流程</h2>
+        <div class="steps">
+          <div class="step"><h4>注册与初始化</h4><p>注册试用 → 填写业务信息 → 选择套餐。先不买主题不装应用。</p></div>
+          <div class="step"><h4>域名与基础设置</h4><p>连接域名、设置企业信息、法定地址（结账页会展示）、默认货币与单位制。</p></div>
+          <div class="step"><h4>结构与商品</h4><p>先建集合（分类）再建产品；用 CSV 批量导入；配置变体、SKU、条码、库存。</p></div>
+          <div class="step"><h4>页面与导航</h4><p>首页模块化搭建；关于/FAQ/政策页先上线最小可用版本；导航与搜索筛选配置。</p></div>
+          <div class="step"><h4>市场与支付</h4><p>Markets 配置目标市场；Shopify Payments 或第三方网关（注意支持国家）；运费模板与免邮门槛。</p></div>
+          <div class="step"><h4>测试与上线</h4><p>执行上方清单；解除密码保护；提交搜索引擎（模块 10）。</p><span class="io">产出：可收款、可被索引的独立站</span></div>
+        </div>
+
+        <h2><span class="no">8</span>工具与数据资源</h2>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>资源</th><th>用途</th><th>限制</th></tr></thead>
+          <tbody>
+            <tr><td>Shopify Help Center</td><td>官方操作文档</td><td>界面随版本变化，以当前后台为准</td></tr>
+            <tr><td>Shopify App Store</td><td>功能扩展</td><td>评价可刷，重点看“最近更新/支持响应”</td></tr>
+            <tr><td>PageSpeed Insights</td><td>速度抽检</td><td>实验室数据，结合实际用户数据看</td></tr>
+            <tr><td>GTmetrix</td><td>加载瀑布分析</td><td>测试节点影响结果</td></tr>
+          </tbody>
+        </table></div>
+
+        <h2><span class="no">9</span>案例与反例</h2>
+        <div class="case">
+          <div class="case-head"><span class="case-type sim">模拟案例</span>月度成本核算</div>
+          <div class="case-body">
+            <p>Basic $39 + 评论应用 $15 + 邮件应用 $30 + 弹窗 $10 + 域名摊销 $1.5 ≈ $95/月；月销 $3,000、订单 100 单，Shopify Payments 费约 2.9%×3,000+30 ≈ $117。总成本约 $212/月，占营收 7.1%。<strong>解读：</strong>固定成本占比高时，提升 AOV 与转化比砍应用更能改善利润。</p>
+            <div class="src">教学模拟数据。</div>
+          </div>
+        </div>
+        <div class="case">
+          <div class="case-head"><span class="case-type fail">失败反例</span>应用膨胀与主题频繁更换</div>
+          <div class="case-body">
+            <p>为“看起来更专业”安装 18 个应用、更换 4 套主题，移动端加载 8 秒+，跳出率 78%。<strong>对策：</strong>每装一个应用记录“解决的问题+对速度的影响”；每季度审计卸载列表。</p>
+            <div class="src">行业常见模式归纳。</div>
+          </div>
+        </div>
+
+        <h2><span class="no">10</span>练习与自我检验</h2>
+        <div class="exercise">
+          <div class="ex-t"><span class="lv">基础</span>概念题（5 道）</div>
+          <ol>
+            <li>Shopify 与 WordPress+WooCommerce 在维护责任上的核心差异？</li>
+            <li>SKU 与变体的区别？举例。</li>
+            <li>使用第三方支付网关时，除网关自身费率外还需支付什么费用？</li>
+            <li>多语言站点为什么要处理 hreflang？</li>
+            <li>上线前为什么必须做真实小额支付测试？</li>
+          </ol>
+          <details><summary>查看参考答案与评分标准</summary><div class="ans">
+            <p>1）Shopify 托管服务器、安全与结账基础设施；WooCommerce 需自管主机、更新、备份与安全。</p>
+            <p>2）SKU 是库存管理的最小单元；变体是产品页上的选项组合。如 T 恤（一个产品）有 S/M/L × 3 色 = 9 个 SKU。</p>
+            <p>3）Shopify 收取的第三方交易附加费（按套餐约 0.5%–2%），叠加在网关费率之上。</p>
+            <p>4）告诉搜索引擎各语言版本的对应关系，避免重复内容问题并让用户进入正确语言页面。</p>
+            <p>5）验证支付链路、税率计算、邮件通知与结算信息是否正确，避免上线后丢单。</p>
+            <p><strong>评分：</strong>每题 2 分。</p>
+          </div></details>
+        </div>
+        <div class="exercise">
+          <div class="ex-t"><span class="lv a">应用</span>分析题（3 道）</div>
+          <ol>
+            <li>你的月销 $8,000、订单 260 单。比较继续 Basic+第三方 PayPal 与升级 Grow+Shopify Payments 的年成本差异，并给出建议。</li>
+            <li>目标市场含美国与德国：列出 Markets 配置中必须本地化的六项内容。</li>
+            <li>店铺移动端跳出率 80%。设计一个 5 步排查流程。</li>
+          </ol>
+          <details><summary>查看参考答案与评分标准</summary><div class="ans">
+            <p>1）Basic+PayPal：$39×12 + PayPal 费（约 3.49%+$0.49 美区，以官方为准）+ Basic 档第三方附加费 2%×8,000×12 ≈ $468+3,360+1,920 ≈ $5,748/年。Grow+Shopify Payments：$79×12 + 约 2.7%×8,000×12 ≈ $948+2,592 ≈ $3,540/年（数字随费率与订单结构变化，仅演示方法）。结论：Shopify Payments 通常显著更省。</p>
+            <p>2）语言（含政策页人工翻译）、货币与价格展示、支付方式、运费模板与时效承诺、退货政策与法定权利表述、税种含税/不含税展示。</p>
+            <p>3）①真机测速（PageSpeed/GTmetrix）；②检查首屏图片与字体；③审计应用影响；④检查结账流程步骤与表单；⑤用热图/录屏看交互阻塞点。</p>
+            <p><strong>评分：</strong>每题 5 分。</p>
+          </div></details>
+        </div>
+        <div class="exercise">
+          <div class="ex-t"><span class="lv p">实战</span>综合任务</div>
+          <ol>
+            <li>搭建一个含 5 个产品、2 个集合、完整政策页的测试商店，完成上线清单，并记录成本核算表。</li>
+          </ol>
+          <details><summary>查看评分标准</summary><div class="ans"><p><strong>合格线：</strong>清单 10 项全过；成本表含套餐/应用/支付/域名。优秀：包含 Markets 配置与移动端实测记录。</p></div></details>
+        </div>
+
+        <h2><span class="no">11</span>章节总结与知识关联</h2>
+        <p><strong>核心结论：</strong>独立站是“可收款的系统”而非“漂亮的页面”；成本与速度由配置纪律决定，不由主题数量决定。</p>
+        <p><strong>掌握后你能独立完成：</strong>商店搭建、市场配置、成本核算、上线测试。</p>
+        <p><strong>仍不能解决：</strong>页面怎么说服（模块 09）、支付细节（模块 16）、技术 SEO（模块 10）。</p>
+        <p><strong>下一步：</strong>模块 09 产品页面优化。</p>
+
+        <h2><span class="no">12</span>参考资料</h2>
+        <div class="src-grid">
+          <div class="src-card"><div class="st">Shopify Help Center</div><div class="sm">Shopify 官方 · 官方文档</div><a href="https://help.shopify.com/" target="_blank" rel="noopener">help.shopify.com</a><div class="use">支持：全部操作步骤核验第一来源</div></div>
+          <div class="src-card"><div class="st">Shopify Pricing</div><div class="sm">Shopify 官方 · 官方页面</div><a href="https://www.shopify.com/pricing" target="_blank" rel="noopener">shopify.com/pricing</a><div class="use">支持：套餐与费率 · 核验于 2026-10</div></div>
+          <div class="src-card"><div class="st">Shopify Markets 文档</div><div class="sm">Shopify 官方 · 官方文档</div><a href="https://help.shopify.com/en/manual/markets" target="_blank" rel="noopener">help.shopify.com/en/manual/markets</a><div class="use">支持：多语言多币种配置 · 路径如有变动请从帮助中心检索“Markets”</div></div>
+          <div class="src-card"><div class="st">PageSpeed Insights</div><div class="sm">Google · 官方工具</div><a href="https://pagespeed.web.dev/" target="_blank" rel="noopener">pagespeed.web.dev</a><div class="use">支持：速度与 Core Web Vitals 检测</div></div>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- ==================== 模块 09 ==================== -->
+      <section class="module module-anchor" id="m09">
+        <header class="module-head">
+          <div class="module-meta">
+            <span class="meta-chip">模块 09</span>
+            <span class="meta-chip">阶段 C</span>
+            <span class="meta-chip pri-p0">优先级 P0</span>
+            <span class="meta-chip">约 8–12 学时（参考）</span>
+          </div>
+          <h1>产品页面优化与转化率优化</h1>
+          <p class="module-goal">学完本模块后，你能够：按说服逻辑重构产品页信息架构；设计信任证据与风险消除机制；用漏斗数据定位瓶颈；正确执行 A/B 测试（假设、样本量、显著性）；区分页面、流量与产品问题。</p>
+          <div class="module-actions">
+            <button class="btn btn-primary mod-done-btn" type="button" data-mod="m09">标记本模块为已掌握</button>
+            <button class="btn btn-ghost mod-ex-btn" type="button" data-mod="m09">标记本模块练习已完成</button>
+          </div>
+        </header>
+
+        <h2><span class="no">1</span>学习目标</h2>
+        <ul class="checklist">
+          <li>能够按“价值主张→差异化→证据→风险消除→<span class="term" data-term="CTA">CTA</span>”组织产品页。</li>
+          <li>能够设计价格锚点、套餐、加购与免邮门槛，并解释其心理机制与风险。</li>
+          <li>能够计算并解释转化漏斗各层指标，定位真实瓶颈。</li>
+          <li>能够设计一个合格的 A/B 测试（假设、指标、样本量、周期、停止规则）。</li>
+          <li>能够区分“页面问题、流量问题、产品问题”并给出对应动作。</li>
+        </ul>
+
+        <h2><span class="no">2</span>核心概念与基础原理</h2>
+        <div class="cards">
+          <div class="kcard"><div class="kt">说服逻辑</div><p>用户在产品页依次问：这是什么？给我带来什么？凭什么信你？有什么风险？怎么买？页面结构应顺着回答这五问，而非按品牌喜好堆模块。</p></div>
+          <div class="kcard"><div class="kt"><span class="term" data-term="AIDA">AIDA</span> 的边界</div><p>注意→兴趣→欲望→行动可作为文案结构参考，但真实决策是非线性的（比价、离开、回访），不能把 AIDA 当精确漏斗模型使用。</p></div>
+          <div class="kcard"><div class="kt">JTBD 应用</div><p>标题写“任务完成”而非“产品名称”：“3 分钟安装的墙面收纳”优于“XX 型号置物架”。</p></div>
+          <div class="kcard"><div class="kt">微转化</div><p>加购、发起结账、保存愿望单是购买的前置信号。流量小时优化微转化能更快获得统计结论。</p></div>
+        </div>
+
+        <h2><span class="no">3</span>产品页信息架构</h2>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>区块</th><th>内容</th><th>常见错误</th></tr></thead>
+          <tbody>
+            <tr><td>标题区</td><td>利益型标题+核心卖点+主图/视频</td><td>型号名当标题；卖点自嗨</td></tr>
+            <tr><td>卖点区</td><td>3–5 条利益点（图标+短句）</td><td>罗列参数不给利益</td></tr>
+            <tr><td>证据区</td><td>场景图/视频/检测报告/对比</td><td>只有精修图无真实场景</td></tr>
+            <tr><td>规格区</td><td>尺寸/材质/兼容/装箱清单</td><td>藏关键信息导致客服与退货</td></tr>
+            <tr><td>信任区</td><td>评论/<span class="term" data-term="UGC">UGC</span>/评分/媒体露出</td><td>五星墙无细节</td></tr>
+            <tr><td>风险消除</td><td>退换/质保/关税说明/客服时效</td><td>政策难找或口径模糊</td></tr>
+            <tr><td>行动区</td><td>CTA、库存与时效提示、支付图标</td><td>CTA 无紧迫信息；隐藏运费</td></tr>
+          </tbody>
+        </table></div>
+
+        <h2><span class="no">4</span>转化漏斗与数据定位</h2>
+        <div class="formula">
+          <div class="ft">转化漏斗核心口径（Shopify）</div>
+          <div class="fx">转化率 = 订单数 ÷ 会话数　　加购率 = 加购次数 ÷ 会话数　　结账到达率 = 到达结账 ÷ 会话数</div>
+          <div class="ex"><b>演示：</b>月会话 20,000，订单 400 → <span class="term" data-term="CVR">CVR</span> 2%。若加购率 6%、结账到达率 3.6%、支付完成率 55%，最大流失在“加购→结账”（-2.4pp）与“结账→支付”（-1.98pp）。<b>解释：</b>先修最大断层，而不是先改标题颜色。<b>误区：</b>不同报表口径（用户 vs 会话 vs 订单）混用会得出相反结论。</div>
+        </div>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>症状</th><th>可能原因排序</th><th>第一步动作</th></tr></thead>
+          <tbody>
+            <tr><td>流量高、跳出高</td><td>流量不匹配/首屏弱/速度慢</td><td>查搜索词与广告受众一致性；真机看首屏</td></tr>
+            <tr><td>加购低</td><td>价值主张不清/价格/信任不足</td><td>看页面滚动深度与热图；访谈加购未购用户</td></tr>
+            <tr><td>结账流失高</td><td>运费意外/强制注册/支付方式缺失</td><td>逐步走查结账；查失败订单原因（模块 16）</td></tr>
+            <tr><td>各环节正常但不赚钱</td><td>产品/定价/单位经济问题</td><td>回模块 20 算贡献利润</td></tr>
+          </tbody>
+        </table></div>
+
+        <h2><span class="no">5</span>A/B 测试方法论</h2>
+        <div class="steps">
+          <div class="step"><h4>写假设</h4><p>“把【安装承诺】前置到首屏，会提高加购率，因为差评显示安装是首要障碍。”没有因果机制的假设只是猜测。</p></div>
+          <div class="step"><h4>定指标</h4><p>主指标一个（如加购率），护栏指标（CVR、AOV、跳出）防止赢了战役输了战争。</p></div>
+          <div class="step"><h4>算样本量</h4><p>用在线样本量计算器输入基准转化率与最小可检测提升（MDE）；流量小时用微转化做指标。</p></div>
+          <div class="step"><h4>跑满周期</h4><p>至少覆盖一个完整购买周期（通常 1–2 周），期间不偷看结果（peeking 会显著提高假阳性）。</p></div>
+          <div class="step"><h4>判定与记录</h4><p>看置信区间而非仅 p 值；无论胜负记录结论，建立实验库。</p></div>
+        </div>
+        <div class="warn"><strong>常见错误：</strong>一周内下结论；一次改多个变量（归因失效）；用“感觉更好”推翻数据；把工具显示的虚假显著性当结论。</div>
+
+        <h2><span class="no">6</span>产品页检查清单</h2>
+        <div class="tpl"><div class="tt">产品页优化清单（可直接复制使用）</div><div class="tpl-body">□ 标题含利益与关键词，≤60 字符显示完整<br>
+□ 首图/视频 3 秒内传达产品与场景<br>
+□ 卖点 ≤5 条，全部写到 Benefit 层<br>
+□ 规格表含尺寸/重量/材质/兼容/装箱清单<br>
+□ 真实场景图 ≥3 张（含参照物）<br>
+□ 评论 ≥10 条且商家有回复<br>
+□ FAQ 覆盖 TOP5 购买阻力<br>
+□ 退换与关税政策一页可达<br>
+□ 免邮门槛与运费在加购前后一致透明<br>
+□ CTA 在首屏与页尾均可见<br>
+□ 移动端无横向滚动、按钮 ≥44px</div></div>
+
+        <h2><span class="no">7</span>工具与数据资源</h2>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>工具</th><th>用途</th><th>限制</th></tr></thead>
+          <tbody>
+            <tr><td>Shopify Analytics</td><td>会话/转化/产品报表</td><td>口径固定，需理解定义</td></tr>
+            <tr><td>GA4</td><td>事件级行为与渠道</td><td>需事件规划（模块 19）</td></tr>
+            <tr><td>Microsoft Clarity / Hotjar</td><td>热图与录屏</td><td>隐私合规需配置掩码</td></tr>
+            <tr><td>VWO / Optimizely / ABHero 等</td><td>A/B 测试执行</td><td>付费；Shopify 亦有官方测试能力</td></tr>
+            <tr><td>在线样本量计算器</td><td>实验设计</td><td>假设决定结果</td></tr>
+          </tbody>
+        </table></div>
+
+        <h2><span class="no">8</span>案例与反例</h2>
+        <div class="case">
+          <div class="case-head"><span class="case-type sim">模拟案例</span>一个合格的实验</div>
+          <div class="case-body">
+            <p>假设：将“尺码不合免费退换”徽章从页尾移至首屏会提高加购率（依据：退货原因 34% 为尺码）。主指标加购率（基准 5.5%，MDE +15% 相对提升），样本量约 4,600/组，跑 14 天。结果：+18% 相对提升，置信区间 [6%, 31%]，CVR 与 AOV 无显著变化 → 全量上线并同步更新广告素材。</p>
+            <div class="src">教学模拟。</div>
+          </div>
+        </div>
+        <div class="case">
+          <div class="case-head"><span class="case-type fail">失败反例</span>优化错误的瓶颈</div>
+          <div class="case-body">
+            <p>团队花一个月改按钮颜色与文案，转化无变化；后来发现 60% 流量来自不相关关键词，加购率天然低。<strong>教训：</strong>CRO 的前提是流量质量合格。先看流量结构，再优化页面。</p>
+            <div class="src">行业常见情形归纳。</div>
+          </div>
+        </div>
+
+        <h2><span class="no">9</span>练习与自我检验</h2>
+        <div class="exercise">
+          <div class="ex-t"><span class="lv">基础</span>概念题（5 道）</div>
+          <ol>
+            <li>产品页说服逻辑的五个顺序问题是什么？</li>
+            <li>为什么“罗列参数”通常转化差？</li>
+            <li>Shopify 转化率的分母是什么？</li>
+            <li>什么是 peeking？为什么危险？</li>
+            <li>免邮门槛提高 AOV 的同时有什么风险？</li>
+          </ol>
+          <details><summary>查看参考答案与评分标准</summary><div class="ans">
+            <p>1）这是什么？给我什么利益？凭什么信你？有什么风险？怎么买？</p>
+            <p>2）参数是特点，用户需要翻译成“对我的好处”；缺利益层则决策成本高。</p>
+            <p>3）会话数（在线商店会话）。注意与 GA4 的用户/会话口径不同。</p>
+            <p>4）实验中反复查看结果并据此提前停止；这会大幅提高假阳性与错误决策概率。</p>
+            <p>5）可能推高低价值凑单、增加退货与客诉；门槛过高则弃购，需测试平衡点。</p>
+            <p><strong>评分：</strong>每题 2 分。</p>
+          </div></details>
+        </div>
+        <div class="exercise">
+          <div class="ex-t"><span class="lv a">应用</span>分析题（3 道）</div>
+          <ol>
+            <li>给定漏斗：会话 50,000 / 加购 2,000 / 到结账 1,100 / 成交 550。计算各层转化率，指出最大断层并给出三个可能原因。</li>
+            <li>为“加购→结账”断层设计一个 A/B 实验（假设、指标、样本量思路、周期）。</li>
+            <li>一个产品页各项指标健康但整体亏损。说明接下来查什么、按什么顺序。</li>
+          </ol>
+          <details><summary>查看参考答案与评分标准</summary><div class="ans">
+            <p>1）加购率 4%、结账到达 2.2%、支付完成 50%；最大断层在“加购→到结账”（-1.8pp）。可能：结账入口不明显、运费意外、强制注册、移动端结账故障。</p>
+            <p>2）假设：在加购后弹层直接显示含运费总价与 Guest Checkout 提示可减少流失。主指标：加购→结账率；护栏：CVR、AOV；样本按基准 2.2%、MDE +20% 相对提升估算；跑满 14 天。</p>
+            <p>3）页面健康说明转化环节非瓶颈，转查：流量成本（CAC）、退货率、客单价与贡献利润（模块 20），最后查隐藏成本（关税、物流、退款）。</p>
+            <p><strong>评分：</strong>每题 5 分。</p>
+          </div></details>
+        </div>
+        <div class="exercise">
+          <div class="ex-t"><span class="lv p">实战</span>综合任务</div>
+          <ol>
+            <li>选一个真实产品页，按清单逐项打分（1–5），输出 10 条优化建议并按“影响×成本”排序，再为 Top3 设计实验。</li>
+          </ol>
+          <details><summary>查看评分标准</summary><div class="ans"><p><strong>合格线：</strong>建议对应清单条目；Top3 有假设、指标与样本量思路。优秀：包含一个护栏指标与失败预案。</p></div></details>
+        </div>
+
+        <h2><span class="no">10</span>章节总结与知识关联</h2>
+        <p><strong>核心结论：</strong>CRO 的顺序是“先流量质量、再漏斗断层、最后细节”；实验的价值来自假设质量与统计纪律，而非工具。</p>
+        <p><strong>掌握后你能独立完成：</strong>产品页重构、漏斗诊断、实验设计与结果判读。</p>
+        <p><strong>仍不能解决：</strong>流量从哪来（模块 10–14）、数据怎么采（模块 19）、赚不赚钱（模块 20）。</p>
+        <p><strong>下一步：</strong>模块 16 支付与结账。</p>
+
+        <h2><span class="no">11</span>参考资料</h2>
+        <div class="src-grid">
+          <div class="src-card"><div class="st">Shopify — 转化与报表文档</div><div class="sm">Shopify 官方 · 官方文档</div><a href="https://help.shopify.com/en/manual/reports-and-analytics" target="_blank" rel="noopener">help.shopify.com</a><div class="use">支持：转化率等口径定义</div></div>
+          <div class="src-card"><div class="st">Google — Web Vitals</div><div class="sm">Google · 官方文档</div><a href="https://web.dev/articles/vitals" target="_blank" rel="noopener">web.dev</a><div class="use">支持：体验指标与优化方法</div></div>
+          <div class="src-card"><div class="st">Microsoft Clarity</div><div class="sm">Microsoft · 免费工具</div><a href="https://clarity.microsoft.com/" target="_blank" rel="noopener">clarity.microsoft.com</a><div class="use">支持：热图与录屏 · 免费额度大，需隐私配置</div></div>
+          <div class="src-card"><div class="st">Nielsen Norman Group — Conversion</div><div class="sm">研究机构 · 行业研究</div><a href="https://www.nngroup.com/" target="_blank" rel="noopener">nngroup.com</a><div class="use">支持：转化与说服设计研究</div></div>
+        </div>
+      </section>
+
+      <hr class="divider">
+
+      <!-- ==================== 模块 16 ==================== -->
+      <section class="module module-anchor" id="m16">
+        <header class="module-head">
+          <div class="module-meta">
+            <span class="meta-chip">模块 16</span>
+            <span class="meta-chip">阶段 C</span>
+            <span class="meta-chip pri-p0">优先级 P0</span>
+            <span class="meta-chip">约 5–8 学时（参考）</span>
+          </div>
+          <h1>支付方式与结账优化</h1>
+          <p class="module-goal">学完本模块后，你能够：比较信用卡、数字钱包与本地支付方式的适用性；理解授权、扣款、结算与到账的差异及拒付风险；诊断结账流失；按目标市场配置支付组合。</p>
+          <div class="module-actions">
+            <button class="btn btn-primary mod-done-btn" type="button" data-mod="m16">标记本模块为已掌握</button>
+            <button class="btn btn-ghost mod-ex-btn" type="button" data-mod="m16">标记本模块练习已完成</button>
+          </div>
+        </header>
+
+        <h2><span class="no">1</span>学习目标</h2>
+        <ul class="checklist">
+          <li>能够解释授权、扣款、结算、到账四个阶段的差异与现金流含义。</li>
+          <li>能够按目标市场选择支付方式组合（卡/钱包/本地方式/BNPL）。</li>
+          <li>能够说明 Shopify Payments 的地区支持与第三方网关的取舍。</li>
+          <li>能够识别拒付与欺诈风险信号，并知道应对与举证要求。</li>
+          <li>能够诊断结账漏斗流失并提出针对性优化。</li>
+        </ul>
+
+        <h2><span class="no">2</span>核心概念与基础原理</h2>
+        <div class="cards">
+          <div class="kcard"><div class="kt">四阶段资金流</div><p>授权（冻结额度）→ 扣款（capture）→ 结算（acquirer 与卡组织清算）→ 到账（payout 到银行，Shopify Payments 通常数个工作日）。理解四阶段才能读懂“销售额≠账上现金”。</p></div>
+          <div class="kcard"><div class="kt">Shopify Payments</div><p>Shopify 内置收单方案，免除第三方网关附加费；仅支持特定国家/地区注册主体（美国、加拿大、英国、欧盟多数国家、澳新、日本、新加坡、中国香港等；中国大陆主体暂不支持，以官方列表为准）。</p></div>
+          <div class="kcard"><div class="kt">拒付与欺诈</div><p>拒付（Chargeback）是持卡人经发卡行撤销交易，商家通常被收取处理费且影响账户评级；欺诈订单则钱货两空。防线：AVS/3DS、地址与行为风控、保留发货凭证。</p></div>
+          <div class="kcard"><div class="kt">汇率与货币转换</div><p>多币种展示伴随转换费（常见 1%–1.5% 或按服务商规则）；动态货币转换（DCC）让客户用本币支付但汇率差、体验争议多，通常不建议开启。</p></div>
+        </div>
+
+        <h2><span class="no">3</span>支付方式与地域差异</h2>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>市场</th><th>主流方式</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td>美国</td><td>信用卡（Visa/MC/Amex）+ PayPal + Apple/Google Pay + Shop Pay</td><td>卡主导；钱包提升移动端转化</td></tr>
+            <tr><td>英国/欧盟主要国家</td><td>卡 + PayPal + 本地方式（荷兰 iDEAL、德国 Sofort/Klarna、比利时 Bancontact、波兰 BLIK 等）+ BNPL</td><td>本地方式缺失会直接损失转化；以 Shopify/服务商支持列表为准</td></tr>
+            <tr><td>日本</td><td>卡 + Konbini（便利店支付）+ 银行转账</td><td>便利店付款对无卡人群重要</td></tr>
+            <tr><td>巴西/拉美</td><td>Pix、本地分期、票券</td><td>分期文化强，需本地收单</td></tr>
+            <tr><td>全球通用</td><td>PayPal（信任度高但费率与冻结争议多）</td><td>新店常见选项；注意账户合规</td></tr>
+          </tbody>
+        </table></div>
+        <div class="note">上表为行业通行认知的结构性描述；具体可用方式以 Shopify Payments/各网关在目标国的支持列表为准（核验日期 2026-10）。</div>
+
+        <h2><span class="no">4</span>支付成功率与风控</h2>
+        <ul>
+          <li>支付成功率 = 成功扣款 ÷ 尝试扣款。软失败（余额、3DS 超时）可重试或换方式挽回。</li>
+          <li>拒付率需远低于卡组织阈值（经验上 &lt;1%，具体以收单行协议为准）；超限可能导致罚款或失去收单资格。</li>
+          <li>证据链：发货跟踪、签收记录、客户沟通、产品描述一致性——拒付抗辩的胜负手。</li>
+          <li>高风险品类（保健品、电子烟、成人用品等）可能被 Shopify Payments 限制，需提前查可接受使用政策并准备替代网关。</li>
+        </ul>
+
+        <h2><span class="no">5</span>结账流程优化</h2>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>优化点</th><th>做法</th><th>依据</th></tr></thead>
+          <tbody>
+            <tr><td>游客结账</td><td>默认允许 Guest Checkout，账户后置邀请</td><td>注册墙是弃购首因之一</td></tr>
+            <tr><td>运费透明</td><td>尽早展示运费与到时效（免邮门槛前置）</td><td>意外费用是弃购主因</td></tr>
+            <tr><td>表单精简</td><td>地址自动补全、减少字段、移动端键盘适配</td><td>每多一字段都在流失</td></tr>
+            <tr><td>信任信号</td><td>支付图标、SSL、退换承诺、真实评价</td><td>跨境新品牌必需</td></tr>
+          <tr><td>钱包优先</td><td>Apple/Google Pay/PayPal 置顶</td><td>移动端一键支付转化更高</td></tr>
+            <tr><td>失败挽回</td><td>支付失败订单自动邮件/短信提醒</td><td>软失败挽回率可观</td></tr>
+          </tbody>
+        </table></div>
+
+        <h2><span class="no">6</span>实际操作流程</h2>
+        <div class="steps">
+          <div class="step"><h4>确认主体资格</h4><p>核对 Shopify Payments 支持国家/地区；不满足则选第三方网关（Stripe/PayPal/2Checkout 等，以服务商政策为准）。</p></div>
+          <div class="step"><h4>配置支付组合</h4><p>按目标市场：卡 + PayPal + 2–3 个本地方式；设置币种与结账语言。</p></div>
+          <div class="step"><h4>风控设置</h4><p>开启 3DS/AVS 规则、地址不匹配拦截、高风险国家策略。</p></div>
+          <div class="step"><h4>测试与监控</h4><p>小额真实交易；每周看失败订单报表与拒付通知；建立证据归档流程。</p><span class="io">产出：支付配置与监控表</span></div>
+        </div>
+
+        <h2><span class="no">7</span>案例与反例</h2>
+        <div class="case">
+          <div class="case-head"><span class="case-type sim">模拟案例</span>结账漏斗诊断</div>
+          <div class="case-body">
+            <p>到达结账 1,100 人，完成支付 550 人（50%）。分国家看：荷兰仅 31%，美国 68%。查因：未开通 iDEAL。接入后荷兰提升至 55%，整体支付完成率升至 61%。<strong>方法：</strong>按国家/设备拆分支付完成率，先补最大缺口。</p>
+            <div class="src">教学模拟数据；本地支付差异为行业通行认知。</div>
+          </div>
+        </div>
+        <div class="case">
+          <div class="case-head"><span class="case-type fail">失败反例</span>忽视拒付证据链</div>
+          <div class="case-body">
+            <p>旺季拒付激增，商家因无法提供签收记录全额败诉，拒付率超阈值被收单行罚款。<strong>对策：</strong>物流必须可跟踪、高风险订单发货前电话/邮件确认、描述与实物一致（描述不符是拒付常见根源）。</p>
+            <div class="src">行业常见情形归纳。</div>
+          </div>
+        </div>
+
+        <h2><span class="no">8</span>练习与自我检验</h2>
+        <div class="exercise">
+          <div class="ex-t"><span class="lv">基础</span>概念题（5 道）</div>
+          <ol>
+            <li>授权、扣款、结算、到账的区别？</li>
+            <li>退款与拒付的本质差异是什么？</li>
+            <li>Shopify Payments 不支持中国大陆主体的含义是什么？可选路径有哪些？</li>
+            <li>DCC（动态货币转换）为什么通常不建议开启？</li>
+            <li>支付失败订单为什么值得单独设置挽回流程？</li>
+          </ol>
+          <details><summary>查看参考答案与评分标准</summary><div class="ans">
+            <p>1）授权=冻结额度；扣款=实际划转；结算=收单行与卡组织清算；到账=资金进入商家银行账户。时间差从数小时到数日不等。</p>
+            <p>2）退款是商家主动返还；拒付是持卡人通过发卡行强制撤销，伴随罚金、证据抗辩与账户评级影响。</p>
+            <p>3）无法用内置收单，需选第三方网关（如 Stripe、PayPal、2Checkout 等），并注意 Shopify 对第三方网关的附加交易费；具体以官方支持列表为准。</p>
+            <p>4）DCC 由商家侧转换货币，汇率通常不利且账单显示外币易引发争议；更好做法是让客户选择本地币种展示并由服务商透明收汇。</p>
+            <p>5）大量“失败”实为软失败（3DS 超时、临时余额不足），挽回成本极低而收益直接。</p>
+            <p><strong>评分：</strong>每题 2 分。</p>
+          </div></details>
+        </div>
+        <div class="exercise">
+          <div class="ex-t"><span class="lv a">应用</span>分析题（3 道）</div>
+          <ol>
+            <li>目标市场为德国：列出你的支付组合并说明理由；指出需要核验的两个官方信息点。</li>
+            <li>某店拒付率 1.4% 且集中在两个 SKU。设计排查与处置方案。</li>
+            <li>移动端支付完成率 45%、桌面 70%。列出排查步骤与三个最可能原因。</li>
+          </ol>
+          <details><summary>查看参考答案与评分标准</summary><div class="ans">
+            <p>1）组合：卡 + PayPal + Klarna/Sofort + 钱包。核验点：Shopify Payments/网关在德国的支持与费率；本地方式的服务商接入条件。</p>
+            <p>2）先看这两个 SKU 的差评与描述一致性、物流时效；检查是否集中某国家/某设备；对可疑订单启用 3DS 与发货前确认；同时补充证据归档；必要时下架整改。</p>
+            <p>3）步骤：真机走查结账 → 检查钱包按钮显示 → 检查表单键盘与自动填充 → 看失败订单的设备分布。最可能：钱包入口不明显、表单字段过多、3DS 跳转在移动浏览器中断。</p>
+            <p><strong>评分：</strong>每题 5 分。</p>
+          </div></details>
+        </div>
+        <div class="exercise">
+          <div class="ex-t"><span class="lv p">实战</span>综合任务</div>
+          <ol>
+            <li>为目标市场输出《支付配置方案》：方式组合与顺序、费率估算（含附加费）、风控规则、失败订单监控表模板。</li>
+          </ol>
+          <details><summary>查看评分标准</summary><div class="ans"><p><strong>合格线：</strong>费率含 Shopify 附加费与网关费率；有风控规则与监控频率。优秀：包含拒付抗辩证据清单。</p></div></details>
+        </div>
+
+        <h2><span class="no">9</span>章节总结与知识关联</h2>
+        <p><strong>核心结论：</strong>支付是转化的最后一公里，也是现金流的入口；配置按市场、风控按证据、监控按报表。</p>
+        <p><strong>掌握后你能独立完成：</strong>支付组合配置、结账优化、拒付与失败订单处置。</p>
+        <p><strong>仍不能解决：</strong>到账后的资金安排（模块 22）、税务处理（模块 23）。</p>
+        <p><strong>下一步：</strong>阶段 D 流量获取。</p>
+
+        <h2><span class="no">10</span>参考资料</h2>
+        <div class="src-grid">
+          <div class="src-card"><div class="st">Shopify Payments 支持国家/地区</div><div class="sm">Shopify 官方 · 官方文档</div><a href="https://help.shopify.com/en/manual/payments/shopify-payments/supported-countries" target="_blank" rel="noopener">help.shopify.com</a><div class="use">支持：主体资格核验 · 路径如有变动请检索“Shopify Payments supported countries”</div></div>
+          <div class="src-card"><div class="st">Shopify — 支付与结账文档</div><div class="sm">Shopify 官方 · 官方文档</div><a href="https://help.shopify.com/en/manual/payments" target="_blank" rel="noopener">help.shopify.com</a><div class="use">支持：网关、费率与结账配置</div></div>
+          <div class="src-card"><div class="st">Visa — 拒付处理指南（Dispute Management）</div><div class="sm">Visa · 卡组织文档</div><a href="https://usa.visa.com/support/small-business/dispute-management.html" target="_blank" rel="noopener">usa.visa.com</a><div class="use">支持：拒付流程与抗辩 · 路径可能调整</div></div>
+          <div class="src-card"><div class="st">Mastercard — Chargeback Guide</div><div class="sm">Mastercard · 卡组织文档</div><a href="https://www.mastercard.us/en-us/business/overview/support/chargeback-guide.html" target="_blank" rel="noopener">mastercard.us</a><div class="use">支持：拒付规则参考</div></div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <p>阶段 C 完成。建议进入 <a href="stage-d.html#m10">阶段 D · 模块 10 SEO</a> 继续学习。</p>
+      </footer>
+    </div>
+  </main>
+  <aside class="page-toc" id="pageToc" aria-label="本页目录"></aside>
+</div>
+
+<div class="search-modal" id="searchModal" role="dialog" aria-label="全局搜索">
+  <div class="search-box">
+    <input id="searchInput" type="text" placeholder="搜索模块、章节、术语或工具…（Ctrl/⌘ + K）" autocomplete="off">
+    <div class="search-results" id="searchResults"></div>
+    <div class="search-foot"><span>↑↓ 选择</span><span>Enter 打开</span><span>Esc 关闭</span></div>
+  </div>
+</div>
+<div class="gloss-pop" id="glossaryPop"></div>
+<button class="to-top" id="toTop" type="button" aria-label="返回顶部">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 13V3M3.5 7.5L8 3l4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

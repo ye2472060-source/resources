@@ -1,0 +1,546 @@
+
+<!-- ================= 模块 5 ================= -->
+<section class="page" id="page-m5">
+  <div class="breadcrumb"><a href="#/home">课程</a> › <a href="#/map">知识地图</a> › 模块 5</div>
+  <div class="page-head">
+    <h1>模块 5 · 用户激活、留存与生命周期运营</h1>
+    <p class="lead">重点研究用户为什么开始使用、为什么持续使用、为什么流失。留存是增长系统的地基——没有留存的获客是漏水桶里加水。</p>
+    <div class="chips">
+      <span class="chip">学习目标：<b>会定义激活事件、会读留存曲线、能设计分层与召回策略</b></span>
+      <span class="chip">前置知识：<b>模块 3</b></span>
+      <span class="chip">预计时长：<b>8–10 小时</b></span>
+      <span class="chip">单元数：<b>11</b></span>
+    </div>
+  </div>
+
+  <!-- ========== 5.1 ========== -->
+  <section class="unit" id="u5-1">
+    <div class="unit-head">
+      <span class="unit-no">5.1</span>
+      <h3>注册、首次使用、首次关键行为与激活：四个不同的概念</h3>
+      <label class="done-check"><input type="checkbox" data-pid="u5-1"><span>标记完成</span></label>
+    </div>
+    <div class="ev"><span class="ev-tag ev-frame">理论框架</span></div>
+    <div class="cq"><b>核心问题：</b>「注册转化率」高就说明 onboarding 好吗？激活到底以什么为标志？</div>
+    <div class="table-scroll">
+    <table class="dt">
+      <thead><tr><th>概念</th><th>定义</th><th>典型误用</th></tr></thead>
+      <tbody>
+        <tr><td class="em">注册</td><td>用户创建账号（表单提交成功）</td><td>把注册当激活——注册只是许可，不是价值</td></tr>
+        <tr><td class="em">首次使用</td><td>注册后第一次进入产品并产生任意行为</td><td>把「打开过」当使用</td></tr>
+        <tr><td class="em">首次关键行为</td><td>用户完成产品设计者定义的「核心价值动作」</td><td>关键行为定义太浅（如仅「浏览首页」）或太深</td></tr>
+        <tr><td class="em">激活</td><td>新用户完成首次关键行为、体验到核心价值的状态</td><td>用时间（注册 7 天内活跃）代替行为定义</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <h4><span class="h4ico">🎯</span>激活事件的三个筛选标准</h4>
+    <ol class="steps">
+      <li><b>与留存强相关</b><span>做过该行为的用户，其留存率显著高于没做过的人群（用同期群数据验证）。</span></li>
+      <li><b>在产品设计的影响范围内</b><span>团队能通过引导、默认设置、模板等方式提升其完成率。</span></li>
+      <li><b>可观测、可计数</b><span>有明确的事件定义与埋点，不是「感觉他上手了」。</span></li>
+    </ol>
+    <p><strong>验证方法：</strong>对每个候选「关键行为」，比较「7 日内做过 vs 没做过」两群用户的 30 日留存差异；同时检查因果关系方向（可能是高意向用户既做该行为又留存，自选择偏差——需用实验或新用户强制体验验证，模块 4）。</p>
+    <div class="callout note-warn"><b>常见错误：</b>激活定义随时间漂移（每次复盘都换定义，历史不可比）；把「完成引导流程」当激活（用户走完流程但什么都没得到）。</div>
+    <div class="refs"><b>关联知识：</b>5.2 Aha 时刻 · 5.4 留存曲线 · 模块 7 事件埋点</div>
+    <div class="quiz">
+      <div class="q-title">一款外卖产品把「激活」定义为「注册后 7 天内完成首单」。这个定义有什么潜在问题？</div>
+      <button class="ans-toggle">查看参考答案</button>
+      <div class="answer">两个问题：① 7 天窗口偏松——真正健康的信号可能是「注册后 3 天内首单」或「首单后 7 天内第二单」（频率窗口应按产品自然节奏定，外卖是高频产品）；② 首单可能靠新客大额补贴完成，不代表价值认可——应结合「是否使用搜索/收藏/复购」等无补贴行为验证。定义激活事件要同时满足「与留存强相关」和「可被产品影响」。</div>
+    </div>
+    <div class="task"><b>实践任务：</b>为你的产品定义激活事件：写出候选关键行为清单，用三条标准各打一遍分，选出最终定义并记录数据验证方法。</div>
+  </section>
+
+  <!-- ========== 5.2 ========== -->
+  <section class="unit" id="u5-2">
+    <div class="unit-head">
+      <span class="unit-no">5.2</span>
+      <h3>Aha 时刻与激活路径优化</h3>
+      <label class="done-check"><input type="checkbox" data-pid="u5-2"><span>标记完成</span></label>
+    </div>
+    <div class="ev"><span class="ev-tag ev-logic">推导判断</span></div>
+    <div class="cq"><b>核心问题：</b>用户在哪一刻「懂了」这个产品？如何让更多人更快到达这一刻？</div>
+    <h4><span class="h4ico">💡</span>Aha 时刻（Aha Moment）</h4>
+    <p>Aha 时刻指用户<strong>第一次清晰感知到产品核心价值的瞬间</strong>。它不是某个功能，而是「问题被解决」的体验。识别方法（按可靠性排序）：</p>
+    <ol class="steps">
+      <li><b>留存对比法</b><span>找「早期就完成某行为的用户」与留存的相关性（见 5.1）。</span></li>
+      <li><b>访谈法</b><span>问活跃用户「你什么时候觉得这产品有用？当时在做什么？」。</span></li>
+      <li><b>流失回访法</b><span>问流失用户「如果早点做到 X，你会留下来吗？」。</span></li>
+    </ol>
+    <p class="small">注意：不同人群的 Aha 时刻可能不同（核心用户与非核心用户），应分群定义而非全站一刀切。</p>
+    <h4><span class="h4ico">🛤️</span>激活路径优化的五个杠杆</h4>
+    <div class="table-scroll">
+    <table class="dt">
+      <thead><tr><th>杠杆</th><th>做法</th><th>示例</th></tr></thead>
+      <tbody>
+        <tr><td class="em">缩短路径</td><td>减少到达关键行为的步骤与决策</td><td>注册后默认带一个示例项目，而非空白首页</td></tr>
+        <tr><td class="em">前置价值</td><td>先给价值再要投入</td><td>先体验核心功能，再引导完善资料</td></tr>
+        <tr><td class="em">模板与默认值</td><td>替用户做前几个决策</td><td>新用户默认开启「推荐关注」</td></tr>
+        <tr><td class="em">即时反馈</td><td>关键行为完成后立刻给正向反馈</td><td>首次打卡后显示「已连续 1 天」进度</td></tr>
+        <tr><td class="em">场景化引导</td><td>在用户任务场景中提示，而非说明书式教程</td><td>用户卡在某步 30 秒时出现情境提示</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <h4><span class="h4ico">🧪</span>优化流程</h4>
+    <ol class="steps">
+      <li>画出当前激活漏斗（注册→首次使用→关键行为），找最大流失步骤。</li>
+      <li>对流失步骤做定性诊断（录屏/访谈：用户在犹豫什么）。</li>
+      <li>按五杠杆生成 2–3 个改动假设，设计实验（模块 4）。</li>
+      <li>用「激活率 + 30 日留存」双指标评估（防止激活灌水）。</li>
+    </ol>
+    <div class="callout note-warn"><b>常见错误：</b>把「完成引导流程步数」当激活（流程完成 ≠ 价值到达）；为不同人群设计同一条激活路径；优化激活率时引入误导性默认（如默认勾选订阅）。</div>
+    <div class="refs"><b>关联知识：</b>5.1 激活定义 · 模块 4 实验 · 工具箱留存诊断模板</div>
+    <div class="quiz">
+      <div class="q-title">一个在线文档产品的新用户激活漏斗：注册 100% → 创建文档 60% → 编辑并保存 25% → 分享/协作 8%。最大流失在「编辑并保存」，可能的原因与验证方式？</div>
+      <button class="ans-toggle">查看参考答案</button>
+      <div class="answer">可能原因：① 空白页不知道写什么（启动成本）；② 编辑器学习成本；③ 用户只是来「看看」，无真实任务。验证：① 漏斗分群（来源渠道是否带来低意向用户）；② 录屏看用户在编辑器的行为（打开后多久关闭、是否使用了模板）；③ 访谈「注册后你想做的第一件事是什么」。若确认是启动成本，实验方向：模板库前置、示例文档、AI 起草——并监控「分享/协作」是否随之上升（价值传导）。</div>
+    </div>
+    <div class="task"><b>实践任务：</b>画出你产品的激活漏斗（真实或估算数据），在最大流失步写两个原因假设和一个实验设计。</div>
+  </section>
+
+  <!-- ========== 5.3 ========== -->
+  <section class="unit" id="u5-3">
+    <div class="unit-head">
+      <span class="unit-no">5.3</span>
+      <h3>留存指标体系：留存率、流失率、复购率与活跃率</h3>
+      <label class="done-check"><input type="checkbox" data-pid="u5-3"><span>标记完成</span></label>
+    </div>
+    <div class="ev"><span class="ev-tag ev-frame">理论框架</span></div>
+    <div class="cq"><b>核心问题：</b>「留存率 80%」在不同口径下含义完全不同——到底在算哪个留存？</div>
+    <h4><span class="h4ico">🧮</span>核心指标与公式</h4>
+    <div class="formula">
+      <button class="copy-btn">复制</button>
+      <div class="f-main">N 日留存率 = 第 N 日仍活跃的用户数 ÷ 第 0 日（注册日）的用户数 × 100%</div>
+      <div class="f-vars"><b>活跃的定义必须先固定：</b>「打开 App」「完成核心行为」「有会话」是三件不同的事，口径不同结果不可比。<b>流失率 = 1 − 留存率</b>（需注意与「退订/注销率」区分，后者只统计显式离开）。</div>
+    </div>
+    <div class="formula">
+      <button class="copy-btn">复制</button>
+      <div class="f-main">复购率 = 统计周期内购买 ≥2 次的用户数 ÷ 该周期内有购买的用户数 × 100%</div>
+      <div class="f-vars"><b>适用：</b>电商/零售；<b>变体：</b>购买频次（次/人/年）、复购间隔。<b>误读：</b>复购率高不等于收入健康（要看客单价与毛利）。</div>
+    </div>
+    <h4><span class="h4ico">📅</span>时间口径家族</h4>
+    <div class="table-scroll">
+    <table class="dt">
+      <thead><tr><th>口径</th><th>算法</th><th>特点</th><th>适用</th></tr></thead>
+      <tbody>
+        <tr><td class="em">N 日留存（经典）</td><td>第 0 日 cohort 中第 N 日活跃的人数占比</td><td>简单、行业常用、可跨公司比</td><td>获客密集、日常使用的产品</td></tr>
+        <tr><td class="em">范围留存（Bracket）</td><td>第 0–N 日内任意一天活跃即算留存</td><td>数值偏高，对低频产品更宽容</td><td>周活型/工具型产品</td></tr>
+        <tr><td class="em">滚动留存（Rolling）</td><td>从第 N 日起至周期末仍有活跃</td><td>最宽松，长期价值视角</td><td>订阅制、长周期产品</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p><strong>报告留存时必须同时说明口径</strong>——「30 日留存 30%」在经典口径下不错，在滚动口径下则很差。这也是跨公司 benchmark 最常出错的地方。</p>
+    <h4><span class="h4ico">📊</span>活跃率指标</h4>
+    <ul class="tight">
+      <li><strong>DAU/MAU（粘性）：</strong>日活占月活比例，反映使用频次密度（社交/内容类常看）。</li>
+      <li><strong>WAU/MAU：</strong>周活密度，适合周频次产品。</li>
+      <li><strong>活跃用户定义：</strong>同样必须先定义「什么算活跃」，否则该指标无意义。</li>
+    </ul>
+    <div class="callout note-warn"><b>常见错误：</b>混用口径做历史对比；用累计用户算留存（分母虚高）；把「登录」当活跃（自动登录/推送打开的噪音）；只看总体留存不看同期群。</div>
+    <div class="refs"><b>关联知识：</b>5.4 同期群 · 模块 7 指标口径</div>
+    <div class="quiz">
+      <div class="q-title">产品 A 的「30 日留存」是 25%，产品 B 是 55%。能说明 B 的用户忠诚度更高吗？</div>
+      <button class="ans-toggle">查看参考答案</button>
+      <div class="answer">不能直接比。要核对：① 口径（经典/范围/滚动）；② 「活跃」定义（打开 vs 核心行为）；③ 产品频率属性（日报 vs 季度报）；④ 用户构成（自然流量 vs 补贴用户）。正确做法是同口径、同定义、同期群对比，或与自己历史比。跨产品比较留存数字而不管口径，是常见的错误归因。</div>
+    </div>
+    <div class="task"><b>实践任务：</b>为你的产品写一份「留存口径定义卡」：活跃定义、留存口径（经典/范围/滚动）、统计周期、分群维度——并检查团队现有报表是否混用。</div>
+  </section>
+
+  <!-- ========== 5.4 ========== -->
+  <section class="unit" id="u5-4">
+    <div class="unit-head">
+      <span class="unit-no">5.4</span>
+      <h3>留存曲线、同期群分析与用户分群</h3>
+      <label class="done-check"><input type="checkbox" data-pid="u5-4"><span>标记完成</span></label>
+    </div>
+    <div class="ev"><span class="ev-tag ev-frame">理论框架</span><span class="ev-tag ev-sim">教学模拟数据</span></div>
+    <div class="cq"><b>核心问题：</b>一条留存曲线能告诉你什么？为什么总体留存数字会掩盖真相？</div>
+    <h4><span class="h4ico">📈</span>三种典型留存曲线形态（模拟数据示意）</h4>
+    <div class="kmap-wrap" style="padding:14px">
+    <svg viewBox="0 0 1000 300" role="img" aria-label="三种典型留存曲线形态示意图（模拟数据）">
+      <defs><marker id="arr10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#94A1B5"/></marker></defs>
+      <g font-family="inherit">
+        <line x1="70" y1="250" x2="950" y2="250" stroke="var(--border)" stroke-width="1.5"/>
+        <line x1="70" y1="250" x2="70" y2="20" stroke="var(--border)" stroke-width="1.5"/>
+        <text x="510" y="285" text-anchor="middle" font-size="12" fill="var(--text2)">注册后天数 →</text>
+        <text x="40" y="140" font-size="12" fill="var(--text2)" transform="rotate(-90 40 140)">留存率 %</text>
+        <text x="118" y="265" font-size="11" fill="var(--text2)">D1</text>
+        <text x="238" y="265" font-size="11" fill="var(--text2)">D7</text>
+        <text x="358" y="265" font-size="11" fill="var(--text2)">D14</text>
+        <text x="478" y="265" font-size="11" fill="var(--text2)">D30</text>
+        <text x="598" y="265" font-size="11" fill="var(--text2)">D60</text>
+        <text x="718" y="265" font-size="11" fill="var(--text2)">D90</text>
+        <text x="838" y="265" font-size="11" fill="var(--text2)">D180</text>
+        <path d="M90 50 C 150 180 200 220 250 228 C 350 240 500 240 650 242 L900 243" fill="none" stroke="var(--teal)" stroke-width="2.5"/>
+        <text x="700" y="238" font-size="12" font-weight="700" fill="var(--teal)">曲线 1：下滑后走平（健康）</text>
+        <path d="M90 50 C 150 180 250 225 400 240 C 600 252 800 256 900 257" fill="none" stroke="var(--danger)" stroke-width="2.5"/>
+        <text x="560" y="268" font-size="12" font-weight="700" fill="var(--danger)">曲线 2：持续下滑趋零（漏水）</text>
+        <path d="M90 50 C 140 170 220 210 300 218 C 500 232 700 220 900 205" fill="none" stroke="var(--warn)" stroke-width="2.5"/>
+        <text x="620" y="205" font-size="12" font-weight="700" fill="var(--warn)">曲线 3：后期回升（罕见，需验证口径）</text>
+        <line x1="70" y1="228" x2="950" y2="228" stroke="var(--teal)" stroke-width="1" stroke-dasharray="4 4"/>
+        <text x="90" y="222" font-size="10.5" fill="var(--teal)">走平线≈长期留存水位</text>
+        <text x="90" y="40" font-size="11" fill="var(--text2)">（模拟数据：仅示意形态，非真实产品数据）</text>
+      </g>
+    </svg>
+    </div>
+    <h4><span class="h4ico">🧩</span>同期群分析（Cohort Analysis）</h4>
+    <p>同期群 = 在同一时间窗口内具有共同起始特征的用户组（通常按注册周/月）。按同期群分别计算留存曲线，可以：① 观察留存是否随时间改善（改版是否有效）；② 识别异常 cohort（某渠道/某活动带来的用户质量骤降）；③ 消除增长对留存的掩盖（总体留存上升可能只是因为新用户占比变化）。</p>
+    <div class="table-scroll">
+    <table class="dt">
+      <thead><tr><th>注册周（模拟）</th><th>D1</th><th>D7</th><th>D14</th><th>D30</th></tr></thead>
+      <tbody>
+        <tr><td class="em">W1</td><td>45%</td><td>28%</td><td>22%</td><td>18%</td></tr>
+        <tr><td class="em">W2</td><td>46%</td><td>30%</td><td>24%</td><td>19%</td></tr>
+        <tr><td class="em">W3（改版）</td><td>52%</td><td>34%</td><td>28%</td><td>23%</td></tr>
+        <tr><td class="em">W4</td><td>53%</td><td>35%</td><td>29%</td><td>24%</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="small">读法：W3 起各天留存同步上移——如果 W3 恰好有 onboarding 改版且改动前无其他重大变更，则支持「改版改善了留存」的判断（仍建议用实验进一步确认，见模块 4）。</p>
+    <h4><span class="h4ico">👥</span>分群维度</h4>
+    <ul class="tight">
+      <li>获客渠道/活动来源（质量差异最大的维度）。</li>
+      <li>注册时间（同期群）。</li>
+      <li>激活与否、关键行为完成度。</li>
+      <li>人群属性（设备/地域/平台）与行为特征（使用频次、功能偏好）。</li>
+    </ul>
+    <div class="callout note-warn"><b>常见错误：</b>用「总体平均留存」评估产品健康（掩盖结构变化）；曲线未走平就判断 PMF（2.9）；对后期回升的曲线不做归因就庆祝（可能是口径变化或召回活动扭曲）。</div>
+    <div class="refs"><b>关联知识：</b>2.9 PMF 信号 · 模块 7 同期群分析 · 工具箱留存诊断模板</div>
+    <div class="quiz">
+      <div class="q-title">产品总体 30 日留存从 20% 升到 26%，但分渠道看：自然流量留存不变、新投放渠道留存 35%、老推广渠道留存从 25% 跌到 12%。怎么解读？</div>
+      <button class="ans-toggle">查看参考答案</button>
+      <div class="answer">总体上升是渠道结构变化造成的假象：低质量老渠道占比下降拉低了整体还是抬高？细看——新渠道（35%）占比提升拉高了总体，而老渠道自身留存从 25% 跌到 12%（可能是渠道受众变化、素材老化或投放定向漂移）。行动：① 老渠道做质量诊断（激活率、人群画像变化）；② 新渠道确认 35% 的留存是否可持续（是否补贴期红利）；③ 渠道预算向质量倾斜而非总量。这就是「分群留存」避免误判的典型场景。</div>
+    </div>
+    <div class="task"><b>实践任务：</b>用工具箱留存诊断模板，按渠道或注册周拆分你的留存数据，找出 1 个异常 cohort 并写下验证假设。</div>
+  </section>
+
+  <!-- ========== 5.5 ========== -->
+  <section class="unit" id="u5-5">
+    <div class="unit-head">
+      <span class="unit-no">5.5</span>
+      <h3>行为留存、收入留存与 B2B 的续约指标</h3>
+      <label class="done-check"><input type="checkbox" data-pid="u5-5"><span>标记完成</span></label>
+    </div>
+    <div class="ev"><span class="ev-tag ev-frame">理论框架</span></div>
+    <div class="cq"><b>核心问题：</b>用户还在用，但收入在跌——这在算什么留存？B2B 的续约该看哪些指标？</div>
+    <h4><span class="h4ico">🧾</span>行为留存 vs 收入留存</h4>
+    <div class="table-scroll">
+    <table class="dt">
+      <thead><tr><th>口径</th><th>定义</th><th>回答</th><th>陷阱</th></tr></thead>
+      <tbody>
+        <tr><td class="em">行为留存</td><td>用户仍在活跃（使用产品）</td><td>产品是否有用</td><td>活跃不等于付费，可能免费白嫖</td></tr>
+        <tr><td class="em">收入留存（GRR）</td><td>毛收入留存率：含降级与流失，不含扩张；公式：（期初 MRR − 流失 − 降级）÷ 期初 MRR</td><td>存量收入守得住吗</td><td>GRR 上限 100%</td></tr>
+        <tr><td class="em">净收入留存（NDR）</td><td>净收入留存率：（期初 MRR − 流失 − 降级 + 扩张）÷ 期初 MRR</td><td>存量客户在成长吗</td><td>可 &gt;100%；高 NDR 可能掩盖高流失（靠大客户扩张撑着）</td></tr>
+        <tr><td class="em">Logo 留存</td><td>客户数量留存（不按金额）</td><td>客户关系稳不稳</td><td>与金额留存背离（小客户流失多）</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="callout note-info"><b>口径提醒：</b>不同公司对 NDR/GRR 的计算细节不同（是否含试用、如何处理中途升降级、汇率处理），跨公司比较前先核对口径；公司内部必须固定一套定义并写入指标字典（模块 7）。</div>
+    <h4><span class="h4ico">🏢</span>B2B 留存的关键补充指标</h4>
+    <ul class="tight">
+      <li><strong>续约率：</strong>到期客户中续约的比例（金额/数量分开看）。</li>
+      <li><strong>席位渗透率：</strong>已购席位 ÷ 客户组织内潜在使用席位——反映扩张空间。</li>
+      <li><strong>功能采用深度：</strong>核心功能模块的活跃使用团队占比（用得浅的客户续约风险高）。</li>
+      <li><strong>健康度评分：</strong>综合使用频率、支持工单、NPS、续约临近度的客户健康模型。</li>
+    </ul>
+    <div class="callout note-warn"><b>常见错误：</b>用 DAU 评估 B2B 产品（B2B 用户「必须用」而非「选择用」，DAU 高不代表满意）；只看 NDR 不拆解（扩张收入可能来自 5% 的大客户，掩盖 40% 的小客户流失）。</div>
+    <div class="refs"><b>关联知识：</b>5.10 B2B 运营 · 模块 6 MRR/ARR · 模块 7 口径管理</div>
+    <div class="quiz">
+      <div class="q-title">某 SaaS 公司 NDR 112%，但客户数量留存只有 85%。老板说「我们留存很好」。你怎么解读？</div>
+      <button class="ans-toggle">查看参考答案</button>
+      <div class="answer">两个指标背离说明：存量客户中少部分在大幅扩张（买更多席位/模块），多数中小客户在流失。业务实质是「依赖大客户的增长掩盖了小客户流失」——一旦大客户扩张见顶，收入会随小客户流失而下滑。需要拆解：① 各规模分层的客户留存与扩张；② 流失客户的健康度预警是否被忽视；③ 产品是否只适合大客户（定位问题，模块 2）。</div>
+    </div>
+    <div class="task"><b>实践任务：</b>为你的产品（或模拟的 B2B 产品）计算 GRR、NDR 与 Logo 留存，并拆解出「谁在贡献扩张、谁在流失」。</div>
+  </section>
+
+  <!-- ========== 5.6 ========== -->
+  <section class="unit" id="u5-6">
+    <div class="unit-head">
+      <span class="unit-no">5.6</span>
+      <h3>使用频率与场景；习惯形成机制及其适用边界</h3>
+      <label class="done-check"><input type="checkbox" data-pid="u5-6"><span>标记完成</span></label>
+    </div>
+    <div class="ev"><span class="ev-tag ev-frame">理论框架</span><span class="ev-tag ev-fact">事实 · 可核验</span></div>
+    <div class="cq"><b>核心问题：</b>所有产品都该追求「让用户上瘾」吗？低频产品怎么做留存？</div>
+    <h4><span class="h4ico">📊</span>频率—场景匹配</h4>
+    <div class="table-scroll">
+    <table class="dt">
+      <thead><tr><th>使用频率</th><th>典型产品</th><th>留存策略重心</th><th>错误策略</th></tr></thead>
+      <tbody>
+        <tr><td class="em">每日多次</td><td>社交、音乐、办公 IM</td><td>习惯回路、推送节奏、内容供给</td><td>过度推送导致关闭</td></tr>
+        <tr><td class="em">每日–每周</td><td>健身、学习、记账</td><td>目标感、进度可视化、社群陪伴</td><td>签到奖励稀释内在动机</td></tr>
+        <tr><td class="em">每周–每月</td><td>电商、出行、外卖</td><td>复购触发、会员体系、场景营销</td><td>强推日活指标</td></tr>
+        <tr><td class="em">每季–每年</td><td>保险、报税、企业采购</td><td>服务体验、到期前触达、口碑</td><td>照搬高频产品的留存打法</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <h4><span class="h4ico">🔁</span>两个习惯模型（框架，非定律）</h4>
+    <p><strong>Hook 模型（上瘾模型）：</strong>Nir Eyal 在《Hooked》（2014）中提出习惯循环四步——触发（Trigger，外部提示→内部情绪）→ 行动（Action，期待奖励的最简行为）→ 多变的酬赏（Variable Reward，社群/猎物/自我三类）→ 投入（Investment，用户沉淀数据与内容，提升迁移成本与下次触发概率）。</p>
+    <p><strong>Fogg 行为模型：</strong>BJ Fogg 提出行为 = 动机 × 能力 × 提示（B=MAP）——行为发生需要三者同时具备；提升行为的杠杆是降低难度（提升能力）常比激发动机更有效。</p>
+    <h4><span class="h4ico">⚠️</span>适用边界与争议</h4>
+    <ul class="tight">
+      <li>Hook 模型是<strong>描述性框架</strong>，其心理学基础（可变奖励）源自行为主义研究，但「四步循环」并非经过严格验证的因果定律；学界与业界均有批评（如多数成功产品并不严格符合该循环）。</li>
+      <li>对<strong>低频、高介入、B2B 强制使用</strong>产品，习惯模型基本不适用——它们的留存靠「结果质量」而非「行为粘性」。</li>
+      <li>用习惯机制提升留存有伦理边界（5.11）：为用户的长期利益设计习惯是产品设计；为短期指标制造依赖是操纵。</li>
+    </ul>
+    <div class="callout note-tip"><b>实践选型：</b>先判断产品频率属性与用户使用是「选择」还是「必须」，再决定是否投入习惯机制建设。低频产品把资源投向「到期时刻的服务质量」往往回报更高。</div>
+    <div class="refs"><b>关联知识：</b>5.7 触达召回 · 5.11 伦理 · 模块 6 订阅</div>
+    <div class="quiz">
+      <div class="q-title">一款「每年报税」的工具产品，团队想学 Duolingo 做连续打卡。这个想法有什么问题？更好的留存策略是什么？</div>
+      <button class="ans-toggle">查看参考答案</button>
+      <div class="answer">问题：使用频率由任务本质决定（一年一次），打卡机制与用户真实场景错位，只会制造无意义通知。更好策略：① 报税季前的精准提醒（场景触发）；② 报税季中的流程体验与安全感（进度保存、错误提醒）；③ 季后的资料归档与明年预约（把低频接触变成可预期的服务节奏）；④ 口碑与家庭/小企业多账号（低频产品的自然增长靠信任而非粘性）。</div>
+    </div>
+    <div class="task"><b>实践任务：</b>判断你的产品属于哪种频率类型，从 Hook 四步中选最相关的一步，写出 1 个合规的习惯设计假设（含伦理自查）。</div>
+    <div class="refs"><b>参考来源：</b><ul>
+      <li>Nir Eyal, 《上瘾》（Hooked: How to Build Habit-Forming Products），2014（框架原始著作）</li>
+      <li>BJ Fogg, Fogg Behavior Model（B=MAP），fogg.net（原作者公开资料）</li>
+      <li><a href="https://www.thebehavioralscientist.com/embed/3988/" target="_blank" rel="noopener">The Behavioral Scientist：The Hooked Model 及其学术批评</a>（争议观点参考）</li>
+    </ul></div>
+  </section>
+
+  <!-- ========== 5.7 ========== -->
+  <section class="unit" id="u5-7">
+    <div class="unit-head">
+      <span class="unit-no">5.7</span>
+      <h3>触达与召回机制：产品内、邮件、推送与消息</h3>
+      <label class="done-check"><input type="checkbox" data-pid="u5-7"><span>标记完成</span></label>
+    </div>
+    <div class="ev"><span class="ev-tag ev-logic">推导判断</span></div>
+    <div class="cq"><b>核心问题：</b>推送发得越多用户回来得越多吗？召回的健康标准是什么？</div>
+    <h4><span class="h4ico">📨</span>四类触达渠道对比</h4>
+    <div class="table-scroll">
+    <table class="dt">
+      <thead><tr><th>渠道</th><th>触达力</th><th>打扰风险</th><th>适用</th><th>关键指标</th></tr></thead>
+      <tbody>
+        <tr><td class="em">产品内触达</td><td>中（仅活跃用户可见）</td><td>低</td><td>引导、新功能告知、进度提醒</td><td>点击率、后续行为转化</td></tr>
+        <tr><td class="em">邮件</td><td>中</td><td>低–中</td><td>内容摘要、召回、交易通知</td><td>打开率、点击率、退订率</td></tr>
+        <tr><td class="em">推送（Push）</td><td>高</td><td>高</td><td>时效性强、个性化相关内容</td><td>打开率、关闭率、卸载率</td></tr>
+        <tr><td class="em">短信/微信等</td><td>高</td><td>高（有成本）</td><td>高价值节点（续费、流失预警）</td><td>响应率、成本每转化</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <h4><span class="h4ico">🛡️</span>召回的健康纪律</h4>
+    <ol class="steps">
+      <li><b>先诊断后触达</b><span>对沉默用户先分群（需求消失 vs 体验障碍 vs 被遗忘），不同原因用不同内容（5.9）。</span></li>
+      <li><b>价值前置</b><span>召回内容必须携带「用户错过的价值」（新内容、新功能、朋友动态），而非单纯「我们想你了」。</span></li>
+      <li><b>频率上限与冷却</b><span>设定单人触达频次上限；多次未响应即进入冷却，停止触达（否则训练用户忽略）。</span></li>
+      <li><b>监控反向指标</b><span>推送关闭率、退订率、卸载率、投诉率——召回「成功」但反向指标恶化的活动是负资产。</span></li>
+      <li><b>召回后重新激活</b><span>召回用户落地页应直接进入价值场景，而不是首页让他们重新找。</span></li>
+    </ol>
+    <div class="callout note-warn"><b>常见错误：</b>给全体沉睡用户群发同一文案；用「红包/福利」召回非目标人群（吸引福利猎人，扭曲数据）；只看召回点击率不看 7 日回访留存——召回的质量标准是「回来后留下来」。</div>
+    <div class="refs"><b>关联知识：</b>5.9 流失诊断 · 5.11 伦理 · 模块 4 实验</div>
+    <div class="quiz">
+      <div class="q-title">一次邮件召回活动：打开率 12%（历史 6%），但 7 日后仍活跃的召回用户只有 2%，与自然活跃用户相当。说明什么？</div>
+      <button class="ans-toggle">查看参考答案</button>
+      <div class="answer">说明邮件标题/内容成功吸引了注意力（打开率翻倍），但落地体验没有接住——用户回来后发现没有新价值，随即再次沉默。动作：① 检查召回落地页是否直接进入个性化价值场景；② 分群看哪类沉默用户被成功召回（需求仍在 vs 已被唤醒）；③ 下次实验把指标从「打开率」改为「召回后 7 日仍活跃比例」。打开率是 vanity 指标，回访留存才是召回质量。</div>
+    </div>
+    <div class="task"><b>实践任务：</b>为一款产品设计一次召回实验：目标人群分层、渠道、内容价值点、频率上限、反向指标护栏，写成一页实验卡。</div>
+  </section>
+
+  <!-- ========== 5.8 ========== -->
+  <section class="unit" id="u5-8">
+    <div class="unit-head">
+      <span class="unit-no">5.8</span>
+      <h3>用户生命周期分层与精细化运营（RFM 等方法）</h3>
+      <label class="done-check"><input type="checkbox" data-pid="u5-8"><span>标记完成</span></label>
+    </div>
+    <div class="ev"><span class="ev-tag ev-frame">理论框架</span></div>
+    <div class="cq"><b>核心问题：</b>「对所有用户做差异化运营」听起来很好，怎么落地成可执行的框架？</div>
+    <h4><span class="h4ico">🧮</span>RFM 模型</h4>
+    <p>RFM 是营销领域经典的客户价值分层方法（通常追溯至 Arthur Hughes 1990 年代中期的著作）：按三个维度给客户打分——<strong>最近一次消费/活跃（Recency）、频率（Frequency）、金额（Monetary）</strong>。每个维度分 3–5 档，组合成若干细分群：</p>
+    <div class="table-scroll">
+    <table class="dt">
+      <thead><tr><th>分层</th><th>特征</th><th>运营策略</th></tr></thead>
+      <tbody>
+        <tr><td class="em">重要价值用户</td><td>R/F/M 都高</td><td>VIP 服务、新品优先、推荐人计划</td></tr>
+        <tr><td class="em">重要深耕用户</td><td>F 高、M 中低</td><td>提升客单/套餐升级、交叉销售</td></tr>
+        <tr><td class="em">重要挽留用户</td><td>M 高但 R 远（快流失的大客户）</td><td>主动回访、流失原因诊断、定制方案</td></tr>
+        <tr><td class="em">新用户</td><td>R 近、F 低</td><td>激活路径优化、首单/首价值引导</td></tr>
+        <tr><td class="em">一般保持/低价值</td><td>各项都低</td><td>低成本自动化触达，不投入重资源</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <h4><span class="h4ico">🧭</span>非交易产品的分层改造</h4>
+    <p>工具/内容产品没有「消费金额」时，RFM 可改造为：<strong>R（最近活跃日）、F（活跃频次）、D（使用深度/核心行为数）</strong>。分层不是目的，关键是每层有<strong>明确的运营动作与资源预算</strong>——没有动作映射的分层表是废纸。</p>
+    <h4><span class="h4ico">⚙️</span>落地步骤</h4>
+    <ol class="steps">
+      <li>选 2–3 个与业务结果最相关的维度（别贪多）。</li>
+      <li>定义每维度的分档规则（用数据分布定档，不用整数猜测）。</li>
+      <li>为每个组合层命名并配置：运营动作、触达渠道、负责人、预算。</li>
+      <li>设定层间迁移的监测（用户升层/降层的比例与原因）。</li>
+      <li>每季度复盘分层有效性（动作是否真的改善了该层的结果指标）。</li>
+    </ol>
+    <div class="callout note-warn"><b>常见错误：</b>分层维度随每次汇报变（不可比）；给每层都配重资源（重点失焦）；分层运营变成「给高价值用户发券」的单一动作；用静态标签代替动态更新。</div>
+    <div class="refs"><b>关联知识：</b>3.5 生命周期 · 5.9 流失预警 · 模块 6 客户扩张</div>
+    <div class="quiz">
+      <div class="q-title">一个电商平台把「RFM 三项都打 5 分」的用户定义为 VIP，结果发现这批人占用户 40%、贡献 GMV 15%。问题在哪？</div>
+      <button class="ans-toggle">查看参考答案</button>
+      <div class="answer">问题在分档规则：按绝对分数（而非分布分位）打分，导致「都打 5 分」的人群过大且内部差异巨大——把「偶尔买一次低价商品的老用户」和「每周买高价的忠实用户」混在一起。修正：① 按分布分位（如每维前 20% 为 5 分）或业务阈值分档；② 分层后看每层的规模—贡献结构，重要层应该是「小规模高贡献」；③ VIP 层过大时资源被稀释，失去精细化意义。</div>
+    </div>
+    <div class="task"><b>实践任务：</b>用工具箱分层方案模板，为你的产品定义 5–6 个用户层：每层写名称、判定规则、运营动作、负责人与成功指标。</div>
+  </section>
+
+  <!-- ========== 5.9 ========== -->
+  <section class="unit" id="u5-9">
+    <div class="unit-head">
+      <span class="unit-no">5.9</span>
+      <h3>流失预警、流失原因诊断与召回策略</h3>
+      <label class="done-check"><input type="checkbox" data-pid="u5-9"><span>标记完成</span></label>
+    </div>
+    <div class="ev"><span class="ev-tag ev-frame">理论框架</span><span class="ev-tag ev-logic">推导判断</span></div>
+    <div class="cq"><b>核心问题：</b>用户走了还能回来吗？怎么在走之前发现、走之后搞清楚为什么？</div>
+    <h4><span class="h4ico">🚨</span>流失预警信号（按强度）</h4>
+    <ul class="tight">
+      <li><strong>行为衰减：</strong>使用频次连续下降、会话时长变短、核心行为间隔拉大。</li>
+      <li><strong>关键场景缺席：</strong>错过产品周期中的关键节点（如电商大促未参与、订阅到期未续）。</li>
+      <li><strong>负面信号：</strong>客服投诉未解决、退款申请、评分骤降、功能停用。</li>
+      <li><strong>B2B 专属：</strong>管理员登录减少、席位闲置率上升、支持工单激增（遇到问题）、合同谈判停滞。</li>
+    </ul>
+    <h4><span class="h4ico">🔍</span>流失原因诊断流程</h4>
+    <div class="kmap-wrap" style="padding:14px">
+    <svg viewBox="0 0 1000 180" role="img" aria-label="流失诊断流程">
+      <defs><marker id="arr11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#94A1B5"/></marker></defs>
+      <g font-family="inherit">
+        <rect x="8" y="45" width="150" height="80" rx="10" fill="var(--warn-soft)" stroke="var(--warn)" stroke-width="1.5"/>
+        <text x="83" y="82" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--warn)">识别沉默/预警</text>
+        <text x="83" y="102" text-anchor="middle" font-size="10" fill="var(--text2)">行为衰减信号</text>
+        <rect x="198" y="45" width="150" height="80" rx="10" fill="var(--brand-soft)" stroke="var(--brand)" stroke-width="1.5"/>
+        <text x="273" y="82" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--brand)">分层归因</text>
+        <text x="273" y="102" text-anchor="middle" font-size="10" fill="var(--text2)">价值/需求/体验?</text>
+        <rect x="388" y="45" width="150" height="80" rx="10" fill="var(--teal-soft)" stroke="var(--teal)" stroke-width="1.5"/>
+        <text x="463" y="82" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--teal)">定性验证</text>
+        <text x="463" y="102" text-anchor="middle" font-size="10" fill="var(--text2)">访谈/问卷样本</text>
+        <rect x="578" y="45" width="150" height="80" rx="10" fill="var(--purple-soft)" stroke="var(--purple)" stroke-width="1.5"/>
+        <text x="653" y="82" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--purple)">选择策略</text>
+        <text x="653" y="102" text-anchor="middle" font-size="10"5" fill="var(--text2)">召回/修复/放弃</text>
+        <rect x="768" y="45" width="150" height="80" rx="10" fill="var(--card)" stroke="var(--border)" stroke-width="1.5"/>
+        <text x="843" y="82" text-anchor="middle" font-size="12.5" font-weight="700" fill="var(--text)">执行与度量</text>
+        <text x="843" y="102" text-anchor="middle" font-size="10" fill="var(--text2)">召回率+回访留存</text>
+        <path d="M158 85 H196" stroke="#94A1B5" stroke-width="1.8" marker-end="url(#arr11)"/>
+        <path d="M348 85 H386" stroke="#94A1B5" stroke-width="1.8" marker-end="url(#arr11)"/>
+        <path d="M538 85 H576" stroke="#94A1B5" stroke-width="1.8" marker-end="url(#arr11)"/>
+        <path d="M728 85 H766" stroke="#94A1B5" stroke-width="1.8" marker-end="url(#arr11)"/>
+        <path d="M843 45 C 843 14 273 14 273 43" fill="none" stroke="#B6C0CF" stroke-width="1.5" stroke-dasharray="5 5" marker-end="url(#arr11)"/>
+        <text x="540" y="12" font-size="11" fill="var(--text2)">结果回流：更新预警规则与分层策略</text>
+      </g>
+    </svg>
+    </div>
+    <h4><span class="h4ico">🧭</span>三类流失原因与对应策略</h4>
+    <div class="table-scroll">
+    <table class="dt">
+      <thead><tr><th>原因类型</th><th>识别特征</th><th>策略</th></tr></thead>
+      <tbody>
+        <tr><td class="em">价值不足</td><td>核心任务未被完成；竞品/替代方案更好地解决了问题</td><td>产品改进优先于召回；召回只买时间</td></tr>
+        <tr><td class="em">需求消失</td><td>任务本身已结束（如项目结项、人生阶段变化）</td><td>接受流失；转向新用户获取；考虑产品场景延展</td></tr>
+        <tr><td class="em">体验障碍</td><td>任务仍在但产品内受阻（性能、复杂度、bug、服务）</td><td>修复 + 定向召回（带修复信息回来）</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <h4><span class="h4ico">🔁</span>召回策略设计</h4>
+    <ul class="tight">
+      <li>对「体验障碍」用户：告知问题已修复 + 直接落地到卡点场景。</li>
+      <li>对「价值感知不足」用户：用其未使用过的核心功能/新内容做钩子（个性化）。</li>
+      <li>对「需求消失」用户：不投入重资源；可用低成本触达保持弱连接（如邮件简报）。</li>
+      <li>所有召回都要度量「召回后 7/30 日留存」，而不是「召回点击」。</li>
+    </ul>
+    <div class="callout note-warn"><b>常见错误：</b>不分原因统一发券（对价值不足用户，券只是延迟死亡）；召回成本高于用户 LTV 仍持续（渠道经济学错误，模块 6）；把「无法召回」当失败——有些流失是健康的产品代谢。</div>
+    <div class="refs"><b>关联知识：</b>5.7 触达 · 5.8 分层 · 工具箱流失诊断模板</div>
+    <div class="quiz">
+      <div class="q-title">一个项目管理工具的流失用户访谈显示：「项目做完了，不需要了」占 45%，「太复杂」占 30%，「换了别的工具」占 25%。分别给出策略。</div>
+      <button class="ans-toggle">查看参考答案</button>
+      <div class="answer">① 45% 需求消失：接受流失；策略转向「让更多新项目开始」——模板市场、项目结项后的归档与复盘功能（弱连接保持）；② 30% 太复杂：产品问题——简化核心流程、分层功能（高级功能折叠），对这批用户定向召回告知改版；③ 25% 换工具：需细分是主动迁移还是被团队/公司决策带走——前者做竞品差异对比与迁移成本优化（数据导入），后者争取团队级渗透（B2B 打法）。三类原因的运营动作完全不同，混在一起做召回等于浪费预算。</div>
+    </div>
+    <div class="task"><b>实践任务：</b>用工具箱流失诊断模板：定义你的产品沉默阈值，对最近 100 个沉默/流失用户按三类原因分类（可用数据+小样本访谈），输出三类各自的策略与预算分配。</div>
+  </section>
+
+  <!-- ========== 5.10 ========== -->
+  <section class="unit" id="u5-10">
+    <div class="unit-head">
+      <span class="unit-no">5.10</span>
+      <h3>B2B 产品的客户留存：续约、客户成功与扩张</h3>
+      <label class="done-check"><input type="checkbox" data-pid="u5-10"><span>标记完成</span></label>
+    </div>
+    <div class="ev"><span class="ev-tag ev-logic">推导判断</span></div>
+    <div class="cq"><b>核心问题：</b>B2B 产品的「留存」和 C 端有什么本质不同？客户成功团队到底在成功什么？</div>
+    <h4><span class="h4ico">🏢</span>B2B 与 C 端留存的差异</h4>
+    <div class="table-scroll">
+    <table class="dt">
+      <thead><tr><th>维度</th><th>C 端</th><th>B2B</th></tr></thead>
+      <tbody>
+        <tr><td>决策单位</td><td>个人</td><td>采购委员会（使用者/管理者/财务/IT）</td></tr>
+        <tr><td>留存指标</td><td>行为留存、复购</td><td>续约率、NDR、席位渗透</td></tr>
+        <tr><td>流失原因</td><td>价值/习惯/替代</td><td>ROI 不可见、内部推动者离职、集成失败</td></tr>
+        <tr><td>关键岗位</td><td>用户运营</td><td>客户成功（CS）/客户经理</td></tr>
+        <tr><td>增长方式</td><td>拉新+裂变</td><td>扩张（席位/模块/客单价）为主</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <h4><span class="h4ico">🎯</span>客户成功（Customer Success）的核心逻辑</h4>
+    <p>客户成功团队的目标不是「让客户满意」，而是<strong>让客户通过产品获得可量化的业务结果</strong>——结果可量化，续约与扩张才是必然。工作框架：</p>
+    <ol class="steps">
+      <li><b>定义成功标准</b><span>与客户共识「用什么指标衡量产品价值」（如工单处理时长下降 30%）。</span></li>
+      <li><b> onboarding 到价值</b><span>上线后 30/60/90 天里程碑：集成完成、核心团队激活、首批业务结果。</span></li>
+      <li><b>健康度监控</b><span>使用深度、席位活跃、支持工单、NPS、续约临近度——低分客户提前干预。</span></li>
+      <li><b>季度业务回顾（QBR）</b><span>向客户展示价值达成情况，自然引出扩张机会。</span></li>
+      <li><b>流失前置干预</b><span>续约前 90 天识别风险，制定挽救计划（或有序退出）。</span></li>
+    </ol>
+    <h4><span class="h4ico">📈</span>扩张（Expansion）路径</h4>
+    <ul class="tight">
+      <li><strong>席位扩张：</strong>单团队 → 全公司（关键：证明团队级 ROI + 降低采购摩擦）。</li>
+      <li><strong>模块扩张：</strong>核心模块 → 增值模块（按客户成功标准自然延伸）。</li>
+      <li><strong>版本升级：</strong>基础版 → 企业版（安全、合规、管理需求出现时）。</li>
+    </ul>
+    <div class="callout note-warn"><b>常见错误：</b>把 CS 当「高级客服」（只处理问题不经营价值）；只看产品使用率不看业务结果（用得多的团队也可能没获得结果）；扩张销售化过猛损害信任；忽视「内部推动者离职」这一 B2B 特有流失原因。</div>
+    <div class="refs"><b>关联知识：</b>5.5 收入留存 · 模块 6 续费与扩张 · 模块 9 跨部门协作</div>
+    <div class="quiz">
+      <div class="q-title">一家 SaaS 客户的产品使用率很高，但续约时仍压价 30%。可能原因与应对？</div>
+      <button class="ans-toggle">查看参考答案</button>
+      <div class="answer">可能原因：① 使用率高≠业务结果被认可（没人向决策层证明 ROI）；② 采购方只看价格不感知价值（价值沟通断层）；③ 预算周期压力。应对：① 续约前 60–90 天启动 QBR，用量化结果报告对接决策层；② 与客户共同定义价值指标并持续跟踪；③ 提供灵活方案（多年期锁定、模块调整）而非直接降价；④ 内部检查：是否只在续约前才接触客户（健康度监控失效）。</div>
+    </div>
+    <div class="task"><b>实践任务：</b>为一个 B2B 产品设计「30/60/90 天 onboarding 里程碑」与健康度评分卡（5 个指标 + 阈值），并写出低分客户的干预剧本。</div>
+  </section>
+
+  <!-- ========== 5.11 ========== -->
+  <section class="unit" id="u5-11">
+    <div class="unit-head">
+      <span class="unit-no">5.11</span>
+      <h3>留存优化的常见误区与伦理边界</h3>
+      <label class="done-check"><input type="checkbox" data-pid="u5-11"><span>标记完成</span></label>
+    </div>
+    <div class="ev"><span class="ev-tag ev-logic">推导判断</span></div>
+    <div class="cq"><b>核心问题：</b>哪些留存「技巧」在制造虚假繁荣？什么手段越过了伦理线？</div>
+    <h4><span class="h4ico">🕳️</span>五个误区</h4>
+    <div class="table-scroll">
+    <table class="dt">
+      <thead><tr><th>误区</th><th>表现</th><th>纠正</th></tr></thead>
+      <tbody>
+        <tr><td class="em">把活跃当留存</td><td>推送把用户叫回来，但价值体验没变</td><td>看同期群自然留存（无强刺激周期）</td></tr>
+        <tr><td class="em">分母游戏</td><td>缩小统计口径让留存率变好看</td><td>固定口径；变更时并列新旧数据</td></tr>
+        <tr><td class="em">幸存者分析</td><td>只研究留下的用户，把离开的人当噪音</td><td>流失用户研究权重 ≥ 留存用户</td></tr>
+        <tr><td class="em">习惯指标化</td><td>为「连续打卡」而设计，而非为任务完成</td><td>检验习惯设计是否服务于用户的真实目标</td></tr>
+        <tr><td class="em">单点优化</td><td>提高某行为频次却拉低整体满意度</td><td>护栏指标（满意度、投诉、卸载）</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <h4><span class="h4ico">⚖️</span>伦理边界清单</h4>
+    <ul class="tight">
+      <li><strong>暗黑模式（Dark Patterns）：</strong>利用界面设计误导用户做出非本意决策——隐藏退订入口、默认勾选、确认羞辱（「不，我不想省钱」）、劫持系统返回键。短期提升指标，长期摧毁信任并引发监管风险。</li>
+      <li><strong>制造焦虑：</strong>以「不连续就前功尽弃」等损失框架驱动非理性使用。</li>
+      <li><strong>过度采集与打扰：</strong>超出功能需要的权限、无退出选项的推送。</li>
+      <li><strong>对弱势人群的操纵：</strong>针对自控力较弱群体（如未成年人、成瘾倾向用户）的设计需格外谨慎。</li>
+    </ul>
+    <div class="callout note-tip"><b>自检问题：</b>如果用户完全理解产品的运作机制，他还会做这个选择吗？如果答案是「不会」，你就在利用信息不对称。合规只是底线，信任才是留存最贵的资产。</div>
+    <div class="refs"><b>关联知识：</b>4.9 古德哈特 · 5.6 习惯边界 · 模块 6 过度收费</div>
+    <div class="quiz">
+      <div class="q-title">某产品把「取消会员」入口藏在五层菜单下，并每 24 小时弹窗挽留。这属于什么问题？可能带来什么后果？</div>
+      <button class="ans-toggle">查看参考答案</button>
+      <div class="answer">属于暗黑模式（取消流程阻碍 + 频繁挽留骚扰）。后果：① 短期留存数字虚高，但用户满意度与口碑受损；② 投诉与监管风险（多国消费者保护法对取消流程有明确要求）；③ 内部数据失真——团队无法区分「真留存」与「被困住的用户」，后续决策全部建立在扭曲信号上。正确做法：取消流程与订阅流程一样顺畅，把挽留资源放在「价值未达成」的干预上。</div>
+    </div>
+    <div class="task"><b>实践任务：</b>审计你产品的一个留存机制（推送/打卡/续费挽留）：列出其中的暗黑模式风险点，改写为「透明版本」并预测指标变化。</div>
+  </section>
+
+  <div class="card" style="border-left:4px solid var(--teal)">
+    <h3>模块 5 小结</h3>
+    <p class="small">留存的本质是「产品持续交付用户价值」。工具箱：激活事件定义、留存口径卡、同期群分析、RFM 分层、流失三分法。下一模块回答商业化的核心问题：产品如何形成可持续的收入。</p>
+    <a class="chip" href="#/m6" style="background:var(--warn);color:#fff;border-color:var(--warn);margin-top:10px">进入模块 6：商业化、定价与收入增长 →</a>
+  </div>
+</section>

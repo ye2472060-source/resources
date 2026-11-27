@@ -1,0 +1,423 @@
+
+<!-- ================= 模块 7 ================= -->
+<section class="page" id="page-m7">
+  <div class="breadcrumb"><a href="#/home">课程</a> › <a href="#/map">知识地图</a> › 模块 7</div>
+  <div class="page-head">
+    <h1>模块 7 · 产品数据分析与指标体系</h1>
+    <p class="lead">建立产品决策与数据分析之间的连接：如何定义指标、如何拆解波动、如何区分相关与因果。本模块包含一个从异常发现到行动方案的完整教学案例（模拟数据）。</p>
+    <div class="chips">
+      <span class="chip">学习目标：<b>会定义指标、会拆解波动、会识别口径陷阱与采集偏差</b></span>
+      <span class="chip">前置知识：<b>模块 0</b>（可与模块 3 并行）</span>
+      <span class="chip">预计时长：<b>7–9 小时</b></span>
+      <span class="chip">单元数：<b>9</b></span>
+    </div>
+  </div>
+
+  <!-- ========== 7.1 ========== -->
+  <section class="unit" id="u7-1">
+    <div class="unit-head">
+      <span class="unit-no">7.1</span>
+      <h3>数据驱动决策的含义与边界</h3>
+      <label class="done-check"><input type="checkbox" data-pid="u7-1"><span>标记完成</span></label>
+    </div>
+    <div class="ev"><span class="ev-tag ev-logic">推导判断</span></div>
+    <div class="cq"><b>核心问题：</b>「用数据说话」和「被数据绑架」的区别是什么？什么时候不该听数据的？</div>
+    <h4><span class="h4ico">✅</span>数据驱动的三个层次</h4>
+    <ol class="steps">
+      <li><b>描述层：</b>发生了什么（报表）——必要但不构成决策。</li>
+      <li><b>诊断层：</b>为什么发生（分群、拆解、归因）——支持判断。</li>
+      <li><b>决策层：</b>该做什么（形成假设 → 实验验证 → 复盘）——数据的最终归宿。</li>
+    </ol>
+    <h4><span class="h4ico">🚧</span>数据的四个边界</h4>
+    <div class="table-scroll">
+    <table class="dt">
+      <thead><tr><th>边界</th><th>说明</th><th>对策</th></tr></thead>
+      <tbody>
+        <tr><td class="em">只能回答被测量的问题</td><td>没埋点/没定义的现象不在数据里</td><td>用定性研究补充（模块 1）</td></tr>
+        <tr><td class="em">相关不等于因果</td><td>相关关系不能自动推出干预效果</td><td>实验验证（模块 4）</td></tr>
+        <tr><td class="em">历史不预示未来</td><td>市场、竞争、用户结构会变</td><td>持续监测 + 分群结构分析</td></tr>
+        <tr><td class="em">指标是代理不是目的</td><td>指标被优化后会失真（古德哈特）</td><td>护栏指标 + 定期审视口径（4.9）</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p><strong>健康的数据文化：</strong>数据用于「减少无知」而非「终结争论」——当数据与强逻辑冲突时，先检查数据口径与样本，再检查逻辑，而不是直接选边站。</p>
+    <div class="refs"><b>关联知识：</b>7.2 指标体系 · 模块 4 实验 · 4.9 古德哈特</div>
+    <div class="quiz">
+      <div class="q-title">「数据没有信号」时该做什么？直接上线一个功能观察数据吗？</div>
+      <button class="ans-toggle">查看参考答案</button>
+      <div class="answer">「没信号」通常意味着：① 没埋点（先补最小埋点再决策）；② 效应太小测不出（需要更大样本/更长周期/更敏感指标）；③ 问题本身是战略判断题（没有数据能替你决定「要不要进入某市场」——这时用研究+逻辑+小规模试探，而不是等数据）。直接上线观察的问题：无法归因（同期还有哪些变化？）、样本偏差、且把用户当实验对象却不承担实验设计的责任。</div>
+    </div>
+    <div class="task"><b>实践任务：</b>回想你最近一次「用数据做的决策」：它属于哪个层次（描述/诊断/决策）？数据起了什么作用、没起什么作用？</div>
+  </section>
+
+  <!-- ========== 7.2 ========== -->
+  <section class="unit" id="u7-2">
+    <div class="unit-head">
+      <span class="unit-no">7.2</span>
+      <h3>指标体系：目标、信号、指标、事件与用户属性</h3>
+      <label class="done-check"><input type="checkbox" data-pid="u7-2"><span>标记完成</span></label>
+    </div>
+    <div class="ev"><span class="ev-tag ev-frame">理论框架</span><span class="ev-tag ev-fact">事实 · 可核验</span></div>
+    <div class="cq"><b>核心问题：</b>老板的目标怎么变成工程师能埋的点？指标体系的翻译链条是什么？</div>
+    <h4><span class="h4ico">🔗</span>GSM 框架（目标—信号—指标）</h4>
+    <p>GSM 由 Google 的 Kerry Rodden 等人在 2010 年 CHI 论文《Measuring the User Experience on a Large Scale》中与 HEART 框架一同提出：</p>
+    <div class="table-scroll">
+    <table class="dt">
+      <thead><tr><th>层</th><th>定义</th><th>示例（电商产品）</th></tr></thead>
+      <tbody>
+        <tr><td class="em">目标 Goal</td><td>用户要完成的关键任务/业务目标</td><td>用户能高效找到并买到合适商品</td></tr>
+        <tr><td class="em">信号 信号</td><td>能指示目标达成情况的可观察现象</td><td>搜索后有点击、加购后完成购买</td></tr>
+        <tr><td class="em">Metric 指标</td><td>把信号变成可度量、可追踪的数字</td><td>搜索点击率、搜索→购买转化率</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <h4><span class="h4ico">📐</span>指标树（从业务目标到事件）</h4>
+    <p>指标树 = 把北极星指标按乘加结构层层拆解，直到可执行的日常指标与事件（3.4 有图示）。拆解的两种基本结构：</p>
+    <ul class="tight">
+      <li><strong>乘法结构：</strong>收入 = 流量 × 转化率 × 客单价（每项可独立归因）。</li>
+      <li><strong>加法结构：</strong>总收入 = 产品 A + 产品 B + 服务收入（看结构变化）。</li>
+    </ul>
+    <h4><span class="h4ico">🧱</span>埋点对象：事件与属性</h4>
+    <div class="table-scroll">
+    <table class="dt">
+      <thead><tr><th>概念</th><th>定义</th><th>示例</th></tr></thead>
+      <tbody>
+        <tr><td class="em">事件 Event</td><td>用户做的一个可记录动作</td><td>click_subscribe、complete_purchase</td></tr>
+        <tr><td class="em">事件属性</td><td>事件的上下文参数</td><td>商品 ID、价格、来源渠道</td></tr>
+        <tr><td class="em">用户属性</td><td>用户相对稳定的特征</td><td>注册时间、渠道、套餐、城市</td></tr>
+        <tr><td class="em">指标</td><td>由事件计算出的度量</td><td>转化率 = 完成购买用户数 ÷ 访问用户数</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <h4><span class="h4ico">🛠️</span>HEART 框架（体验指标体系）</h4>
+    <p>同一篇 Google 论文提出的 HEART 把体验目标分为五类：<strong>Happiness（满意度）、Engagement（参与度）、Adoption（接受度）、Retention（留存）、Task success（任务完成）</strong>，每类配 GSM 三层定义。适用于「难以直接量化」的体验类目标（如改版是否更易用）。</p>
+    <div class="callout note-warn"><b>常见错误：</b>指标树只有两层（目标和一堆互不相干的指标）；事件命名混乱（同义不同名）；属性不全导致事后无法分群（返工埋点）；HEART 只做分类不做 GSM 落地。</div>
+    <div class="refs"><b>关联知识：</b>3.4 北极星 · 7.3 埋点 · 工具箱模板 7 指标树</div>
+    <div class="quiz">
+      <div class="q-title">目标「提升新用户搜索成功率」。写出对应的 Signal 与 Metric，并列出需要的埋点事件与属性。</div>
+      <button class="ans-toggle">查看参考答案</button>
+      <div class="answer">Signal：搜索后有点击行为；连续两次搜索无点击后修改关键词；使用筛选器后点击率上升。Metric：搜索点击率、搜索→详情页转化率、无结果搜索占比、搜索后 30 分钟内购买转化率。埋点：search_performed（属性：关键词、来源页、结果数）、search_result_clicked（属性：结果位置、关键词）、filter_applied（属性：筛选项）。用户属性：新老用户、注册渠道。注意「搜索成功率」需要定义分子分母（有点击算成功？还是购买算成功？）——定义不同结论不同。</div>
+    </div>
+    <div class="task"><b>实践任务：</b>用工具箱模板 7 为一个真实目标搭建 GSM + 指标树 + 埋点清单（事件/属性/口径），并标注现有数据缺口。</div>
+    <div class="refs"><b>参考来源：</b><ul>
+      <li><a href="https://kerryrodden.com/heart/" target="_blank" rel="noopener">Kerry Rodden：HEART framework 与 GSM（原始作者页面，含 CHI 2010 论文索引）</a>（第一层）</li>
+      <li><a href="https://measuringu.com/heart-framework/" target="_blank" rel="noopener">MeasuringU：Should You Love the HEART Framework?</a>（第二层，含批判性评述）</li>
+    </ul></div>
+  </section>
+
+  <!-- ========== 7.3 ========== -->
+  <section class="unit" id="u7-3">
+    <div class="unit-head">
+      <span class="unit-no">7.3</span>
+      <h3>埋点基础与五个核心对象：事件、用户、会话、转化、同期群</h3>
+      <label class="done-check"><input type="checkbox" data-pid="u7-3"><span>标记完成</span></label>
+    </div>
+    <div class="ev"><span class="ev-tag ev-frame">理论框架</span></div>
+    <div class="cq"><b>核心问题：</b>同一个用户在不同设备上是几个人？一次跨天的购买算几个会话？口径怎么定？</div>
+    <h4><span class="h4ico">🧱</span>五个核心对象</h4>
+    <div class="table-scroll">
+    <table class="dt">
+      <thead><tr><th>对象</th><th>定义</th><th>口径要点</th><th>常见问题</th></tr></thead>
+      <tbody>
+        <tr><td class="em">事件</td><td>一次用户行为的记录（带时间戳）</td><td>命名规范：对象_动作（click_button）；一个事件一个含义</td><td>事件滥用（一个事件塞多个含义）</td></tr>
+        <tr><td class="em">用户</td><td>被识别的个体（登录 ID / 设备 ID / 匿名 ID）</td><td>登录前后 ID 关联规则必须明确</td><td>一人多设备被算多人；匿名用户膨胀</td></tr>
+        <tr><td class="em">会话</td><td>一段连续的使用（通常以 30 分钟无活动为界，各工具默认不同）</td><td>超时空窗按工具口径（GA4 默认可不同）</td><td>用会话替代用户做留存统计</td></tr>
+        <tr><td class="em">转化</td><td>用户完成目标事件（购买/激活）</td><td>转化窗口（点击后多久内算该渠道转化）</td><td>转化归因窗口混乱</td></tr>
+        <tr><td class="em">同期群</td><td>按共同起始时间/特征分组的用户集</td><td>分组维度（注册日/首购日/激活日）</td><td>混用不同起点的同期群</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <h4><span class="h4ico">📋</span>埋点规范最小集</h4>
+    <ul class="tight">
+      <li><strong>命名规范：</strong>统一格式（如 snake_case）、团队共享的埋点字典、废弃标记。</li>
+      <li><strong>关键事件必须有属性：</strong>没有属性的事件等于没埋（事后无法分群）。</li>
+      <li><strong>ID 关联：</strong>登录/注册时合并匿名 ID 与用户 ID——决定「用户数」是否可信。</li>
+      <li><strong>验收流程：</strong>埋点上线前用测试账号走查关键路径；上线后核对数据与业务日志。</li>
+      <li><strong>文档化：</strong>每个事件：谁触发、在哪触发、带什么属性、算什么指标、谁负责。</li>
+    </ul>
+    <div class="callout note-info"><b>工具差异提示：</b>GA4（2020 年推出，2023 年 7 月起取代 Universal Analytics 成为 Google 的主推版本）采用「事件 + 参数」模型，与 Universal Analytics 的「会话 + 页面浏览」模型差异很大；迁移过公司的历史口径通常不可直接比较，需重算基线。</div>
+    <div class="refs"><b>关联知识：</b>7.2 指标体系 · 7.5 分析方法 · 模块 4 实验分流</div>
+    <div class="quiz">
+      <div class="q-title">产品同时有 App 和网页端，用户常先用网页后装 App。汇报 DAU 时把两端用户数直接相加，有什么问题？</div>
+      <button class="ans-toggle">查看参考答案</button>
+      <div class="answer">问题是用户去重：同一人在两端被算成两个 DAU，DAU 虚高；且无法回答「多少用户真的在用产品」（可能大量是重复计数）。正确处理：① 建立跨端用户 ID 关联（登录体系优先，设备指纹为辅）；② 未登录用户只能按设备估，需明确说明误差；③ 至少分端汇报（App DAU / Web DAU / 去重总 DAU），内部看板用去重口径。这也是「同一指标多个口径」的典型：对外可用设备口径，内部经营必须用去重口径。</div>
+    </div>
+    <div class="task"><b>实践任务：</b>检查你产品的一个核心指标：它的用户口径是什么（设备/登录/去重）？写一条「如果口径换了，这个指标会怎么变」的推演。</div>
+  </section>
+
+  <!-- ========== 7.4 ========== -->
+  <section class="unit" id="u7-4">
+    <div class="unit-head">
+      <span class="unit-no">7.4</span>
+      <h3>四种分析方法：漏斗、路径、分群与同期群</h3>
+      <label class="done-check"><input type="checkbox" data-pid="u7-4"><span>标记完成</span></label>
+    </div>
+    <div class="ev"><span class="ev-tag ev-frame">理论框架</span></div>
+    <div class="cq"><b>核心问题：</b>同一个问题，四种分析方法给出的答案完全不同——各用在什么时候？</div>
+    <div class="table-scroll">
+    <table class="dt">
+      <thead><tr><th>方法</th><th>回答</th><th>适用</th><th>局限</th></tr></thead>
+      <tbody>
+        <tr><td class="em">漏斗分析</td><td>有序流程中每步的转化与流失</td><td>注册/下单/激活等线性流程</td><td>假设路径唯一（实际用户可跳过、可回流）</td></tr>
+        <tr><td class="em">路径分析</td><td>用户实际走了哪些步、去哪了</td><td>路径不唯一、找意外行为</td><td>噪音大、需要大样本；「太阳图」易过载</td></tr>
+        <tr><td class="em">分群分析</td><td>不同人群的行为差异</td><td>找高/低价值人群、异常群体</td><td>分群维度选错则看不到差异</td></tr>
+        <tr><td class="em">同期群分析</td><td>不同时间进入的用户表现差异</td><td>评估改版/拉新质量、留存趋势</td><td>需要时间成熟；近期 cohort 数据不完整</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <h4><span class="h4ico">🔀</span>组合使用示例</h4>
+    <p>问题：「新用户激活率下降」。</p>
+    <ol class="steps">
+      <li><b>同期群：</b>按注册周看激活率——定位从哪一周开始下降（对应哪个变更）。</li>
+      <li><b>分群：</b>看下降 cohort 内部分布——是全体下降还是某渠道/设备骤降（结构问题 vs 全局问题）。</li>
+      <li><b>漏斗：</b>对下降人群画激活漏斗——找最大流失步。</li>
+      <li><b>路径：</b>看流失用户实际流向——是离开产品还是去了别的功能（被别的事打断）。</li>
+    </ol>
+    <p>四步之后才形成「最可能的原因」假设，然后定性验证或实验（模块 1、4）——数据分析的价值是缩小范围，不是直接给答案。</p>
+    <div class="callout note-warn"><b>常见错误：</b>只跑漏斗不看路径（错过非线性行为）；分群维度无限细分（看到噪音）；同期群未成熟就下结论；把「相关」的分群差异当因果。</div>
+    <div class="refs"><b>关联知识：</b>3.3 漏斗 · 5.4 同期群 · 工具箱模板 12 分析报告</div>
+    <div class="quiz">
+      <div class="q-title">漏斗显示「加购→结算」转化率下降 20%，但同期 GMV 没变。可能的原因与验证？</div>
+      <button class="ans-toggle">查看参考答案</button>
+      <div class="answer">可能：① 结算入口被遮挡/ bug（真问题，GMV 应下降——但若用户从别的路径结算则 GMV 不变）；② 用户行为变化：从「加购后结算」转为「直接购买」（路径变化，漏斗失真——需路径分析验证）；③ 流量结构变化：新用户占比上升（分群：新客该步转化天然低）。验证顺序：先路径分析看「直接购买」占比是否上升 → 再分群看新客结构 → 最后查该步埋点与页面异常。不验证就优化「结算按钮」，可能修的是不存在的问题。</div>
+    </div>
+    <div class="task"><b>实践任务：</b>用四种方法各回答一个你手上的真实问题，记录每种方法「推翻或修正」了什么初始假设。</div>
+  </section>
+
+  <!-- ========== 7.5 ========== -->
+  <section class="unit" id="u7-5">
+    <div class="unit-head">
+      <span class="unit-no">7.5</span>
+      <h3>活跃指标与留存指标：不同定义如何改变结论</h3>
+      <label class="done-check"><input type="checkbox" data-pid="u7-5"><span>标记完成</span></label>
+    </div>
+    <div class="ev"><span class="ev-tag ev-frame">理论框架</span></div>
+    <div class="cq"><b>核心问题：</b>「月活 500 万」——打开一次和每天用的用户被算成一样吗？</div>
+    <h4><span class="h4ico">👤</span>活跃的三种定义</h4>
+    <div class="table-scroll">
+    <table class="dt">
+      <thead><tr><th>定义</th><th>含义</th><th>适用</th><th>风险</th></tr></thead>
+      <tbody>
+        <tr><td class="em">访问活跃</td><td>有会话（打开过）</td><td>流量型产品</td><td>最宽松；推送可刷高</td></tr>
+        <tr><td class="em">行为活跃</td><td>完成核心行为（发帖/播放/下单）</td><td>多数产品经营分析</td><td>需明确核心行为清单</td></tr>
+        <tr><td class="em">付费活跃</td><td>有交易/订阅</td><td>商业化评估</td><td>忽略免费生态价值</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <h4><span class="h4ico">📊</span>活跃指标计算</h4>
+    <div class="formula">
+      <button class="copy-btn">复制</button>
+      <div class="f-main">DAU/MAU（粘性比率）= 日活跃用户数 ÷ 月活跃用户数 × 100%</div>
+      <div class="f-vars"><b>解读：</b>反映用户回访密度（理论上限 100%≈每天都来）。<b>适用：</b>日频产品；周频产品应用 WAU/MAU。<b>误读：</b>把 DAU/MAU 当「留存率」（它不是留存，是频次代理）；忽略口径差异（活跃定义不同则完全不可比）。</div>
+    </div>
+    <h4><span class="h4ico">🧮</span>留存指标回顾（口径见 5.3）</h4>
+    <ul class="tight">
+      <li>N 日留存（经典/范围/滚动）——报告必须带口径。</li>
+      <li>流失率 = 1 − 留存率；显式退订率只统计主动离开（远低于真实流失）。</li>
+      <li>复购率、收入留存（GRR/NDR）——见 5.5、6.6。</li>
+    </ul>
+    <div class="callout note-warn"><b>常见错误：</b>同一指标在不同报表里口径不同（活动看板用「打开」、经营看板用「核心行为」）；用推送把 DAU 做高后粘性「改善」的假象；把 MAU 当「用户规模」宣传（它只是「月内打开过」的人数）。</div>
+    <div class="refs"><b>关联知识：</b>5.3 留存口径 · 5.4 同期群 · 6.6 商业指标</div>
+    <div class="quiz">
+      <div class="q-title">改版后 DAU 涨了 15%，但「完成核心行为的用户数」没变。这个改版成功了吗？</div>
+      <button class="ans-toggle">查看参考答案</button>
+      <div class="answer">不能算成功。DAU 上涨而核心行为不变，说明新增的「活跃」没有产生价值（可能是推送/红点/新奇效应带来的无效打开）。应检查：① DAU 增长的人群结构（新客还是老客回访）；② 打开后是否完成核心行为（行为率是否下降）；③ 30 日留存是否被稀释（老用户被骚扰关闭推送）。结论取决于核心行为指标与留存护栏，而不是 DAU。</div>
+    </div>
+    <div class="task"><b>实践任务：</b>为你的产品定义「活跃」的三种口径并算出当前值；写一段向管理层汇报的话术，说明为什么用你选的口径。</div>
+  </section>
+
+  <!-- ========== 7.6 ========== -->
+  <section class="unit" id="u7-6">
+    <div class="unit-head">
+      <span class="unit-no">7.6</span>
+      <h3>指标波动拆解、相关性与因果关系</h3>
+      <label class="done-check"><input type="checkbox" data-pid="u7-6"><span>标记完成</span></label>
+    </div>
+    <div class="ev"><span class="ev-tag ev-frame">理论框架</span><span class="ev-tag ev-logic">推导判断</span></div>
+    <div class="cq"><b>核心问题：</b>DAU 跌了 8%，怎么知道是「人少了」还是「来得少了」？相关性能相信到什么程度？</div>
+    <h4><span class="h4ico">🧮</span>乘法拆解法</h4>
+    <div class="kmap-wrap" style="padding:14px">
+    <svg viewBox="0 0 1000 200" role="img" aria-label="指标乘法拆解示意图">
+      <defs><marker id="arr14" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#94A1B5"/></marker></defs>
+      <g font-family="inherit">
+        <rect x="30" y="60" width="200" height="70" rx="10" fill="var(--brand-soft)" stroke="var(--brand)" stroke-width="1.5"/>
+        <text x="130" y="90" text-anchor="middle" font-size="13.5" font-weight="700" fill="var(--brand)">总量指标</text>
+        <text x="130" y="110" text-anchor="middle" font-size="11" fill="var(--text2)">DAU / 收入 / GMV</text>
+        <rect x="290" y="20" width="200" height="70" rx="10" fill="var(--teal-soft)" stroke="var(--teal)" stroke-width="1.5"/>
+        <text x="390" y="50" text-anchor="middle" font-size="13" font-weight="700" fill="var(--teal)">因子 1</text>
+        <text x="390" y="70" text-anchor="middle" font-size="11" fill="var(--text2)">人数/流量/新客数</text>
+        <rect x="290" y="110" width="200" height="70" rx="10" fill="var(--teal-soft)" stroke="var(--teal)" stroke-width="1.5"/>
+        <text x="390" y="140" text-anchor="middle" font-size="13" font-weight="700" fill="var(--teal)">因子 2</text>
+        <text x="390" y="160" text-anchor="middle" font-size="11" fill="var(--text2)">人均频次/转化率/客单价</text>
+        <rect x="550" y="20" width="200" height="70" rx="10" fill="var(--purple-soft)" stroke="var(--purple)" stroke-width="1.5"/>
+        <text x="650" y="50" text-anchor="middle" font-size="13" font-weight="700" fill="var(--purple)">子因子</text>
+        <text x="650" y="70" text-anchor="middle" font-size="11" fill="var(--text2)">继续拆到可行动层</text>
+        <rect x="550" y="110" width="200" height="70" rx="10" fill="var(--purple-soft)" stroke="var(--purple)" stroke-width="1.5"/>
+        <text x="650" y="140" text-anchor="middle" font-size="13" font-weight="700" fill="var(--purple)">结构因子</text>
+        <text x="650" y="160" text-anchor="middle" font-size="11" fill="var(--text2)">人群/渠道/时段占比</text>
+        <path d="M230 95 H288" stroke="#94A1B5" stroke-width="1.8" marker-end="url(#arr14)"/>
+        <path d="M490 55 H548" stroke="#94A1B5" stroke-width="1.8" marker-end="url(#arr14)"/>
+        <path d="M490 145 H548" stroke="#94A1B5" stroke-width="1.8" marker-end="url(#arr14)"/>
+        <text x="770" y="95" font-size="12" fill="var(--text2)">DAU = 新增 + 回访</text>
+        <text x="770" y="115" font-size="12" fill="var(--text2)">收入 = 用户 × 转化 × 客单</text>
+        <text x="770" y="135" font-size="12" fill="var(--text2)">变化归因到最小因子</text>
+      </g>
+    </svg>
+    </div>
+    <p><strong>示例：</strong>DAU 跌 8%。拆为「活跃人数 × 人均活跃天数」或「新增用户 × 新客留存 × 老客留存」——定位到具体因子后再分群（哪个渠道/哪天的 cohort 在跌）。<strong>拆解到「可行动层」为止</strong>：能指出「哪个人群的哪个行为」就不用再拆。</p>
+    <h4><span class="h4ico">🔗</span>相关 vs 因果：三个检验</h4>
+    <ol class="steps">
+      <li><b>自选择检验：</b>做该行为的用户是否本来就不同（更活跃、更高质量）？→ 比较「同人群内做/不做」的差异。</li>
+      <li><b>时序检验：</b>原因必须先于结果——行为变化与指标变化谁先谁后？</li>
+      <li><b>干预检验：</b>推动该行为，结果是否随之变化？（唯一可靠的因果证据来自实验，模块 4）</li>
+    </ol>
+    <p><strong>辛普森悖论提醒：</strong>总体上的相关/差异可能在每个分群内都反向——分群是回答「是不是真相关」的前提，不是可选项。</p>
+    <div class="callout note-warn"><b>常见错误：</b>「用了功能 A 的用户留存高 40%」→ 直接全量推 A（忽略自选择：愿意探索功能的用户本来留存就高）；看总体不看分群；把时间上的先后当因果。</div>
+    <div class="refs"><b>关联知识：</b>模块 4 实验 · 7.4 分析方法 · 7.9 教学案例</div>
+    <div class="quiz">
+      <div class="q-title">数据显示「完善个人资料的用户 30 日留存 45%，未完善的只有 12%」。产品经理建议把「完善资料」设为新用户强制步骤。这个建议有什么风险？</div>
+      <button class="ans-toggle">查看参考答案</button>
+      <div class="answer">风险：留存差异可能来自自选择——愿意完善资料的用户本身参与度更高，而非资料完善导致了留存。强制步骤的可能后果：① 增加注册摩擦，注册完成率下降（可能净损失更多用户）；② 被强制完善的用户未必获得同等留存收益；③ 伤害体验（为数据制造行为）。正确路径：先小规模实验（引导完善资料 vs 不引导）看注册→激活→留存的整体链路变化；若留存增益真实且注册损耗可接受，再逐步扩大。</div>
+    </div>
+    <div class="task"><b>实践任务：</b>找一条你相信的「行为—结果」相关关系，用三个检验逐一审查，写下它升格为「因果」还缺什么证据。</div>
+  </section>
+
+  <!-- ========== 7.7 ========== -->
+  <section class="unit" id="u7-7">
+    <div class="unit-head">
+      <span class="unit-no">7.7</span>
+      <h3>数据质量、采集偏差与指标失真</h3>
+      <label class="done-check"><input type="checkbox" data-pid="u7-7"><span>标记完成</span></label>
+    </div>
+    <div class="ev"><span class="ev-tag ev-logic">推导判断</span></div>
+    <div class="cq"><b>核心问题：</b>报表上的数字可能怎么「撒谎」？怎么在信任数据前先验证数据？</div>
+    <h4><span class="h4ico">🕳️</span>数据失真来源清单</h4>
+    <div class="table-scroll">
+    <table class="dt">
+      <thead><tr><th>来源</th><th>表现</th><th>检测方法</th></tr></thead>
+      <tbody>
+        <tr><td class="em">埋点缺陷</td><td>事件漏报/重复上报/参数缺失</td><td>与业务日志对账；A/A 检查；抽样人工验证</td></tr>
+        <tr><td class="em">口径漂移</td><td>同一指标不同报表算法不同</td><td>指标字典；关键指标双源校验</td></tr>
+        <tr><td class="em">机器人/作弊流量</td><td>异常集中时段/IP/设备模式</td><td>反作弊过滤；对账广告平台点击</td></tr>
+        <tr><td class="em">归因窗口与最后点击偏差</td><td>功劳全记给最后触点</td><td>多触点归因对比；分渠道看质量而非只看归因</td></tr>
+        <tr><td class="em">样本与选择偏差</td><td>只分析幸存用户/活跃用户</td><td>纳入沉默与流失用户分群</td></tr>
+        <tr><td class="em">异常值与缺失</td><td>极端值拉高均值、字段大面积为空</td><td>分布检查；缺失率监控；中位数对比</td></tr>
+        <tr><td class="em">时区与周期错误</td><td>跨时区统计日期错位；周 vs 自然月混用</td><td>统一时区；固定统计周期</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <h4><span class="h4ico">🛡️</span>数据可信度四查</h4>
+    <ol class="steps">
+      <li><b>查对账：</b>关键数字是否有第二个独立来源（财务收入 vs 产品 MRR）。</li>
+      <li><b>查结构：</b>分群后是否还成立（辛普森检查）。</li>
+      <li><b>查时间：</b>剔除异常日/异常周后趋势是否还在。</li>
+      <li><b>查口径：</b>这个数字的定义最近改过吗？历史序列是否重算过？</li>
+    </ol>
+    <div class="callout note-warn"><b>常见错误：</b>把仪表盘当真相（不查对账）；发现数据不支持结论时改口径（移动球门）；异常值直接删除而不记录；用「清洗后」的数据汇报但不说明清洗规则。</div>
+    <div class="refs"><b>关联知识：</b>7.2 埋点 · 模块 8 归因 · 工具箱模板 12</div>
+    <div class="quiz">
+      <div class="q-title">改版后「平均使用时长」从 12 分钟涨到 18 分钟。查数据发现是 5% 的异常长会话（平均 4 小时）拉高了均值，中位数只从 9 分钟到 9.5 分钟。如何汇报？</div>
+      <button class="ans-toggle">查看参考答案</button>
+      <div class="answer">汇报必须同时给出均值与中位数/分布，并说明异常会话的构成：① 若 4 小时会话是「挂着忘关」或测试账号，应过滤后汇报（并说明过滤规则）；② 若真实存在（如直播场景），应分群呈现（重度用户 vs 普通用户），避免单点均值误导决策；③ 结论改为「普通用户时长基本持平，重度用户时长显著上升——需确认这是场景变化还是数据异常」。用均值单点数字驱动决策是典型的指标失真。</div>
+    </div>
+    <div class="task"><b>实践任务：</b>选一个你常看的指标，做「四查」：找第二个数据源对账、分群看结构、剔除近 30 天最异常 3 天看趋势、确认口径未变。记录发现。</div>
+  </section>
+
+  <!-- ========== 7.8 ========== -->
+  <section class="unit" id="u7-8">
+    <div class="unit-head">
+      <span class="unit-no">7.8</span>
+      <h3>仪表盘设计原则与工具选择</h3>
+      <label class="done-check"><input type="checkbox" data-pid="u7-8"><span>标记完成</span></label>
+    </div>
+    <div class="ev"><span class="ev-tag ev-logic">推导判断</span></div>
+    <div class="cq"><b>核心问题：</b>仪表盘应该放什么？为什么很多仪表盘没人看？</div>
+    <h4><span class="h4ico">📊</span>仪表盘设计五原则</h4>
+    <ol class="steps">
+      <li><b>按决策组织，不按数据表组织：</b>每块区域回答一个具体问题（「新客获取健康吗」），而不是罗列所有指标。</li>
+      <li><b>层级分明：</b>顶层 3–5 个核心指标（北极星+护栏），点击下钻到分群与明细。</li>
+      <li><b>带上下文：</b>每个数字配对比基准（上周/上月同期/目标值/分群均值）——孤立数字不可解读。</li>
+      <li><b>标注变更：</b>页面标记版本发布、活动、实验时间线——否则异常无法归因。</li>
+      <li><b>定期清理：</b>每月淘汰无人查看的模块——仪表盘的复杂度是负债。</li>
+    </ol>
+    <h4><span class="h4ico">🛠️</span>工具选择框架</h4>
+    <div class="table-scroll">
+    <table class="dt">
+      <thead><tr><th>工具类型</th><th>代表</th><th>适合</th><th>注意</th></tr></thead>
+      <tbody>
+        <tr><td class="em">网站/流量分析</td><td>Google Analytics 4</td><td>流量结构、渠道、网页转化</td><td>事件模型与 UA 差异大；隐私合规</td></tr>
+        <tr><td class="em">产品行为分析平台</td><td>Amplitude、Mixpanel 等</td><td>留存、漏斗、同期群、分群</td><td>需规范埋点；按量计费</td></tr>
+        <tr><td class="em">实验平台</td><td>Optimizely、VWO、自建等</td><td>A/B 测试、分流、统计</td><td>统计方法差异（固定样本/序贯）</td></tr>
+        <tr><td class="em">电子表格</td><td>Excel/Google Sheets</td><td>快速分析、一次性计算、模板</td><td>版本混乱、难复用——关键分析要文档化</td></tr>
+        <tr><td class="em">BI/自建</td><td>SQL + BI 工具</td><td>大规模、多源、定制口径</td><td>需要数据团队支持</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="callout note-info"><b>选型原则：</b>从问题出发选工具，不是从工具出发找问题。先写下「我要回答什么问题、多久回答一次、谁来看」，再选能满足的最小工具集。常见浪费：买了高级平台但埋点混乱，数据质量差 → 工具越高级，错误越精致。</div>
+    <div class="callout note-warn"><b>常见错误：</b>仪表盘堆砌 50 个指标无人看；数字没有对比基准；改版/实验不标注；把「实时大屏」当分析（实时数据适合监控，不适合解读）。</div>
+    <div class="refs"><b>关联知识：</b>3.4 指标树 · 7.7 数据质量 · 工具箱模板 12</div>
+    <div class="quiz">
+      <div class="q-title">团队要一个「增长仪表盘」。设计前你应该问哪三个问题？</div>
+      <button class="ans-toggle">查看参考答案</button>
+      <div class="answer">① 谁看、多久看一次、看完做什么决策（高管周会看 5 个数，增长团队每天看漏斗明细——两者不是同一个仪表盘）；② 每个数字的对比基准是什么（目标/同期/分群）——没有基准的数字不构成信息；③ 数据从哪来、口径谁维护、延迟多久（决定它是监控看板还是分析看板）。三个问题答不清，就会做出一个「什么都有、没人使用」的仪表盘。</div>
+    </div>
+    <div class="task"><b>实践任务：</b>为你的团队重设计一个仪表盘：不超过 8 个模块，每模块写「回答什么问题 + 对比基准 + 数据来源 + 谁来看」，并删掉一个现有无用模块。</div>
+  </section>
+
+  <!-- ========== 7.9 ========== -->
+  <section class="unit" id="u7-9">
+    <div class="unit-head">
+      <span class="unit-no">7.9</span>
+      <h3>完整教学案例：从异常发现到行动方案</h3>
+      <label class="done-check"><input type="checkbox" data-pid="u7-9"><span>标记完成</span></label>
+    </div>
+    <div class="ev"><span class="ev-tag ev-sim">教学模拟数据</span></div>
+    <div class="cq"><b>核心问题：</b>一次完整的数据分析长什么样？从现象到行动的每一步怎么走？<strong>本案例数据均为教学模拟数据。</strong></div>
+
+    <div class="collapse">
+      <button class="c-head"><span style="color:var(--brand)">📗</span>案例：某在线教育产品「完课率连续 4 周下降」的全流程分析<em class="arrow">▼ 展开</em></button>
+      <div class="c-body">
+        <h4>第一步：现象描述（不跳步）</h4>
+        <p>模拟数据：产品整体完课率从 6 周前的 41% 连续下降到 33%，无重大版本发布。同期：DAU 基本持平（±2%），新用户注册量 +15%。</p>
+        <h4>第二步：口径与质量四查</h4>
+        <ul class="tight">
+          <li>对账：完课率定义 =「购买后 30 天内完成 ≥80% 课时的用户 ÷ 购买用户」，近 6 周定义未变（指标字典确认）。</li>
+          <li>异常值：剔除 3 天服务器故障日后趋势不变。</li>
+          <li>结构检查：分群前先不下结论。</li>
+        </ul>
+        <h4>第三步：同期群 + 分群定位</h4>
+        <div class="table-scroll"><table class="dt">
+          <thead><tr><th>购买周（模拟）</th><th>新客完课率</th><th>老客复购买完课率</th><th>该周新客占比</th></tr></thead>
+          <tbody>
+            <tr><td class="em">6 周前</td><td>45%</td><td>38%</td><td>60%</td></tr>
+            <tr><td class="em">4 周前</td><td>41%</td><td>36%</td><td>72%</td></tr>
+            <tr><td class="em">本周</td><td>36%</td><td>37%</td><td>80%</td></tr>
+          </tbody>
+        </table></div>
+        <p>发现：老客完课率基本稳定（36–38%），下滑主要来自新客；且新客占比在上升。初步判断是「人群结构 + 新客体验」问题，而非「产品整体退化」。</p>
+        <h4>第四步：漏斗 + 路径找机制</h4>
+        <p>新客漏斗（模拟）：购课 100% → 首次上课 78% → 完成第一章 52% → 完成 ≥80% 36%。最大流失在「首次上课 → 完成第一章」。路径分析显示：流失用户中 40% 在购课后第 3–5 天集中沉默。定性补充：抽访 8 名流失新客，6 人表示「买课后不知道从哪开始、课程比预期长、没有学习计划」。</p>
+        <h4>第五步：形成假设与行动方案</h4>
+        <div class="table-scroll"><table class="dt">
+          <thead><tr><th>假设</th><th>验证方式</th><th>对应行动</th></tr></thead>
+          <tbody>
+            <tr><td>新客缺少「开学路径」，首章完成成本高</td><td>A/B：购课后即时推送「7 天学习计划 + 首章入口」</td><td>若首章完成率 +10pp，全量并优化计划个性化</td></tr>
+            <tr><td>课程时长预期管理不足</td><td>商详页增加「每周投入 X 小时」预期信息 + 回访验证</td><td>降低「买了发现太耗时」型流失</td></tr>
+            <tr><td>新客占比上升本身不可逆，需分层运营</td><td>按「购课后是否 48h 内首课」分群的留存对比</td><td>48h 未首课用户进入专项激活流</td></tr>
+          </tbody>
+        </table></div>
+        <h4>第六步：复盘要点</h4>
+        <p>① 最初现象（整体完课率下降）的归因（「课程质量下降」）被数据推翻——是结构与新客体验问题；② 关键动作是同期群 + 分群，没有它会把结构效应当产品问题；③ 定性（8 人访谈）为机制假设提供了方向，但不能替代实验验证；④ 行动方案全部带验证标准——每个动作都可证伪。</p>
+      </div>
+    </div>
+
+    <div class="callout note-risk"><b>案例使用说明：</b>以上数据为教学模拟，演示「现象 → 四查 → 同期群/分群 → 漏斗/路径 → 假设 → 实验设计」的完整过程。真实分析中每一步都要留下记录（模板 12），否则三个月后没人记得为什么当时这么判断。</div>
+    <div class="task"><b>实践任务：</b>用工具箱模板 12，对你产品的一个真实指标异动走完六步流程，输出一页分析报告（含假设表与验证标准）。</div>
+  </section>
+
+  <div class="card" style="border-left:4px solid var(--purple)">
+    <h3>模块 7 小结</h3>
+    <p class="small">数据分析的核心产出不是报表，而是「可验证的判断」。纪律：口径先行、对账四查、拆解到可行动层、相关必须过三个检验才配谈因果。下一模块把产品与市场连接：增长渠道与用户获取。</p>
+    <a class="chip" href="#/m8" style="background:var(--teal);color:#fff;border-color:var(--teal);margin-top:10px">进入模块 8：增长渠道与用户获取 →</a>
+  </div>
+</section>

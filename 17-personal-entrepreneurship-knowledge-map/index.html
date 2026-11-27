@@ -1,0 +1,1776 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>个人创业与一人公司 · 交互式知识地图</title>
+<meta name="description" content="Personal Entrepreneurship & One-Person Business：基于英文权威资料与学术研究构建的系统化自学知识体系，含学习路线、交互知识地图、商业模式比较、商业工具箱与参考文献。">
+<style>
+/* ============ 设计变量 ============ */
+:root{
+  --bg:#F7F6F2; --ink:#20272E; --primary:#243B53; --teal:#3A7D74; --gold:#C49545;
+  --muted:#64748B; --border:#DCE1E5; --card:#FFFFFF;
+  --primary-soft:#EAEFF5; --teal-soft:#E9F1EF; --gold-soft:#F6EFDF;
+  --stage-a:#243B53; --stage-b:#3A7D74; --stage-c:#C49545; --stage-d:#5B6B8C;
+  --radius:10px; --shadow:0 1px 2px rgba(32,39,46,.05);
+  --mono:"SF Mono",Consolas,"Liberation Mono","Courier New",monospace;
+  --sans:"Inter","Segoe UI","PingFang SC","Microsoft YaHei","Noto Sans SC",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.75;-webkit-font-smoothing:antialiased}
+a{color:var(--primary);text-decoration:none}
+a:hover{text-decoration:underline}
+button{font-family:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.skip-link{position:absolute;left:-9999px;top:0;background:var(--primary);color:#fff;padding:8px 14px;z-index:200}
+.skip-link:focus{left:8px;top:8px}
+::selection{background:var(--gold-soft)}
+
+/* ============ 顶部主视觉 ============ */
+.hero{background:var(--card);border-bottom:1px solid var(--border);padding:44px 28px 36px}
+.hero-inner{max-width:1180px;margin:0 auto}
+.hero-kicker{font-size:12px;letter-spacing:.18em;color:var(--teal);font-weight:600;text-transform:uppercase;margin-bottom:10px}
+.hero h1{font-size:34px;line-height:1.25;color:var(--primary);font-weight:700;letter-spacing:.01em}
+.hero .en-sub{font-size:15px;color:var(--muted);margin-top:6px;font-weight:500;letter-spacing:.02em}
+.hero-desc{max-width:760px;margin-top:16px;color:#3d4750;font-size:14.5px}
+.core-q{margin:20px 0 6px;padding:14px 18px;background:var(--primary-soft);border-left:3px solid var(--primary);border-radius:0 var(--radius) var(--radius) 0;max-width:820px}
+.core-q .label{font-size:12px;font-weight:700;color:var(--primary);letter-spacing:.08em;display:block;margin-bottom:4px}
+.core-q p{font-size:15px;color:var(--primary);font-weight:600;line-height:1.7}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-top:24px;max-width:900px}
+.stat{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px}
+.stat b{display:block;font-size:24px;color:var(--primary);font-family:var(--mono);font-weight:700;line-height:1.2}
+.stat span{font-size:12px;color:var(--muted)}
+
+/* ============ 布局 ============ */
+.shell{display:flex;max-width:1280px;margin:0 auto;align-items:flex-start}
+.sidebar{width:250px;flex-shrink:0;position:sticky;top:0;max-height:100vh;overflow-y:auto;padding:22px 16px 30px;border-right:1px solid var(--border);background:var(--card)}
+.main{flex:1;min-width:0;padding:26px 30px 60px}
+.nav-title{font-size:11px;letter-spacing:.14em;color:var(--muted);font-weight:700;margin:18px 0 8px;text-transform:uppercase}
+.nav-title:first-child{margin-top:0}
+.nav-list{list-style:none}
+.nav-list a{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:8px;color:#3d4750;font-size:13.5px;font-weight:500}
+.nav-list a:hover{background:var(--bg);text-decoration:none}
+.nav-list a.active{background:var(--primary-soft);color:var(--primary);font-weight:600}
+.nav-ico{width:18px;text-align:center;font-size:14px}
+.progress-box{margin-top:22px;padding:14px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius)}
+.progress-box h4{font-size:12.5px;color:var(--primary);margin-bottom:8px}
+.pbar{height:8px;background:#E5E9ED;border-radius:99px;overflow:hidden}
+.pbar i{display:block;height:100%;background:var(--teal);border-radius:99px;transition:width .3s}
+.progress-box .ptext{font-size:12px;color:var(--muted);margin-top:6px;display:flex;justify-content:space-between}
+.btn-reset{margin-top:10px;width:100%;padding:6px;font-size:12px;background:none;border:1px solid var(--border);border-radius:7px;color:var(--muted)}
+.btn-reset:hover{border-color:var(--gold);color:var(--gold)}
+.hamburger{display:none;position:fixed;top:12px;left:12px;z-index:120;width:40px;height:40px;border-radius:9px;border:1px solid var(--border);background:var(--card);font-size:18px;color:var(--primary);box-shadow:var(--shadow)}
+
+/* ============ 区块通用 ============ */
+section{margin-bottom:52px;scroll-margin-top:20px}
+.sec-head{margin-bottom:18px;padding-bottom:12px;border-bottom:2px solid var(--primary)}
+.sec-head h2{font-size:23px;color:var(--primary);font-weight:700}
+.sec-head .sec-en{font-size:12.5px;color:var(--muted);letter-spacing:.06em;margin-top:2px}
+.sec-head p{font-size:13.5px;color:#4a5560;margin-top:8px;max-width:860px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
+.badge{display:inline-block;padding:2px 9px;border-radius:99px;font-size:11px;font-weight:700;letter-spacing:.04em;white-space:nowrap}
+.b-a{background:var(--primary-soft);color:var(--stage-a)}
+.b-b{background:var(--teal-soft);color:var(--stage-b)}
+.b-c{background:var(--gold-soft);color:#8a6a24}
+.b-d{background:#EEF0F5;color:var(--stage-d)}
+.ev{display:inline-block;padding:1px 8px;border-radius:5px;font-size:11px;font-weight:600;border:1px solid var(--border);color:var(--muted);background:var(--bg);white-space:nowrap}
+.ev-1{border-color:#bcd6c9;color:#2c6e4e;background:#eef6f1}
+.ev-2{border-color:#c9d8ea;color:#2f5b8a;background:#eef3f9}
+.ev-3{border-color:#e3d3ae;color:#8a6a24;background:#f8f2e4}
+.ev-4{border-color:#e8c9c0;color:#9c4f38;background:#f9efeb}
+.ev-5{border-color:#d5d5d5;color:#666;background:#f2f2f2}
+
+/* ============ 学习路线 ============ */
+.stage{margin-bottom:18px;border:1px solid var(--border);border-radius:var(--radius);background:var(--card);overflow:hidden}
+.stage-head{display:flex;align-items:center;gap:14px;padding:16px 20px;cursor:pointer;user-select:none}
+.stage-head:hover{background:#fafbfc}
+.stage-letter{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:17px;color:#fff;flex-shrink:0}
+.stage-a .stage-letter{background:var(--stage-a)} .stage-b .stage-letter{background:var(--stage-b)}
+.stage-c .stage-letter{background:var(--stage-c)} .stage-d .stage-letter{background:var(--stage-d)}
+.stage-head h3{font-size:16.5px;color:var(--primary)}
+.stage-head .stage-goal{font-size:12.5px;color:var(--muted);margin-top:2px}
+.stage-chev{margin-left:auto;color:var(--muted);transition:transform .2s;font-size:13px}
+.stage.open .stage-chev{transform:rotate(180deg)}
+.stage-body{display:none;padding:4px 20px 20px;border-top:1px solid var(--border)}
+.stage.open .stage-body{display:block}
+.stage-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.sg{background:var(--bg);border:1px solid var(--border);border-radius:9px;padding:13px 15px}
+.sg h5{font-size:12px;color:var(--teal);letter-spacing:.06em;margin-bottom:7px;font-weight:700}
+.sg ul{margin-left:16px;font-size:13px;color:#3d4750}
+.sg li{margin-bottom:3px}
+.sg p{font-size:13px;color:#3d4750}
+.mod-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.mod-chip{font-size:12px;padding:3px 10px;border-radius:99px;background:var(--primary-soft);color:var(--primary);border:1px solid transparent;font-weight:600}
+.mod-chip:hover{border-color:var(--primary);text-decoration:none}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:14px;padding:12px 14px;background:var(--bg);border:1px dashed var(--border);border-radius:9px;font-size:12.5px;color:#3d4750}
+.flow b{color:var(--primary)}
+.flow .arr{color:var(--gold);font-weight:700}
+
+/* ============ 知识地图 ============ */
+.map-toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:16px}
+.search-box{flex:1;min-width:220px;display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:9px;padding:8px 12px}
+.search-box input{flex:1;border:none;outline:none;font-size:14px;background:none;color:var(--ink);font-family:inherit}
+.search-count{font-size:12px;color:var(--muted);white-space:nowrap}
+.module{border:1px solid var(--border);border-radius:var(--radius);background:var(--card);margin-bottom:12px;overflow:hidden}
+.module-head{width:100%;display:flex;align-items:center;gap:13px;padding:14px 18px;background:none;border:none;text-align:left}
+.module-head:hover{background:#fafbfc}
+.mod-num{font-family:var(--mono);font-size:13px;font-weight:700;color:#fff;background:var(--primary);border-radius:7px;padding:3px 8px;flex-shrink:0}
+.module.stage-b .mod-num{background:var(--stage-b)} .module.stage-c .mod-num{background:var(--stage-c)} .module.stage-d .mod-num{background:var(--stage-d)}
+.mod-title{font-size:15.5px;font-weight:700;color:var(--primary)}
+.mod-en{font-size:11.5px;color:var(--muted);display:block;font-weight:400;margin-top:1px}
+.mod-chev{margin-left:auto;color:var(--muted);transition:transform .2s;font-size:13px;flex-shrink:0}
+.module.open .mod-chev{transform:rotate(180deg)}
+.module-body{display:none;padding:6px 20px 22px;border-top:1px solid var(--border)}
+.module.open .module-body{display:block}
+.mod-overview{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:14px 0}
+.ov{background:var(--bg);border-radius:9px;padding:11px 14px;border:1px solid var(--border)}
+.ov h5{font-size:11.5px;color:var(--teal);letter-spacing:.07em;font-weight:700;margin-bottom:4px}
+.ov p{font-size:13px;color:#3d4750}
+.ov .rel{font-size:12.5px;color:#3d4750}
+.subhead{font-size:13px;font-weight:700;color:var(--primary);letter-spacing:.05em;margin:20px 0 10px;padding-left:9px;border-left:3px solid var(--gold)}
+.topic{margin-bottom:14px;border:1px solid var(--border);border-radius:9px;overflow:hidden}
+.topic-head{width:100%;display:flex;align-items:center;gap:10px;padding:10px 14px;background:#fafbfc;border:none;text-align:left;font-size:14px;font-weight:700;color:var(--primary)}
+.topic-head:hover{background:var(--bg)}
+.topic-chev{margin-left:auto;color:var(--muted);font-size:12px;transition:transform .2s}
+.topic.open .topic-chev{transform:rotate(180deg)}
+.topic-body{display:none;padding:12px 14px}
+.topic.open .topic-body{display:block}
+.concept{margin-bottom:10px;border:1px solid var(--border);border-radius:8px}
+.concept-btn{width:100%;display:flex;align-items:center;gap:9px;padding:9px 12px;background:none;border:none;text-align:left;font-size:13.5px;font-weight:600;color:var(--ink)}
+.concept-btn:hover{background:var(--bg)}
+.concept-btn .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);flex-shrink:0}
+.concept-btn .evtag{margin-left:auto;flex-shrink:0}
+.concept-detail{display:none;padding:4px 14px 14px;border-top:1px dashed var(--border)}
+.concept.open .concept-detail{display:block}
+.cd-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:9px;margin-top:10px}
+.cd{background:var(--bg);border-radius:7px;padding:9px 12px}
+.cd h6{font-size:11px;color:var(--teal);font-weight:700;letter-spacing:.05em;margin-bottom:3px}
+.cd p{font-size:12.8px;color:#3d4750;line-height:1.65}
+.obj-list{list-style:none}
+.obj-list li{position:relative;padding:5px 0 5px 26px;font-size:13.5px;color:#3d4750;border-bottom:1px dashed var(--border)}
+.obj-list li:last-child{border-bottom:none}
+.obj-list li::before{content:"✓";position:absolute;left:4px;color:var(--teal);font-weight:700}
+.checks{margin-top:8px;font-size:13px;color:#4a5560;background:var(--bg);border-radius:8px;padding:10px 14px}
+.checks b{color:var(--primary)}
+.practice{background:var(--gold-soft);border:1px solid #e8d9b5;border-radius:9px;padding:14px 16px;margin-top:14px}
+.practice h5{font-size:13px;color:#8a6a24;font-weight:700;margin-bottom:6px}
+.practice p{font-size:13.5px;color:#4a4436}
+.practice .tmpl{margin-top:8px;font-size:12.8px;color:#5c5545;background:rgba(255,255,255,.65);border-radius:7px;padding:9px 12px}
+.practice .tmpl b{color:#8a6a24}
+.gate{margin-top:8px;font-size:12.8px;color:#4a5560}
+.gate b{color:var(--primary)}
+.done-row{display:flex;align-items:center;gap:9px;margin-top:12px}
+.done-row label{font-size:13px;color:var(--primary);font-weight:600;cursor:pointer;display:flex;align-items:center;gap:7px}
+.done-row input{width:16px;height:16px;accent-color:var(--teal);cursor:pointer}
+.mistake{border-left:3px solid #c96a4a;background:#faf4f1;border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:9px}
+.mistake h6{font-size:13px;color:#9c4f38;font-weight:700}
+.mistake p{font-size:12.8px;color:#5c4a42;margin-top:3px}
+.mistake p b{color:#9c4f38}
+
+/* ============ 资源卡片 ============ */
+.res-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.res{background:var(--card);border:1px solid var(--border);border-radius:9px;padding:13px 15px;display:flex;flex-direction:column;gap:6px}
+.res h5{font-size:13.8px;color:var(--primary);line-height:1.45}
+.res h5 a{color:var(--primary)}
+.res .meta{font-size:11.8px;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px}
+.res .why{font-size:12.8px;color:#3d4750}
+.res .limits{font-size:12px;color:#8a6a24;background:var(--gold-soft);border-radius:6px;padding:6px 9px}
+.res .tags{display:flex;flex-wrap:wrap;gap:5px}
+.rtag{font-size:10.8px;padding:1px 8px;border-radius:99px;background:var(--bg);border:1px solid var(--border);color:var(--muted)}
+
+/* ============ 模式比较 ============ */
+.model-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.mtab{padding:7px 15px;border-radius:99px;border:1px solid var(--border);background:var(--card);font-size:13px;font-weight:600;color:#3d4750}
+.mtab.on{background:var(--primary);color:#fff;border-color:var(--primary)}
+.table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius);background:var(--card)}
+table.cmp{border-collapse:collapse;width:100%;min-width:980px;font-size:12.8px}
+table.cmp th,table.cmp td{border:1px solid var(--border);padding:9px 11px;text-align:left;vertical-align:top}
+table.cmp thead th{background:var(--primary);color:#fff;font-size:12.5px;position:sticky;top:0}
+table.cmp tbody th{background:var(--bg);color:var(--primary);font-weight:700;white-space:nowrap;width:130px}
+table.cmp td .rate{display:inline-block;font-weight:700;font-size:11.5px;padding:1px 8px;border-radius:5px;margin-bottom:3px;background:var(--bg);border:1px solid var(--border);color:var(--primary)}
+table.cmp td .note{color:#4a5560;font-size:12.2px;display:block;line-height:1.55}
+.model-detail{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.md-card{border:1px solid var(--border);border-radius:var(--radius);background:var(--card);padding:16px 18px}
+.md-card h4{font-size:15px;color:var(--primary);margin-bottom:8px}
+.md-card h5{font-size:12px;color:var(--teal);font-weight:700;margin:10px 0 4px;letter-spacing:.05em}
+.md-card p,.md-card li{font-size:13px;color:#3d4750}
+.md-card ul{margin-left:16px}
+.decide{margin-top:22px;border:1px solid var(--border);border-radius:var(--radius);background:var(--card);padding:18px 20px}
+.decide h3{font-size:16px;color:var(--primary);margin-bottom:4px}
+.decide .hint{font-size:12.8px;color:var(--muted);margin-bottom:14px}
+.dform{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.dfield label{display:block;font-size:12px;font-weight:700;color:var(--primary);margin-bottom:4px}
+.dfield select{width:100%;padding:7px 9px;border:1px solid var(--border);border-radius:7px;font-size:13px;background:var(--card);color:var(--ink);font-family:inherit}
+.btn-primary{margin-top:14px;padding:9px 22px;background:var(--primary);color:#fff;border:none;border-radius:8px;font-size:13.5px;font-weight:600}
+.btn-primary:hover{background:#1b2f43}
+.dresult{margin-top:16px;display:none}
+.dresult.show{display:block}
+.dresult .cand{border:1px solid var(--border);border-left:4px solid var(--teal);border-radius:0 9px 9px 0;padding:11px 15px;margin-bottom:9px;background:var(--bg)}
+.dresult .cand h5{font-size:13.5px;color:var(--primary)}
+.dresult .cand p{font-size:12.8px;color:#3d4750;margin-top:3px}
+.dresult .cand.excl{border-left-color:#c96a4a}
+.dresult .cand.excl h5{color:#9c4f38}
+.dcaveat{margin-top:12px;font-size:12.8px;color:#8a6a24;background:var(--gold-soft);border-radius:8px;padding:10px 14px}
+
+/* ============ 工具箱 ============ */
+.tool{border:1px solid var(--border);border-radius:9px;background:var(--card);margin-bottom:10px;overflow:hidden}
+.tool-head{width:100%;display:flex;align-items:center;gap:11px;padding:12px 16px;background:none;border:none;text-align:left}
+.tool-head:hover{background:#fafbfc}
+.tool-num{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--teal);background:var(--teal-soft);border-radius:6px;padding:2px 8px;flex-shrink:0}
+.tool-head h4{font-size:14px;color:var(--primary);font-weight:700}
+.tool-head .tmod{font-size:11.5px;color:var(--muted);display:block;font-weight:400}
+.tool-chev{margin-left:auto;color:var(--muted);font-size:12px;transition:transform .2s}
+.tool.open .tool-chev{transform:rotate(180deg)}
+.tool-body{display:none;padding:4px 18px 18px;border-top:1px solid var(--border)}
+.tool.open .tool-body{display:block}
+.tool-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:11px;margin-top:12px}
+.tg{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 13px}
+.tg h6{font-size:11.5px;color:var(--teal);font-weight:700;letter-spacing:.05em;margin-bottom:4px}
+.tg p,.tg li{font-size:12.8px;color:#3d4750}
+.tg ul,.tg ol{margin-left:16px}
+.tg li{margin-bottom:2px}
+.formula{font-family:var(--mono);font-size:12.5px;background:#20272E;color:#D8E2EC;border-radius:8px;padding:11px 14px;margin-top:10px;overflow-x:auto;line-height:1.8}
+.formula b{color:var(--gold)}
+.formula .cm{color:#8fa3b8}
+
+/* ============ 资源库 ============ */
+.filter-bar{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin-bottom:16px}
+.filter-bar select{padding:7px 10px;border:1px solid var(--border);border-radius:8px;font-size:13px;background:var(--card);color:var(--ink);font-family:inherit}
+.fchips{display:flex;flex-wrap:wrap;gap:6px}
+.fchip{padding:4px 12px;border-radius:99px;border:1px solid var(--border);background:var(--card);font-size:12px;color:#3d4750}
+.fchip.on{background:var(--teal);color:#fff;border-color:var(--teal)}
+
+/* ============ 参考文献 ============ */
+.ref-group{margin-bottom:20px}
+.ref-group h4{font-size:14.5px;color:var(--primary);margin-bottom:9px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.ref{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:11px 14px;margin-bottom:8px}
+.ref h5{font-size:13.2px;color:var(--primary);line-height:1.5}
+.ref h5 a{color:var(--primary);word-break:break-all}
+.ref .rmeta{font-size:11.8px;color:var(--muted);margin-top:3px}
+.ref .rsup{font-size:12.5px;color:#3d4750;margin-top:5px}
+.ref .rlim{font-size:12px;color:#8a6a24;margin-top:4px}
+.method-note{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin-bottom:16px}
+.method-note h4{font-size:14px;color:var(--primary);margin-bottom:8px}
+.method-note p,.method-note li{font-size:13px;color:#3d4750}
+.method-note ul,.method-note ol{margin:6px 0 6px 18px}
+.method-note li{margin-bottom:3px}
+.ev-legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.ev-legend .ev{cursor:default}
+
+/* ============ 页脚 ============ */
+footer{border-top:1px solid var(--border);background:var(--card);padding:26px 30px;margin-top:20px}
+.foot-inner{max-width:1180px;margin:0 auto;font-size:12.5px;color:var(--muted);line-height:1.8}
+.foot-inner b{color:var(--primary)}
+
+/* ============ 响应式 ============ */
+@media (max-width:1024px){
+  .hamburger{display:block}
+  .sidebar{position:fixed;left:0;top:0;bottom:0;z-index:110;transform:translateX(-105%);transition:transform .25s;box-shadow:4px 0 18px rgba(32,39,46,.12);max-height:100vh}
+  .sidebar.open{transform:none}
+  .main{padding:64px 18px 50px}
+  .hero{padding:56px 18px 30px}
+  .stage-grid{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .hero h1{font-size:26px}
+  .main{padding:60px 13px 44px}
+  .module-head{flex-wrap:wrap;gap:8px}
+  .mod-chev{margin-left:0}
+  .sec-head h2{font-size:19px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+  html{scroll-behavior:auto}
+}
+@media print{
+  .sidebar,.hamburger,.map-toolbar,.filter-bar{display:none}
+  .module-body,.topic-body,.concept-detail,.stage-body,.tool-body{display:block!important}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">跳到主内容</a>
+<button class="hamburger" id="hamburger" aria-label="打开目录菜单" aria-expanded="false">☰</button>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-kicker">Personal Entrepreneurship &amp; One-Person Business</div>
+    <h1>个人创业与一人公司</h1>
+    <div class="en-sub">A Research-Based Self-Study Knowledge System for Solo Founders</div>
+    <p class="hero-desc">本知识地图基于英文权威官方资料（SBA、BLS、美国人口普查局等）、同行评审研究与高质量行业研究构建，覆盖从机会识别、需求验证、商业模式选择、获客销售、定价财务到自动化系统化与退出决策的完整经营链条。所有重要结论均标注证据等级与来源，区分「可通过阅读学习的知识」与「必须通过市场实验获取的商业证据」。</p>
+    <div class="core-q">
+      <span class="label">核心问题</span>
+      <p>一个资源有限的个人，如何找到真实需求，构建能够持续创造价值并获得收入的业务，并以可控的成本和风险将其经营下去？</p>
+    </div>
+    <div class="stats" id="hero-stats" aria-label="知识体系统计"></div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="sidebar" id="sidebar" aria-label="侧边目录">
+    <div class="nav-title">导航</div>
+    <ul class="nav-list">
+      <li><a href="#sec-roadmap" class="active"><span class="nav-ico">🗺️</span>学习路线</a></li>
+      <li><a href="#sec-map"><span class="nav-ico">🧠</span>知识地图</a></li>
+      <li><a href="#sec-models"><span class="nav-ico">⚖️</span>创业模式对比</a></li>
+      <li><a href="#sec-tools"><span class="nav-ico">🧰</span>商业工具箱</a></li>
+      <li><a href="#sec-resources"><span class="nav-ico">📚</span>学习资源库</a></li>
+      <li><a href="#sec-refs"><span class="nav-ico">🔖</span>参考文献与方法</a></li>
+    </ul>
+    <div class="progress-box">
+      <h4>实践任务进度</h4>
+      <div class="pbar"><i id="pbar-fill" style="width:0%"></i></div>
+      <div class="ptext"><span id="ptext-done">已完成 0</span><span id="ptext-total">/ 0</span></div>
+      <button class="btn-reset" id="btn-reset" type="button">清除进度记录</button>
+    </div>
+  </aside>
+
+  <main class="main" id="main">
+    <section id="sec-roadmap" aria-labelledby="roadmap-h">
+      <div class="sec-head">
+        <h2 id="roadmap-h">学习路线</h2>
+        <div class="sec-en">Learning Roadmap · 四个阶段</div>
+        <p>四个阶段构成一条从「理解商业原理」到「系统化长期经营」的主路径。阶段之间不是机械线性关系：客户研究、产品调整、销售与财务分析在实践中需要反复循环。每个阶段都标注了进入下一阶段所需的证据门槛。</p>
+      </div>
+      <div id="roadmap-container"></div>
+    </section>
+
+    <section id="sec-map" aria-labelledby="map-h">
+      <div class="sec-head">
+        <h2 id="map-h">交互式知识地图</h2>
+        <div class="sec-en">Interactive Knowledge Map · 17 个模块</div>
+        <p>点击模块展开完整学习单元：模块概览、知识结构（主题 → 核心概念 → 详细解释）、学习目标与自测、实践任务与成果模板、常见错误与反例、学习资源。点击概念可查看定义、原理、应用、误区与局限。使用搜索框可按关键词过滤模块与资源。</p>
+      </div>
+      <div class="map-toolbar">
+        <div class="search-box">
+          <span aria-hidden="true">🔍</span>
+          <input type="search" id="map-search" placeholder="搜索知识点、模块或资源关键词，如：定价、MVP、现金流…" aria-label="搜索知识点与资源">
+        </div>
+        <span class="search-count" id="map-search-count" aria-live="polite"></span>
+      </div>
+      <div id="map-container"></div>
+    </section>
+
+    <section id="sec-models" aria-labelledby="models-h">
+      <div class="sec-head">
+        <h2 id="models-h">创业模式比较与决策</h2>
+        <div class="sec-en">Business Model Comparison &amp; Decision Tool</div>
+        <p>六种适合个人启动的商业模式在 15 个维度上的定性比较。评级为定性判断（低 / 中 / 高），依据标注在每格注释中；缺乏可信量化资料的维度不做精确打分。下方决策工具根据个人约束筛选候选模式，但最终选择必须通过真实市场实验验证。</p>
+      </div>
+      <div id="models-container"></div>
+    </section>
+
+    <section id="sec-tools" aria-labelledby="tools-h">
+      <div class="sec-head">
+        <h2 id="tools-h">核心商业工具箱</h2>
+        <div class="sec-en">Business Toolkit · 20 个可复用模板</div>
+        <p>与知识模块一一对应的 20 个实操工具。每个工具说明适用场景、输入信息、使用步骤、判断标准与常见误用；计算类工具展示完整公式与变量定义。点击展开查看完整模板内容。</p>
+      </div>
+      <div id="tools-container"></div>
+    </section>
+
+    <section id="sec-resources" aria-labelledby="res-h">
+      <div class="sec-head">
+        <h2 id="res-h">学习资源库</h2>
+        <div class="sec-en">Resource Library</div>
+        <p>全部资源按模块、类型与难度分类。所有链接指向原始来源页面。资源推荐理由针对具体知识点，证据局限如实标注；仅覆盖模块部分知识点的资料会明确说明范围。</p>
+      </div>
+      <div class="filter-bar">
+        <select id="res-filter-module" aria-label="按模块筛选资源"><option value="">全部模块</option></select>
+        <select id="res-filter-type" aria-label="按类型筛选资源">
+          <option value="">全部类型</option>
+          <option>官方文档与政府资料</option>
+          <option>学术研究</option>
+          <option>方法论与工具</option>
+          <option>行业研究与数据</option>
+          <option>实践案例</option>
+        </select>
+        <select id="res-filter-level" aria-label="按难度筛选资源">
+          <option value="">全部难度</option>
+          <option>入门</option><option>中级</option><option>进阶</option>
+        </select>
+        <div class="fchips" id="res-ev-chips" role="group" aria-label="按证据等级筛选">
+          <button class="fchip on" data-ev="">全部证据等级</button>
+          <button class="fchip" data-ev="1">已验证事实</button>
+          <button class="fchip" data-ev="2">有研究支持</button>
+          <button class="fchip" data-ev="3">实践方法</button>
+          <button class="fchip" data-ev="4">存在争议</button>
+        </div>
+        <span class="search-count" id="res-count" aria-live="polite"></span>
+      </div>
+      <div class="res-grid" id="res-container"></div>
+    </section>
+
+    <section id="sec-refs" aria-labelledby="refs-h">
+      <div class="sec-head">
+        <h2 id="refs-h">参考文献与研究方法</h2>
+        <div class="sec-en">References &amp; Methodology</div>
+        <p>集中展示来源目录、证据分级标准、资料筛选原则、时效性与地域适用性说明，以及仍然存在的证据局限。各知识点旁的具体引用与本节相互对应。</p>
+      </div>
+      <div id="refs-container"></div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <div class="foot-inner">
+    <b>个人创业与一人公司 · 交互式知识地图</b> — 基于英文权威资料与学术研究构建的系统化自学体系。法律与税务内容以美国官方来源为示例并明确标注适用地域，不构成法律或税务意见；其他司法辖区需另行核实。所有外部链接指向原始来源，本页面为单文件离线可用，核心知识内容不依赖网络。<br>
+    生成日期：2026-10-20 · 内容组织：结构化数据渲染 · 进度记录：浏览器本地存储（可随时清除）
+  </div>
+</footer>
+
+<script>
+"use strict";
+/* ==================== 数据：学习阶段 ==================== */
+const STAGES = [
+  {
+    id:"A", name:"阶段 A · 理解商业基本原理",
+    goal:"建立共同的商业语言，理解客户需求、价值创造、收入、利润与现金流之间的关系。",
+    modules:["m0","m1","m2","m4","m5"],
+    order:"m0 → m1 → m2 → m4 → m5（m1 与 m2 可并行；m4 可在 m2 之后进行）",
+    must:["m0 底层原理","m1 机会识别","m2 客户研究","m5 商业模式"],
+    optional:["m4 竞争分析（可与 m2 合并实践）"],
+    tasks:["用商业逻辑分析 3 个创业想法（工具 1）","完成 5 次以上客户访谈并记录（工具 2）","建立商业模式画布初稿（工具 5）"],
+    outcome:"能够提出若干候选创业机会，并依据证据与个人约束（技能、资金、时间、风险承受力）进行初步比较，而不是先做网站、开发产品或注册公司。",
+    gate:"进入阶段 B 的条件：至少 1 个候选机会有可追溯的需求证据（客户原话、行为数据或付费信号），且商业模式假设已书面化。"
+  },
+  {
+    id:"B", name:"阶段 B · 找到真实需求并完成低成本验证",
+    goal:"从创业想法转向可测试的商业假设，用最低成本获取真实市场证据。",
+    modules:["m3","m6","m10"],
+    order:"m3 → m6 → m10（m10 的定价假设可在 m6 之后并行设计）",
+    must:["m3 需求验证与 MVP","m6 价值主张与产品化","m10 定价假设"],
+    optional:["m4 竞争分析深化","m2 补充访谈"],
+    tasks:["制定验证计划：假设、实验、成本上限、成功/失败阈值（工具 6、7、8）","制作最小销售方案（工具 9）","设计至少 3 种价格方案并列出待验证假设（工具 13）"],
+    outcome:"形成一份可执行的需求验证计划，并获得来自真实潜在客户的反馈或行为证据（访谈记录、落地页转化、预售或付费试点）。",
+    gate:"进入阶段 C 的条件：至少完成 1 次区分性实验并获得明确结果；明确「客户表示感兴趣」与「愿意付费」的区别证据。"
+  },
+  {
+    id:"C", name:"阶段 C · 建立首个可运行的业务",
+    goal:"让业务具备真实销售、交付和收款的基本能力。",
+    modules:["m7","m8","m9","m10","m11","m14"],
+    order:"m7 → m8 → m9 → m10 → m11（m14 合规核查在首次收款前完成）",
+    must:["m7 定位与信任","m8 获客渠道","m9 销售流程","m10 定价","m11 财务与单位经济","m14 合规"],
+    optional:["m6 产品迭代","m4 竞争跟踪"],
+    tasks:["设计 3 种获客方法并写明预算与停止条件（工具 11）","画出完整销售漏斗并定义各阶段指标（工具 12）","建立三情景财务模型（工具 14、15）","生成合规核查清单（工具 19 关联）"],
+    outcome:"建立一份完整的商业方案：客户是谁、解决什么问题、如何获客、如何收费、如何交付、怎样判断业务是否值得继续。",
+    gate:"进入阶段 D 的条件：有可重复的成交记录（≥3 笔真实付款）与可重复的交付流程；单位经济模型有真实数据支撑。"
+  },
+  {
+    id:"D", name:"阶段 D · 系统化、自动化与长期经营",
+    goal:"使业务不再完全依赖临时性、不可重复的个人劳动，并建立理性决策机制。",
+    modules:["m12","m13","m15","m16"],
+    order:"m12 → m13 → m15 → m16（m13 自动化以 m12 流程标准化为前提）",
+    must:["m12 运营与外包","m13 AI 自动化","m15 增长与系统化","m16 失败分析与退出"],
+    optional:["m11 财务模型持续更新","m14 合规年度复查"],
+    tasks:["绘制端到端交付流程并标注执行方式（工具 16）","评估 3 个自动化候选点（工具 17）","设计阶段路线图与证据门槛（工具 19）","制定继续/转型/退出决策清单（工具 20）"],
+    outcome:"形成一份业务运营系统蓝图：流程、关键指标、自动化机会、财务监控与后续决策机制。",
+    gate:"长期经营条件：关键指标（现金流、获客成本、交付周期）可定期复盘；退出与转型规则事先书面化。"
+  }
+];
+
+/* 模块间主路径（用于路线图流程图展示） */
+const MAIN_FLOW = ["机会识别","客户研究","需求假设","低成本验证","商业模式选择","最小销售方案","获取首批客户","完成交付","验证定价与单位经济","稳定获客与交付","自动化与系统化","增长或退出决策"];
+/* ==================== 数据：商业模式比较 ==================== */
+/* 评级为定性判断（低/中/高），依据写入 note；无可靠量化资料的维度不给出精确分数 */
+const MODELS = [
+  {
+    id:"freelance", name:"自由职业与专业服务", en:"Freelance & Professional Services",
+    dims:{
+      capital:{r:"低",n:"几乎零启动成本；主要投入是时间与既有技能。Upwork 2025 研究显示技能型自由职业者全职收入中位数约 $85,000。"},
+      timeToRevenue:{r:"短",n:"若有现成技能与客户资源，数周内可获首单；冷启动则取决于个人品牌积累速度。"},
+      skills:{r:"中",n:"核心是可变现的专业技能；销售与自我营销能力常被低估。"},
+      acqDifficulty:{r:"中",n:"依赖人脉、平台（Upwork 等）或内容；平台抽成与竞价压低单价是常见问题。"},
+      delivery:{r:"中",n:"按项目或按小时交付，定制化程度高，质量依赖个人状态。"},
+      cashflow:{r:"项目制波动",n:"按项目收款，账期与空窗期造成现金流波动；预付款比例可改善。"},
+      stability:{r:"低",n:"收入与个人时间强绑定，停工即停收。"},
+      margin:{r:"高毛利低杠杆",n:"无库存与重资产，但收入上限受时间约束。"},
+      timeDependence:{r:"高",n:"收入几乎完全依赖创始人亲自交付。"},
+      standardization:{r:"低",n:"每单定制，难以标准化。"},
+      automation:{r:"低",n:"交付本身难以自动化，仅行政流程可自动化。"},
+      scaling:{r:"难",n:"规模化需转型为产品化服务或招聘，本质是换模式。"},
+      risk:{r:"技能过时、单一客户依赖、无被动缓冲",n:"市场需求变化或平台政策变化直接影响收入。"},
+      founderFit:{r:"有明确可变现技能、希望快速验证、风险承受力低的人",n:"适合作为创业起点与现金流来源。"},
+      validation:{r:"直接接单验证",n:"向潜在客户提供付费服务即为最强验证；访谈 + 试单结合。"}
+    }
+  },
+  {
+    id:"productized", name:"产品化服务", en:"Productized Services",
+    dims:{
+      capital:{r:"低",n:"固定范围、固定价格、可重复交付；Many Pixels 等案例从第一天即采用该模式。"},
+      timeToRevenue:{r:"短至中",n:"需先定义服务包与交付流程，通常 1–3 个月可上线销售。"},
+      skills:{r:"中",n:"专业技能 + 流程设计能力；需把服务拆解为可重复步骤。"},
+      acqDifficulty:{r:"中",n:"定价页即销售页，购买摩擦低；但需持续获客。"},
+      delivery:{r:"中低",n:"范围预先定义，减少范围蔓延；交付可逐步外包。"},
+      cashflow:{r:"较稳定",n:"订阅/月费制带来可预测收入；支持预付。"},
+      stability:{r:"中",n:"经常性收入提高稳定性，但客户集中度仍是风险。"},
+      margin:{r:"中高",n:"标准化降低单位交付成本；外包后毛利取决于管理能力。"},
+      timeDependence:{r:"中",n:"流程文档化后可部分外包，降低个人时间依赖。"},
+      standardization:{r:"高",n:"这是该模式的核心特征：固定范围 + 固定价格 + 可重复流程。"},
+      automation:{r:"中",n:" intake、交付、对账等环节可自动化；核心交付仍靠人。"},
+      scaling:{r:"中",n:"可通过外包与提价扩张；常见失败点是试图把全部服务产品化。"},
+      risk:{r:"过度产品化、质量失控、客户预期管理",n:"把复杂咨询整体打包往往两头不讨好。"},
+      founderFit:{r:"已有服务经验、希望收入可预测、愿意做流程设计的人",n:"是从自由职业走向系统化的自然过渡。"},
+      validation:{r:"预售服务包",n:"先卖固定套餐再完善交付流程；用首批客户校准范围与价格。"}
+    }
+  },
+  {
+    id:"knowledge", name:"知识产品与数字产品", en:"Knowledge & Digital Products",
+    dims:{
+      capital:{r:"低",n:"制作成本主要是时间；工具与平台费用低。"},
+      timeToRevenue:{r:"中",n:"需先建立受众信任或精准流量；冷启动周期较长。"},
+      skills:{r:"内容 + 营销",n:"专业知识包装能力、课程/模板设计、销售页转化能力。"},
+      acqDifficulty:{r:"中高",n:"依赖受众规模与信任；「有流量不等于有需求」在此模式最明显。"},
+      delivery:{r:"低",n:"一次制作、重复销售；边际成本趋近于零。"},
+      cashflow:{r:"脉冲式",n:"发布期集中收款，日常现金流依赖持续营销。"},
+      stability:{r:"低至中",n:"收入依赖持续获客；会员制可提高稳定性。"},
+      margin:{r:"高",n:"数字产品毛利高，但退款、平台抽成与获客成本侵蚀利润。"},
+      timeDependence:{r:"低",n:"产品销售不绑定个人时间；持续更新内容除外。"},
+      standardization:{r:"高",n:"天然标准化。"},
+      automation:{r:"高",n:"交付、支付、答疑均可自动化。"},
+      scaling:{r:"中",n:"受众与产品线可扩张；但市场易饱和、盗版风险存在。"},
+      risk:{r:"需求误判、盗版、受众信任透支",n:"「感兴趣」与「愿意付费」差距最大的领域。"},
+      founderFit:{r:"有系统化专业知识与表达力、能持续产出内容的人",n:"适合有教学/写作积累的专家。"},
+      validation:{r:"预售 + 小规模付费测试",n:"先卖大纲/模板再制作完整课程；用付费人数验证需求。"}
+    }
+  },
+  {
+    id:"content", name:"内容与个人品牌商业化", en:"Content & Personal Brand",
+    dims:{
+      capital:{r:"低",n:"主要成本是时间与设备。"},
+      timeToRevenue:{r:"长",n:"受众积累以月/年计；EMAC 研究显示互动深度（而非观看时长）预测转化。"},
+      skills:{r:"内容创作 + 社区运营",n:"持续产出能力、平台算法理解、商业转化设计。"},
+      acqDifficulty:{r:"高",n:"注意力竞争激烈；54.4% 的成功个体创业者粉丝不足 5,000（160 案例样本，存在选择偏差）。"},
+      delivery:{r:"低",n:"内容生产可外包部分环节。"},
+      cashflow:{r:"不稳定",n:"广告/赞助/带货收入波动大。"},
+      stability:{r:"低",n:"平台算法与政策变化直接冲击流量。"},
+      margin:{r:"中高",n:"制作成本低，但商业化路径（广告、带货、课程）毛利差异大。"},
+      timeDependence:{r:"中高",n:"个人出镜/发声的模式与创始人强绑定。"},
+      standardization:{r:"中",n:"内容格式可标准化，个人风格难以复制。"},
+      automation:{r:"中",n:"剪辑、分发、数据监控可自动化。"},
+      scaling:{r:"中",n:"可多平台扩张；但注意力经济边际收益递减。"},
+      risk:{r:"平台依赖、 Burnout、变现与内容质量冲突",n:"追逐曝光而无商业转化是典型失败模式。"},
+      founderFit:{r:"表达欲强、能长期坚持、接受慢回报的人",n:"更适合作为其他业务的获客渠道而非独立收入模式。"},
+      validation:{r:"受众调研 + 小规模变现测试",n:"先验证受众愿意为什么付费（咨询/课程/社群），再放大内容投入。"}
+    }
+  },
+  {
+    id:"ecommerce", name:"电商与线上零售", en:"E-commerce & Retail",
+    dims:{
+      capital:{r:"中高",n:"库存、物流、平台费用构成启动资金门槛。"},
+      timeToRevenue:{r:"中",n:"选品与供应链就绪后可较快开卖；盈利周期取决于周转。"},
+      skills:{r:"选品 + 运营 + 供应链",n:"市场嗅觉、广告投放、库存与现金流管理。"},
+      acqDifficulty:{r:"高",n:"流量成本持续上升；依赖平台流量或广告投放。"},
+      delivery:{r:"高",n:"采购、仓储、物流、售后全链路运营。"},
+      cashflow:{r:"库存占用",n:"钱变成货再变成钱，周转决定现金流健康度。"},
+      stability:{r:"中",n:"复购型品类较稳定；趋势型品类波动大。"},
+      margin:{r:"中低",n:"平台抽成、物流、退货侵蚀毛利；规模效应有限。"},
+      timeDependence:{r:"中",n:"运营环节多，但可外包仓储物流。"},
+      standardization:{r:"中",n:"订单处理可标准化，选品与营销依赖判断。"},
+      automation:{r:"中",n:"订单、客服、库存同步可自动化。"},
+      scaling:{r:"中",n:"扩品类/扩渠道可增长；但库存风险同步放大。"},
+      risk:{r:"库存积压、价格战、平台政策、退货成本",n:"「收入增长但现金流恶化」的典型场景。"},
+      founderFit:{r:"有供应链资源或选品嗅觉、能管理库存风险的人",n:"不适合作为零库存验证的首选。"},
+      validation:{r:"小批量试销 + 预售",n:"先验证需求再备货；用预售/众筹测试支付意愿。"}
+    }
+  },
+  {
+    id:"microsaas", name:"微型 SaaS 与 AI 原生业务", en:"Micro-SaaS & AI-Native",
+    dims:{
+      capital:{r:"低",n:"工具链月成本通常 $0–100；真实成本是个人跑道（生活开支）。"},
+      timeToRevenue:{r:"中长",n:"MVP 2–8 周可做出，但从上线到稳定 MRR 通常需数月；社区数据显示约 70% 微型 SaaS 月收入低于 $1,000（非硬统计）。"},
+      skills:{r:"技术 + 分发",n:"开发或 no-code 能力 + 获客能力；「分发比产品更重要」是从业者共识。"},
+      acqDifficulty:{r:"中高",n:"SEO/内容（6–12 个月回报）、集成市场、社区是主要冷启动渠道。"},
+      delivery:{r:"低",n:"软件边际成本趋近于零；支持负担随用户增长。"},
+      cashflow:{r:"订阅制稳定",n:"MRR 可预测；但流失率决定长期价值。"},
+      stability:{r:"中高",n:"经常性收入 + 低固定成本；月流失率约 10% 是常见警戒线。"},
+      margin:{r:"高",n:"软件毛利高；基础设施与支持成本占比低。"},
+      timeDependence:{r:"低",n:"产品运行不绑定个人时间；维护与支持除外。"},
+      standardization:{r:"高",n:"天然标准化。"},
+      automation:{r:"高",n:"部署、计费、支持均可高度自动化。"},
+      scaling:{r:"中高",n:"提价与扩用户可增长；单人维护存在复杂度上限。"},
+      risk:{r:"留存不足、平台依赖、维护债务、安全合规",n:"月流失率高时应先修留存再投增长。"},
+      founderFit:{r:"能构建并分发软件、接受慢回报、擅长细分市场的人",n:"AI 工具降低了构建门槛，但未降低验证需求的门槛。"},
+      validation:{r:"预售 + 等待名单 + 付费试点",n:"先验证付费意愿再开发；用落地页/白皮门测试需求强度。"}
+    }
+  }
+];
+const MODEL_DIMS = ["capital","timeToRevenue","skills","acqDifficulty","delivery","cashflow","stability","margin","timeDependence","standardization","automation","scaling","risk","founderFit","validation"];
+const MODEL_DIM_LABELS = {
+  capital:"启动资金需求", timeToRevenue:"达到首笔收入的潜在时间", skills:"所需核心技能",
+  acqDifficulty:"客户获取难度", delivery:"交付复杂度", cashflow:"现金流特征",
+  stability:"收入稳定性", margin:"毛利与成本结构", timeDependence:"个人时间依赖程度",
+  standardization:"标准化可能性", automation:"自动化潜力", scaling:"规模化难度",
+  risk:"主要风险", founderFit:"适合的创始人类型", validation:"早期验证方式"
+};
+
+/* 决策框架：输入 → 规则 → 候选（规则透明，非黑箱打分） */
+const DECIDE_INPUTS = [
+  {id:"skills", label:"现有技能", options:["专业技能（设计/写作/咨询等）","技术开发能力","内容创作能力","供应链/选品能力","尚不明确"]},
+  {id:"capital", label:"可投入资金", options:["< ¥5,000","¥5,000–50,000","> ¥50,000"]},
+  {id:"hours", label:"每周可用时间", options:["< 10 小时","10–25 小时","> 25 小时"]},
+  {id:"clients", label:"已有客户资源", options:["有可直接联系的潜在客户","有弱关系人脉","基本从零开始"]},
+  {id:"goal", label:"收入目标", options:["补充现有收入","替代全职收入","追求高收入上限"]},
+  {id:"risk", label:"风险承受能力", options:["低（不能承受亏损）","中（可承受有限亏损）","高（可承受较大不确定性）"]}
+];
+/* ==================== 数据：知识模块（0–5） ==================== */
+const MODULES = [
+{
+  id:"m0", num:"00", name:"创业的底层原理与决策框架", en:"Foundations & Decision Frameworks", stage:"A",
+  coreQ:"什么是商业价值、收入、利润和现金流？资源约束下如何做创业决策？",
+  value:"建立分析创业想法的共同语言：先判断商业逻辑是否成立，再投入任何资源。",
+  position:"整个体系的地基。后续所有模块（机会、客户、验证、模式、财务）都建立在本模块的概念之上。",
+  prereq:[], next:["m1","m2","m5"], parallel:[],
+  topics:[
+    {name:"价值创造与价值捕获", concepts:[
+      {t:"商业价值", d:"客户为获得某项结果而愿意放弃的资源（通常是金钱、时间或注意力）。价值由客户感知定义，不由产品功能定义。", s:"解决「为什么客户会付钱」这一根本问题。", w:"没有客户感知的价值，任何产品、网站或公司注册都是成本而非资产。", m:"价值 = 客户现状与期望状态之间的差距 × 该差距对客户的重要性。Levitt 的经典表述：客户要的不是四分之一英寸的钻头，而是四分之一英寸的孔。", a:"评估任何创业想法时，先问：客户现在的做法是什么？做到理想状态对他值多少钱？", p:"把「我觉得有用」当成商业价值；把功能数量当成价值。", x:"与「产品价值」区别：产品价值是客观属性，商业价值是客户主观感知。", l:"价值感知因客户细分而异，同一产品对不同人群价值不同。", ev:2},
+      {t:"价值捕获", d:"企业从创造的客户价值中实际获取的比例，即定价与成本结构决定的那部分。", s:"解决「创造了价值却赚不到钱」的问题。", w:"价值创造与价值捕获是两个独立问题：很多业务创造了真实价值但无法捕获（定价过低、成本过高、被平台抽成）。", m:"捕获能力取决于替代方案的价格、转换成本、竞争强度与议价结构。", a:"定价（模块 10）与单位经济（模块 11）本质是价值捕获设计。", p:"假设「有价值自然能赚钱」；忽视渠道与平台对价值的截留。", x:"与「收入」区别：收入是捕获的账面结果，捕获是机制。", l:"捕获能力随竞争与市场阶段动态变化。", ev:2},
+      {t:"收入、利润与现金流的区别", d:"收入是账面销售额；利润是收入减去成本；现金流是实际进出银行账户的资金及其时点。", s:"解决「账面赚钱却发不出工资/交不起房租」的致命问题。", w:"U.S. Bank 的 Jessie Hagen 研究显示约 82% 的小企业失败与现金流管理不善或缺乏现金流认知有关（该研究为回顾性归因，非因果实验）。", m:"利润是权责发生制概念，现金流是收付实现制概念。账期、预付款、库存都会造成两者背离。", a:"任何业务决策同时评估三个数字：这笔交易带来多少收入、多少利润、什么时候进现金。", p:"只看利润表；把应收账款当成可用现金。", x:"与「盈利」区别：盈利是利润为正，存活是现金流不为负。", l:"三者背离程度因行业账期结构差异很大。", ev:1}
+    ]},
+    {name:"资源约束下的决策", concepts:[
+      {t:"机会成本", d:"选择一个方案所放弃的其他最佳方案的价值。个人创业最大的机会成本通常是时间与原有职业收入。", s:"解决「要不要全职创业」「先做哪个项目」的比较问题。", w:"个人创业者的核心稀缺资源是时间与注意力，而非资金。", m:"决策应比较边际收益而非总收益；把时间按小时估值后，很多「省钱」行为其实是亏钱。", a:"每周时间预算分配；选择项目时比较候选机会的期望值而非热情。", p:"忽略自己的时间成本；用「反正闲着也是闲着」为低价值工作辩护。", x:"与「沉没成本」区别：机会成本向前看，沉没成本向后看。", l:"机会成本难以精确量化，只能做方向性比较。", ev:2},
+      {t:"可逆决策与不可逆决策", d:"可逆决策（如改价格、换文案）成本低、可快速撤回；不可逆决策（如注册公司、签长期约、辞职）难以或 costly 撤回。", s:"解决「什么时候该慢、什么时候该快」。", w:"个人创业者资源有限，应把谨慎留给不可逆决策，把速度留给可逆决策。", m:"决策速度应与可逆性匹配：可逆决策快速试错，不可逆决策充分论证。", a:"先做可逆实验（落地页、预售），验证后再做不可逆投入（注册、备货、招聘）。", p:"对所有决策同样谨慎（瘫痪）或同样草率（灾难）。", x:"与「风险大小」相关但不同：低风险也可能是不可逆的。", l:"某些决策的可逆性随时间变化（如先上车后补票式的合规风险）。", ev:3},
+      {t:"沉没成本", d:"已经发生且无法收回的成本。理性决策不应计入沉没成本。", s:"解决「已经投入这么多，不甘心放弃」的陷阱。", w:"个人创业者对自有项目存在禀赋效应，沉没成本谬误在创业中比在投资中更常见。", m:"决策只应比较未来成本与未来收益；过去的投入只影响情绪，不影响未来现金流。", a:"设定事前止损规则（如验证实验失败即停），用规则对抗情绪。", p:"「再投一点就能回本」；把放弃视为承认失败而非释放资源。", x:"与「固定成本」区别：固定成本是未来持续发生的，沉没成本是过去已发生的。", l:"声誉等软性沉没成本确实存在，需单独评估。", ev:2}
+    ]},
+    {name:"不确定性、实验与失败类型学", concepts:[
+      {t:"假设—证据—实验循环", d:"商业决策 = 明确写出假设 → 设计能区分假设真伪的实验 → 收集证据 → 更新决策。", s:"解决「凭直觉选项目」的问题。", w:"Steve Blank 的核心原则：大楼里没有事实，走出去才能获得证据；你拥有的只是一系列未经检验的假设。", m:"假设必须可证伪：「小诊所会喜欢这个」无法检验；「员工少于 10 人的诊所经理每周花 5 小时以上电话改约」可以检验。", a:"模块 3 的验证计划即此循环的完整落地。", p:"把愿望写成假设；设计无法区分真伪的实验（无论结果如何都「验证」了想法）。", x:"与「市场调研」区别：调研收集信息，实验产生可证伪的证据。", l:"实验设计能力本身需要练习；早期样本量小，结论需谨慎。", ev:2},
+      {t:"创业失败的类型学", d:"失败按机制分类：没有需求、无法盈利、无法获客、交付困难、资金链断裂、合规风险、创始人瓶颈。", s:"解决「用单一『创业失败率』吓自己或安慰自己」的问题。", w:"不同失败机制对应不同预防措施；SBA 数据显示新设雇主企业 5 年存活率约 49%（1994–2022 平均），但存活率因行业与阶段差异很大。", m:"多数早期失败是需求端失败（做出了没人要的东西），而非执行端失败。", a:"复盘时先定位失败机制，再决定修复还是退出（模块 16）。", p:"把失败笼统归因于「运气」或「不够努力」。", x:"与「关闭」区别：主动关闭（验证后止损）与被动失败（现金流断裂）性质不同。", l:"失败归因多为事后叙事，存在幸存者与记忆偏差。", ev:1},
+      {t:"一人公司的边界", d:"一人公司（one-person business）指以个人为核心运营主体、可借助外包与自动化扩展的业务形态；不等于永远只有一个人，也不等于被动收入。", s:"澄清对「一人公司」的常见误解。", w:"美国人口普查局 2023 年数据显示约 3,043 万个无雇员企业（nonemployer establishments），贡献约 1.8 万亿美元收入（约占 GDP 6.4%）——一人公司是经济主体形态而非边缘现象。", m:"一人公司的杠杆来自工具、外包与标准化，而非人力堆叠；Stripe 2026 年数据显示其平台上年收入超百万美元的个人运营者两年内翻倍（平台数据，存在口径限制）。", a:"选择模式（模块 5）时明确：哪些环节必须本人做，哪些可以外包或自动化。", p:"把一人公司理解为「躺着收钱」；或认为必须永远单干。", x:"与「自由职业」区别：自由职业出售时间，一人公司出售系统化的产出。", l:"「一人」的统计口径因数据源而异（无雇员 ≠ 无外包）。", ev:1}
+    ]}
+  ],
+  objectives:["能够解释商业价值、价值捕获、收入、利润、现金流五个概念的区别与联系","能够用机会成本框架比较两个候选创业方向","能够区分可逆与不可逆决策，并为每类决策设定不同的谨慎程度","能够把任意创业想法改写成一组可证伪的商业假设"],
+  checks:["一个项目账面盈利但银行账户见底，可能的原因是什么？至少列出三种。","「我先辞职全职做，这样更专注」——用机会成本与可逆性框架分析这个决策。","为什么「客户说很喜欢」不能作为需求证据？它缺少什么？"],
+  practice:{task:"选取一个你正在考虑（或假想）的创业想法，用商业逻辑完成一页分析：目标客户、客户现状、价值假设、收入假设、现金流假设、最大的三个可证伪假设、以及为什么现在不该先做网站/产品/注册公司。", template:"《创业想法商业逻辑一页纸》：① 一句话价值主张 ② 客户现状与替代方案 ③ 收入/利润/现金流三栏预测 ④ 三大可证伪假设 ⑤ 不可逆决策清单（暂缓项）。", criteria:"每个假设都可证伪；现金流假设包含收款时点；明确列出暂缓的不可逆决策。", gate:"能向他人解释「为什么这个想法可能不成立」，而不只是「为什么可能成立」。"},
+  mistakes:[
+    {e:"先做网站、开发产品或注册公司，再想客户是谁", why:"构建比研究更有成就感，且可逆性错觉让人误以为沉没成本低。", bias:"行动偏误 / 构建偏误", detect:"你的待办清单里「做东西」远多于「找证据」。", fix:"把「获得一条客户证据」设为第一个里程碑。"},
+    {e:"把兴趣或热情当作需求证据", why:"个人项目与自我认同绑定，确认偏误被放大。", bias:"确认偏误 / 禀赋效应", detect:"你只能说出自己喜欢这个项目，说不出谁愿意为它付钱。", fix:"强制完成模块 2 的客户访谈与模块 3 的验证实验。"},
+    {e:"混淆收入增长与现金流改善", why:"利润表比现金流量表更容易看懂，也更好看。", bias:"可得性偏差", detect:"收入在涨，但账上现金越来越少。", fix:"建立月度现金流预测（工具 15），把收款时点写进每个假设。"}
+  ],
+  resources:[
+    {name:"Small Business Profiles: Frequently Asked Questions（小企业概况常见问题，含存活率数据）", org:"U.S. Small Business Administration, Office of Advocacy（经 SBE Council 转引）", type:"官方文档与政府资料", url:"https://sbecouncil.org/?p=5852", date:"数据期 1994–2019（2021 年转引）", topic:"创业失败类型学 / 存活率基线", why:"提供新设雇主企业 2 年存活率 67.6%、5 年 48.9%、10 年 33.6% 的官方口径数据，是讨论「创业风险」时最常被引用的基线。", how:"浏览，重点核对统计口径（雇主企业、新设企业、平均值）。", level:"入门", limits:"仅覆盖美国雇主企业；存活率不等于失败率（含主动关闭）；转引页面非 SBA 官网原文。", ev:1},
+    {name:"Small firms accounted for half of net job creation, third quarter 2020–third quarter 2025", org:"U.S. Bureau of Labor Statistics, The Economics Daily", type:"官方文档与政府资料", url:"https://www.bls.gov/opub/ted/2026/small-firms-accounted-for-half-of-net-job-creation-third-quarter-2020-third-quarter-2025.htm", date:"2026 年", topic:"一人公司的经济地位 / 小企业就业贡献", why:"BLS 官方数据显示小企业（≤249 人）贡献 2020Q3–2025Q3 净新增就业的 51%，且自 1993 年以来小企业占私营部门就业略低于一半、占岗位增减的约 71%——说明小企业与个体经营是经济主干而非边缘。", how:"通读图表与结论段。", level:"入门", limits:"美国数据；「小企业」口径为 ≤249 名员工，与一人公司不完全等同。", ev:1},
+    {name:"Small Business Cash Flow Management: Strategies for Success（现金流与小企业失败归因）", org:"Preferred CFO（引述 Jessie Hagen / U.S. Bank 研究）", type:"行业研究与数据", url:"https://preferredcfo.com/insights/cash-flow-reasons-small-businesses-fail-2026", date:"2026 年更新", topic:"收入/利润/现金流的区别 / 失败类型学", why:"系统整理了 Hagen 研究的失败归因数据（现金流 82%、启动资金不足 79%、商业计划缺失 78%、定价不当 77% 等），并解释「盈利企业为何仍会倒闭」。", how:"精读归因清单与「增长消耗现金」部分。", level:"入门", limits:"Hagen 研究为回顾性调查归因，非因果实验；转引来源，建议同时核对 U.S. Bank 原始报告。", ev:2},
+    {name:"Census Bureau Provides Resources, Data Tools, Website for Small Businesses（小企业周专题：无雇员企业数据）", org:"U.S. Census Bureau", type:"官方文档与政府资料", url:"https://www.census.gov/library/stories/2026/05/small-business-week.html", date:"2026 年 5 月", topic:"一人公司的边界 / 无雇员经济规模", why:"官方口径：2023 年美国有 30,427,808 个无雇员经营场所（占全部经营场所 78.4%），收入近 1.8 万亿美元（约占 GDP 6.4%）；同时介绍 Census Business Builder 等可用于市场调研的官方工具。", how:"浏览数据段；把 CBB 加入你的调研工具箱。", level:"入门", limits:"无雇员 ≠ 无外包；收入为申报口径。", ev:1}
+  ]
+},
+{
+  id:"m1", num:"01", name:"创业机会识别", en:"Entrepreneurial Opportunity Recognition", stage:"A",
+  coreQ:"如何从行业变化、个人经验、客户行为与现有产品缺陷中发现值得付费的机会？",
+  value:"把「找项目」从灵感驱动变为证据驱动：先建立候选池，再用统一矩阵比较。",
+  position:"阶段 A 的入口模块。与 m2（客户研究）构成「发现机会 → 验证机会」的前半程。",
+  prereq:["m0"], next:["m2","m4"], parallel:["m2"],
+  topics:[
+    {name:"机会的来源", concepts:[
+      {t:"创业警觉性（Entrepreneurial Alertness）", d:"Kirzner 提出的概念：无需主动搜索就能注意到被他人忽略的机会的倾向，包含扫描搜索、关联连接、评估判断三个维度（Tang 等，2012）。", s:"解释为什么同样信息下有人看到机会、有人看不到。", w:"警觉性可训练：它依赖领域知识存量与信息处理习惯，而非天赋。", m:"机会识别 = 先前知识 × 新信息 × 认知连接能力。Shane & Venkataraman（2000）指出信息不对称分布使机会不会对所有人同时可见。", a:"刻意积累目标行业的一手信息（从业者社区、客户抱怨、平台数据），提高「扫描」密度。", p:"把警觉性浪漫化为「创业嗅觉」，忽视其可训练的成分。", x:"与「创造力」区别：警觉性偏向发现既有错配，创造力偏向构造新组合。", l:"警觉性研究以定性/理论为主，缺乏可靠的因果测量。", ev:2},
+      {t:"机会的发现观与创造观", d:"发现观（Shane & Venkataraman）：机会外生于市场变化，等待被发现；创造观（Alvarez & Barney, 2007）：机会由创业者内生于行动与信念之中。", s:"解释机会到底「在那里」还是「被造出来」。", w:"两种视角对应不同的行动策略：发现观重扫描与速度，创造观重迭代与信念投入。", m:"实务中多数机会介于两者之间：外部变化（技术、监管、行为）提供素材，创业者通过组合与验证赋予其形态。", a:"评估机会时同时问：外部发生了什么变化（发现）？我的独特组合是什么（创造）？", p:"只认一种视角：纯发现观导致追逐热点，纯创造观导致闭门造车。", x:"与「运气」区别：机会识别强调可训练的认知过程。", l:"理论争议尚未解决；对个人创业的实操指导有限。", ev:2},
+      {t:"自上而下与自下而上的机会发现", d:"自上而下：从宏观趋势/大市场向下找切入点；自下而上：从具体客户的具体抱怨向上归纳。", s:"解决「从趋势出发还是从问题出发」的方法选择。", w:"自上而下容易得到大而空的方向（「AI 是趋势」），自下而上容易得到小而真的问题（「我每周花 5 小时手工整理发票」）。", m:"可靠路径通常是自下而上发现问题、自上而下检验市场容量，两者交叉验证。", a:"用「客户原话 + 发生频率 + 现有替代方案」三要素记录每个自下而上发现的问题。", p:"把自上而下的市场规模当成需求证据；把自下而上的个案当成普遍规律。", x:"与 TAM 分析区别：TAM 是自上而下的容量估算工具，不是需求验证。", l:"两种方法都受研究者信息渠道限制。", ev:3}
+    ]},
+    {name:"机会评估", concepts:[
+      {t:"问题重要性四问", d:"值得付费解决的问题通常同时满足：重要（后果显著）、频繁（反复发生）、紧迫（现在就要解决）、可付费（客户有预算且愿意付）。", s:"提供过滤「有趣但无商业价值」问题的标准。", w:"四问缺一，商业价值就存疑：重要但不频繁 → 一次性服务；频繁但不重要 → 低价工具；紧迫但无预算 → 伪需求。", m:"四问对应客户行为的不同层面：后果（影响）、频率（场景密度）、时机（触发事件）、预算（支付能力）。", a:"对每个候选机会逐项打分并写下证据来源（客户原话/行为数据）。", p:"用「我觉得重要」代替客户认为的重要；忽视「不行动的代价」。", x:"与「痛点强度」区别：四问是结构化评估，痛点强度是单一维度感受。", l:"四问的权重因业务模式而异（B2B 更重紧迫与预算，B2C 更重情绪与社交）。", ev:3},
+      {t:"TAM / SAM / SOM", d:"TAM（总可及市场）= 理论上的全部需求；SAM（可服务市场）= 你的产品与渠道能覆盖的部分；SOM（可获得市场）= 短期内实际能拿下的部分。", s:"提供市场容量的分层估算框架。", w:"TAM 最容易被夸大且最不相关；SOM 才是决策依据。", m:"估算方法：自上而下（行业报告 × 渗透率假设）与自下而上（目标客户数 × 客单价 × 购买频率）交叉验证。", a:"对每个候选机会做 SOM 的自下而上估算，并标注每个假设的来源。", p:"引用来源不明的「万亿市场」；把 TAM 当收入预期。", x:"与「市场规模」区别：TAM/SAM/SOM 是估算框架，市场规模是结果。", l:"早期数据稀缺时估算误差极大；应视为量级判断而非精确预测。", ev:3},
+      {t:"个人匹配度", d:"机会与创业者的技能、行业认知、资源、兴趣、风险承受力的匹配程度。", s:"解释「好机会为什么不适合你」。", w:"Shane & Venkataraman 指出先前知识（idiosyncratic prior knowledge）决定谁能看到特定机会——你的独特信息渠道就是你的机会过滤器。", m:"匹配度 = 技能覆盖度 × 信息优势 × 资源可及性 × 持续意愿。", a:"在机会矩阵中单列「个人匹配度」一列，用证据而非感觉打分。", p:"只看市场不看匹配；或只看匹配不看市场（用喜欢代替验证）。", x:"与「热情」区别：匹配度包含能力与资源，热情只是意愿成分。", l:"匹配度会随时间变化（学习、资源积累）。", ev:3}
+    ]}
+  ],
+  objectives:["能够列举至少四种机会来源，并为每个来源给出一个自己领域的实例","能够用四问框架评估一个问题的商业价值，并指出证据缺口","能够对一个候选机会完成 TAM/SAM/SOM 的自下而上估算，并标注假设来源","能够解释为什么宏观趋势不等于付费需求"],
+  checks:["「短视频是趋势，所以做短视频培训有市场」——这个推理错在哪里？","你的上一个「创业灵感」来自哪个机会来源？它满足四问中的哪几条？","TAM 为 100 亿的市场，SOM 可能只有多少？为什么 SOM 才是决策依据？"],
+  practice:{task:"选取三个候选创业机会，建立统一评价矩阵，比较：需求证据（客户原话/行为）、客户可触达性、竞争强度、启动成本、个人匹配度、潜在盈利能力（SOM 自下而上估算）。每个维度注明证据来源。", template:"《创业机会筛选矩阵》（工具 1）：行 = 评估维度，列 = 三个候选机会；每格填写评级 + 证据 + 证据强度。", criteria:"每个评级都有可追溯证据；至少一个维度使用自下而上估算；明确标注「尚无证据」的格子。", gate:"能向他人说明三个机会中哪个最值得进入客户研究阶段，以及为什么。"},
+  mistakes:[
+    {e:"只选择自己喜欢、却没有可靠需求证据的项目", why:"个人项目与自我认同绑定，放弃想法像否定自己。", bias:"确认偏误 / 禀赋效应", detect:"你的项目笔记里「我为什么喜欢它」远多于「谁为它付过钱」。", fix:"用机会矩阵强制比较三个候选，让数据而非偏好说话。"},
+    {e:"把宏观趋势当成付费需求", why:"趋势叙事容易获得认同感，且不需要接触真实客户。", bias:"叙事偏误", detect:"你描述机会时使用「万亿市场」「时代红利」等词，却说不出一个具体客户的名字。", fix:"把趋势翻译成具体客户的具体场景与频率，再进入客户研究。"},
+    {e:"高估市场规模（TAM 崇拜）", why:"大数字让项目感觉更值得做，也更容易自我说服。", bias:"乐观偏误", detect:"你的市场规模数字来自二手转引，无法追溯到原始假设。", fix:"改用自下而上 SOM 估算，并标注每个假设的证据强度。"}
+  ],
+  resources:[
+    {name:"Opportunity Recognition Framework: Exploring the Technology Entrepreneurs", org:"Shane & Venkataraman (2000)、Kirzner、Tang et al. (2012) 等理论的综述性论文（SAPUB 开放期刊）", type:"学术研究", url:"http://article.sapub.org/10.5923.c.economics.201501.10.html", date:"2015 年", topic:"创业警觉性 / 机会发现观与创造观", why:"系统综述机会识别的主要理论脉络：警觉性三维度、先前知识的作用、发现观与创造观之争，并给出各理论的代表文献。", how:"精读理论框架部分；文献综述部分按图索骥。", level:"中级", limits:"综述性论文，非实证研究；期刊级别一般，引用时核对原始文献。", ev:2},
+    {name:"The Discovery and Exploitation of Opportunities in the Dairy Industry（博士论文，含机会识别文献综述）", org:"University of Saskatchewan 机构知识库", type:"学术研究", url:"https://harvest.usask.ca/bitstreams/83d1cba3-8a57-4683-8e5f-07b1b10cd6f1/download", date:"2021 年", topic:"机会发现观与创造观 / 先前知识", why:"对 Alvarez & Barney (2007) 创造观与 Shane 发现观的对比梳理清晰，并讨论机会识别的阶段模型（准备—酝酿—洞察—评估—细化）。", how:"选读文献综述章节。", level:"进阶", limits:"博士论文，非同行评审期刊；行业案例为乳业，迁移需谨慎。", ev:2},
+    {name:"Upwork Study Finds 1 in 4 U.S. Skilled Knowledge Workers Now Work Independently（Future Workforce Index 新闻稿）", org:"Upwork Research Institute", type:"行业研究与数据", url:"https://upwork.com/press/releases/upwork-study-finds-1-in-4-u-s-skilled-knowledge-workers-now-work-independently-generating-1-5-trillion-in-earnings", date:"2025 年 4 月 23 日", topic:"个人匹配度 / 技能变现路径", why:"28% 的美国知识工作者以自由职业/独立身份工作，2024 年合计创收 1.5 万亿美元；全职技能型自由职业者收入中位数 $85,000，高于全职雇员的 $80,000——为「技能变现」路径提供基准数据。", how:"浏览关键发现清单。", level:"入门", limits:"平台方研究，存在利益相关；「知识工作者」口径排除蓝领零工。", ev:2},
+    {name:"Census Business Builder（人口普查局官方商业数据工具）", org:"U.S. Census Bureau", type:"官方文档与政府资料", url:"https://www.census.gov/library/stories/2026/05/small-business-week.html", date:"2026 年 5 月", topic:"TAM/SAM/SOM 自下而上估算的数据来源", why:"官方工具：整合 County Business Patterns 与 Nonemployer Statistics，可按行业/地区查企业数量与收入，是自下而上市场估算的可靠数据源。", how:"练习：用 CBB 查你所在行业的目标地区企业数量。", level:"入门", limits:"美国数据；行业分类为 NAICS 口径。", ev:1}
+  ]
+},
+{
+  id:"m2", num:"02", name:"客户研究与痛点分析", en:"Customer Research & Pain Point Analysis", stage:"A",
+  coreQ:"谁是真正的客户？他们的痛点是什么？如何区分「表达出来的兴趣」与「愿意付费」？",
+  value:"把「我觉得客户需要」变成「客户用行为和金钱证明需要」。",
+  position:"阶段 A 的核心模块。与 m1 构成机会发现的前半程，为 m3（验证）提供假设素材。",
+  prereq:["m0","m1"], next:["m3","m6"], parallel:["m1"],
+  topics:[
+    {name:"客户细分与画像", concepts:[
+      {t:"客户细分（Segmentation）", d:"按需求、行为或情境将市场划分为内部同质、外部异质的群体。", s:"解决「对所有人营销等于对没有人营销」。", w:"细分决定价值主张、渠道与定价；错误的细分让后续所有努力打折。", m:"有效细分基于「待完成的任务 + 使用情境」，而非人口统计标签。", a:"为每个候选机会写下：谁在什么情境下、为了完成什么任务、现在用什么替代方案。", p:"用年龄/地域等人口统计做细分；细分过宽（「25–45 岁白领」）。", x:"与「用户画像（Persona）」区别：画像是细分的具象化表达，不是细分本身。", l:"早期数据不足时细分只能基于假设，需随验证迭代。", ev:3},
+      {t:"购买者、使用者与决策者", d:"B2B 中三者常分离：使用者承受问题、决策者掌握预算、购买者执行采购；B2C 中通常合一但存在「代购」情境。", s:"解决「访谈了很多人，却没有找到会掏钱的人」。", w:"向错误对象营销是最常见的获客浪费；JTBD 研究强调应围绕「任务执行者」定义市场。", m:"识别链条：谁发现问题 → 谁评估方案 → 谁签字付款 → 谁日常使用。", a:"访谈前先画出目标客户的决策链，确保覆盖到预算掌握者。", p:"只访谈使用者（热情但无预算）或只访谈决策者（有预算但不了解痛点细节）。", x:"与「客户画像」区别：决策链是角色地图，画像是单角色描述。", l:"决策链因组织规模差异极大，小企业可能三者合一。", ev:3}
+    ]},
+    {name:"访谈与需求证据", concepts:[
+      {t:"Jobs to Be Done（JTBD）", d:"客户购买产品是为了完成某项「任务」；任务是稳定且与具体解决方案无关的（Ulwick / Christensen）。", s:"把需求分析从「产品功能」转向「客户要取得的进展」。", w:"JTBD 的核心原则：任务稳定而产品易变；按任务而非人群定义市场，能发现人口统计看不到的细分。", m:"访谈聚焦：你当时想完成什么？卡在哪一步？怎么衡量做得好不好？现在怎么解决的？", a:"用 JTBD 提纲做访谈（工具 2），把客户原话整理为「任务 + 期望结果 + 现有方案」。", p:"把 JTBD 当成提问模板而非思维转换；把功能请求当成任务描述。", x:"与「用户故事」区别：JTBD 描述客户目标，用户故事描述产品行为。", l:"JTBD 访谈质量高度依赖访谈者技巧；ODI 的量化流程（机会算法）对个人创业者成本过高。", ev:2},
+      {t:"支付意愿 vs 表达兴趣", d:"支付意愿（WTP）是客户为解决问题愿意付出的资源；表达出来的兴趣（「这个想法不错」）不伴随任何成本。", s:"解决「访谈反馈很好，产品却卖不动」的核心断裂。", w:"定价研究一致显示：陈述性支付意愿系统性低于真实支付意愿约 15–30%（直接提问法），而真实购买行为是唯一可靠证据。", m:"兴趣是言语，支付是行为；行为证据 > 陈述证据 > 意见。", a:"把「你会买吗」换成「你上次为解决这个问题付了多少钱」「你现在用什么方案、花多少时间/钱」。", p:"用「如果…你会…吗」式假设问题；把「感兴趣」记录为验证通过。", x:"与「需求强度」区别：WTP 是支付维度，需求强度是感受维度。", l:"早期无产品时无法直接测 WTP，只能用行为代理指标（等待名单、预售、付费试点）。", ev:1},
+      {t:"访谈偏差与确认偏误", d:"访谈偏差包括诱导性提问、样本偏差（只访朋友）、社会期许效应；确认偏误指只听见支持自己想法的信息。", s:"保护研究结论的有效性。", w:"Blank 的原则：办公室里没有事实；但走出去也可能带着偏见出去。", m:"防偏方法：问行为不问意见（「上次你是怎么做的」）、问极端案例（「最糟糕的一次是什么时候」）、记录原话而非转述、主动寻找反例。", a:"访谈记录表（工具 2）强制记录「证据强度」列：原话/行为/推测。", p:"问「你觉得这个功能怎么样」；只访同意你观点的人；把转述当原话。", x:"与「样本量不足」区别：偏差是系统性问题，样本量是随机性问题。", l:"完全消除偏差不可能，只能通过设计降低。", ev:2}
+    ]},
+    {name:"痛点评估", concepts:[
+      {t:"痛点优先级评估", d:"按频率 × 影响 × 现有方案满意度 × 支付证据四个维度对痛点排序。", s:"解决「痛点很多，先做哪个」。", w:"Ulwick 的机会算法（重要性 + max(重要性−满意度, 0)）给出量化版本；个人创业者可用简化四维定性版。", m:"高频高影响且现有方案不满 = 优先；低频高影响 = 一次性服务；高频低影响 = 工具化。", a:"用工具 3 对访谈收集的痛点统一打分，输出优先级排序。", p:"按「喊得最响」的痛点排序；忽视「不行动的代价」。", x:"与「需求清单」区别：评估表是排序工具，需求清单是收集工具。", l:"评分依赖访谈样本质量；小样本下区分度有限。", ev:3},
+      {t:"现有解决方案与不行动的代价", d:"客户现在如何解决问题（包括「什么都不做」），以及维持现状的总成本（时间、金钱、风险、情绪）。", s:"判断痛点的真实性与替代方案的竞争强度。", w:"你的真正竞争对手往往不是同类产品，而是 Excel、纸质流程和「忍一忍」。", m:"替代方案的价格与转换成本决定你的定价上限；不行动的代价决定需求的紧迫性。", a:"每个痛点记录：现有方案是什么？客户每周花多少时间/钱？上次为此付费是什么时候？", p:"只调研直接竞品，忽视「什么都不做」这个最大竞品。", x:"与「竞品分析」区别：此处关注客户侧现状，竞品分析关注供给侧格局。", l:"客户对自身成本的估算常不准确，需行为数据交叉验证。", ev:3}
+    ]}
+  ],
+  objectives:["能够设计一份避免诱导性提问的客户访谈提纲","能够区分购买者、使用者与决策者，并绘制目标客户的决策链","能够用 JTBD 语言把客户原话整理为「任务 + 期望结果 + 现有方案」","能够用四维框架对痛点排序，并标注每个痛点的支付证据强度"],
+  checks:["「这个功能你觉得怎么样？」——这个问题有什么问题？应该怎么问？","客户说「我很需要这个」——你接下来应该收集什么证据？","为什么「什么都不做」是你最应该认真对待的竞争对手？"],
+  practice:{task:"设计一份客户访谈提纲（聚焦行为与过往经历，不问假设与意见），并对 5 位目标客户完成访谈；用客户研究表记录：问题频率、影响程度、现有解决方案、支付行为、证据强度。", template:"《客户访谈提纲 + 客户研究表》（工具 2、3）：提纲含开场、情境回溯、任务与结果、现有方案、支付历史五段；研究表含痛点、频率、影响、现有方案、支付证据、证据强度六列。", criteria:"≥5 次访谈；每个痛点都有原话引用；明确区分「说过」与「做过」的证据。", gate:"能说出至少 3 个有支付行为证据的痛点，或明确承认「尚未找到」。"},
+  mistakes:[
+    {e:"问「你会买吗」这类假设性问题", why:"提问比观察容易，且正面回答让人感觉良好。", bias:"社会期许效应 / 确认偏误", detect:"你的访谈记录里「会/很好/感兴趣」远多于具体数字与过往行为。", fix:"改问行为：「上次你为解决这个问题做了什么？花了多少钱？」"},
+    {e:"只访谈朋友和熟人", why:"熟人容易约到，且倾向于鼓励你。", bias:"样本偏差 / 亲和偏误", detect:"你的受访者全部来自现有社交圈。", fix:"通过目标客户聚集的社区、行业活动或冷接触扩大样本。"},
+    {e:"把功能请求当成需求", why:"客户给的是解决方案，直接实现比翻译成问题省力。", bias:"表面接受偏误", detect:"你的需求文档是一串功能列表，没有「为什么」。", fix:"对每个功能请求追问三层为什么，回溯到任务与期望结果。"}
+  ],
+  resources:[
+    {name:"The Core Tenets of Jobs-to-be-Done Theory", org:"Tony Ulwick / jobs-to-be-done.com", type:"方法论与工具", url:"https://jobs-to-be-done.com/the-5-tenets-of-jobs-to-be-done-theory-ba58c3a093c1", date:"持续更新", topic:"JTBD 核心原则", why:"用十条原则清晰界定 JTBD 的适用范围：任务稳定、方案无关、按任务定义市场、以「更好地完成任务」为创新标准。作者为 JTBD 实践体系（ODI）创始人，属一手方法论来源。", how:"通读十条原则；对照自己的访谈提纲检查是否遵循「任务稳定、方案无关」。", level:"入门", limits:"作者为 ODI 商业方法提出者，内容带方法论推广属性；「20% 更好即可胜出」等论断缺乏公开的同行评审证据。", ev:3},
+    {name:"Jobs-to-be-Done（Strategyn 官方页面）", org:"Strategyn（Tony Ulwick 创立）", type:"方法论与工具", url:"https://strategyn.com/jobs-to-be-done", date:"持续更新", topic:"JTBD 应用流程 / 机会算法", why:"给出 ODI 六阶段流程与「机会算法」公式（重要性 + max(重要性−满意度, 0)），并说明量化调研对个人创业者的成本边界。", how:"浏览流程部分；机会算法部分了解即可（个人实践可用简化版）。", level:"中级", limits:"厂商官方页面；「86% 成功率」等数据来自厂商自有调研（393 名创新负责人），非独立验证。", ev:3},
+    {name:"Outcome-Driven Innovation（维基百科条目，含机会算法公式）", org:"Wikipedia", type:"方法论与工具", url:"http://wikipedia.com/wiki/Outcome-Driven_Innovation", date:"持续更新", topic:"机会算法 / ODI 与 JTBD 的关系", why:"中立条目：清晰说明 ODI 的起源（Ulwick 1999 专利、2002 HBR、2005 著作）、与 Christensen 的关系，以及机会算法的完整公式。", how:"作为交叉核对来源快速浏览。", level:"入门", limits:"百科条目非一手来源；引用具体论断时回到原始文献。", ev:3},
+    {name:"Customer Development Manifesto: The Path of Warriors and Winners (part 5)", org:"Steve Blank（steveblank.com）", type:"方法论与工具", url:"https://steveblank.com/2009/09/17/the-path-of-warriors-and-winners/", date:"2009 年 9 月 17 日", topic:"访谈方法论 / 假设思维 / 走出办公室", why:"Blank 一手原文：客户发展四步骤、迭代性、低燃烧设计，以及「事实不在大楼里」「智能的观点仍是猜测」等核心原则——客户研究方法论的源头文献。", how:"精读全文；把「没有事实在楼内」设为访谈纪律。", level:"入门", limits:"博客文章，面向高科技初创；原则通用但案例偏硅谷语境。", ev:2}
+  ]
+},
+{
+  id:"m3", num:"03", name:"需求验证、MVP 与低成本试错", en:"Demand Validation, MVP & Low-Cost Experiments", stage:"B",
+  coreQ:"如何用最低成本区分「有需求」与「没需求」？什么时候该继续、调整、暂停或放弃？",
+  value:"把创业想法变成可证伪假设，用实验而非投入来获取答案。",
+  position:"阶段 B 的引擎模块。承接 m2 的痛点假设，产出进入 m6/m10 的验证证据。",
+  prereq:["m2"], next:["m6","m10"], parallel:["m4"],
+  topics:[
+    {name:"精益创业与实验逻辑", concepts:[
+      {t:"Build-Measure-Learn 循环", d:"Ries 的精益创业核心：把想法变成假设，用最小投入构建测量工具，获得经验证的学习，再更新方向。", s:"为「不确定环境下如何决策」提供结构化流程。", w:"该框架影响极大但证据分层：Cambridge Judge 对 21 家加速器企业的两年追踪发现，演绎式（假设—实验）推理在「想法验证期」最有效，而在想法产生期与规模化期，归纳式推理更有优势——实验方法存在适用边界。", m:"循环的关键不是「构建」而是「测量什么」：没有可证伪假设的构建只是昂贵的猜测。", a:"每个实验前写下：假设是什么、什么结果会证伪它、成本上限是多少。", p:"把 BML 当成开发 sprint 流程；构建了产品却没有可测量的假设。", x:"与「敏捷开发」区别：敏捷优化交付速度，精益创业优化学习速度。", l:"对硬件、强监管或需要长期信任积累的业务，快速实验的适用性下降。", ev:2},
+      {t:"飞跃假设（Leap-of-Faith Assumptions）", d:"商业模式中「如果错了整个业务就不成立」的核心假设，通常关于客户、问题与支付意愿。", s:"把有限验证资源集中在最致命的假设上。", w:"验证资源应优先分配给「错了代价最大」的假设，而非最容易验证的假设。", m:"假设分级：价值假设（客户要吗）→ 增长假设（能规模化吗）→ 其他。先验证价值假设。", a:"用工具 6 列出全部假设，标注「若错误则业务不成立」的飞跃假设，优先设计实验。", p:"先验证容易的假设（技术可行性），把最致命的假设（付费意愿）留到最后。", x:"与「风险清单」区别：假设清单关注可证伪性，风险清单关注发生概率。", l:"假设之间相互依赖，单一实验难以完全分离。", ev:3},
+      {t:"区分性实验（Discriminating Experiment）", d:"设计上能使不同假设产生不同可观察结果的实验；无法区分假设真伪的实验没有信息价值。", s:"避免「无论结果如何都觉得自己对了」的自欺。", w:"大多数创业者做的「验证」（问朋友、发朋友圈）是非区分性的：好评不能区分「需求存在」与「朋友给面子」。", m:"区分性来自：对照组、行为门槛（付费/留资/时间投入）、事前写定的成功/失败阈值。", a:"实验设计模板（工具 7）强制填写：假设、指标、分母定义、成功阈值、失败阈值、停止条件。", p:"用落地页访问量当需求证据（分母是流量，分子是留资，转化率才有意义）；实验没有事前阈值。", x:"与「A/B 测试」区别：A/B 是比较两个方案，区分性实验是比较假设与证据。", l:"小样本下统计功效不足，需拉长测试期或提高行为门槛。", ev:3}
+    ]},
+    {name:"MVP 与验证手段", concepts:[
+      {t:"最小可行产品（MVP）", d:"能够检验核心假设的最小投入形态，目的是学习而非交付。", s:"以最低成本获取最致命假设的答案。", w:"MVP 最常见的误用是把它当成「功能最少的产品」；它的定义单位是「假设」而不是「功能」。", m:"MVP 形态谱系：落地页测试 → 原型/视频演示 → 人工交付（ concierge ）→ 预售 → 付费试点 → 小规模服务测试。越往后成本越高、证据越强。", a:"按假设类型选择形态：验证需求用落地页/预售，验证交付用人工交付，验证付费用预售/试点。", p:"花三个月开发「完整 MVP」；用 MVP 名义发布半成品却不测量任何假设。", x:"与「原型」区别：原型验证可用性，MVP 验证商业假设。", l:"MVP 对需要网络效应或重资产投入的业务形态不适用。", ev:2},
+      {t:"验证证据等级", d:"从弱到强：意见（「不错」）→ 意向（留资/等待名单）→ 承诺（预付/签约）→ 行为（持续使用/复购）。", s:"统一判断「验证到什么程度」的语言。", w:"「客户表示感兴趣」与「愿意付费」之间隔着整个商业风险；只有承诺与行为级证据能支撑进入阶段 C。", m:"证据强度 = 客户付出的成本 × 决策的不可逆程度。", a:"每个实验记录达到的证据等级；进入阶段 C 的门槛是承诺级证据。", p:"把留资（留邮箱）当成付费意愿；把一次购买当成持续需求。", x:"与「转化率」区别：转化率是测量工具，证据等级是解释框架。", l:"证据等级与业务模式相关（B2B 试点 ≈ B2C 预售）。", ev:3},
+      {t:"虚荣指标与真实指标", d:"虚荣指标（注册数、粉丝数、页面浏览）只增不减、与商业健康弱相关；真实指标（付费转化、留存、回收期）直接反映价值捕获。", s:"防止用增长假象替代商业验证。", w:"B2B 内容营销研究（EMAC 2022，1,478 家企业 webinar 数据）发现：互动深度（提问、下载、点击购买信号）显著预测线索转化，而观看时长与转化负相关——「参与度」需要拆解到行为层。", m:"真实指标的特征：可行动（变化能指导决策）、可归因（与业务结果挂钩）、分母明确。", a:"为每个实验定义分子分母；把「转化率」写成「X 行为 ÷ Y 人群」。", p:"用总注册数汇报；用平台归因（末次点击）高估渠道效果。", x:"与「北极星指标」区别：虚荣指标是误用，北极星指标是精选的真实指标。", l:"早期数据量小，真实指标噪声大，需结合定性证据。", ev:2}
+    ]},
+    {name:"决策规则", concepts:[
+      {t:"继续 / 调整 / 暂停 / 放弃", d:"基于实验结果的四象限决策：证据支持 → 继续；部分支持 → 调整（改客户/改方案/改定价）；证据模糊 → 暂停（补数据）；证据否定 → 放弃（释放资源）。", s:"把「再坚持一下」从情绪决定变为规则决定。", w:"Cambridge Judge 研究同时发现：消亡的企业共同点是「从不转型或极少转型」，而频繁转型同样损害进展——转型频率存在最优区间（约 1–2 次）。", m:"决策规则应事前写定（工具 8 的停止条件），用规则对抗禀赋效应。", a:"实验计划中预写三种结果（超预期/符合/低于阈值）各自的下一步动作。", p:"没有事前阈值，事后为任何结果找到「继续」的解释。", x:"与「韧性」区别：韧性是执行纪律，决策规则是止损纪律。", l:"规则无法覆盖所有情形，需保留例外通道但提高例外成本。", ev:2},
+      {t:"失败实验的信息价值", d:"被证伪的假设同样产生价值：它排除了一个方向，缩小了搜索空间。", s:"重新定义「失败」在验证框架中的位置。", w:"Blank 的客户发展模型把「找不到足够付费客户」设计为返回客户探索的循环，而非终点。", m:"实验成本应视为信息采购成本：$500 买到的「此路不通」比 $50,000 买到的同样结论便宜 100 倍。", a:"实验复盘模板（工具 19）强制记录：假设、结果、学到什么、下一步。", p:"把失败实验当作「浪费」而隐藏；或把失败浪漫化为「必经之路」而不复盘。", x:"与「 pivot 」区别：pivot 是战略转向，失败实验是信息事件。", l:"信息价值取决于是否真正更新了决策。", ev:3}
+    ]}
+  ],
+  objectives:["能够把一个商业想法分解为价值假设、增长假设与飞跃假设","能够为最致命的假设设计一个区分性实验，并写定成功/失败阈值","能够区分意见、意向、承诺、行为四级证据，并判断当前业务处于哪一级","能够用事前规则决定继续、调整、暂停或放弃"],
+  checks:["「上线落地页，来了 1000 个访问，50 个留资」——这能证明需求吗？分母和分子分别是什么？","MVP 和「功能最少的产品」有什么区别？举一个你领域的 MVP 形态例子。","为什么「从不转型」和「频繁转型」都是危险的？最优区间大概在哪里？"],
+  practice:{task:"为一个真实商业想法制定验证计划：列出全部假设并标注飞跃假设；为每个飞跃假设设计区分性实验（形态、指标、分母、阈值、成本上限、期限）；预写三种结果对应的下一步决策。", template:"《创业假设清单 + MVP 验证实验计划 + 实验成本与阈值记录表》（工具 6、7、8）。", criteria:"每个实验都有事前阈值与停止条件；成本上限明确；至少一个实验达到承诺级证据设计。", gate:"计划中不存在「无论结果如何都继续」的实验。"},
+  mistakes:[
+    {e:"把 MVP 当成功能最少的产品来开发", why:"「做产品」比「设计实验」更具体、更有进度感。", bias:"构建偏误", detect:"你的 MVP 计划以功能列表开头，而不是以假设开头。", fix:"先写假设清单（工具 6），再问「检验这个假设最少需要什么」。"},
+    {e:"用落地页流量或留资当需求证明", why:"数字好看且容易获得；分母（流量）可以买。", bias:"虚荣指标偏误", detect:"你的验证报告只有访问量和留资数，没有付费行为。", fix:"升级证据等级：预售、付费试点或人工交付收费。"},
+    {e:"实验没有事前阈值，事后解释一切", why:"事前写死阈值意味着承认可能失败。", bias:"承诺升级 / 确认偏误", detect:"每次实验后你的结论都是「基本符合预期，继续优化」。", fix:"在实验开始前把成功/失败/停止条件写进工具 8 并签字。"}
+  ],
+  resources:[
+    {name:"Changing course（剑桥大学 Judge 商学院：加速器企业 pivot 与推理方式的两年追踪研究）", org:"Cambridge Judge Business School（Boddington & Kavadias 论文的官方解读）", type:"学术研究", url:"https://www.jbs.cam.ac.uk/?p=115528", date:"研究期 2016–2018，解读页持续在线", topic:"BML 的适用边界 / 转型频率", why:"少见的实证研究：21 家加速器企业、129 次 pivot 的追踪发现——演绎式实验在想法验证期最有效，归纳式在创造期与规模化期更优；从不转型或极少转型的企业全部消亡，频繁转型同样受阻。为「精益创业并非万能」提供一手证据。", how:"精读研究发现部分。", level:"中级", limits:"样本仅 21 家欧洲加速器企业；pivot 定义较宽；结论外推需谨慎。", ev:2},
+    {name:"The Lean Startup: How Constant Innovation Creates Radically Successful Businesses（Grokipedia 条目，含学术批评综述）", org:"Grokipedia（百科条目，引述 Mollick、Gans et al. 等学术文献）", type:"学术研究", url:"https://grokipedia.com/page/the_lean_startup_how_constant_innovation_creates_radically_successful_businesses_(book)", date:"持续更新", topic:"精益创业的学术证据与批评", why:"系统整理了对精益创业的学术批评：过度依赖早期反馈可能错失突破性创新（Christensen 颠覆理论视角）、知识产权保护弱时早期实验暴露创意、实验成本可能超过收益（Kohavi et al.）、以及 Mollick 引用的 116 家初创实验研究（受训创始人转型更有效、收入更高）。", how:"选读「学术视角」与「批评」部分。", level:"中级", limits:"百科条目为二手汇编；引用具体研究时回到原始论文。", ev:2},
+    {name:"Making the Lean Start-up Method Work: The Role of Prior Market Knowledge（工作论文）", org:"KU Leuven（LIRIAS 机构库）", type:"学术研究", url:"https://lirias.kuleuven.be/retrieve/dbdf1ee9-c9cd-40e4-b0c2-a3bd3c15aa9e", date:"工作论文（2010 年代）", topic:"实验方法的适用条件 / 先前市场知识", why:"多案例研究发现：精益方法的效果取决于创始人的先前市场知识——缺乏领域知识时实验反馈难以解释，方法反而失效。为「什么时候该实验、什么时候该靠经验」提供条件性证据。", how:"选读结论部分。", level:"进阶", limits:"4 家伦敦 ICT 初创的小样本案例研究；理论建构型论文。", ev:2},
+    {name:"Theoretical and Methodological Foundations of Technology Validation in Startups（综述论文）", org:"Management Papers（Silesian University of Technology 期刊）", type:"学术研究", url:"https://managementpapers.polsl.pl/wp-content/uploads/2026/04/242-Romek-Klimowicz-Bromski-Kaczor-Szkodny-Wielguszewska.pdf", date:"2026 年", topic:"MVP / pivot / 精益方法的证据现状", why:"综述指出：精益创业的科学验证仍然有限，大量证据来自实践者经验（Frederiksen & Brem, 2017）；并汇总了适用边界（硬件、强监管行业）与「死亡之谷」概念。适合快速建立该领域的证据地图。", how:"浏览文献综述部分。", level:"进阶", limits:"综述性论文；部分引文为工作论文。", ev:2}
+  ]
+},
+{
+  id:"m4", num:"04", name:"市场调研与竞争分析", en:"Market Research & Competitive Analysis", stage:"A",
+  coreQ:"如何用一手与二手资料判断市场格局？「市场空白」何时是真机会？",
+  value:"建立不依赖主观猜测的竞争认知，为差异化定位提供证据基础。",
+  position:"阶段 A 模块，与 m2 并行；为 m7（定位）与 m8（获客）提供竞争情报。",
+  prereq:["m0"], next:["m7","m8"], parallel:["m2","m3"],
+  topics:[
+    {name:"资料与数据", concepts:[
+      {t:"一手资料与二手资料", d:"一手资料：客户访谈、问卷、行为数据、竞品实际购买体验；二手资料：行业报告、政府统计、搜索数据、公开评价。", s:"解决「调研从哪开始」的资料分层问题。", w:"二手资料便宜但有偏差（口径、时点、商业利益）；一手资料贵但直接。两者应交叉验证。", m:"调研顺序：先用二手资料建立格局假设，再用一手资料验证关键未知。", a:"竞品矩阵（工具 4）中每格标注资料类型与日期。", p:"把二手报告结论当事实；用「我觉得」填一手资料的位置。", x:"与「定量/定性」区别：资料分层按来源，方法分层按数据类型。", l:"个人创业者获取一手资料的渠道有限，需创造（访谈、试用、购买体验）。", ev:3},
+      {t:"市场研究的数据质量", d:"样本偏差、时间滞后、口径不一致是二手数据的三大陷阱。", s:"保护调研结论不被垃圾数据污染。", w:"同一指标（如「自由职业者占比」）在不同口径下差异巨大：BLS 口径 2023 年约 1,190 万独立承包商，MBO Partners 口径超 7,200 万独立工作者——两者都对，因为测的是不同人群。", m:"使用任何数据前问：谁统计的？统计谁？什么时候？怎么定义的？", a:"引用数据时记录口径与日期；对矛盾数据并列呈现而非择一。", p:"引用来源不明的「行业平均」；混用不同口径的数据做推算。", x:"与「数据造假」区别：数据质量问题是方法问题，造假是诚信问题。", l:"完全消除口径差异不可能，只能透明标注。", ev:2}
+    ]},
+    {name:"竞争分析", concepts:[
+      {t:"直接、间接与替代竞争", d:"直接竞争：同类产品同类客户；间接竞争：不同产品同类需求；替代竞争：完全不同的解决方案（包括「什么都不做」）。", s:"解决「只盯着同行，却被 Excel 打败」。", w:"客户的总预算与总时间是有限的；替代方案往往比直接竞品更强大。", m:"竞争地图按「客户任务」而非「产品品类」绘制：谁在帮客户完成同一个任务？", a:"竞品矩阵（工具 4）包含三类竞争者，每类至少一个代表。", p:"竞品清单里只有同行；忽视「不行动」选项。", x:"与「竞品跟踪」区别：分析是结构认知，跟踪是持续监控。", l:"替代竞争难以量化，需靠客户访谈发现。", ev:3},
+      {t:"差异化与定位假设", d:"差异化 = 在目标客户心智中占据一个与竞争者不同的位置；定位假设必须可验证。", s:"把「我们更好」变成「我们在 X 维度上对 Y 客户显著更好」。", w:"Ulwick 的 JTBD 实践显示：把任务完成度提升 20% 以上的产品才可能胜出——差异化需要量级而非形容词。", m:"差异化来源：细分专注、交付方式、价格结构、信任资产、集成生态。", a:"为每个差异化假设设计验证方法（客户访谈中的对比提问、A/B 定价、试点）。", p:"用「更好、更快、更省」等无法验证的形容词；差异化假设从不验证。", x:"与「独特卖点（USP）」区别：定位是心智位置，USP 是传播口号。", l:"差异化随竞争模仿而衰减，需持续再投资。", ev:3},
+      {t:"市场空白与真实商业机会", d:"市场空白 = 无人满足的需求；商业机会 = 有人愿意为之付费且你能经济地满足。", s:"防止把「没人做」误当「值得做」。", w:"空白存在三种可能：真机会、伪需求（有人想过但验证失败）、结构性不可行（成本/监管/时机）。", m:"判断流程：空白 → 为什么空白（问从业者/查历史尝试）→ 付费证据 → 经济性测算。", a:"对每个「空白」记录：历史上有谁尝试过？为什么没成？", p:"把空白当先发优势；忽视「没人做」往往意味着「做了的都没活下来」。", x:"与「蓝海」区别：蓝海是战略概念，空白是市场事实。", l:"历史尝试的信息常不完整，需多源交叉。", ev:3}
+    ]}
+  ],
+  objectives:["能够区分一手与二手资料，并为调研问题选择合适的资料类型","能够绘制包含直接、间接、替代三类竞争者的竞争地图","能够为每个竞品填写客户群体、价值主张、定价、渠道四要素并标注资料来源","能够把一个差异化主张改写为可验证的假设"],
+  checks:["「这个领域没人做，我们是第一家」——在决定进入前你应该查什么？","为什么客户访谈比行业报告更能发现替代竞争？","引用一个市场数据时，你必须记录哪四个信息？"],
+  practice:{task:"选择一个细分市场，建立竞品矩阵（≥5 个竞争者，覆盖三类竞争），填写：客户群体、价值主张、产品/服务、定价、渠道、服务方式、资料来源与日期；提出 2 个有证据基础的差异化假设，并为每个假设设计验证方法。", template:"《市场调研与竞争分析矩阵》（工具 4）。", criteria:"每个竞品条目有来源与日期；差异化假设可验证；包含至少一个替代方案（含「什么都不做」）。", gate:"能解释「为什么是我们」而不只是「为什么不是他们」。"},
+  mistakes:[
+    {e:"用主观猜测填写竞品信息", why:"真实调研耗时，且猜测可以随时「完成」。", bias:"过度自信", detect:"你的竞品矩阵里「定价」「客户群体」等格没有来源标注。", fix:"每格强制标注来源；无法核实的格子写「未验证」。"},
+    {e:"只分析直接竞争者", why:"直接竞品最显眼，也最容易找到资料。", bias:"可得性偏差", detect:"你的竞争清单里没有 Excel、人工流程或「不行动」。", fix:"从客户访谈中收集「你现在怎么解决的」，把答案全部列入竞争地图。"},
+    {e:"把「市场空白」当成机会证明", why:"空白叙事（「没人做」）比付费证据更容易获得。", bias:"叙事偏误", detect:"你说不出这个空白为什么存在（历史尝试、结构性障碍）。", fix:"调研历史尝试与失败原因；把空白转化为待验证假设。"}
+  ],
+  resources:[
+    {name:"Business models: the toolkit to design a disruptive company（Strategyzer 官方：商业模式画布九要素）", org:"Strategyzer（Osterwalder & Pigneur）", type:"方法论与工具", url:"https://www.strategyzer.com/business-models-the-toolkit-to-design-a-disruptive-company", date:"持续更新", topic:"商业模式画布 / 竞争与价值主张结构", why:"画布方法的官方来源：九大模块、四个检验维度（需求性、可行性、生存性、适应性），以及「不再需要冗长乐观的商业计划」的定位说明。", how:"通读九要素定义；用画布组织你的竞争与模式假设。", level:"入门", limits:"官方页面带工具推广属性；画布本身不检验假设真伪。", ev:3},
+    {name:"Business Model Canvas（Innovation Terms 条目：画布的局限）", org:"Innovation Terms", type:"方法论与工具", url:"https://innovationterms.com/definition/business-model-canvas", date:"持续更新", topic:"画布与商业计划的区别 / 画布的局限", why:"清晰说明画布的四个局限：记录假设但不检验假设、无财务预测机制、静态快照、对客户洞察不足（需配合价值主张画布）。帮你避免把画布当答案。", how:"浏览局限部分。", level:"入门", limits:"百科条目；引用学术批评时核对原始文献。", ev:3},
+    {name:"Business Model Canvas: the one-page map of how a business works（含咖啡馆订阅盒完整算例）", org:"Leaders Loop", type:"实践案例", url:"https://leadersloop.com/toolkit/business-model-canvas", date:"持续更新", topic:"画布的实战用法 / 假设标注", why:"用一个咖啡馆订阅盒的完整算例演示：如何从画布右侧（客户与价值）读到左侧（成本与资源）的约束，以及「每个格子都是假设」的工作纪律。", how:"精读算例部分。", level:"入门", limits:"单一教学案例；数字为示意性质。", ev:3},
+    {name:"Census Business Builder / Small Business Week 数据工具专题", org:"U.S. Census Bureau", type:"官方文档与政府资料", url:"https://www.census.gov/library/stories/2026/05/small-business-week.html", date:"2026 年 5 月", topic:"二手数据来源 / 竞争对手定位调研", why:"官方介绍 Census Business Builder：可按行业与地区查企业数量、收入分布，用于评估市场密度与竞争格局；同时说明 BTOS（商业趋势与展望调查）等高频数据源。", how:"练习用 CBB 查目标市场的企业密度。", level:"入门", limits:"美国数据；NAICS 行业口径。", ev:1}
+  ]
+},
+{
+  id:"m5", num:"05", name:"商业模式与个人创业路径选择", en:"Business Models & Solo Venture Paths", stage:"A",
+  coreQ:"自由职业、产品化服务、知识产品、内容、电商、微型 SaaS——哪种模式适合现阶段的你？",
+  value:"在投入之前比较不同模式的机制差异，选择与个人约束匹配的路径。",
+  position:"阶段 A 的收束模块：把机会与客户认知转化为模式选择，为阶段 B/C 的验证与建设定向。",
+  prereq:["m0","m1"], next:["m6","m10"], parallel:["m4"],
+  topics:[
+    {name:"商业模式的结构", concepts:[
+      {t:"商业模式画布九要素", d:"客户细分、价值主张、渠道、客户关系、收入流、关键资源、关键活动、关键伙伴、成本结构——描述企业如何创造、传递与捕获价值。", s:"把商业模式从模糊概念变为可分析的结构。", w:"画布是假设清单而非答案：Strategyzer 官方定位为「组织适应变化的工具」，其价值在于让隐性假设显性化。", m:"右侧（客户与价值）回答「市场要不要」，左侧（资源与活动）回答「我们能不能交付」，底部成本与收入回答「划不划算」。", a:"用画布组织模式假设；每个格子标注证据强度（工具 5）。", p:"把画布填满就当验证完成；忽视格子之间的联动（渠道变了收入结构就变）。", x:"与「商业计划书」区别：画布是内部设计工具，计划书是外部沟通文档。", l:"画布是静态快照，不描述模式演化与竞争动态。", ev:3},
+      {t:"收入模式谱系", d:"按小时、按项目、按套餐、订阅、按用量、交易佣金——不同收入模式对应不同的现金流、可预测性与客户关系。", s:"解决「怎么收钱」的结构选择。", w:"收入模式决定业务的风险形态：项目制波动大但回款快，订阅制稳定但需要留存能力。", m:"选择维度：客户预算周期、交付边际成本、留存可能性、定价心理。", a:"为候选业务设计主收入模式 + 辅助收入模式（如服务 + 模板）。", p:"默认选择订阅制（「订阅更高级」）而不评估客户是否接受经常性承诺。", x:"与「定价」区别：收入模式是收费结构，定价是具体数字（模块 10）。", l:"收入模式可组合，但组合会增加客户理解成本。", ev:3},
+      {t:"一次性收入与经常性收入", d:"一次性收入（项目费、产品销售）与经常性收入（订阅、维护费）在现金流形态、估值逻辑与运营压力上完全不同。", s:"理解两种收入的真实差异，避免「订阅崇拜」。", w:"经常性收入不等于被动收入：订阅业务需要持续的留存运营；一次性业务也可以通过复购与转介绍获得稳定性。", m:"经常性收入的价值 = 可预测性 × 留存率 × 扩张收入；三者缺一，经常性收入的优势就不存在。", a:"评估模式时计算：收入中经常性占比、月流失率、净收入留存。", p:"把「订阅」当商业模式本身；忽视流失率对经常性收入的毁灭性影响。", x:"与「被动收入」区别：经常性收入仍需运营，被动收入是神话。", l:"B2B 订阅与 B2C 订阅的流失机制差异很大。", ev:2}
+    ]},
+    {name:"路径演进与模式选择", concepts:[
+      {t:"从技能变现到系统化的路径", d:"典型演进：自由职业（卖时间）→ 产品化服务（卖标准化结果）→ 知识/数字产品（卖可复制资产）→ 微型 SaaS（卖软件）。每步提高杠杆，也提高验证门槛。", s:"理解模式之间的过渡逻辑与代价。", w:"并非所有业务都需要走到 SaaS：产品化服务可以是终点；「维持一个小而高利润的业务」是正当选择。", m:"每步演进的核心变化：交付标准化程度、个人时间依赖度、启动验证成本。", a:"用模式比较矩阵（本章工具）定位当前位置与下一步。", p:"认为演进是单向升级；跳步（无服务经验直接做 SaaS）。", x:"与「规模化」区别：路径演进是模式转换，规模化是同模式内扩张。", l:"演进路径依赖个人技能与市场反馈，无标准答案。", ev:3},
+      {t:"收入集中度与依赖风险", d:"单一客户、单一平台、单一渠道占比过高时，业务稳定性取决于外部方的决策。", s:"识别「看起来赚钱实则脆弱」的业务结构。", w:"平台依赖是个人创业的典型风险：算法、政策、抽成变化可直接摧毁收入。", m:"集中度指标：最大客户收入占比、最大渠道流量占比、平台政策敏感度。", a:"在模式选择阶段就评估：这个模式是否必然依赖某个平台？", p:"把平台流量当成自有资产；忽视合同中的排他与账号归属条款。", x:"与「客户集中度」区别：依赖风险还包括渠道与平台，不止客户。", l:"完全无依赖的模式几乎不存在，关键是可替代性与迁移成本。", ev:3},
+      {t:"模式与个人约束的匹配", d:"模式选择 = 技能 × 资金 × 时间 × 客户资源 × 收入目标 × 风险承受力的联合函数。", s:"把「什么模式好」变成「什么模式适合我」。", w:"没有普遍最优模式：同一模式对不同约束的人是不同的生意。", m:"匹配逻辑见本章决策工具：输入约束 → 规则过滤 → 候选模式 + 必须实验验证的问题。", a:"用决策工具生成候选，再用模块 3 的实验设计验证。", p:"用主观加权公式得出「最佳创业项目」的虚假精确感。", x:"与「机会评估」区别：模式匹配是供给侧选择，机会评估是需求侧判断。", l:"约束会变化（学习、储蓄、人脉积累），匹配需定期重估。", ev:3}
+    ]}
+  ],
+  objectives:["能够用商业模式画布组织一个候选业务的全部假设","能够比较六种模式在启动成本、回款周期、交付负担、利润潜力与可复制性上的差异","能够解释一次性收入与经常性收入的真实区别，并识别「订阅崇拜」陷阱","能够用决策工具根据自己的约束筛选候选模式，并列出必须通过实验验证的问题"],
+  checks:["「订阅制一定比项目制更好」——这个说法在什么条件下成立，什么条件下不成立？","从自由职业演进到微型 SaaS，每一步分别牺牲了什么、获得了什么？","你的候选业务中，收入占比最高的客户/渠道/平台是哪个？如果它消失会怎样？"],
+  practice:{task:"建立个人创业模式比较表：对六种模式按 15 个维度做定性评级并注明依据；用决策工具输入个人约束，生成候选模式排序；为排名第一的候选模式列出三个必须通过市场实验回答的问题。", template:"《个人创业模式比较表 + 模式决策框架》（本章比较矩阵与决策工具）。", criteria:"评级有依据而非感觉；决策结果附带「必须实验验证的问题」清单。", gate:"能说明为什么某个「更流行」的模式不适合现阶段的你。"},
+  mistakes:[
+    {e:"默认追求 SaaS 化或产品化", why:"「可扩展」的叙事更有吸引力，且从业者社区普遍推崇。", bias:"潮流偏误", detect:"你的模式选择理由是「这个模式天花板高」，而非「这个模式适合我现在的约束」。", fix:"用决策工具做约束过滤；把「维持小而美」纳入候选。"},
+    {e:"忽视现金流特征的差异", why:"利润故事比现金节奏更容易讲述。", bias:"叙事偏误", detect:"你比较模式时只看毛利，没算回款周期与营运资金占用。", fix:"在比较表中加入现金流特征行，用工具 15 做三情景测算。"},
+    {e:"把平台流量当成自有资产", why:"流量数字增长带来掌控感错觉。", bias:"控制错觉", detect:"你的获客计划里 80% 依赖单一平台。", fix:"评估渠道可替代性；把「平台消失」作为压力测试情景。"}
+  ],
+  resources:[
+    {name:"Productized Services（FourWeekMBA 百科式指南）", org:"FourWeekMBA", type:"方法论与工具", url:"https://fourweekmba.com/productized-services", date:"持续更新", topic:"产品化服务的定义与特征", why:"结构化定义：固定范围、固定价格、可重复流程、有限定制；并列出优势（可预测收入、易销售）与劣势（定制受限、初始搭建成本）。适合建立产品化服务的概念地图。", how:"通读定义与特征部分。", level:"入门", limits:"商业教育网站，内容为综合整理而非原创研究。", ev:3},
+    {name:"What Is a Productised Service?（Evans Sales Consultancy）", org:"Evans Sales Consultancy", type:"实践案例", url:"https://evanssalesconsultancy.co.uk/insights/what-is-a-productised-service", date:"持续更新", topic:"产品化服务三支柱 / 常见失败模式", why:"提出产品化三支柱（固定范围、固定价格、可重复流程），并指出关键失败模式：试图把整个复杂咨询产品化——应先选一个高价值高频任务标准化。对「怎么产品化」给出可操作边界。", how:"精读「为什么失败」部分。", level:"入门", limits:"咨询公司观点文章，带服务推广属性。", ev:3},
+    {name:"Build a Micro-SaaS on a Tight Budget（2026 指南）", org:"Adlega", type:"行业研究与数据", url:"https://adlega.com/blog/building-a-micro-saas-with-minimal-funding", date:"2026 年", topic:"微型 SaaS 的分发渠道 / 跑道数学 / 定价区间", why:"少见的量化整理：启动成本区间（工具 $0–100/月）、个人跑道公式（现金跑道 = 现金 ÷ 月净燃烧，6 个月个人跑道约 $16K–27K）、分发渠道排序（SEO 6–12 个月回报、集成市场最快）、以及社区流传的收入分布（约 70% 微型 SaaS 月收入 <$1,000，明确标注为非硬统计）。", how:"精读分发渠道与跑道数学部分。", level:"中级", limits:"行业博客；收入分布数据来自社区汇总，明确不可作为预测依据。", ev:3},
+    {name:"MicroSaaS: what it is, examples and how to build one", org:"Metricaas", type:"方法论与工具", url:"https://metricaas.ai/en/glossario/microsaas", date:"持续更新", topic:"微型 SaaS 与传统 SaaS 的区别 / 关键指标", why:"清晰对比微型 SaaS（细分、小团队、自筹、高毛利）与传统 SaaS（大市场、融资、大团队），并强调 MRR、流失率、固定成本三个核心指标。", how:"浏览对比与指标部分。", level:"入门", limits:"术语百科站点；案例为示意性质。", ev:3},
+    {name:"Freelancing Stats 2026: Market Size, Earnings, and Future Trends", org:"Upwork", type:"行业研究与数据", url:"https://www.upwork.com/resources/freelancing-stats", date:"2026 年", topic:"自由职业模式的收入基准", why:"汇总自由职业经济数据：39% 美国工作者有自由职业行为（2026）、技能型自由职业者收入中位数、AI 相关工作收入溢价等。为自由职业路径提供外部基准。", how:"浏览关键数据。", level:"入门", limits:"平台方数据；口径为「自由职业行为」而非全职独立经营。", ev:2}
+  ]
+},
+{
+  id:"m6", num:"06", name:"价值主张、产品化服务与产品设计", en:"Value Proposition, Productized Services & Product Design", stage:"B",
+  coreQ:"客户为什么买你？如何把服务或知识变成边界清晰、可重复交付的产品？",
+  value:"把验证过的痛点转化为可销售的最小方案，控制范围、管理预期、降低重复劳动。",
+  position:"阶段 B 的核心建设模块：把 m3 的验证结果落成「最小销售方案」，为阶段 C 的真实销售做准备。",
+  prereq:["m3"], next:["m7","m10"], parallel:["m4"],
+  topics:[
+    {name:"价值主张设计", concepts:[
+      {t:"价值主张", d:"关于「为什么目标客户应该选你而不是替代方案」的完整陈述：解决什么问题、带来什么结果、凭什么信你。", s:"把痛点翻译成购买理由。", w:"价值主张是销售页、定位与产品范围的共同源头；写不清楚价值主张，后续营销都是猜测。", m:"结构：目标客户 + 待完成的任务 + 关键痛点 + 我们的方案 + 与替代方案的差异 + 信任证据。", a:"用工具 9（最小销售方案）强制写全六个要素。", p:"把功能清单当价值主张；用「更好更快更省」代替具体结果。", x:"与「卖点」区别：价值主张是完整论证，卖点是其中一句。", l:"价值主张需随客户认知迭代；早期版本必然不完整。", ev:3},
+      {t:"价值主张画布（VPC）", d:"Strategyzer 的配套工具：右侧映射客户的任务、痛点、收益；左侧映射产品服务、痛点缓解、收益创造；两侧对齐即契合。", s:"系统检验「我们做的」与「客户要的」是否对齐。", w:"画布官方定位：客户细分与价值主张是商业模式中最关键也最容易失败的一对，VPC 是对这一对的放大检查。", m:"契合检验：每个痛点缓解对应一个真实痛点；每个收益创造对应一个客户在乎的结果。", a:"把 m2 访谈整理的痛点/收益填入右侧，再检查左侧覆盖度。", p:"两侧各写各的，不做对齐检查；把「我们有的功能」当「客户要的收益」。", x:"与 BMC 区别：BMC 看全局，VPC 只看客户—价值这一对。", l:"画布不产生证据，只组织假设。", ev:3},
+      {t:"范围控制与过度开发", d:"在验证完成前限制产品/服务范围，只做支撑核心价值主张所必需的部分。", s:"防止「什么都想做」导致的成本失控与交付崩溃。", w:"个人创业者的交付带宽有限；范围每扩大一点，验证周期与现金流压力同步放大。", m:"范围纪律：每个功能/服务项必须回答「它支撑哪个已验证的假设」。", a:"最小销售方案（工具 9）中明确「不包含什么」。", p:"用「客户可能会要」为范围扩张辩护；把「以后可以加」当承诺。", x:"与「MVP」区别：MVP 是验证工具，范围控制是持续纪律。", l:"过度保守也会错失真实需求信号，需用反馈校准。", ev:3}
+    ]},
+    {name:"产品化服务设计", concepts:[
+      {t:"产品化服务三支柱", d:"固定范围（客户明确知道得到什么、得不到什么）、固定价格（按结果定价而非工时）、可重复流程（交付遵循文档化步骤）。", s:"把定制服务转化为可预测、可委托的产品形态。", w:"三支柱共同实现「收入与资深个人时间解耦」；缺任何一根，产品化都会退化为普通服务。", m:"固定范围消除范围蔓延；固定价格消除报价摩擦；可重复流程使外包与自动化成为可能。", a:"用工具 10（产品化服务设计表）逐项落实三支柱。", p:"只固定价格不固定范围（亏损交付）；把整个复杂服务一次性产品化。", x:"与「订阅服务」区别：产品化服务可以是项目制；订阅是收费结构。", l:"高定制化需求的市场（战略咨询等）不适合产品化。", ev:3},
+      {t:"服务套餐与规格", d:"把服务组织为 2–4 个价格档位，每档明确交付物、周期、修订次数与边界。", s:"降低客户决策成本，同时引导客户选择利润结构更健康的档位。", w:"Many Pixels 案例：固定月费 + 明确请求规则的设计，使其从第一天起就具备可重复销售与外包基础。", m:"档位设计原则：中间档为锚点；每档的交付成本差异小于价格差异。", a:"套餐表包含：交付物清单、交付周期、修订政策、明确排除项。", p:"档位过多（选择瘫痪）或过少（无锚点）；排除项写得含糊。", x:"与「定价」区别：套餐是结构，定价是数字（模块 10）。", l:"套餐需随交付数据校准，首版必然有偏差。", ev:3},
+      {t:"从客户问题到产品方案", d:"转化路径：客户原话 → 任务与期望结果 → 方案要素 → 交付流程 → 结果衡量方式。", s:"保证产品方案直接对应已验证的客户问题。", w:"跳过「客户原话」直接设计功能，是需求误判的主要来源。", m:"每个方案要素必须能回溯到至少一条客户原话或行为证据。", a:"最小销售方案（工具 9）中设置「证据回溯」列。", p:"把团队/个人兴趣当需求；功能与证据脱钩。", x:"与「头脑风暴」区别：转化是受约束的推导，头脑风暴是发散生成。", l:"证据质量决定转化质量；小样本下需标注不确定性。", ev:3}
+    ]},
+    {name:"交付质量与迭代", concepts:[
+      {t:"交付边界与结果承诺", d:"明确承诺什么结果（可衡量的交付物）、不承诺什么（客户侧配合事项、不可控因素）。", s:"管理客户预期，减少交付纠纷。", w:"预期管理是留存与转介绍的前提；模糊的承诺在规模化时集中爆发为退款与差评。", m:"承诺分级：交付物（必达）→ 过程（尽力）→ 结果（共同责任，需客户配合）。", a:"服务条款中区分三类承诺；退款政策与承诺等级对应。", p:"为签单过度承诺；把「保证效果」当卖点。", x:"与「SLA」区别：SLA 是正式服务等级协议，此处是轻量承诺框架。", l:"B2C 场景中结果承诺受消费者保护法规约束（模块 14）。", ev:3},
+      {t:"标准流程与重复劳动", d:"把交付拆解为文档化步骤（SOP），使质量稳定、可外包、可自动化。", s:"降低单位交付成本与个人时间依赖。", w:"流程标准化是产品化服务从「一个人的生意」走向「系统」的前提（模块 12 深入）。", m:"SOP 要素：步骤、输入输出、质量标准、常见问题、检查清单。", a:"每完成一单，更新一次 SOP；把「这次踩的坑」写进检查清单。", p:"流程只存在于创始人脑子里；为不存在重复的业务过度建流程。", x:"与「自动化」区别：标准化是自动化的前置条件，先标准化再自动化。", l:"过度标准化会扼杀需要创造性的环节，需区分。", ev:3},
+      {t:"客户反馈与产品迭代", d:"系统收集交付过程中的反馈，区分「这个客户的偏好」与「这类客户的普遍需求」。", s:"用真实交付数据改进产品，而非凭感觉迭代。", w:"反馈是验证的延续：交付过程产生的行为数据比访谈中的陈述更可靠。", m:"迭代纪律：每次只改一个变量；改动前后对比同一指标。", p:"把单个客户的要求直接变成产品变更；同时改多处导致无法归因。", x:"与「客户成功」区别：反馈收集是输入，客户成功是关系管理（模块 9）。", l:"反馈样本偏向「愿意发声的客户」，沉默客户需主动调研。", ev:3}
+    ]}
+  ],
+  objectives:["能够写出一份包含六要素的价值主张","能够用产品化服务三支柱评估一个服务是否适合产品化","能够设计一个最小销售方案，明确目标客户、问题、交付内容、期限、价格假设、边界与衡量方式","能够区分交付物承诺、过程承诺与结果承诺"],
+  checks:["「我们提供高质量的专业服务」——为什么这不是价值主张？缺什么？","产品化服务三支柱是哪三个？缺了「固定范围」会发生什么？","客户在交付中要求「再加一点」——你依据什么决定加还是不加？"],
+  practice:{task:"制作一个最小销售方案：目标客户、解决的问题、交付内容、交付期限、价格假设、服务边界（明确不包含什么）、结果衡量方式、证据回溯（每个要素对应的客户证据）。", template:"《最小销售方案模板》（工具 9）+《产品化服务设计表》（工具 10）。", criteria:"六要素齐全；边界明确；每个要素有证据回溯；价格假设标注待验证。", gate:"方案可以被一个不了解背景的人读懂并复述购买理由。"},
+  mistakes:[
+    {e:"把功能清单当价值主张", why:"功能是内部视角，写起来容易且有成就感。", bias:"内部视角偏误", detect:"你的销售页第一屏是功能列表而非客户结果。", fix:"用「客户从 X 状态到 Y 状态」重写价值主张。"},
+    {e:"为签单过度承诺结果", why:"承诺是签单成本最低的杠杆。", bias:"短期利益偏误", detect:"你的成交话术里出现「保证」「一定」等词。", fix:"分级承诺：交付物必达、过程尽力、结果共担；写入服务条款。"},
+    {e:"范围只增不减", why:"拒绝客户令人不适；「加一点」每次都很小。", bias:"承诺升级", detect:"交付时间逐单变长，毛利率逐单下降。", fix:"固定范围 + 明确排除项；范围变更走正式变更流程。"}
+  ],
+  resources:[
+    {name:"The Productized Service Guide: How to Build, Price, and Scale", org:"ManyRequests（引述 Many Pixels 创始人案例）", type:"实践案例", url:"https://www.manyrequests.com/blog/productized-service-guide", date:"2026 年更新", topic:"产品化服务设计 / 套餐与交付系统", why:"以 Many Pixels（固定月费、48 小时交付、无 SOW 无议价）为完整案例，拆解产品化服务的销售流程、交付系统与现金流优势（预付、可预测收入）；并给出「先选一个高价值高频任务标准化」的实操建议。", how:"精读案例与「为什么产品化」部分。", level:"入门", limits:"平台方内容（ManyRequests 销售产品化服务工具），案例为单一成功样本。", ev:3},
+    {name:"Productized Services（DealHub 术语库）", org:"DealHub", type:"方法论与工具", url:"https://dealhub.io/glossary/productized-services/", date:"持续更新", topic:"产品化服务要素 / 与定制服务的对比", why:"结构化列出成功产品化服务的要素与「产品化 vs 定制」的逐项对比（范围、定价、流程、销售、收入、可扩展性），并给出跨行业实例（SEO 审计、设计套餐、网站维护等）。", how:"浏览对比表与实例部分。", level:"入门", limits:"术语库条目，内容为综合整理。", ev:3},
+    {name:"Productized service businesses - the ultimate guide", org:"High Signal", type:"实践案例", url:"https://www.highsignal.io/productized-services", date:"持续更新", topic:"产品化服务实例 / 收入结构", why:"汇总多个真实产品化服务案例（DesignJoy、Embarque、CyberLeads 等）的收费结构与运营成本，展示「固定月费 × 客户数」的收入数学。", how:"浏览案例部分。", level:"入门", limits:"案例来自公开报道，收入数字为当事人自述，未经审计。", ev:3},
+    {name:"Jobs-to-be-Done（Strategyn：价值主张与客户任务的对应方法）", org:"Strategyn", type:"方法论与工具", url:"https://strategyn.com/jobs-to-be-done", date:"持续更新", topic:"价值主张画布 / 从客户任务到方案", why:"给出把客户任务转化为价值主张的六阶段流程（定义市场围绕任务 → 揭示需求 → 量化数据 → 发现细分 → 制定市场策略 → 制定产品策略），是价值主张设计的系统方法。", how:"浏览六阶段流程。", level:"中级", limits:"厂商方法，量化阶段成本高；个人实践用定性简化版。", ev:3}
+  ]
+},
+{
+  id:"m7", num:"07", name:"市场定位、品牌与信任建立", en:"Positioning, Brand & Trust Building", stage:"C",
+  coreQ:"如何在目标客户心中占据一个清晰的位置，并用证据建立信任？",
+  value:"把价值主张转化为客户可感知的定位与信任资产，支撑获客与销售转化。",
+  position:"阶段 C 的前端模块：定位决定内容与渠道（m8），信任证据决定销售转化（m9）。",
+  prereq:["m6"], next:["m8","m9"], parallel:["m14"],
+  topics:[
+    {name:"定位与差异化", concepts:[
+      {t:"定位陈述", d:"「对于 [目标客户]，[我们的品牌] 是 [品类] 中 [差异化点] 的选择，因为 [信任理由]」的结构化陈述。", s:"统一内外部对「我们是谁」的认知。", w:"定位不清的典型症状：每个渠道讲不同的故事，客户无法转述你的价值。", m:"定位三要素：目标客户（谁）、差异化（凭什么不同）、信任理由（凭什么信）。", a:"用一页纸写定位陈述，并用它审查所有对外内容。", p:"定位陈述里没有具体客户与差异化点；定位从不更新。", x:"与「使命愿景」区别：定位是客户心智中的位置，使命是内部志向。", l:"定位需随市场反馈迭代；早期定位是假设。", ev:3},
+      {t:"个人品牌与公司品牌", d:"个人品牌以创始人为信任载体（适合服务、咨询、内容）；公司品牌以组织为信任载体（适合产品、电商）。", s:"选择信任资产的承载形式。", w:"个人品牌建立快、迁移难（与人身绑定）；公司品牌建立慢、可转让。一人公司常两者并用：个人品牌获客，公司品牌承接。", m:"选择依据：业务的可委托程度、退出计划、客户决策链（B2B 常认人）。", a:"在定位陈述中明确主品牌形式与辅品牌形式。", p:"个人品牌业务从不考虑「人不在了怎么办」；公司品牌忽视创始人的信任杠杆。", x:"与「人设」区别：品牌是信任结构，人设是传播人格。", l:"平台政策与舆论风险对个人品牌的冲击更大。", ev:3}
+    ]},
+    {name:"信任证据", concepts:[
+      {t:"社会证明", d:"客户评价、案例研究、数据结果、推荐机制等第三方证据。", s:"降低新客户的决策风险。", w:"B2B 研究中案例研究是转化率最高的内容形式之一（v12.ai 对 312 家 B2B 公司的归因数据：案例研究平均转化率 8.4%，为各内容形式之首——样本为平台客户，存在选择偏差）。", m:"证据强度排序：可验证的结果数据 > 具名客户证言 > 匿名评价 > 粉丝数。", a:"信任证据清单（工具关联 m7 实践）：每个销售触点配置对应证据。", p:"把粉丝数/浏览数当信任证据；只有好评没有细节。", x:"与「品牌知名度」区别：知名度是认知广度，信任是决策深度。", l:"早期无客户时信任证据稀缺，需用专业内容与透明过程替代。", ev:2},
+      {t:"案例研究", d:"以具体客户、具体问题、具体结果构成的完整叙事。", s:"把抽象能力转化为可感知的结果证明。", w:"案例研究的转化力来自具体性：「某公司 6 个月收入增长 247%」远胜「5 个提升收入的技巧」。", m:"结构：客户背景与问题 → 方案实施 → 量化结果 → 客户证言 → 下一步。", a:"每完成一单，征得同意后整理为案例；量化结果需客户确认。", p:"案例只有过程没有结果；结果数字无法追溯。", x:"与「客户评价」区别：案例是完整叙事，评价是单点证言。", l:"敏感行业客户可能拒绝具名，需设计匿名版本。", ev:3}
+    ]},
+    {name:"内容与转化", concepts:[
+      {t:"内容与购买旅程对齐", d:"按认知（发现问题）→ 考虑（比较方案）→ 决策（选择伙伴）三阶段组织内容，每阶段回答客户当下的问题。", s:"让内容真正推动购买决策而非只积累曝光。", w:"EMAC 2022 研究（1,478 家 B2B 企业的 webinar 数据）：互动深度（提问、下载、点击购买信号）显著预测线索转化（β=2.127, p<0.001），而观看时长与转化负相关——参与必须落到行为层。STM Laser 案例研究同样显示：技术应用型内容互动量远高于促销内容，访客到询盘转化率 2.4%。", m:"对齐检验：每个内容资产标注服务的阶段与要回答的问题。", a:"内容计划表（关联 m8 实践）按三阶段分配内容类型。", p:"所有内容都在认知阶段（「5 个技巧」），决策阶段内容缺失。", x:"与「内容营销」区别：对齐是组织原则，内容营销是执行体系。", l:"阶段边界模糊，同一内容可服务多阶段。", ev:2},
+      {t:"曝光与商业转化的区别", d:"曝光（浏览、粉丝、播放）是注意力指标；转化（留资、询盘、付费）是商业指标。", s:"防止「内容很火但生意没起色」。", w:"160 个个体创业者案例样本显示 54.4% 粉丝不足 5,000（样本来自 starterstory，存在幸存者偏差）——受众规模与收入相关但非充分条件。", m:"转化链路：曝光 → 信任 → 行动；任何一环断裂都会表现为「有流量没需求」。", a:"为每个渠道设定转化指标而非曝光指标；定期审计「曝光→转化」漏斗。", p:"用粉丝数汇报业绩；把平台算法变化当生意失败主因。", x:"与「品牌知名度」区别：曝光是认知，转化是行为。", l:"B2B 长周期业务中转化滞后数月，需用中间指标（询盘质量）跟踪。", ev:2}
+    ]}
+  ],
+  objectives:["能够写出包含目标客户、差异化点、信任理由三要素的定位陈述","能够区分个人品牌与公司品牌的适用场景与风险","能够按购买旅程三阶段组织内容计划，并为每阶段设定转化指标","能够用证据强度排序评估自己的信任资产"],
+  checks:["为什么「5 个提升效率的技巧」这类内容很难带来询盘？它缺了什么？","粉丝 10 万但零转化，可能断在哪一环？怎么诊断？","B2B 客户为什么更认「人」而不是「公司」？这对一人公司意味着什么？"],
+  practice:{task:"设计一份定位陈述、一页核心业务介绍，以及与目标客户购买决策相对应的信任证据清单（按证据强度排序，标注现有与待建）。", template:"《定位陈述 + 一页业务介绍 + 信任证据清单》。", criteria:"定位陈述三要素齐全；信任证据按强度排序并标注缺口；一页介绍可被非专业人士复述。", gate:"能说出「客户在决策链的哪一环最需要什么证据」。"},
+  mistakes:[
+    {e:"只追求曝光，没有商业转化设计", why:"曝光数字即时可见，转化链路长且归因难。", bias:"即时满足偏误", detect:"你的内容数据只有播放/粉丝，没有留资/询盘/付费。", fix:"为每个渠道设定转化指标；在内容中嵌入与阶段匹配的行动召唤。"},
+    {e:"把粉丝数当信任证据", why:"粉丝数是唯一容易量化的「社会证明」。", bias:"量化偏误", detect:"你的销售材料把粉丝数放在客户证言之前。", fix:"按证据强度重排：结果数据 > 具名证言 > 案例 > 粉丝数。"},
+    {e:"定位陈述从不更新", why:"定位写一次就「完成」了，更新需要面对错误。", bias:"承诺升级", detect:"你的定位陈述与最近三个月的实际成交客户对不上。", fix:"每季度用实际成交客户特征校准定位陈述。"}
+  ],
+  resources:[
+    {name:"Content That Converts B2B Leads: Turning Activity Into Revenue", org:"Room4Media", type:"行业研究与数据", url:"https://room4media.com/blog/content-that-converts-b2b-leads-turning-activity-into-revenue/", date:"持续更新", topic:"内容与购买旅程对齐 / 营销销售协同", why:"总结 B2B 内容转化的研究证据：内容需连接营销与销售（Talentia 案例）、LinkedIn 战略内容提升 B2B 收入（Industrial Marketing Management 同行评审研究）、个性化显著提升转化（Dynamic Yield 自测：注册 +275%、演示请求 +800%）。并给出「随机内容行为」的诊断框架。", how:"精读研究证据与框架部分。", level:"中级", limits:"博客汇总多方研究，部分为厂商自测数据；引用时核对原始研究。", ev:2},
+    {name:"Does engaging content marketing help generate more B2B leads?（EMAC 会议论文）", org:"EMAC（欧洲营销科学院）会议论文集", type:"学术研究", url:"http://proceedings.emac-online.org/pdfs/A2022-107378.pdf", date:"2022 年", topic:"互动深度与转化的关系", why:"基于 1,478 家 B2B 企业 webinar 平台数据的 logistic 回归：平均互动得分是线索转化的最强正向预测因子（β=2.127, p<0.001），出席人数无显著影响，观看时长与转化负相关。为「参与度必须落到行为层」提供实证支持。", how:"精读结果与讨论部分。", level:"进阶", limits:"单一平台数据；webinar 场景；相关性非因果。", ev:2},
+    {name:"Driving B2B Demand through Content Marketing: A Study at STM Laser（案例研究论文）", org:"International Journal of Scientific Research in Engineering and Management", type:"学术研究", url:"https://ijsrem.com/uploads/production/Driving-B2B-Demand-through-Content-Marketing-A-Study-at-STM-Laser.pdf", date:"2024–2025 年", topic:"内容类型效果 / 询盘转化", why:"工业 B2B 案例：技术应用型内容互动量（920/760 次）远高于促销内容；产品页 brochure 下载到询盘转化 68.1%；整体访客到询盘 2.4%，内容影响询盘占比约 78%。展示内容营销的可测量 ROI 结构。", how:"浏览发现与建议部分。", level:"中级", limits:"单一公司案例；期刊级别一般；数字为特定站点口径。", ev:2},
+    {name:"B2B Content Marketing Leads Statistics（统计汇总，含测量挑战）", org:"The Trust Agency", type:"行业研究与数据", url:"https://thetrustagency.net/statistic/b2b-content-marketing-leads", date:"持续更新", topic:"内容营销效果统计 / 测量挑战", why:"汇总内容营销的常见统计（案例研究转化、长文优势等）与同样重要的测量挑战：仅 21% 的 B2B 营销者能成功追踪内容 ROI、42% 难以归因线索到具体内容——提醒你对内容数据保持口径怀疑。", how:"浏览「测量与挑战」部分。", level:"入门", limits:"统计转引，原始来源多样且部分无法追溯；作为方向性参考。", ev:3}
+  ]
+},
+{
+  id:"m8", num:"08", name:"客户获取与营销渠道", en:"Customer Acquisition & Marketing Channels", stage:"C",
+  coreQ:"目标客户在哪里？用什么渠道、多少预算、什么指标、什么停止条件获取他们？",
+  value:"建立有预算纪律的获客实验体系，避免在缺少转化证据时扩大投入。",
+  position:"阶段 C 的增长引擎模块：渠道选择由定位（m7）决定，效果由单位经济（m11）检验。",
+  prereq:["m7"], next:["m9","m11"], parallel:["m10"],
+  topics:[
+    {name:"渠道类型与匹配", concepts:[
+      {t:"主动获客与被动获客", d:"主动获客（外联、冷邮件、广告投放）由你发起接触；被动获客（SEO、内容、转介绍）由客户主动找来。", s:"匹配业务阶段与资源结构。", w:"早期业务通常需要主动获客获得前 10 个客户；被动渠道（SEO 等）回报周期 6–12 个月，适合验证后投入。", m:"选择依据：客单价（高客单适合主动）、决策周期（长周期适合内容培育）、预算（广告需要持续投入）。", a:"为业务设计「1 个主动 + 1 个被动」渠道组合起步。", p:"只做被动渠道然后抱怨没客户；只做主动渠道然后抱怨不可持续。", x:"与「 inbound / outbound 」区别：同义概念，中文语境常用主动/被动。", l:"渠道效果随平台与市场变化，需定期重估。", ev:3},
+      {t:"渠道谱系", d:"SEO、付费广告、社交媒体、内容营销、合作伙伴、转介绍、销售外联、市场平台（Upwork 等）。", s:"建立渠道选择的完整菜单。", w:"不同渠道的成本、可控性、回报周期差异巨大：SEO 慢但复利，广告快但停投即停，转介绍质量最高但不可控。", m:"渠道评估维度：单客成本、可控性、回报周期、与客户行为的匹配度。", a:"用工具 11（获客渠道测试计划）为每个渠道写预算、流程、指标、停止条件。", p:"同时开五个渠道各投一点；把「都试试」当策略。", x:"与「营销策略」区别：渠道是触达路径，策略是整体设计。", l:"平台数据归因（末次点击）系统性高估直接转化渠道。", ev:3},
+      {t:"渠道与客户行为匹配", d:"渠道选择应跟随目标客户的实际信息行为：他们在哪搜索、信任谁、如何决策。", s:"避免「在客户不在的地方营销」。", w:"B2B 技术买家偏好应用型技术内容（STM Laser 案例）；B2C 冲动购买受社交推荐影响——渠道必须匹配客户的真实行为。", m:"匹配方法：从 m2 访谈中提取「你上次如何找到类似方案」的答案，直接映射渠道。", a:"渠道清单中每个渠道标注「客户行为证据」。", p:"按「哪个渠道火」而非「客户在哪」选择。", x:"与「渠道偏好」区别：匹配基于证据，偏好基于习惯。", l:"客户行为随代际与场景变化，需持续观察。", ev:3}
+    ]},
+    {name:"渠道经济学", concepts:[
+      {t:"CAC 及其计算局限", d:"CAC = 营销与销售总成本 ÷ 新客户数。完整口径（full-loaded）通常比报表口径高 40–60%（含管理、工具、管理层时间分摊）。", s:"诚实衡量获客成本，避免渠道决策建立在低估的数字上。", w:"Cape Fear Advisors 的分析指出：末次点击归因在多触点环境下系统性低估真实获客成本 20–50%；混合 CAC 会掩盖单个渠道的真实经济性（混合 3:1 可能隐藏某渠道 0.8:1）。", m:"计算纪律：固定口径跨期可比；分渠道计算而非只看混合值；时间匹配（本期花费对应本期成交的错配）。", a:"工具 14（单位经济模型）中 CAC 分渠道计算；记录口径假设。", p:"只算广告费不算人力与工具；用平台归因数据当真实 CAC。", x:"与「获客费用」区别：CAC 是单位指标，费用是总额。", l:"早期数据量小，CAC 波动大，需结合回收期判断。", ev:2},
+      {t:"渠道验证与预算纪律", d:"新渠道先小预算测试（可逆决策），达到事前阈值再扩大；未达阈值即停。", s:"把获客投入变成可证伪的实验而非信仰。", w:"「在缺少转化证据时扩大流量投入」是个人创业者最常见的资金消耗方式。", m:"测试设计：预算上限、测试期、成功指标（如 CAC < LTV/3 且回收期 < 12 个月）、停止条件。", a:"工具 11 强制填写停止条件；每月复盘渠道数据。", p:"「再投一个月看看」；用总曝光量掩盖单客成本恶化。", x:"与「增长黑客」区别：验证是纪律，黑客是技巧集合。", l:"渠道间存在协同效应，单独归因会低估组合价值。", ev:3},
+      {t:"单一渠道依赖", d:"收入过度依赖单一渠道或平台时，渠道方的规则变化可直接摧毁业务。", s:"识别获客结构的脆弱性。", w:"平台依赖是个人创业的结构性风险：算法调整、抽成变化、账号政策都可能让获客成本一夜翻倍。", m:"依赖度指标：最大渠道流量占比、渠道切换成本、渠道方可替代性。", a:"每季度做「渠道消失」压力测试：如果主渠道没了，业务能活多久？", p:"把平台粉丝当自有资产；渠道集中度从不复盘。", x:"与「客户集中度」区别：渠道依赖是供给侧风险，客户集中度是需求侧风险。", l:"完全多渠道分散对早期资源不现实，关键是可迁移性。", ev:3}
+    ]}
+  ],
+  objectives:["能够为目标业务设计三种可选获客方法，各含预算、流程、成功指标与停止条件","能够计算分渠道 CAC 并说明其口径与局限","能够解释为什么不应在缺少转化证据时扩大流量投入","能够评估业务的单一渠道依赖风险"],
+  checks:["「SEO 是免费的流量」——这句话错在哪里？SEO 的真实成本是什么？","你的主渠道如果明天关停，业务会受到什么影响？现在能做什么准备？","为什么混合 CAC 会掩盖渠道问题？应该怎么看渠道经济性？"],
+  practice:{task:"为一个具体业务设计三种可选获客方法：每种写明预算、执行流程、成功指标、停止条件与客户行为匹配证据；用工具 11 记录并选择一个先做小规模测试。", template:"《获客渠道测试计划》（工具 11）。", criteria:"三种方法覆盖主动+被动；停止条件事前写定；每个渠道有客户行为证据。", gate:"能说出「先测哪个渠道、花多少钱、什么结果算成功、什么结果算停止」。"},
+  mistakes:[
+    {e:"多渠道同时小规模投入", why:"分散让人感觉安全，且每个渠道都有「正在推进」的进度感。", bias:"虚假掌控感", detect:"你的营销预算被切成五份，每份都看不出效果。", fix:"单渠道打透再扩展；用工具 11 的停止条件强制收敛。"},
+    {e:"用曝光量汇报渠道效果", why:"曝光数字大且即时，转化数据滞后。", bias:"虚荣指标偏误", detect:"你的渠道报告只有展示量/点击量，没有留客成本。", fix:"渠道报表必须包含 CAC 与回收期；分渠道计算。"},
+    {e:"把平台流量当自有资产", why:"粉丝与订阅数在后台持续可见，产生拥有感。", bias:"禀赋效应", detect:"你的获客计划 80% 依赖单一平台，且没有迁移预案。", fix:"把平台受众逐步转化为自有渠道（邮件列表等）；做渠道消失压力测试。"}
+  ],
+  resources:[
+    {name:"B2B Content Marketing ROI in 2026: What Actually Generates Leads（312 家公司数据）", org:"V12 Marketing", type:"行业研究与数据", url:"https://v12.ai/b2b-content-marketing-roi-in-2026-what-actually-generates-leads-data-from-312-companies", date:"2026 年", topic:"内容渠道的效果排序 / 渠道组合", why:"对 312 家 B2B 公司的归因分析：案例研究转化率 8.4%（各形式之首）、原创研究报告 6.9%、对比页 5.7%、长文 3.2%；多渠道组合（邮件+LinkedIn+SEO）转化是单 SEO 的 5.1 倍。为内容渠道优先级提供数据参考。", how:"精读内容形式排序部分。", level:"中级", limits:"营销公司自有客户数据，存在选择偏差；归因方法未完全披露。", ev:3},
+    {name:"Driving B2B Demand through Content Marketing: A Study at STM Laser", org:"IJSREM（学术期刊案例研究）", type:"学术研究", url:"https://ijsrem.com/uploads/production/Driving-B2B-Demand-through-Content-Marketing-A-Study-at-STM-Laser.pdf", date:"2024–2025 年", topic:"渠道与客户行为匹配 / 内容漏斗", why:"工业 B2B 实证：62% 流量来自自然搜索（内容驱动可发现性）、技术内容互动远超促销内容、按购买阶段组织内容形成「高意向内容漏斗」。展示渠道—行为匹配的可测量结果。", how:"浏览发现部分。", level:"中级", limits:"单一公司案例；期刊级别一般。", ev:2},
+    {name:"Build a Micro-SaaS on a Tight Budget（分发渠道排序与跑道数学）", org:"Adlega", type:"行业研究与数据", url:"https://adlega.com/blog/building-a-micro-saas-with-minimal-funding", date:"2026 年", topic:"冷启动渠道排序 / 预算纪律", why:"对微型 SaaS 冷启动渠道的务实排序：SEO/内容（6–12 个月回报但复利）、集成市场（Slack/Notion/Zapier，常为最快冷获客）、社区（先帮忙后提及）、build in public、冷外联（每周 50–100 封，个位数回复率）、付费广告（LTV>3×CAC 后才投）。并给出跑道公式。", how:"精读分发渠道部分。", level:"中级", limits:"行业博客；渠道排序为经验法则而非统计数据。", ev:3}
+  ]
+},
+{
+  id:"m9", num:"09", name:"销售流程、销售漏斗与客户留存", en:"Sales Process, Funnel & Retention", stage:"C",
+  coreQ:"从线索到成交的转化过程如何设计？成交之后如何留住客户并放大价值？",
+  value:"建立可重复的销售流程与留存机制，让收入不依赖运气。",
+  position:"阶段 C 的转化模块：承接 m8 的线索，产出 m11 验证的现金流。",
+  prereq:["m8"], next:["m11"], parallel:["m10"],
+  topics:[
+    {name:"销售漏斗", concepts:[
+      {t:"销售漏斗阶段", d:"线索 → 资格判断 → 需求沟通 → 方案报价 → 异议处理 → 成交 → 交付衔接。每阶段有明确的进入条件与退出条件。", s:"把「销售」从艺术变为可诊断的流程。", w:"漏斗的价值在于定位流失环节：不知道客户在哪一步离开，就无法改进。", m:"阶段指标：各阶段转化率、周期时长、流失原因分布。", a:"用工具 12（销售漏斗指标表）定义各阶段进入条件与指标。", p:"漏斗阶段从不定义进入条件；只看总转化率不看分段。", x:"与「营销漏斗」区别：营销漏斗到线索为止，销售漏斗从线索到成交。", l:"B2B 长周期销售的阶段边界模糊，需按决策链定制。", ev:3},
+      {t:"资格判断", d:"在投入销售时间前筛选：有预算、有权限、有需求、有时间表（实践中的常用四项）。", s:"把销售时间分配给最可能成交的线索。", w:"个人创业者的销售时间是最稀缺资源；资格判断是时间分配工具。", m:"判断方式：提问验证而非客户自述；四项全无的线索降级培育。", a:"在漏斗第一阶段设置资格问题清单。", p:"对所有线索平均用力；把「有兴趣」当「有资格」。", x:"与「客户画像」区别：资格判断是单线索筛选，画像是群体描述。", l:"四项标准因业务而异（B2C 无「权限」维度）。", ev:3},
+      {t:"B2B 与 B2C 销售差异", d:"B2B：决策链长、多角色、合同与采购流程；B2C：决策快、情绪与信任驱动、冲动与比价并存。", s:"匹配销售流程与客户类型。", w:"用 B2C 打法做 B2B（只讲产品不讲 ROI）或用 B2B 打法做 B2C（过度正式）都会损失转化。", m:"B2B 重：决策链地图、ROI 论证、风险消除；B2C 重：信任信号、价格锚点、购买便利。", a:"按客户类型设计话术、材料与跟进节奏。", p:"一套话术打天下；B2B 报价后干等。", x:"与「客户细分」区别：销售差异是流程设计，细分是市场划分。", l:"同一产品可能同时存在 B2B 与 B2C 客户，需双轨设计。", ev:3}
+    ]},
+    {name:"留存与客户成功", concepts:[
+      {t:"留存经济学", d:"Gupta、Lehmann & Stuart 的研究：留存率每提高 1%，客户价值提高 3–7%；而获客成本投入的弹性仅 0.02–0.3——留存的杠杆远大于获客。", s:"把留存从「服务态度」问题升级为「经济结构」问题。", w:"Fader & Hardie（Marketing Science）证明：用单一平均留存率计算会系统性误估客户价值（其契约业务案例中低估 38%），因为高流失客户早退、队列留存随时间上升。", m:"留存指标：月流失率、队列留存曲线、净收入留存（NRR）。", a:"工具 14 中 LTV 用队列数据而非平均值计算。", p:"用平均留存率算 LTV；忽视扩张收入对留存的贡献。", x:"与「客户满意度」区别：留存是行为结果，满意度是感受指标。", l:"队列数据需要时间积累；早期只能用代理指标。", ev:1},
+      {t:"复购、追加销售与转介绍", d:"复购（再次购买）、追加销售（升级/加购）、转介绍（推荐新客户）是留存价值的三个放大器。", s:"在存量客户上获取增量收入。", w:"转介绍是成本最低、信任最高的获客渠道；追加销售直接提升 LTV。", m:"机制设计：复购靠提醒与订阅化；追加销售靠场景触发；转介绍靠双边激励与低摩擦流程。", a:"在交付完成节点设置转介绍请求；为高满意度客户设计推荐机制。", p:"转介绍只靠「客户自愿」；追加销售变成骚扰。", x:"与「交叉销售」区别：追加销售是升级，交叉销售是关联品类。", l:"激励机制设计不当会损害信任（尤其 B2B）。", ev:3},
+      {t:"客户成功", d:"主动帮助客户实现购买时期望的结果，而非被动响应问题。", s:"把留存从事后补救变为事前经营。", w:"客户流失的主因常是「没得到预期结果」而非产品缺陷；预期管理（m6）是客户成功的前半程。", m:"客户成功动作： onboarding 检查清单、定期价值回顾、使用数据监控、风险预警。", a:"为每个客户设定「成功标准」并在交付中对照。", p:"把客户成功当客服；只在客户投诉时介入。", x:"与「售后服务」区别：客户成功是主动经营，售后是被动响应。", l:"个人创业者带宽有限，客户成功需按客户价值分层。", ev:3}
+    ]},
+    {name:"问题诊断", concepts:[
+      {t:"四类问题诊断框架", d:"转化不佳时区分：产品问题（价值不足）、流量问题（来人不对）、销售问题（流程断裂）、定价问题（价格与价值错配）。", s:"把「卖不动」的模糊焦虑转为可定位的诊断。", w:"四类问题的处方完全不同：产品问题改方案，流量问题换渠道，销售问题修流程，定价问题做实验。", m:"诊断顺序：先看流量质量（来人是不是目标客户）→ 再看销售流程（有没有到报价环节）→ 再看定价（报价后流失率）→ 最后看产品（成交后留存）。", a:"用漏斗数据逐段排查；每段配一个诊断问题。", p:"把所有问题都归因于「流量不够」；用降价掩盖产品问题。", x:"与「复盘」区别：诊断是定位机制，复盘是全面回顾。", l:"四类问题常并存，需按顺序逐个排除。", ev:3}
+    ]}
+  ],
+  objectives:["能够画出适用于选定业务的完整销售漏斗，定义各阶段进入条件与指标","能够用资格判断筛选线索并说明四项标准","能够解释留存率与获客成本对客户价值的杠杆差异","能够用四类问题诊断框架定位转化瓶颈"],
+  checks:["「留存的杠杆远大于获客」——这个结论的研究依据是什么？适用条件是什么？","客户在报价后流失，可能是哪四类问题？按什么顺序排查？","为什么用平均流失率计算 LTV 会系统性出错？"],
+  practice:{task:"画出适用于选定业务的完整销售漏斗：定义各阶段进入条件、关键指标与改进方法；为每段流失设计一个诊断问题；设计复购/追加销售/转介绍三个留存机制。", template:"《销售漏斗指标表》（工具 12）。", criteria:"每阶段有进入条件与指标；流失诊断问题可执行；留存机制具体到触发时点。", gate:"能指着漏斗任意一段说出「这里流失说明什么、下一步查什么」。"},
+  mistakes:[
+    {e:"只看总转化率，不看分段流失", why:"总转化率一个数字最简单，且可以讲成故事。", bias:"过度简化", detect:"你的销售汇报只有「这个月成交 X 单」。", fix:"用工具 12 记录分段转化率与流失原因分布。"},
+    {e:"把「有兴趣」当「有资格」", why:"兴趣信号让人愉悦，资格判断需要追问让人不适。", bias:"确认偏误", detect:"你的跟进列表里大量「聊得很好但没下文」的线索。", fix:"在第一次接触就用资格问题清单筛选。"},
+    {e:"用降价解决所有转化问题", why:"降价是最快的成交杠杆，且不需要改其他任何东西。", bias:"短期主义", detect:"你的折扣率逐季上升，毛利率逐季下降。", fix:"先用四类诊断定位问题；降价前先验证价值传递是否到位。"}
+  ],
+  resources:[
+    {name:"LTV:CAC ratio: the 3:1 rule, formula and its limits", org:"We PUSHERS（引述 Skok、a16z、Kellogg、Gurley、Fader & Hardie 等）", type:"行业研究与数据", url:"https://wepushers.com/frameworks/ltv-cac-ratio", date:"持续更新", topic:"CAC/LTV 计算口径 / 留存弹性研究", why:"系统梳理 LTV 与 CAC 的公式变体与陷阱：同一业务在不同假设下 LTV:CAC 可从 1.5 到 6.7；引用 Fader & Hardie（Marketing Science）的平均留存率误估问题、Gupta 等的留存弹性（1% 留存 → 3–7% 客户价值）、Gurley 对输入非独立性的批评。", how:"精读公式变体与陷阱部分。", level:"中级", limits:"博客汇编；引用研究时回到原始论文。", ev:2},
+    {name:"LTV/CAC ratio: your secret weapon to measure sales & marketing ROI", org:"Cube Software", type:"行业研究与数据", url:"https://www.cubesoftware.com/blog/ltv-cac-ratio", date:"持续更新", topic:"CAC 完整口径 / 队列差异", why:"强调 CAC 必须包含全部营销销售成本（创意、人力、软件、线索评分），并指出 LTV/CAC 随队列差异巨大——用平均值会掩盖结构性问题。", how:"浏览局限与陷阱部分。", level:"入门", limits:"财务软件公司博客，带产品推广属性。", ev:3},
+    {name:"LTV To CAC Ratio: Why 3:1 Became The Go To Standard", org:"DataAlly", type:"行业研究与数据", url:"https://dataally.ai/blog/ltv-to-cac-ratio", date:"持续更新", topic:"3:1 规则的来源与争议 / 回收期", why:"明确指出 3:1 并非科学推导的最优值，而是对成熟企业群的观察 floor；并强调 CAC 回收期（2022 年私营 SaaS 中位数约 23 个月）是让比率保持诚实的配套指标。", how:"精读「比率何时误导」部分。", level:"入门", limits:"行业博客；回收期中位数为转引数据。", ev:3}
+  ]
+},
+{
+  id:"m10", num:"10", name:"定价策略与收入结构", en:"Pricing Strategy & Revenue Structure", stage:"C",
+  coreQ:"定多少钱？用什么收费结构？如何验证价格而不是猜价格？",
+  value:"把定价从「成本加一点」或「随竞争对手」变为基于价值与支付意愿的系统决策。",
+  position:"阶段 C 的利润模块：定价假设在 m3 阶段提出，在 m10 用真实客户验证，结果进入 m11 的单位经济。",
+  prereq:["m6"], next:["m11"], parallel:["m8","m9"],
+  topics:[
+    {name:"定价方法", concepts:[
+      {t:"四种定价导向", d:"成本导向（成本+加成）、竞争导向（对标对手）、价值导向（按客户获得的价值）、支付意愿导向（按客户实际愿付）。", s:"建立定价决策的方法论菜单。", w:"多数小企业默认成本导向，导致「忙而不赚」；价值导向需要理解客户的结果，支付意愿导向需要验证工具。", m:"选择逻辑：标准化商品适合竞争导向；差异化服务适合价值导向；新产品适合支付意愿研究。", a:"为业务选择主导向 + 辅助校验（成本价为下限，竞争价为参照）。", p:"只用成本加成；把「对手定多少」当唯一依据。", x:"与「定价心理学」区别：导向是方法论，心理学是技巧层。", l:"价值量化在 B2C 情感消费中困难，需借助支付意愿研究。", ev:3},
+      {t:"价格、销量、毛利与收入的关系", d:"收入 = 价格 × 销量；毛利 = (价格 − 单位变动成本) × 销量；提价若销量降幅小于价格升幅，总利润上升。", s:"理解定价的利润杠杆。", w:"定价是利润杠杆最大的变量之一：1% 提价（销量不变）直接落入利润；但销量对价格的敏感度必须实测。", m:"盈亏平衡销量 = 固定成本 ÷ (价格 − 单位变动成本)；提价降低盈亏平衡点。", a:"用工具 13（定价与收入情景模型）测算不同价格 × 销量组合。", p:"假设提价不影响销量；用「薄利多销」掩盖单位经济不成立。", x:"与「折扣策略」区别：定价是基准，折扣是临时调整。", l:"价格弹性因客户群体与场景差异大，需分群测试。", ev:2}
+    ]},
+    {name:"支付意愿研究", concepts:[
+      {t:"Van Westendorp 价格敏感度测量", d:"四问法：什么价格太便宜（怀疑质量）、便宜（划算）、贵（仍考虑）、太贵（不考虑）；曲线交点给出可接受价格区间与最优价格点（OPP）。", s:"在没有任何价格参照时探索客户的心理价格边界。", w:"该方法唯一能识别「价格下限」——价格过低会触发质量怀疑（如企业软件 $1/月会被认为不可靠）。", m:"输出：可接受区间（PMC–PPC 之间）、OPP（太便宜与太贵曲线交点）、IDP（便宜与贵曲线交点）。", a:"新产品定价探索阶段使用；样本 100–300。", p:"把陈述性阈值当实际购买行为；样本过小。", x:"与「直接问愿付多少」区别：VW 问感知边界，直接问给数字。", l:"纯陈述性偏好，say-do gap 明显；不给需求曲线。", ev:2},
+      {t:"Gabor-Granger 与需求曲线", d:"向受访者依次展示价格点，询问是否购买；各价格点的购买比例构成需求曲线，收入（价格 × 购买概率）峰值即收入最大化价格。", s:"在已知大致价格区间时找到收入最优价格。", w:"Gabor-Granger 的输出可直接用于收入测算；但顺序展示价格会产生锚定效应。", m:"收入最大化价格 ≠ 利润最大化价格（需结合成本）；价格点选择决定能否发现最优点。", a:"已有价格假设时使用；样本 200–400 或每价格点 50+。", p:"价格点设置跳过真实最优区；忽视锚定偏差。", x:"与 VW 区别：VW 探索区间，GG 优化区间内点位。", l:"陈述性方法；购买意向 ≠ 实际购买。", ev:2},
+      {t:"陈述性偏好与显示性偏好（say-do gap）", d:"陈述性偏好（说愿付多少）系统性低于显示性偏好（实际支付行为）；直接提问法低估支付意愿约 15–30%。", s:"理解为什么问卷定价不可靠。", w:"定价研究领域共识：最终价格决策必须用行为数据验证（A/B 价格测试、预售、付费试点）。", m:"证据阶梯：直接提问（最弱）→ VW/GG（中）→ conjoint（较强）→ 市场行为测试（最强）。", a:"用调研定区间，用行为测试定最终价格。", p:"把问卷结果当最终定价依据；忽视「说」与「做」的系统性差距。", x:"与「样本偏差」区别：say-do gap 是方法固有偏差，样本偏差是抽样问题。", l:"行为测试需要真实流量与交付能力，早期成本高。", ev:1},
+      {t:"价格锚点与套餐结构", d:"通过版本差异（好/更好/最好）、参照价格与「太便宜」信号影响客户的价值感知与选择。", s:"在不改变产品的情况下影响成交价格与结构。", w:"VW 的「太便宜」问题揭示：价格过低会损害信任；锚点设计同时管理价格感知与质量感知。", m:"三档设计：入门档（降低尝试门槛）、主力档（锚点，利润主力）、高价档（抬升参照）。", a:"套餐设计后做小规模 A/B 或访谈验证感知。", p:"档位差异只做减法不做加法；锚点档无人购买。", x:"与「定价实验」区别：锚点是结构设计，实验是验证方法。", l:"锚点效果因品类与文化差异大，需实测。", ev:3}
+    ]},
+    {name:"收入结构", concepts:[
+      {t:"一次性、经常性与多元收入", d:"一次性（项目/产品销售）、经常性（订阅/维护）、多元（组合）三种收入结构的风险与稳定性特征。", s:"设计抗风险的收入组合。", w:"经常性收入提高可预测性但要求留存能力；一次性收入波动大但回款快；多元结构降低单一依赖。", m:"结构设计：主收入（现金流引擎）+ 辅收入（平滑波动）+ 实验收入（期权）。", a:"用工具 13 测算不同收入结构下的现金流形态。", p:"追求「纯订阅」而忽视客户是否接受经常性承诺。", x:"与「商业模式」区别：收入结构是模式的一个维度。", l:"多元结构增加管理复杂度，早期应克制。", ev:3},
+      {t:"收入集中度", d:"最大客户/渠道/产品占收入的比例；集中度过高时业务稳定性受制于少数外部方。", s:"识别收入结构的脆弱点。", w:"个人创业早期集中度高是常态，但需设定警戒线（如单一客户 >30%）并主动管理。", m:"管理动作：客户分层、主动拓展第二收入源、合同条款（最低承诺）。", a:"每月更新收入集中度看板；设定阈值与应对预案。", p:"把「大客户依赖」当稳定；集中度从不量化。", x:"与「客户留存」区别：集中度是结构指标，留存是行为指标。", l:"细分市场天然集中（客户总量小），需结合市场规模判断。", ev:3}
+    ]}
+  ],
+  objectives:["能够比较四种定价导向并说明各自适用条件","能够用 Van Westendorp 与 Gabor-Granger 设计支付意愿研究并解释其局限","能够解释 say-do gap 及其对定价决策的含义","能够设计至少三种价格方案并测算不同销量与转化率下的经营结果"],
+  checks:["「直接问客户愿付多少」为什么是最弱的定价研究方法？系统性偏差有多大？","提价 10% 但销量降 5%，总利润如何变化？需要什么数据才能判断？","为什么「太便宜」是一个需要认真对待的定价信号？"],
+  practice:{task:"设计至少三种价格方案（如三档套餐），估算不同销量、转化率、交付成本下的经营结果（保守/基准/乐观三情景），并列出需要真实客户验证的假设清单。", template:"《定价与收入情景模型》（工具 13）。", criteria:"三情景参数有依据；公式与变量定义完整；待验证假设明确到「用什么实验验证」。", gate:"能说出「当前价格是假设还是证据」，以及验证它的最小实验。"},
+  mistakes:[
+    {e:"用成本加成定价", why:"成本是唯一容易获得的数字，且「不亏本」给人安全感。", bias:"锚定于内部成本", detect:"你的定价逻辑是「成本 × 2」，说不出客户获得的价值。", fix:"做支付意愿研究（VW/GG）；用价值语言重写定价依据。"},
+    {e:"把问卷支付意愿当最终定价", why:"问卷便宜且给出确定数字。", bias:"虚假精确感", detect:"你的定价依据是一份「客户说愿付 X 元」的调研。", fix:"用调研定区间，用行为测试（预售/A-B）定最终价格。"},
+    {e:"低价获客", why:"低价降低销售阻力，且「先上车」感觉稳妥。", bias:"短期主义", detect:"你的客单价持续低于交付成本可承受水平，或低价客户流失率最高。", fix:"测算低价客户的 LTV:CAC；用「太便宜」信号检查质量感知。"}
+  ],
+  resources:[
+    {name:"Pricing Research Methods: A Complete Comparison", org:"Quali-Fi", type:"行业研究与数据", url:"https://quali-fi.com/learn/pricing-research", date:"持续更新", topic:"四种定价研究方法对比 / say-do gap", why:"对 Van Westendorp、Gabor-Granger、conjoint、直接提问四种方法的系统对比：输出、样本量、适用场景与局限；明确指出直接提问法系统性低估支付意愿 15–30%。是选择定价研究方法的实用决策框架。", how:"精读方法对比与决策框架部分。", level:"中级", limits:"市场研究公司内容，带服务属性；样本量建议为经验值。", ev:3},
+    {name:"Pricing Research Methods: A Practical Comparison", org:"SUPRA Consulting", type:"行业研究与数据", url:"https://www.supra.consulting/insights/pricing-research-methods", date:"持续更新", topic:"陈述性 vs 显示性偏好 / 行为测试", why:"按预测效度对七种定价方法排序，核心论点：陈述性方法测「说的」，行为测试（A/B 价格测试）测「做的」，后者是金标准；并给出各方法的适用情境与成本区间。", how:"精读方法排序与「何时用哪种」部分。", level:"中级", limits:"咨询公司观点；成本数据为欧洲市场口径。", ev:3},
+    {name:"Van Westendorp vs Gabor-Granger — which method is right for your situation?", org:"bms（市场研究机构）", type:"行业研究与数据", url:"https://bms-net.de/en/van-westendorp-vs-gabor-granger-which-method-is-right-for-your-situation", date:"持续更新", topic:"VW 与 GG 的机制与选择", why:"详细解释 VW 四问的曲线交点（可接受区间、OPP、IDP）与 GG 的价格阶梯逻辑，并明确两者「诊断 vs 预测」的分工：VW 找心理边界，GG 量化各价位需求。", how:"精读两方法的机制部分。", level:"中级", limits:"研究机构内容；方法细节偏专业调研场景。", ev:3},
+    {name:"Testing prices: which method shows what customers will really pay?", org:"Horizon（价格测试服务商）", type:"行业研究与数据", url:"https://www.gethorizon.net/blog/exploring-price-testing-methodologies-a-comprehensive-guide", date:"持续更新", topic:"行为价格测试（painted door）/ 方法组合", why:"提出「先调研定范围、再行为测试定决策」的组合逻辑，并介绍 painted door 价格测试（真实广告 + 真实报价页，测购买/注册意向）的设计与局限（最多比较约六个价格、不解释原因）。", how:"精读行为测试部分。", level:"中级", limits:"服务商内容；行为测试需要一定流量基础。", ev:3}
+  ]
+},
+{
+  id:"m11", num:"11", name:"创业财务、现金流与单位经济模型", en:"Financials, Cash Flow & Unit Economics", stage:"C",
+  coreQ:"这笔生意到底赚不赚钱？什么时候能回本？现金能撑多久？",
+  value:"建立简单但持续更新的财务模型，用真实数据判断业务健康度。",
+  position:"阶段 C 的决策模块：检验 m8–m10 的获客、销售与定价是否构成可行经济；为 m15 的增长决策提供依据。",
+  prereq:["m10"], next:["m15"], parallel:["m14"],
+  topics:[
+    {name:"财务基础", concepts:[
+      {t:"贡献毛利与盈亏平衡", d:"贡献毛利 = 价格 − 单位变动成本；盈亏平衡销量 = 固定成本 ÷ 单位贡献毛利。", s:"判断「卖多少才不亏」与「每多卖一单赚多少」。", w:"贡献毛利是单位经济与定价决策的核心变量；盈亏平衡点是业务可行性的第一道检验。", m:"固定成本（不随销量变：工具、订阅、租金）与变动成本（随销量变：交付工时、平台抽成、素材）必须分开。", a:"用工具 14 计算单位贡献毛利与盈亏平衡点。", p:"把创始人时间当零成本；固定/变动成本混淆。", x:"与「毛利率」区别：贡献毛利聚焦单位决策，毛利率是整体口径。", l:"混合成本（半固定）需合理拆分，拆分方式影响结论。", ev:2},
+      {t:"营运资金与账期", d:"应收账款（客户欠你的）、预付款（客户先付的）、库存（压在货上的钱）共同决定营运资金占用。", s:"解释「盈利但缺钱」的结构性原因。", w:"Hagen/U.S. Bank 研究将现金流管理不善列为小企业失败首因（82% 归因）；增长消耗现金（备货、垫资、账期）是「收入增长但现金流恶化」的典型机制。", m:"现金转换周期 = 库存周转天数 + 应收天数 − 应付天数；周期越短，现金流越健康。", a:"用工具 15 做月度现金流预测；对 B2B 业务设置账期上限与预付款比例。", p:"把应收账款当收入；忽视增长对营运资金的吞噬。", x:"与「利润」区别：营运资金是时点概念，利润是期间概念。", l:"行业账期结构差异大，需按行业基准校准。", ev:1}
+    ]},
+    {name:"单位经济模型", concepts:[
+      {t:"CAC（客户获取成本）", d:"获取一个新客户的营销与销售总成本 ÷ 新客户数。完整口径含人力、工具与管理分摊。", s:"衡量获客效率。", w:"CAC 的常见扭曲：口径不全（full-loaded 通常高 40–60%）、时间错配（本期花费对应未来成交）、归因失真（末次点击低估 20–50%）。", m:"计算纪律：固定口径、分渠道计算、与成交周期匹配。", a:"工具 14 中分渠道记录 CAC 与口径假设。", p:"只算广告费；用混合 CAC 做渠道决策。", x:"与「营销费用」区别：CAC 是单位指标。", l:"早期样本小，CAC 波动大，需结合回收期判断。", ev:2},
+      {t:"LTV（客户生命周期价值）", d:"一个客户在整个关系期内贡献的毛利总额。常用公式：LTV = 客单价 × 毛利率 × 平均生命周期；或 ARPU × 毛利率 ÷ 月流失率。", s:"衡量客户侧的价值总量。", w:"LTV 公式变体极多：用收入还是毛利、用平均流失率还是队列曲线、是否折现——同一业务可得出差异巨大的数字（研究示例中 1.5–6.7 的 LTV:CAC 区间）。", m:"队列法优于平均法：Fader & Hardie 证明平均留存率会系统性误估（其案例低估 38%）。", a:"工具 14 提供两种算法并标注假设；优先用队列数据。", p:"用最低观测流失率外推；把扩张收入混入留存。", x:"与「客户价值」区别：LTV 是预测值，客户价值是实际值。", l:"新业务无队列历史，LTV 本质是假设，需标注。", ev:2},
+      {t:"LTV:CAC 与回收期", d:"LTV:CAC 衡量整个生命周期的回报；CAC 回收期 = CAC ÷ 月毛利，衡量现金风险时长。", s:"配对使用，互相校验。", w:"3:1 是广泛引用的 floor 而非科学推导的最优值（源自对成熟企业群的观察）；回收期是让比率保持诚实的配套指标（2022 年私营 SaaS 中位数约 23 个月）。", m:"两者冲突的案例：5 个月回收期 + 10% 月流失 → LTV:CAC 仅 1.2；反之 33 个月回收期在计入流失后实际无法回本。", a:"工具 14 同时输出 LTV:CAC 与回收期；决策以两者共同通过为准。", p:"只看比率不看回收期；把 3:1 当普适真理。", x:"与「ROI」区别：LTV:CAC 是客户维度，ROI 是投入维度。", l:"两者都依赖 LTV 假设质量；早期以回收期为先。", ev:2},
+      {t:"现金流预测与跑道", d:"期末现金 = 期初现金 + 期间流入 − 期间流出；现金跑道 = 当前现金 ÷ 月净燃烧（净燃烧 = 月成本 − 月收入）。", s:"回答「钱能撑多久」这个生存问题。", w:"个人创业的真实资本需求主要是生活开支而非工具：6 个月个人跑道约 $16K–27K（美国口径，行业整理）。", m:"预测粒度：月度、三情景（保守/基准/乐观）、关键参数标注依据。", a:"用工具 15 建立三情景现金流预测；每月更新实际值。", p:"只做单一乐观情景；把「预计收入」当确定流入。", x:"与「利润预测」区别：现金流预测看时点，利润预测看期间。", l:"预测精度随周期缩短而提高；长期预测只做方向性。", ev:2}
+    ]}
+  ],
+  objectives:["能够计算贡献毛利、盈亏平衡点与现金跑道","能够用两种方法计算 LTV 并说明各自假设","能够解释 LTV:CAC 与回收期为何必须配对使用","能够建立一个三情景现金流预测并标注每个关键参数的依据"],
+  checks:["「LTV:CAC = 5:1，非常健康」——还需要看什么数字？为什么？","为什么用平均流失率计算的 LTV 会系统性出错？队列法怎么改？","收入翻倍但现金流恶化，可能的机制是什么？至少列出两种。"],
+  practice:{task:"为一个候选业务制作基础财务模型：贡献毛利与盈亏平衡、分渠道 CAC、两种口径的 LTV、LTV:CAC 与回收期、三情景现金流预测（保守/基准/乐观），并说明每个关键参数的依据。", template:"《单位经济模型计算表》（工具 14）+《现金流预测与风险清单》（工具 15）。", criteria:"公式与变量定义完整；三情景参数有依据；明确标注哪些是假设、哪些是实测。", gate:"能回答「按保守情景，现金能撑几个月」而不查资料。"},
+  mistakes:[
+    {e:"直接套用行业平均 CAC/LTV/利润率", why:"行业数字看起来权威，且免去了自己测算的麻烦。", bias:"权威偏误", detect:"你的财务模型里出现「行业平均 LTV:CAC 为 3:1 所以我们也按 3:1 算」。", fix:"所有参数标注来源与证据强度；无依据的参数标为假设并设计验证。"},
+    {e:"把创始人时间当零成本", why:"时间不出现在任何报表里。", bias:"隐性成本忽视", detect:"你的单位经济里没有「创始人每小时成本」这一项。", fix:"按市场工资估算创始人时间成本，计入真实经济收益评估。"},
+    {e:"只做乐观情景预测", why:"乐观情景是唯一让人愿意继续的数字。", bias:"乐观偏误", detect:"你的预测只有一条线，且这条线总是接近上限。", fix:"强制三情景；保守情景用于生存判断，基准情景用于规划。"}
+  ],
+  resources:[
+    {name:"The Dangers of CLV/CAC Ratios", org:"Cape Fear Advisors", type:"行业研究与数据", url:"https://capefearadvisors.com/strategy-lab/clv-cac", date:"持续更新", topic:"LTV/CAC 的系统性扭曲 / 完整口径", why:"逐项拆解 CLV 被高估（乐观流失假设、扩张收入混入、未折现）与 CAC 被低估（开销排除、时间错配、末次点击归因低估 20–50%）的机制，并给出「混合 3:1 可能掩盖某渠道 0.8:1」的渠道级分析案例。", how:"精读扭曲机制部分。", level:"中级", limits:"咨询公司分析文章；部分数字为经验区间。", ev:3},
+    {name:"The New Math: Customer Contribution Not Long Term Value", org:"Tom Spencer（引述隐私变化对 LTV 的影响）", type:"行业研究与数据", url:"https://www.spencertom.com?p=22506/", date:"2025 年", topic:"LTV 模型的适用边界 / 客户贡献", why:"讨论 LTV 模型在隐私新规（归因数据碎片化）与订阅经济（客户行为波动）下的可靠性下降，提出「客户贡献（lifetime contribution）」替代视角——计入全生命周期服务成本。", how:"浏览「旧模型为何失效」部分。", level:"中级", limits:"观点文章；部分论断为趋势判断。", ev:3},
+    {name:"3 Common Cash Flow Mistakes that Small Businesses Make", org:"University of Mary Washington SBDC", type:"官方文档与政府资料", url:"https://economicdevelopment.umw.edu/blog/2021/03/09/3-common-cash-flow-mistakes", date:"2021 年 3 月", topic:"现金流管理实务 / 营运资金", why:"SBDC（小企业发展中心，SBA 资源伙伴）官方建议：营运资金储备（3–6 个月运营开支）、应收账款流程（即时开票、预付款、自动催收）、销售预测保守化——现金流管理的可操作清单。", how:"通读三个错误与对策。", level:"入门", limits:"美国语境；建议为通用实践而非实证结论。", ev:3},
+    {name:"LTV:CAC ratio: the 3:1 rule, formula and its limits", org:"We PUSHERS", type:"行业研究与数据", url:"https://wepushers.com/frameworks/ltv-cac-ratio", date:"持续更新", topic:"LTV 公式变体 / 回收期配对", why:"用同一业务演示不同假设下 LTV:CAC 从 1.5 到 6.7 的变化；引用 Fader & Hardie 的平均留存率误估（低估 38%）、Gupta 等的留存弹性（1% → 3–7%）、Gurley 对输入非独立性的批评。单位经济计算的必读口径指南。", how:"精读公式变体与「比率何时失真」部分。", level:"中级", limits:"博客汇编；引用研究时核对原文。", ev:2}
+  ]
+},
+{
+  id:"m12", num:"12", name:"低成本运营、外包与协作", en:"Lean Operations, Outsourcing & Collaboration", stage:"D",
+  coreQ:"哪些事必须创始人做？哪些可以外包？如何从「个人执行」过渡到「系统运营」？",
+  value:"把创始人时间配置到最高价值活动上，用流程与外包突破个人带宽。",
+  position:"阶段 D 的运营模块：为 m13（自动化）提供标准化前提，是「降低对创始人时间依赖」的核心路径。",
+  prereq:["m9"], next:["m13","m15"], parallel:["m14"],
+  topics:[
+    {name:"创始人时间配置", concepts:[
+      {t:"核心任务与外包边界", d:"核心任务（客户关系、核心判断、定价、关键交付）应由创始人保留；重复执行、行政事务、专业服务（会计、设计、开发）可外包。", s:"解决「什么都自己做」导致的瓶颈。", w:"创始人时间的影子价格最高：用它做 $20/小时的工作，等于放弃了 $200/小时的判断工作。", m:"判断标准：该任务是否直接创造客户价值？是否需要独特判断？错误代价多大？", a:"用工具 16 把端到端流程每项工作标记为：亲自执行/标准化/自动化/外包/暂不开展。", p:"把「客户关系」也外包；或把需要判断的工作也外包（省小钱亏大钱）。", x:"与「授权」区别：外包是外部采购，授权是内部分配。", l:"早期资金紧张时外包决策受预算约束，需分阶段。", ev:3},
+      {t:"时间审计", d:"连续两周记录每半小时的时间去向，按「客户价值/业务建设/行政/学习/浪费」分类。", s:"用数据而非感觉发现时间黑洞。", w:"人对时间分配的记忆系统性失真；审计是时间配置决策的前提。", m:"审计输出：高价值时间占比、最大时间黑洞、可立即外包的行政事务清单。", a:"每月做一次简化版审计；对比时间配置与收入结构。", p:"凭感觉决定「最近太忙」；审计后不采取任何行动。", x:"与「时间管理技巧」区别：审计是诊断，技巧是优化。", l:"记录本身消耗时间，需控制粒度。", ev:3}
+    ]},
+    {name:"外包与协作", concepts:[
+      {t:"外包形态谱系", d:"自由职业者（单次任务）、代理服务（持续托管）、合作伙伴（分成/换量）、雇佣（长期全职）——成本结构、控制度与管理负担依次递增。", s:"匹配协作形式与业务需求。", w:"个人创业者最常见的错误是把「外包」等同于「雇人」，忽视中间形态的灵活性。", m:"选择维度：任务持续性、质量可控性要求、预算结构（固定 vs 变动）、退出成本。", a:"用工具 18（外包决策与供应商评估表）逐项评估。", p:"用长期雇佣解决一次性需求；用一次性外包解决持续性需求。", x:"与「供应商管理」区别：外包是采购决策，供应商管理是持续关系。", l:"跨境外包涉及时区、语言、支付与合规差异（模块 14）。", ev:3},
+      {t:"外包经济性判断", d:"外包划算的条件：外包时薪 < 创始人时薪 × (1 + 沟通与管理成本系数)；且质量风险可控。", s:"避免「为了省钱而外包」或「为了省事而乱外包」。", w:"真实成本 = 外包费用 + 沟通时间 + 管理负担 + 质量风险成本；只比单价会系统性误判。", m:"经济性公式：净节省 = (创始人时间 × 时薪 − 外包总成本) − 质量风险期望成本。", a:"工具 18 强制计算四项成本；小额高频任务优先自动化而非外包。", p:"只比较单价；忽视沟通与管理成本（常占外包费用的 30–50%）。", x:"与「成本削减」区别：经济性是价值判断，削减是金额判断。", l:"质量风险难以事前量化，需用试单校准。", ev:3},
+      {t:"沟通成本与质量控制", d:"外包质量 = 任务定义清晰度 × 供应商能力 × 反馈闭环效率。", s:"把外包从「碰运气」变为「可管理」。", w:"外包失败的主因几乎从不是供应商能力，而是任务定义模糊与反馈缺失。", m:"质量控制机制：SOP 文档、示例交付物、检查清单、试单制度、分级验收。", a:"每个外包任务配 SOP 与验收清单；首批必检，稳定后抽检。", p:"用聊天记录代替 SOP；验收标准口头约定。", x:"与「供应商评估」区别：评估是事前筛选，质控是事中管理。", l:"远程协作的文化与时区差异需主动管理。", ev:3}
+    ]},
+    {name:"流程与系统", concepts:[
+      {t:"SOP 与标准操作程序", d:"把重复性工作写成步骤化文档：输入、步骤、输出、质量标准、常见问题。", s:"让交付质量稳定、可外包、可自动化。", w:"SOP 是产品化服务（m6）与自动化（m13）的共同地基；没有 SOP 的自动化只是把混乱加速。", m:"SOP 要素：触发条件、步骤、检查点、异常处理、负责人。", a:"用工具 16 模板编写；每完成一单更新一次。", p:"SOP 只存在于创始人脑中；为一次性工作写 SOP。", x:"与「检查清单」区别：SOP 是流程文档，清单是执行工具。", l:"过度文档化会拖慢早期迭代，需按重复频率分级。", ev:3},
+      {t:"瓶颈识别", d:"端到端流程中限制整体产出的那个环节（产能最低点）。", s:"把改进资源集中在真正的约束上。", w:"优化非瓶颈环节不会提高总产出——这是约束理论的核心洞察。", m:"识别方法：流程各环节的周期时间与排队长度；瓶颈的特征是「永远在忙且后面在等」。", a:"用工具 16 绘制流程并标注各环节周期；优先改进瓶颈。", p:"平均分配改进资源；用「更努力」代替「改结构」。", x:"与「最慢环节」区别：瓶颈是产能约束，最慢是速度描述。", l:"瓶颈会随业务阶段迁移，需定期重估。", ev:3},
+      {t:"关键依赖削减", d:"降低对单一关键人（含创始人自己）、平台、供应商的依赖，使业务在任一方缺席时仍能运转。", s:"把「离不开某个人/某个平台」从风险变为可管理的依赖。", w:"一人公司的悖论：效率来自专注，脆弱也来自专注；依赖管理是长期经营的核心纪律。", m:"依赖指标：单点故障数量、知识文档化率、渠道/供应商可替代性、账号与数据可迁移性。", a:"每季度做「缺席测试」：创始人休假两周，业务哪些环节会停？", p:"把「只有我能做」当核心竞争力；数据与账号全部托管在单一平台。", x:"与「备份」区别：依赖削减是结构设计，备份是技术措施。", l:"完全无依赖成本极高，目标是「可承受的依赖」。", ev:3}
+    ]}
+  ],
+  objectives:["能够用时间审计数据把工作分类为核心/可外包/可自动化","能够计算外包的真实经济性（含沟通与管理成本）","能够为一个实际业务绘制端到端交付流程并标注执行方式","能够识别流程瓶颈并设计削减关键依赖的措施"],
+  checks:["外包单价 $30/小时，你的时薪 $80/小时——外包一定划算吗？还差什么计算？","「这个流程只有我能跑」——这是优势还是风险？怎么区分？","为什么没有 SOP 就不应该先做自动化？"],
+  practice:{task:"绘制一个实际业务的端到端交付流程，将每项工作标记为：亲自执行、标准化、自动化、外包或暂不开展；对标记为「外包」的任务用工具 18 计算真实经济性。", template:"《SOP 与业务流程图模板》（工具 16）+《外包决策与供应商评估表》（工具 18）。", criteria:"流程覆盖从获客到交付到收款全链路；每项工作有明确标记与理由；外包任务有经济性计算。", gate:"能说出「如果创始人离开两周，业务会在哪个环节停」。"},
+  mistakes:[
+    {e:"把需要判断的核心工作也外包", why:"外包能立即减少工作量，而判断失误的代价滞后显现。", bias:"短期便利偏误", detect:"客户关系、定价、核心交付质量都在外部人员手里。", fix:"用工具 16 明确「亲自执行」清单并守住边界。"},
+    {e:"只比较外包单价", why:"单价是唯一显眼的数字。", bias:"价格锚定", detect:"你的外包决策依据是「比我自己做便宜」。", fix:"计算四项成本：费用 + 沟通 + 管理 + 质量风险。"},
+    {e:"流程只存在于创始人脑中", why:"口头传递比写文档快，且「我讲一遍就行」。", bias:"即时便利偏误", detect:"每次交接都要创始人重新讲一遍；休假即停摆。", fix:"每完成一单更新 SOP；把「讲一遍」变成「看文档」。"}
+  ],
+  resources:[
+    {name:"The Productized Service Guide（交付系统与客户门户）", org:"ManyRequests", type:"实践案例", url:"https://www.manyrequests.com/blog/productized-service-guide", date:"2026 年更新", topic:"交付管理系统 / 外包与流程", why:"展示产品化服务的交付系统设计：客户门户、请求队列、自动化对账——把「流程系统化」落到具体工具形态；Many Pixels 从一人做到 40+ 设计师的路径即流程驱动的外包扩展。", how:"浏览交付系统部分。", level:"入门", limits:"平台方内容；案例为单一成功样本。", ev:3},
+    {name:"What Is a Productised Service?（产品化与委托交付）", org:"Evans Sales Consultancy", type:"实践案例", url:"https://evanssalesconsultancy.co.uk/insights/what-is-a-productised-service", date:"持续更新", topic:"从个人执行到可委托交付", why:"核心论点：产品化的本质是「收入与资深个人时间解耦」——通过固定范围把发现环节前移到销售页，使交付可委托。为外包决策提供理论框架。", how:"精读「为什么产品化」部分。", level:"入门", limits:"咨询公司观点文章。", ev:3},
+    {name:"Upwork（全球自由职业者市场平台）", org:"Upwork", type:"行业研究与数据", url:"https://www.upwork.com/", date:"持续更新", topic:"外包渠道 / 自由职业者市场", why:"最大的自由职业者市场之一：每周约 6 万个职位发布，覆盖开发、设计、营销、客服、数据等类别；是个人创业者获取弹性外包产能的主要渠道。使用时注意平台抽成与竞价环境。", how:"浏览职位类别与费率区间。", level:"入门", limits:"平台方数据；费率因类别与地区差异大。", ev:3}
+  ]
+},
+{
+  id:"m13", num:"13", name:"AI 自动化与一人公司的技术系统", en:"AI Automation & Technical Systems", stage:"D",
+  coreQ:"哪些环节值得用 AI 和自动化？如何避免「为了用 AI 而用 AI」？",
+  value:"用 AI 与自动化突破个人带宽，同时控制幻觉、依赖与维护成本。",
+  position:"阶段 D 的杠杆模块：以 m12 的流程标准化为前提，为 m15 的系统化提供工具层。",
+  prereq:["m12"], next:["m15"], parallel:["m14"],
+  topics:[
+    {name:"AI 与自动化的适用场景", concepts:[
+      {t:"生成式 AI 的适用场景", d:"研究（信息搜集与摘要）、内容（初稿与改写）、销售（线索研究与外联草稿）、客服（一线问答与分流）、运营（数据整理与报告）、分析（模式发现）。", s:"把 AI 投入映射到具体业务环节。", w:"Bookipi 2026 调查（2,121 家小企业）：营销内容是最常见应用（36.2%），客服次之（36.1%），财务（16.4%）采用率低但回报更高；SBE Council 数据显示小企业主个人每周节省中位数 5 小时。", m:"适用性判断：任务是否有明确输入输出？错误是否可被人审？频率是否足够高？", a:"用工具 17 评估候选环节；从「高频 + 低错误代价」环节开始。", p:"把 AI 用在需要最终判断与担责的环节；为低频任务建复杂工作流。", x:"与「传统自动化」区别：AI 处理非结构化与生成任务，传统自动化处理规则明确任务。", l:"AI 效果因数据基础与流程适配度差异巨大——UNCTAD 报告强调 AI 不是即插即用。", ev:2},
+      {t:"AI Agent 与自动化工作流", d:"AI Agent = 能调用工具、执行多步任务的 AI 系统；自动化工作流 = 触发—条件—动作的规则链；两者常组合使用。", s:"理解一人公司技术栈的组件关系。", w:"Stripe 2026 数据显示 AI 辅助的新注册企业数量约为以往的 4 倍；Mercatus 研究（Liya Palagashvili，2026 年 7 月）用政府数据发现 2024Q1–2026Q1 高 AI 暴露行业的新企业申请增长 26.8%（对照组 −0.4%）——AI 正在改变一人公司的组建方式。", m:"架构层次：数据层（数据库/表格）→ 逻辑层（工作流/Agent）→ 触点层（网站/客服/邮件）；每层都可独立替换。", a:"技术选型遵循「最熟悉的技术栈 + 托管服务 + 可迁移数据」。", p:"早期过度工程化；把工具链复杂度当能力。", x:"与「无代码」区别：无代码是构建方式，Agent 是运行形态。", l:"Agent 的可靠性仍在演进；关键流程需人工兜底。", ev:2},
+      {t:"自动化的 ROI 评估", d:"ROI = (年节省时间 × 时薪 + 错误减少价值 − 实施成本 − 维护成本) ÷ 总投入。", s:"把自动化从技术决策变为经济决策。", w:"Theseus 2025 年论文（4 家 SME 案例 + 文献综述）：SME 的 AI 方案年支出中位数约 $1.8K，年节省中位数约 $7.5K，多数案例 12 个月内回本，平均每周节省约 13 小时——但样本极小，属方向性证据。", m:"评估维度：节省时间、实施成本、维护成本、错误代价、依赖风险。", a:"工具 17 强制填写五项；按 ROI 排序实施顺序。", p:"只算节省不算维护；忽视自动化失败的业务中断代价。", x:"与「效率提升」区别：ROI 是经济指标，效率是运营指标。", l:"时间节省的货币化依赖创始人时薪假设；小样本证据外推需谨慎。", ev:2}
+    ]},
+    {name:"风险与控制", concepts:[
+      {t:"AI 幻觉与错误输出", d:"生成式 AI 可能产生看似合理但错误的内容（幻觉）；错误在客户-facing 场景中直接损害信任。", s:"控制 AI 输出的质量风险。", w:"Garuda 2024 研究（小企业人机协作）：人工监督在关键决策中被 92% 的受访者认为至关重要；AI 适合处理 70–85% 的常规数据密集任务，人保留战略与创造性控制。", m:"控制机制：human-in-the-loop 审核、输出模板约束、关键事实二次核验、分级放行（低风险自动/高风险人工）。", a:"为客户-facing的 AI 输出设置强制人工审核环节。", p:"把 AI 初稿直接发给客户；用 AI 生成未经核验的数据与引用。", x:"与「AI 不可靠」区别：风险可控，但需要设计控制点。", l:"审核本身消耗时间，需在效率与风险间平衡。", ev:2},
+      {t:"Human-in-the-loop（人工审核机制）", d:"在自动化流程中保留人工判断节点：AI 处理、人决策、或 AI 决策 + 人抽检。", s:"在效率与风险之间取得平衡。", w:"MDPI《World》2026 年对 228 家 SME 的实证：运营型 AI 应用（自动化、数据分析）对劳动生产率与成本降低有统计显著的正向影响，而「应用数量增长本身」不必然带来效率提升—— targeted 实施比铺量更重要。", m:"审核点设计：按错误代价分级（高代价环节全审，低代价抽检）；审核标准文档化。", a:"工具 17 中为每个自动化候选标注审核级别。", p:"审核流于形式；或全流程人工审核（等于没自动化）。", x:"与「人工兜底」区别：HITL 是设计内的控制点，兜底是应急措施。", l:"审核质量依赖审核者能力，需培训与标准。", ev:2},
+      {t:"第三方依赖与业务连续性", d:"对第三方工具、平台、API 的依赖构成业务连续性风险：涨价、停服、政策变化、数据锁定。", s:"保护业务不因供应商单点故障而中断。", w:"UNCTAD 报告（2026 年 1 月）：AI 成效取决于数字基础、技能与业务匹配度，而非「是否使用 AI」；缺乏流程适配时 AI 容易被低效使用甚至闲置。", m:"连续性措施：数据可导出、核心流程有替代方案、关键账号双因素、供应商评估（工具 18）。", a:"每季度检查：核心工具的数据能否导出？替代方案是什么？", p:"把全部业务数据托管在单一 SaaS；从不测试数据导出。", x:"与「备份」区别：依赖管理是结构问题，备份是数据问题。", l:"完全无依赖不现实，目标是「可承受切换成本」。", ev:3}
+    ]}
+  ],
+  objectives:["能够识别适合自动化的重复任务并说明判断标准","能够计算一个自动化候选的 ROI（含维护成本与错误代价）","能够为 AI 应用设计 human-in-the-loop 控制点","能够评估第三方依赖风险并设计连续性措施"],
+  checks:["「AI 能写内容，所以内容生产全自动化」——这个推理漏掉了什么？","为什么「AI 应用数量增长」不等于「效率提升」？实证依据是什么？","一个自动化环节的错误代价很高，应该怎么设计审核机制？"],
+  practice:{task:"从一个具体业务流程中选出三个自动化候选点，计算潜在节省时间、实施成本、错误代价和预期收益，确定实施顺序；为每个候选设计审核级别。", template:"《AI 自动化机会评估表》（工具 17）。", criteria:"三个候选覆盖不同环节；ROI 计算含维护成本；审核级别与错误代价匹配。", gate:"能说出「先自动化哪个、为什么不是另一个」。"},
+  mistakes:[
+    {e:"为了用 AI 而构建没有商业价值的复杂工作流", why:"构建 AI 工作流有技术趣味，且「在用 AI」本身令人愉悦。", bias:"技术玩具偏误", detect:"你的自动化清单按「酷」排序，不按 ROI 排序。", fix:"用工具 17 的 ROI 计算强制排序；低频任务不自动化。"},
+    {e:"把 AI 初稿直接发给客户", why:"省去审核环节立竿见影地节省时间。", bias:"即时便利偏误", detect:"客户-facing 内容没有人工审核记录。", fix:"设置强制审核节点；审核标准文档化。"},
+    {e:"忽视第三方依赖风险", why:"依赖风险在平时不可见。", bias:"正常性偏误", detect:"你说不出核心工具的数据如何导出、替代方案是什么。", fix:"季度依赖检查；关键数据定期导出备份。"}
+  ],
+  resources:[
+    {name:"The Economic Effects of Artificial Intelligence Adoption in Small and Medium-Sized Enterprises", org:"Bolfek, Rajko & Bolfek，《World》(MDPI)，2026", type:"学术研究", url:"https://www.mdpi.com/2673-4060/7/6/103/htm", date:"2026 年", topic:"AI 对 SME 劳动生产率与成本的影响", why:"对 228 家 SME 的问卷 + 多元回归实证：运营型 AI 应用（自动化、数据分析）对劳动生产率与运营成本降低有统计显著的正向影响；管理决策型应用影响较弱；「应用数量随时间增长本身」不必然提升效率—— targeted 实施是关键。", how:"精读结果与讨论部分。", level:"进阶", limits:"横截面问卷数据，相关性非因果；样本为欧洲 SME。", ev:2},
+    {name:"The Impact of AI Automation on Small to Medium Sized Enterprises (SMEs)（学位论文）", org:"Lucas Pastel，Theseus（芬兰应用科学大学）", type:"学术研究", url:"https://www.theseus.fi/items/db88e772-8aca-4a7e-a760-42a05b5dfe00", date:"2025 年", topic:"AI 自动化的成本收益基准", why:"文献综述（2019–2025）+ 4 家 SME 案例：AI 方案年支出中位数约 $1.8K、年节省中位数约 $7.5K、多数 12 个月内回本、平均每周节省约 13 小时；主要障碍是预算、技能与数据质量。", how:"浏览摘要与结论。", level:"中级", limits:"学士论文；4 家案例样本极小；数字为方向性参考。", ev:2},
+    {name:"AI for Small Business Operations: Adoption, ROI, and Implementation in 2026", org:"AI Forward（汇总 Bookipi 2026 调查、SBE Council、JPMC Institute 数据）", type:"行业研究与数据", url:"https://aifwd.net/blog/how-ai-transforms-small-business-operations-2026", date:"2026 年", topic:"AI 采用率与场景分布 / 工具成本下降", why:"Bookipi 2026 调查（2,121 家小企业）：营销内容 36.2%、客服 36.1%、财务 16.4% 为最常见应用；JPMC Institute 数据显示 AI 工具入门成本从 2019 年约 $50/月降至 2025 年 $20–30/月；最大障碍是专业知识（31.2%）而非成本（12.3%）。", how:"浏览采用率与成本部分。", level:"入门", limits:"博客汇总多方调查；部分为厂商数据。", ev:3},
+    {name:"联合国贸发会议报告：人工智能将重塑发展中国家创业生态（中文报道）", org:"联合国贸易和发展会议（UNCTAD），中国经济网报道", type:"官方文档与政府资料", url:"https://www.ce.cn/xwzx/gnsz/gdxw/202601/t20260105_2681405.shtml", date:"2026 年 1 月", topic:"AI 成效的条件性 / 不是即插即用", why:"UNCTAD《释放人工智能潜力：重塑发展中国家创业生态》报告要点：AI 可提升中小微企业生产率与市场接入，但成效取决于数字基础、技能与业务匹配度；缺乏数据、算力与流程适配时 AI 容易被低效使用甚至闲置。为「AI 不是万能解」提供国际组织口径。", how:"浏览报告要点。", level:"入门", limits:"中文二手报道；报告原文为英文，引用时核对 UNCTAD 原文。", ev:2},
+    {name:"The Million-Dollar Company That Never Hired a Marketer（Stripe 与 Mercatus 数据）", org:"State of AI Marketing（引述 Stripe Economics 与 Mercatus Center 研究）", type:"行业研究与数据", url:"https://www.stateofaimarketing.co/news/solo-operators-first-marketing-hire", date:"2026 年", topic:"AI 与一人公司兴起 / 自动化替代人力", why:"两份独立数据的交叉：Stripe Economics（2026 年 6 月）显示其平台年收入超百万美元的个人运营者 2023–2025 年翻倍（平台口径，作者自述局限）；Mercatus Center（Liya Palagashvili，2026 年 7 月 17 日）用人口普查局企业注册与 CPS 数据发现高 AI 暴露行业的新企业申请 2024Q1–2026Q1 增长 26.8%（对照组 −0.4%）。", how:"精读两份数据的口径与局限说明。", level:"中级", limits:"Stripe 为平台数据且承认无法区分个人与雇主；Mercatus 为事件研究设计，相关性非因果。", ev:2}
+  ]
+},
+{
+  id:"m14", num:"14", name:"法律、税务、合规与经营风险", en:"Legal, Tax, Compliance & Business Risk", stage:"C",
+  coreQ:"以什么主体经营？要交什么税？合同、知识产权、数据与平台规则有哪些风险？",
+  value:"在首次收款前建立合规底线，把法律风险从「事后补救」变为「事前预防」。",
+  position:"贯穿阶段 C/D 的保障模块：合规核查在首次真实收款前完成（阶段 C 门槛），并随业务演进年度复查。",
+  prereq:["m5"], next:["m15"], parallel:["m7","m12"],
+  topics:[
+    {name:"主体形式与责任边界", concepts:[
+      {t:"主体形式的基本差异", d:"个体经营（个人直接承担无限责任）、有限责任公司（成员承担有限责任，税务穿透）、公司（有限责任，独立纳税）——差异体现在责任、税务、合规成本与融资能力上。", s:"选择与业务风险匹配的经营主体。", w:"SBA 官方指南：个体经营「自动成立」（不注册即为个体经营），但业务资产与负债不与个人分离，可被追究个人责任；LLC 成员通常不对企业债务承担个人责任。", m:"选择逻辑：风险水平（有无实体产品/大额合同）→ 税务结构 → 合规成本 → 未来融资需求。", a:"用工具 19 关联的合规清单逐项核查；重大决策咨询当地律师与会计师。", p:"用个体经营做高风险业务；或过早设立复杂主体增加合规负担。", x:"与「注册公司」区别：主体形式是法律架构，注册是行政程序。", l:"各州/各国规则差异大；SBA 表格仅为指南，具体以当地法规为准。", ev:1},
+      {t:"个人财务与经营财务分离", d:"经营收支与个人收支分账管理，是税务合规、责任隔离与财务清晰的基础。", s:"避免「公私不分」导致的税务与责任风险。", w:"SBA 建议开设独立商业银行账户；分离不仅是合规要求，也是现金流管理（m11）的前提。", m:"分离动作：独立账户、独立记账、经营支出凭证化、定期对账。", a:"首次收款前完成账户分离；月度对账。", p:"用个人账户收经营款；经营与个人支出混记。", x:"与「税务筹划」区别：分离是基础纪律，筹划是优化策略。", l:"部分地区对个体经营的分账要求宽松，但分离仍是良好实践。", ev:1}
+    ]},
+    {name:"税务基础（以美国为例）", concepts:[
+      {t:"所得税与自雇税", d:"个体经营与 LLC（默认穿透）的利润计入个人所得报税；自雇税（self-employment tax）覆盖社保与医保部分。", s:"理解「赚到的钱要交多少税」。", w:"美国口径：个体经营者按 Schedule C 申报，自雇税率约 15.3%（社保 12.4% + 医保 2.9%）；LLC 可选择 S-Corp 选举以优化税负（需合理薪酬）。", m:"税务规划动作：季度预估税、可抵扣费用凭证、退休账户（SEP-IRA 等）。", a:"建立「收入 − 可抵扣费用 = 应税利润」的月度台账；预留税款。", p:"不留税款全额花掉收入；忽视季度预估税罚款。", x:"与「增值税」区别：所得税对利润征税，流转税对交易额征税。", l:"税则逐年调整；金额与规则以 IRS 官方当年发布为准。", ev:1},
+      {t:"销售税与跨境税务", d:"销售税（sales tax）是对零售交易征收的税，由卖家代收代缴；跨境业务还涉及关税、增值税（VAT/GST）与常设机构问题。", s:"识别交易环节的税务义务。", w:"美国销售税为州级税制，各州对「经济关联」（economic nexus）门槛规定不同；数字商品与 SaaS 的征税规则各州不一——需按经营地逐州核实。", a:"电商/数字产品销售前核查目标市场的销售税登记义务。", p:"认为「小生意不用管销售税」；忽视数字商品的征税扩张。", x:"与「所得税」区别：销售税是交易税，由消费者承担、卖家代缴。", l:"州级规则复杂且变化快；跨境 VAT 需按目的国规则处理。", ev:1}
+    ]},
+    {name:"合同、知识产权与数据", concepts:[
+      {t:"合同要素与常见条款", d:"有效合同通常包含：标的、价格、交付、付款条件、知识产权归属、保密、违约责任、争议解决。", s:"把合作关系书面化，降低纠纷成本。", w:"个人创业者最常见的合同缺口：知识产权归属未约定（客户以为买了全部权利）、付款条件模糊（账期无上限）、交付标准无定义。", a:"标准服务合同模板 + 按项目调整；大额合同请律师审阅。", p:"用聊天记录代替合同；模板从不更新。", x:"与「口头约定」区别：书面合同在争议中可举证。", l:"合同执行受司法辖区约束；跨境合同需约定适用法律。", ev:3},
+      {t:"知识产权基础", d:"版权在作品创作完成时自动产生（美国及多数法域）；商标需注册获得全国性保护；第三方内容使用需授权或符合合理使用边界。", s:"保护自有资产，避免侵犯他人权利。", w:"SBA 指南：商标在联邦层面保护企业名称与商品服务标识；版权自动保护原创作品；使用第三方素材（字体、图片、音乐）需核对授权范围。", a:"品牌名注册前做商标检索；素材使用保留授权记录；客户交付物约定版权归属。", p:"认为「网上能下载就能用」；忽视字体/图片的商用授权。", x:"与「专利」区别：专利保护技术方案，版权保护表达，商标保护标识。", l:"各国知识产权制度差异大；AI 生成内容的权利归属仍在演进。", ev:1},
+      {t:"隐私政策与数据安全", d:"收集个人信息（邮箱、电话、支付信息）需有隐私政策说明收集范围与用途；客户数据的安全存储与泄露应对是法定义务（如 GDPR、CCPA 等）。", s:"合规处理客户数据，避免监管处罚与信任损失。", w:"美国联邦贸易委员会（FTC）对数据安全的执法、欧盟 GDPR 的处罚上限（全球营收 4% 或 2,000 万欧元取高）——数据合规不是可选项。", a:"网站/产品上线前配置隐私政策；支付信息使用合规支付渠道处理（不自行存储卡号）；数据定期备份。", p:"用个人邮箱散存客户数据；隐私政策照抄不管辖范围。", x:"与「网络安全」区别：隐私是法律义务，安全是技术措施。", l:"适用法规取决于客户所在地与业务范围，需按目标市场核实。", ev:1},
+      {t:"平台依赖与账户风险", d:"依赖第三方平台（支付、电商、社交、云服务）经营时，平台的服务条款、账号政策与抽成变化直接影响业务连续性。", s:"管理平台侧的结构性风险。", w:"平台风险形态：账号封禁（申诉周期长）、政策突变（抽成/规则）、数据锁定（无法导出）。", a:"核心数据定期导出；关键平台准备替代方案；账号启用双因素认证。", p:"把平台规则当永久环境；全部客户数据只存于平台。", x:"与「供应商风险」区别：平台同时是渠道与基础设施，风险更复合。", l:"平台条款单方面变更权普遍存在，只能管理无法消除。", ev:3},
+      {t:"AI 生成内容与第三方工具的权利责任", d:"使用生成式 AI 产出的内容（文案、代码、图像）用于商业目的时，需关注训练数据版权争议、输出内容的可版权性，以及第三方工具的服务条款对商用与数据使用的限制。", s:"合规使用 AI 工具，避免权利纠纷。", w:"美国版权局立场：纯 AI 生成内容不受版权保护（需人类作者贡献）；各 AI 工具服务条款对输出商用权与数据训练使用的规定不一——使用前核对条款。", a:"AI 辅助内容保留人工创作记录；商用前核对工具条款；重要交付物人工终审。", p:"假设 AI 输出可自由商用；忽视工具条款中的数据使用授权。", x:"与「合理使用」区别：合理使用是版权例外制度，AI 输出权利是另一问题。", l:"AI 相关法律与判例仍在快速演进，需持续关注。", ev:3}
+    ]}
+  ],
+  objectives:["能够比较个体经营、有限责任公司与公司在责任、税务与合规成本上的差异","能够说明所得税、自雇税与销售税的基本机制（美国口径）","能够识别合同、知识产权、隐私与平台依赖四类常见风险并给出预防措施","能够根据业务模式与目标市场生成一份合规核查清单"],
+  checks:["为什么「用个体经营做高风险业务」是危险组合？风险具体是什么？","客户付钱买你的设计交付物，版权归谁？合同里应该怎么写？","你的业务收集了客户邮箱——上线前必须完成哪三件事？"],
+  practice:{task:"根据选定业务模式与目标市场生成一份合规核查清单：主体形式建议（含理由）、税务义务（按目标市场）、合同模板要点、知识产权核查、隐私与数据安全措施、平台依赖预案。", template:"《合规核查清单》（关联工具 19 复盘表使用）。", criteria:"清单按目标市场分列；每项标注「已完成/待办/不适用」；法律结论标注司法辖区与资料日期。", gate:"能说出「首次收款前必须完成的合规事项」清单。"},
+  mistakes:[
+    {e:"把通用商业建议当法律意见", why:"建议听起来都合理，且「差不多就行」让人安心。", bias:"过度自信", detect:"你的合规决策没有咨询当地专业人士，也没有标注司法辖区。", fix:"重大决策（主体形式、合同、跨境）咨询当地律师/会计师；清单标注辖区与日期。"},
+    {e:"公私财务不分", why:"早期业务量小，分账显得麻烦。", bias:"便利偏误", detect:"经营收款进入个人账户；支出凭证缺失。", fix:"首次收款前开立独立账户；月度对账。"},
+    {e:"忽视平台条款与数据导出", why:"平台平时运转良好，风险不可见。", bias:"正常性偏误", detect:"你说不出核心平台的数据如何导出、封号后业务如何继续。", fix:"季度数据导出演练；准备替代渠道。"}
+  ],
+  resources:[
+    {name:"Launch your business: Choose a business structure（SBA 官方创业指南）", org:"U.S. Small Business Administration", type:"官方文档与政府资料", url:"https://www.sba.gov/business-guide/launch-your-business/get-business-insurance", date:"持续更新", topic:"主体形式差异 / 责任边界", why:"SBA 官方对个体经营、合伙、LLC、公司（C/S/非营利）的结构说明：责任、税务、控制与合规要求的对比，以及「结构选择影响税负、融资能力、文书与个人责任」的官方表述。", how:"通读结构对比部分。", level:"入门", limits:"美国口径；各州规则有差异；官方明确建议咨询律师与会计师。", ev:1},
+    {name:"Launch your business（SBA 官方：主体结构对比表与名称注册）", org:"U.S. Small Business Administration", type:"官方文档与政府资料", url:"https://www.sba.gov/counseling/launch-your-business/", date:"持续更新", topic:"主体形式对比表 / 名称与商标注册", why:"包含 SBA 的主体结构对比表（所有权、责任、税务三列）与四种名称注册方式（实体名、商标、DBA、域名）的官方说明——法律合规的入口资料。", how:"浏览对比表与名称注册部分。", level:"入门", limits:"美国口径；表格仅为指南，具体以州法为准。", ev:1},
+    {name:"2025 Small Business National Resource Guide（小企业全国资源指南 PDF）", org:"Louisiana Veterans Business Outreach Center（汇编 SBA 资源）", type:"官方文档与政府资料", url:"https://lavboc.org/wp-content/uploads/2026/04/2025_Small_Business_Natioal_Resource_Guide_Digital_508c-compressed.pdf", date:"2025 年版", topic:"合规资源总览 / 主体结构对比", why:"SBA 体系资源伙伴发布的官方指南：主体结构对比表（控制、风险、资本、税务）、联邦采购、出口、退伍军人资源等合规与经营支持的完整索引。", how:"按需查阅相关章节。", level:"入门", limits:"汇编性质；部分链接与数据有时效性。", ev:1},
+    {name:"About the Nonemployer Statistics Program（无雇员企业统计项目说明）", org:"U.S. Census Bureau", type:"官方文档与政府资料", url:"https://census.gov/programs-surveys/nonemployer-statistics/about.html", date:"持续更新", topic:"个体经营的税务与统计背景", why:"官方说明：无雇员企业（多数为个体经营的独资企业）的统计口径、数据来源（IRS 税务记录）与覆盖范围——理解「个体经营」在官方统计中的位置。", how:"浏览覆盖与方法部分。", level:"入门", limits:"统计项目说明，非税务建议。", ev:1}
+  ]
+},
+{
+  id:"m15", num:"15", name:"业务增长、系统化与规模化", en:"Growth, Systematization & Scaling", stage:"D",
+  coreQ:"业务到了哪个阶段？什么证据支持进入下一阶段？什么时候不该增长？",
+  value:"用证据门槛管理增长节奏，区分「值得做大」与「值得做久」。",
+  position:"阶段 D 的方向模块：综合 m11 的财务证据与 m12/m13 的系统能力，决定增长、维持或转型。",
+  prereq:["m11","m12"], next:["m16"], parallel:["m13"],
+  topics:[
+    {name:"阶段与证据门槛", concepts:[
+      {t:"业务阶段模型", d:"验证期（假设→证据）→ 启动期（首笔收入→可重复成交）→ 系统期（可重复获客与交付）→ 经营期（稳定运营与优化）。", s:"用阶段框架管理预期与节奏。", w:"每个阶段的核心任务不同：验证期买信息，启动期买确定性，系统期买效率，经营期买韧性。", m:"阶段判断依据：成交可重复性、获客可重复性、交付可重复性、现金流可预测性。", a:"用工具 19（阶段复盘表）每季度定位当前阶段与下一阶段门槛。", p:"在验证期追求规模化指标；在系统期还在重新验证需求。", x:"与「公司生命周期」区别：阶段模型关注经营证据，生命周期关注组织形态。", l:"阶段边界模糊，业务可能多阶段特征并存。", ev:3},
+      {t:"产品市场匹配（PMF）的证据", d:"PMF 的证据形态：留存曲线走平、自然增长（无付费获客）、销售周期缩短、客户主动推荐、NPS 高位。", s:"判断「需求是否被真正满足」。", w:"PMF 没有单一指标；不同证据的强度不同：行为证据（留存、复购）> 态度证据（NPS、满意度）。", m:"证据组合判断：留存 + 获客效率 + 交付负荷三者同时改善才构成 PMF 信号。", a:"为每个 PMF 证据设定量化门槛（如月流失率 <5%、自然流量占比 >30%）。", p:"用「客户说很喜欢」当 PMF；用单一指标（注册增长）当 PMF。", x:"与「 traction 」区别：traction 是增长事实，PMF 是需求满足状态。", l:"PMF 判断本质是事后确认；早期只能观察代理指标。", ev:3}
+    ]},
+    {name:"增长路径", concepts:[
+      {t:"增长路径谱系", d:"流程标准化 → 外包扩展 → 产品化/订阅化 → 提价 → 授权/加盟 → 团队化。每条路径提高杠杆的方式与代价不同。", s:"匹配增长手段与业务结构。", w:"增长手段的选择取决于瓶颈类型：交付瓶颈→标准化/外包，获客瓶颈→渠道扩展，定价瓶颈→价值重定位。", m:"路径评估：对现金流的影响、对质量的影响、对创始人时间的影响、可逆性。", a:"增长决策前用工具 19 复盘当前瓶颈类型。", p:"把「增长」等同于「招人」；在瓶颈未识别时随机扩张。", x:"与「规模化」区别：路径是手段选择，规模化是结果状态。", l:"路径间有依赖顺序（先标准化再外包再团队化）。", ev:3},
+      {t:"收入增长与利润增长的区别", d:"收入增长（销售额上升）与利润增长（净利上升）可能背离：增长消耗营运资金、拉低毛利、增加复杂度。", s:"防止「增长陷阱」。", w:"Tim Berry 的经典观察：销售额翻倍的年份差点破产——提前备货 + 延迟收款 = 增长吞噬现金。", m:"增长质量指标：增量收入的毛利率、增量收入的现金转化周期、增量收入的获客成本变化。", a:"用工具 15 的情景预测检验增长方案的现金流影响。", p:"用收入增长率汇报业绩；忽视增长对现金的占用。", x:"与「规模经济」区别：规模经济是成本现象，增长质量是财务纪律。", l:"早期业务收入基数小，增长率波动天然剧烈。", ev:2},
+      {t:"创始人瓶颈", d:"业务增长受限于创始人的个人时间、技能带宽或决策集中度。", s:"识别「再增长就必须改变结构」的临界点。", w:"一人公司的增长上限 = 创始人有效时间 × 单位时间产出 × 杠杆系数；突破需要杠杆（工具、外包、产品化）而非更努力。", m:"突破路径：时间杠杆（自动化/外包）× 技能杠杆（学习/合作）× 结构杠杆（产品化/订阅）。", a:"当「所有增长机会都排队等创始人」时，启动结构化突破而非硬撑。", p:"用延长工作时间突破瓶颈；把瓶颈当暂时现象。", x:"与「产能瓶颈」区别：创始人瓶颈是人的约束，产能瓶颈是流程的约束。", l:"部分业务形态（高端咨询）的瓶颈是设计而非缺陷。", ev:3}
+    ]},
+    {name:"不应规模化的情形", concepts:[
+      {t:"维持小型高利润业务的正当性", d:"当增长会显著降低利润、增加复杂度或损害生活质量时，主动选择维持规模是理性决策。", s:"把「不做大」从失败叙事中解放出来。", w:"一人公司的目标函数由创始人定义：利润、时间自由、创造性满足都可能是目标；规模只是手段之一。", m:"维持决策的检验：增长的边际利润是否为负？复杂度成本是否超过收益？", a:"在阶段复盘中明确「本阶段不追求增长」并设定维持指标。", p:"用外部标准（融资、雇员数）衡量自己的业务；把维持当退缩。", x:"与「增长停滞」区别：维持是主动选择，停滞是被动结果。", l:"市场变化可能迫使重新评估（竞争、技术替代）。", ev:3},
+      {t:"规模化必要条件检验", d:"规模化的前提：需求可重复验证、交付可标准化、单位经济为正、现金流可支撑增长、创始人可退出日常执行。", s:"在扩张前检验结构性条件。", w:"条件不满足时的规模化 = 放大问题：把不成立的模式做大，只是更快地烧完现金。", m:"检验清单：PMF 证据、SOP 完备度、LTV:CAC 与回收期、跑道长度、关键人依赖度。", a:"用工具 19 的阶段门槛逐项打分；任一项不达标即暂缓规模化。", p:"用融资或储蓄强行突破条件；先扩张后补课。", x:"与「增长计划」区别：检验是前置门槛，计划是执行方案。", l:"条件会随时间变化，需定期重检。", ev:3}
+    ]}
+  ],
+  objectives:["能够用阶段模型定位业务当前阶段并设定下一阶段证据门槛","能够列举 PMF 的行为证据与态度证据并说明强度差异","能够区分收入增长与利润增长，并识别增长陷阱","能够检验规模化的五项必要条件，并论证何时应主动维持小规模"],
+  checks:["「月收入连续三个月增长 20%」——这能说明业务健康吗？还缺什么证据？","为什么「先扩张后补课」通常失败？扩张放大了什么？","什么情况下「不增长」是正确的决策？需要什么证据支持？"],
+  practice:{task:"设计一个从初步验证到稳定经营的阶段路线图：为每个阶段设定进入下一阶段的证据门槛（量化指标）；标注当前业务所处阶段与最近一个未达标门槛。", template:"《创业项目阶段复盘表》（工具 19）。", criteria:"每阶段门槛量化且可观测；当前阶段定位有数据支撑；未达标门槛有改进计划。", gate:"能说出「下一阶段的门槛是什么、现在差多少、怎么补」。"},
+  mistakes:[
+    {e:"用收入增长率当健康证明", why:"收入是最容易统计且最常被问起的数字。", bias:"单一指标偏误", detect:"你的经营汇报只有收入曲线。", fix:"配套汇报：毛利率、现金流、回收期、留存率。"},
+    {e:"在瓶颈未识别时随机扩张", why:"扩张动作（投广告、招人）有即时进度感。", bias:"行动偏误", detect:"你的增长动作与瓶颈类型不匹配（交付瓶颈却在买流量）。", fix:"先用工具 19 定位瓶颈，再选择匹配的增长手段。"},
+    {e:"把「维持规模」当失败", why:"外部叙事普遍把增长当唯一成功标准。", bias:"社会认同偏误", detect:"你的扩张决策说不出边际利润为正的证据。", fix:"用边际分析检验：增长的边际利润、复杂度成本、时间成本。"}
+  ],
+  resources:[
+    {name:"The Million-Dollar Company That Never Hired a Marketer（Stripe 与 Mercatus 交叉数据）", org:"State of AI Marketing", type:"行业研究与数据", url:"https://www.stateofaimarketing.co/news/solo-operators-first-marketing-hire", date:"2026 年", topic:"一人公司的增长现实 / AI 杠杆", why:"两份独立数据的交叉验证：Stripe 平台百万美元级个人运营者两年翻倍（平台口径）；Mercatus 用政府注册数据发现高 AI 暴露行业新企业申请增长 26.8%。同时明确两者的口径局限——增长数据的读取需要谨慎。", how:"精读口径与局限部分。", level:"中级", limits:"Stripe 为平台数据；Mercatus 为相关性研究。", ev:2},
+    {name:"Stripe Data: Solopreneurs Earning $10M Tripled in Two Years", org:"FourWeekMBA（引述 Stripe Economics《The Age of the Solopreneur》）", type:"行业研究与数据", url:"https://fourweekmba.com/stripe-solopreneur-10m-tripled-ai-assisted-4x/", date:"2026 年", topic:"个人运营者的收入规模分布", why:"Stripe Economics 2026 年 6 月报告要点：年收入超百万美元的个人运营者 2023→2025 翻倍，超 500 万/1000 万美元者接近三倍；2025 年注册队列达到百万美元收入的速度比 2023 年快 30%。", how:"浏览数据要点。", level:"入门", limits:"平台数据，存在口径与选择偏差；转引来源。", ev:3},
+    {name:"Changing course（Cambridge Judge：转型频率与推理方式研究）", org:"Cambridge Judge Business School", type:"学术研究", url:"https://www.jbs.cam.ac.uk/?p=115528", date:"研究期 2016–2018", topic:"增长阶段的推理方式 / 转型频率", why:"21 家加速器企业两年追踪：规模化阶段归纳式推理优于演绎式实验；消亡企业「从不转型或极少转型」，频繁转型同样受阻——增长决策的节奏证据。", how:"选读研究发现部分。", level:"中级", limits:"小样本加速器研究；外推需谨慎。", ev:2},
+    {name:"The Million-Dollar Solo: Why the One-Person Business Just Became the Most Ambitious Bet in America", org:"The Lonely Entrepreneur（2026 Solo Economy Report）", type:"行业研究与数据", url:"https://lonelyentrepreneur.com/million-dollar-one-person-business/", date:"2026 年", topic:"一人经济的规模与收入分布", why:"汇总一人经济数据：2023 年 117,060 家无雇员企业收入超百万美元（人口普查局 NES 口径）、81.9% 小企业无雇员、约 2,980 万个体经营者创收 1.7 万亿美元——同时提醒「AI 给的是杠杆而非收入」。", how:"浏览数据与「杠杆放大错误」部分。", level:"入门", limits:"行业报告，部分数据为转引；「收入/人」对比为示意性质。", ev:3}
+  ]
+},
+{
+  id:"m16", num:"16", name:"失败分析、退出与个人长期经营策略", en:"Failure Analysis, Exit & Long-Term Strategy", stage:"D",
+  coreQ:"什么时候该坚持，什么时候该停？退出有哪些选项？长期经营如何管理风险？",
+  value:"把「退出」从情绪事件变为规则决策，保护个人财务与长期选择权。",
+  position:"阶段 D 的收束模块：与 m15 的增长决策构成「继续/调整/退出」的完整决策闭环。",
+  prereq:["m15"], next:[], parallel:["m11"],
+  topics:[
+    {name:"失败机制与可修复性", concepts:[
+      {t:"可修复问题与结构性问题", d:"可修复问题：定价错误、渠道单一、流程混乱、文案不力——有明确处方；结构性问题：需求不存在、市场萎缩、模式不成立、监管禁止——换执行不解决。", s:"区分「再努力一下」与「该停了」。", w:"把结构性问题当可修复问题处理，是最常见的资源耗尽路径。", m:"判别方法：假设检验法——如果换团队/换执行/换渠道，问题会消失吗？不会 → 结构性问题。", a:"用工具 20 的判别清单逐项排查；结构性问题触发退出评估。", p:"用「还不够努力」解释一切；把退出当承认失败。", x:"与「困难」区别：困难是程度问题，结构性是性质问题。", l:"判断依赖信息完整性；信息不足时先补验证（m3）。", ev:3},
+      {t:"停止投入的决策规则", d:"事前写定的止损条件：现金跑道低于阈值、验证实验连续失败、机会成本超过阈值、个人状态不可持续。", s:"用规则对抗承诺升级。", w:"SBA 数据显示新设雇主企业 5 年存活率约 49%——关闭是常见结果而非耻辱；主动止损释放的资源可投入下一个机会。", m:"规则要素：触发指标、阈值、复核周期、例外通道（提高例外成本）。", a:"工具 20 强制事前填写止损规则；每月对照检查。", p:"止损规则只写在脑子里；触发后找例外解释。", x:"与「放弃」区别：止损是规则执行，放弃是情绪决定。", l:"规则无法覆盖所有情形，但能防止最坏情形。", ev:2}
+    ]},
+    {name:"退出选项", concepts:[
+      {t:"退出选项比较", d:"继续经营（证据支持）、转型（pivot：换客户/换方案/换模式）、出售（转让客户关系与资产）、关闭（清算收尾）、维持小规模（主动选择）。", s:"把退出从二元决策变为选项菜单。", w:"Cambridge Judge 研究发现消亡企业「从不转型或极少转型」——转型本身不是失败信号，不转型才是风险。", m:"选项评估维度：资产可转移性、客户关系归属、个人时间释放、情感成本、机会成本。", a:"用工具 20 对每个选项做触发条件与行动方案设计。", p:"认为退出只有「坚持或倒闭」两种；出售选项从不被考虑。", x:"与「失败」区别：退出是决策，失败是结果。", l:"出售市场对微型业务流动性有限，估值预期需现实。", ev:3},
+      {t:"业务资产的可转移性", d:"可转移资产：客户关系与邮件列表、品牌与域名、知识产权、流程文档、数据；不可转移：创始人个人技能与声誉（部分可迁移）。", s:"评估业务的「可退出性」。", w:"一人公司的资产集中度天然高；可转移性决定退出选项的宽度。", m:"可转移性提升动作：客户数据自有化（邮件列表）、流程文档化、品牌与主体分离、合同可转让条款。", a:"每季度更新资产清单与可转移性评级。", p:"把平台粉丝当可转移资产；客户关系全部绑定在创始人个人微信里。", x:"与「资产评估」区别：可转移性关注退出场景，评估关注交易定价。", l:"B2B 关系型业务的可转移性天然低于产品型业务。", ev:3}
+    ]},
+    {name:"长期经营策略", concepts:[
+      {t:"定期复盘机制", d:"固定周期（月度指标 + 季度战略）的结构化复盘：数据回顾 → 假设检验 → 决策更新 → 行动清单。", s:"把经营从「凭感觉」变为「有节奏的决策系统」。", w:"复盘的对象是决策而非结果：记录当时的信息与假设，检验决策质量而非运气。", m:"复盘结构：关键指标 vs 目标 → 偏差归因 → 假设更新 → 下一周期行动。", a:"用工具 19 模板执行季度复盘；月度只看指标仪表盘。", p:"复盘变成自我批评或自我表扬；不复盘决策只复盘结果。", x:"与「总结」区别：复盘面向未来决策，总结面向过去记录。", l:"复盘质量取决于记录完整性，需坚持记决策日志。", ev:3},
+      {t:"个人资产与经营资金的风险隔离", d:"经营资金与个人资产分离管理：经营账户独立、个人应急储备优先、避免以个人资产无限担保经营债务。", s:"保护个人财务安全，保留再出发的能力。", w:"个体经营的无限责任意味着经营失败可能吞噬个人资产——主体形式选择（m14）与资金隔离是长期经营的安全带。", m:"隔离动作：独立账户、个人储备金（6–12 个月生活费）优先于业务扩张投入、谨慎个人担保。", a:"设定「个人财务红线」：任何经营决策不得使个人储备低于阈值。", p:"把全部积蓄投入单一业务；用个人信用卡无限支撑经营现金流。", x:"与「风险投资」区别：隔离是保护策略，投资是配置策略。", l:"早期业务常需个人投入，关键是设定上限与止损。", ev:2},
+      {t:"机会成本与职业选择", d:"持续经营的机会成本 = 同等时间投入其他职业/业务的期望收益；定期重估「继续经营 vs 回去上班 vs 换项目」。", s:"把创业放回人生选择的坐标系。", w:"一人公司的价值不仅是收入：时间自主、创造性满足、技能复利都是收益项——但需诚实计入成本项（不稳定、孤独、保障缺失）。", m:"重估触发点：年度复盘、重大生活变化、业务里程碑（正/负）。", a:"每年做一次「人生资产负债表」：经营业务的全部收益与成本 vs 替代选项。", p:"把「已经投入这么多年」当继续的理由；忽视非货币收益与成本。", x:"与「沉没成本」区别：机会成本是前瞻比较，沉没成本是后视执念。", l:"非货币收益难以量化，但应显式列出而非忽略。", ev:3}
+    ]}
+  ],
+  objectives:["能够区分可修复问题与结构性问题，并用假设检验法判别","能够设计事前止损规则并说明其构成要素","能够比较继续、转型、出售、关闭、维持五种退出选项的评估维度","能够设计个人资产与经营资金的风险隔离方案"],
+  checks:["「再坚持一年说不定就成了」——用什么框架判断这是韧性还是承诺升级？","业务出售时，哪些资产可以转移、哪些不能？这如何影响你现在的经营动作？","为什么「个人应急储备优先于业务扩张」是长期经营纪律而非保守？"],
+  practice:{task:"为一个假设业务设计继续经营、转型及退出三个情景：每个情景明确关键指标、触发条件与行动方案；同时设计个人资产隔离方案与定期复盘机制。", template:"《继续、转型或退出的决策清单》（工具 20）+《创业项目阶段复盘表》（工具 19）。", criteria:"三情景各有量化触发条件；退出选项包含出售与关闭；隔离方案有具体红线。", gate:"能说出「什么信号出现时，我会启动退出评估」。"},
+  mistakes:[
+    {e:"把结构性问题当执行问题硬扛", why:"「努力就能解决」的叙事让人保持希望与尊严感。", bias:"控制错觉 / 承诺升级", detect:"你换了三任执行方案，问题依旧。", fix:"用假设检验法判别：换执行会消失吗？不会 → 结构性问题。"},
+    {e:"退出决策拖到现金断裂", why:"退出意味着承认失败，拖延可以推迟痛苦。", bias:"损失厌恶", detect:"你的现金跑道已低于 3 个月，仍在「再想想」。", fix:"事前止损规则（工具 20）；触发即执行，例外需书面理由。"},
+    {e:"把平台资产与个人微信当业务资产", why:"这些资产日常可见且「感觉是自己的」。", bias:"禀赋效应", detect:"你的客户数据无法导出，业务无法离开你个人账号运转。", fix:"客户数据自有化（邮件列表）；流程文档化；定期资产可转移性审计。"}
+  ],
+  resources:[
+    {name:"Small Business Profiles: Frequently Asked Questions（存活率基线）", org:"U.S. SBA Office of Advocacy（经 SBE Council 转引）", type:"官方文档与政府资料", url:"https://sbecouncil.org/?p=5852", date:"数据期 1994–2019", topic:"关闭与存活的基线 / 止损的现实性", why:"官方口径的存活率数据（5 年约 49%）为「关闭是常见结果」提供基线参照，帮助把退出决策去污名化。", how:"浏览存活率数据。", level:"入门", limits:"美国雇主企业口径；存活率含主动关闭。", ev:1},
+    {name:"Changing course（Cambridge Judge：转型频率研究）", org:"Cambridge Judge Business School", type:"学术研究", url:"https://www.jbs.cam.ac.uk/?p=115528", date:"研究期 2016–2018", topic:"转型 vs 坚持的实证证据", why:"消亡企业的共同特征是「从不转型或极少转型」，而频繁转型同样受阻——为「何时转型」提供实证区间（约 1–2 次转型为最优带）。", how:"精读研究发现部分。", level:"中级", limits:"21 家加速器企业小样本。", ev:2},
+    {name:"Solopreneur Research: Insights from 160+ Cases（160 个案例的分布分析）", org:"lyc.fyi（基于 starterstory 公开案例）", type:"实践案例", url:"https://lyc.fyi/posts/solopreneur-research-160-cases-cn", date:"持续更新", topic:"个体创业者的收入分布现实", why:"160 个公开案例的分布：41% 年收入低于 $50K、7% 超过 $500K、90% 启动资金低于 $500；54.4% 粉丝不足 5,000。为收入预期提供校准——但必须注意样本来自成功案例库，存在严重幸存者偏差。", how:"浏览分布数据并阅读偏差提示。", level:"入门", limits:"案例来自 starterstory（成功案例平台），幸存者偏差极大；分布不可外推为总体概率。", ev:3},
+    {name:"Small Business Cash Flow Management: Strategies for Success（失败归因与增长陷阱）", org:"Preferred CFO（引述 Hagen/U.S. Bank 研究）", type:"行业研究与数据", url:"https://preferredcfo.com/insights/cash-flow-reasons-small-businesses-fail-2026", date:"2026 年更新", topic:"失败机制 / 增长消耗现金", why:"Hagen 研究的失败归因（现金流 82%、启动资金 79%、计划缺失 78%）与「增长是特洛伊木马」的机制解释（提前备货 + 延迟收款 = 增长吞噬现金）——退出决策的财务预警框架。", how:"精读归因与增长陷阱部分。", level:"入门", limits:"回顾性归因研究，非因果实验。", ev:2}
+  ]
+}
+];
+/* ==================== 数据：商业工具箱 ==================== */
+const TOOLS = [
+  {num:1,name:"创业机会筛选矩阵",mod:"m1",
+   scene:"阶段 A：手上有多个候选想法，需要统一标准比较而非凭感觉选择。",
+   inputs:["3 个候选创业机会","评估维度定义（需求证据、客户可触达性、竞争、启动成本、个人匹配度、盈利能力）"],
+   steps:["为每个候选机会逐维度评级（高/中/低）","每个评级标注证据来源（客户原话 / 行为数据 / 推测）","标注「尚无证据」的格子","按加权或排序法得出优先进入客户研究的机会"],
+   criteria:"每个评级都有可追溯证据；至少一个维度使用自下而上估算；「尚无证据」的格子不得计为正面。",
+   misuse:"用感觉打分后补证据；把「我喜欢」填进个人匹配度。",
+   template:"行 = 评估维度，列 = 候选机会；每格 = 评级 + 证据 + 证据强度（原话/行为/推测）。"},
+  {num:2,name:"客户研究与访谈记录表",mod:"m2",
+   scene:"阶段 A/B：需要把客户访谈从「聊天」变成「证据收集」。",
+   inputs:["访谈提纲（五段式：开场、情境回溯、任务与结果、现有方案、支付历史）","目标客户名单（≥5 人）"],
+   steps:["访谈前写下待验证假设","访谈中只问行为与过往经历，不问假设与意见","24 小时内按原话记录（不转述）","标注每条信息的证据强度：原话 / 行为 / 推测","访谈后更新假设状态"],
+   criteria:"≥5 次访谈；每个痛点有原话引用；明确区分「说过」与「做过」。",
+   misuse:"记录自己的转述而非客户原话；只访朋友；问「你会买吗」。",
+   template:"列 = 受访者、日期、任务、期望结果、现有方案、支付行为、原话引用、证据强度、假设更新。"},
+  {num:3,name:"客户痛点优先级评估表",mod:"m2",
+   scene:"阶段 A/B：访谈收集了一堆痛点，需要决定先解决哪个。",
+   inputs:["访谈记录表中的痛点清单"],
+   steps:["列出全部痛点","按四维打分：发生频率、影响程度、现有方案满意度、支付证据","计算优先级（频率 × 影响 × 不满 × 支付证据）","输出排序与「优先验证」的痛点"],
+   criteria:"有支付行为证据的痛点优先；评分依据可回溯到访谈记录。",
+   misuse:"按「客户喊得最响」排序；忽视「不行动的代价」。",
+   template:"行 = 痛点，列 = 频率、影响、现有方案、支付证据、优先级得分、证据来源。"},
+  {num:4,name:"市场调研与竞争分析矩阵",mod:"m4",
+   scene:"阶段 A：进入细分市场前，需要结构化的竞争认知。",
+   inputs:["目标细分市场","竞品清单（≥5 个，覆盖直接/间接/替代三类）"],
+   steps:["收集每个竞品的公开资料（官网、定价页、评价、试用）","填写四要素：客户群体、价值主张、产品/服务、定价、渠道","每格标注资料来源与日期","提出 2 个差异化假设并设计验证方法"],
+   criteria:"每个竞品条目有来源与日期；包含至少一个替代方案（含「什么都不做」）。",
+   misuse:"用主观猜测填格；只列直接竞品；把「市场空白」当机会证明。",
+   template:"行 = 竞品，列 = 类型（直接/间接/替代）、客户群体、价值主张、定价、渠道、资料来源、日期。"},
+  {num:5,name:"商业模式画布",mod:"m5",
+   scene:"阶段 A：把候选业务的全部假设组织在一页上。",
+   inputs:["候选业务的初步假设"],
+   steps:["按九要素填写（客户细分→价值主张→渠道→客户关系→收入流→关键资源→关键活动→关键伙伴→成本结构）","每个格子标注：假设 / 有证据","检查格子间联动（渠道变了收入结构是否成立）","标出 2–3 个最不确定的格子，设计验证实验"],
+   criteria:"每格标注证据状态；联动断点被识别；最不确定格子有验证计划。",
+   misuse:"填满即当验证完成；画布从不更新。",
+   template:"九宫格画布 + 每格下方的「证据状态」标注行。"},
+  {num:6,name:"创业假设清单",mod:"m3",
+   scene:"阶段 B：把商业想法分解为可证伪的假设。",
+   inputs:["商业想法描述"],
+   steps:["列出全部假设（关于客户、问题、方案、定价、渠道、交付）","逐条检验可证伪性（「能想象什么对话会证明我错」）","分类：价值假设 / 增长假设 / 其他","标注飞跃假设（错了业务就不成立）","按「错了代价 × 验证成本」排序"],
+   criteria:"每条假设可证伪；飞跃假设 ≤3 个；排序有依据。",
+   misuse:"把愿望写成假设（「客户会喜欢」）；先验证容易的而非致命的。",
+   template:"列 = 假设陈述、类别、是否飞跃、证伪方式、错了的代价、验证成本、优先级。"},
+  {num:7,name:"MVP 与验证实验计划",mod:"m3",
+   scene:"阶段 B：为最致命的假设设计最低成本的区分性实验。",
+   inputs:["飞跃假设清单"],
+   steps:["为每个飞跃假设选择 MVP 形态（落地页/原型/人工交付/预售/付费试点）","定义指标与分母（转化率 = X 行为 ÷ Y 人群）","设定成功阈值、失败阈值、停止条件","设定成本上限与测试期限","预写三种结果（超预期/符合/低于阈值）各自的下一步"],
+   criteria:"每个实验有事前阈值与停止条件；不存在「无论结果如何都继续」的实验。",
+   misuse:"把 MVP 当功能最少的产品；用流量当需求证据。",
+   template:"列 = 假设、MVP 形态、指标、分母、成功阈值、失败阈值、停止条件、成本上限、期限、三结果预案。"},
+  {num:8,name:"实验成本和成功阈值记录表",mod:"m3",
+   scene:"阶段 B：执行验证实验的过程记录与结果对照。",
+   inputs:["验证实验计划"],
+   steps:["实验前抄录阈值（防止事后修改）","记录实际成本（时间 + 金钱）","记录实际结果（分子/分母）","对照阈值得出结论：继续 / 调整 / 暂停 / 放弃","记录「这次实验买到了什么信息」"],
+   criteria:"阈值抄录于实验开始前；结论与阈值机械对照。",
+   misuse:"事后解释结果使其「基本符合预期」；成本只记金钱不记时间。",
+   template:"列 = 实验、事前阈值、实际成本、实际结果、结论、学到的信息、下一步。"},
+  {num:9,name:"最小销售方案模板",mod:"m6",
+   scene:"阶段 B/C：把验证过的痛点落成可销售的最小方案。",
+   inputs:["客户研究结论","验证实验结果"],
+   steps:["填写六要素：目标客户、解决的问题、交付内容、交付期限、价格假设、服务边界","每个要素做证据回溯（对应哪条客户证据）","明确「不包含什么」","定义结果衡量方式"],
+   criteria:"六要素齐全；边界明确；每个要素有证据回溯；价格假设标注待验证。",
+   misuse:"把功能清单当价值主张；为签单过度承诺结果。",
+   template:"一页纸：价值主张（客户+任务+痛点+方案+差异+信任）+ 交付清单 + 期限 + 价格假设 + 排除项 + 衡量方式 + 证据回溯。"},
+  {num:10,name:"产品化服务设计表",mod:"m6",
+   scene:"阶段 C：把服务转化为固定范围、固定价格、可重复交付的产品。",
+   inputs:["候选服务","交付历史数据（如有）"],
+   steps:["落实三支柱：固定范围（含排除项）、固定价格（按结果定价）、可重复流程（SOP 初稿）","设计 2–4 档套餐（入门/主力/高价锚点）","定义 intake 流程与验收标准","规划外包边界"],
+   criteria:"三支柱全部落实；档位差异清晰；排除项明确。",
+   misuse:"只固定价格不固定范围；把整个复杂服务一次性产品化。",
+   template:"三支柱检查表 + 套餐矩阵（档位 × 交付物 × 周期 × 修订政策 × 排除项）+ SOP 初稿框架。"},
+  {num:11,name:"获客渠道测试计划",mod:"m8",
+   scene:"阶段 C：用有纪律的小规模测试选择获客渠道。",
+   inputs:["目标客户行为证据（客户在哪搜索/信任谁）"],
+   steps:["设计三种获客方法（覆盖主动+被动）","每种写明：预算、执行流程、成功指标、停止条件","选择一种先做小规模测试","每月复盘渠道数据（分渠道 CAC 与回收期）"],
+   criteria:"停止条件事前写定；每个渠道有客户行为证据；分渠道计算 CAC。",
+   misuse:"多渠道同时小规模投入；用曝光量汇报效果。",
+   template:"列 = 渠道、类型（主动/被动）、预算、流程、成功指标、停止条件、客户行为证据、测试结果。"},
+  {num:12,name:"销售漏斗指标表",mod:"m9",
+   scene:"阶段 C：把销售从艺术变为可诊断的流程。",
+   inputs:["业务类型（B2B/B2C）","历史成交数据（如有）"],
+   steps:["定义漏斗阶段（线索→资格→需求沟通→报价→异议处理→成交→交付衔接）","为每阶段定义进入条件与退出条件","设定各阶段指标（转化率、周期、流失原因）","为每段流失设计一个诊断问题","设计复购/追加销售/转介绍机制"],
+   criteria:"每阶段有进入条件；分段转化率可计算；流失诊断问题可执行。",
+   misuse:"只看总转化率；把「有兴趣」当「有资格」。",
+   template:"漏斗阶段表（阶段、进入条件、指标、流失原因、诊断问题、改进方法）+ 留存机制设计。"},
+  {num:13,name:"定价与收入情景模型",mod:"m10",
+   scene:"阶段 C：用三情景测算不同价格与销量下的经营结果。",
+   inputs:["2–3 个价格方案","销量与转化率假设","固定成本与单位变动成本"],
+   steps:["为每个价格方案设定保守/基准/乐观三组销量假设","计算各情景的收入、毛利、盈亏平衡","标注每个参数的依据（实测/调研/假设）","列出需要真实客户验证的假设清单"],
+   criteria:"三情景参数有依据；公式与变量定义完整；待验证假设明确到「用什么实验验证」。",
+   misuse:"套用未经验证的行业均值；只做乐观情景。",
+   template:"情景表（价格 × 销量 → 收入、毛利、盈亏平衡销量）+ 参数依据列 + 待验证假设清单。",
+   formula:"收入 = 价格 × 销量\n利润 = (价格 − 单位变动成本) × 销量 − 固定成本\n盈亏平衡销量 = 固定成本 ÷ (价格 − 单位变动成本)\n单位贡献毛利 = 价格 − 单位变动成本"},
+  {num:14,name:"单位经济模型计算表",mod:"m11",
+   scene:"阶段 C/D：检验获客与留存的真实经济性。",
+   inputs:["分渠道营销销售成本","新客户数","客单价与毛利率","流失率或队列留存数据"],
+   steps:["分渠道计算 CAC（固定口径，含人力与工具）","用队列数据计算 LTV（优先于平均流失率）","计算 LTV:CAC 与 CAC 回收期","两者共同通过才判定渠道健康","标注所有假设的证据强度"],
+   criteria:"口径固定跨期可比；LTV 用队列法；LTV:CAC 与回收期配对判断。",
+   misuse:"只算广告费；用最低观测流失率外推；把 3:1 当普适真理。",
+   template:"CAC 分渠道表 + LTV 双算法对照 + LTV:CAC 与回收期仪表盘 + 假设标注。",
+   formula:"CAC = 营销与销售总成本 ÷ 新客户数\nLTV（平均法）= 客单价 × 毛利率 × 平均客户生命周期\nLTV（流失率法）= ARPU × 毛利率 ÷ 月流失率\nLTV:CAC = LTV ÷ CAC\nCAC 回收期（月） = CAC ÷ (月客单价 × 毛利率)"},
+  {num:15,name:"现金流预测与风险清单",mod:"m11",
+   scene:"阶段 C/D：回答「钱能撑多久」并管理增长对现金的吞噬。",
+   inputs:["期初现金","月度收入与成本预测（分保守/基准/乐观）","账期与预付款结构"],
+   steps:["建立月度现金流预测（三情景）","计算净燃烧率与现金跑道","标注每个关键参数的依据","编制风险清单（客户集中、账期、平台、个人支出）","每月用实际值更新"],
+   criteria:"保守情景下业务可生存；每个参数有依据；风险清单有应对预案。",
+   misuse:"只做乐观情景；把应收账款当可用现金；忽视增长对营运资金的占用。",
+   template:"月度现金流表（期初、流入、流出、期末）+ 三情景区间 + 跑道计算 + 风险清单（风险、概率、影响、预案）。",
+   formula:"期末现金 = 期初现金 + 期间流入 − 期间流出\n月净燃烧 = 月成本 − 月收入\n现金跑道（月） = 当前现金 ÷ 月净燃烧\n盈亏平衡销量 = 固定成本 ÷ (价格 − 单位变动成本)"},
+  {num:16,name:"SOP 与业务流程图模板",mod:"m12",
+   scene:"阶段 D：把端到端交付流程文档化，为外包与自动化做准备。",
+   inputs:["业务全链路（获客→交付→收款）"],
+   steps:["绘制端到端流程图（标注各环节周期）","识别瓶颈环节","每项工作标记：亲自执行 / 标准化 / 自动化 / 外包 / 暂不开展","为「标准化」与「外包」工作编写 SOP（步骤、输入输出、质量标准、检查清单）","每完成一单更新 SOP"],
+   criteria:"流程覆盖全链路；每项工作有明确标记；瓶颈被识别。",
+   misuse:"流程只存在于创始人脑中；为一次性工作过度建流程。",
+   template:"流程图 + 工作标记表 + SOP 模板（触发条件、步骤、检查点、异常处理、负责人）。"},
+  {num:17,name:"AI 自动化机会评估表",mod:"m13",
+   scene:"阶段 D：选择值得自动化的环节并排定实施顺序。",
+   inputs:["业务流程清单","创始人时薪假设"],
+   steps:["选出三个自动化候选点","计算每个候选：节省时间 × 时薪 = 年收益","减去实施成本与年维护成本","评估错误代价（客户-facing 环节错误代价高）","按 ROI 排序，确定实施顺序","为每个候选设定审核级别（全审/抽检/自动）"],
+   criteria:"ROI 含维护成本；审核级别与错误代价匹配；按 ROI 而非「酷」排序。",
+   misuse:"为了用 AI 而建复杂工作流；把 AI 初稿直接发给客户。",
+   template:"候选评估表（环节、频率、节省时间、年收益、实施成本、维护成本、错误代价、ROI、审核级别、优先级）。",
+   formula:"自动化 ROI = (年节省时间 × 时薪 + 错误减少价值 − 实施成本 − 年维护成本) ÷ 总投入\n净节省 = (创始人时间 × 时薪 − 外包/自动化总成本) − 质量风险期望成本"},
+  {num:18,name:"外包决策与供应商评估表",mod:"m12",
+   scene:"阶段 D：判断任务是否值得外包，并筛选管理供应商。",
+   inputs:["待外包任务清单","创始人时薪"],
+   steps:["计算真实经济性（费用 + 沟通 + 管理 + 质量风险）","选择外包形态（自由职业者/代理/合作伙伴）","筛选供应商（作品集、试单、评价）","定义验收标准与 SOP","首批全检，稳定后抽检"],
+   criteria:"四项成本全部计入；试单制度执行；验收标准文档化。",
+   misuse:"只比较单价；用聊天记录代替 SOP；把需要判断的工作外包。",
+   template:"经济性计算表 + 供应商评估表（能力、价格、沟通、试单结果、验收标准、风险）。"},
+  {num:19,name:"创业项目阶段复盘表",mod:"m15",
+   scene:"阶段 D：季度结构化复盘，定位阶段与下一阶段门槛。",
+   inputs:["季度关键指标（收入、毛利、现金流、CAC、回收期、留存）","决策日志"],
+   steps:["指标回顾：实际 vs 目标","偏差归因（产品/流量/销售/定价四类）","假设更新：哪些假设被证实/证伪","定位当前阶段与下一阶段门槛差距","制定下一季度行动清单"],
+   criteria:"复盘面向决策而非结果；决策日志完整；门槛差距有改进计划。",
+   misuse:"复盘变成自我批评或表扬；只复盘结果不复盘决策。",
+   template:"指标仪表盘 + 归因分析 + 假设状态更新 + 阶段定位 + 行动清单。"},
+  {num:20,name:"继续、转型或退出的决策清单",mod:"m16",
+   scene:"阶段 D：当事业务陷入困境或到达里程碑时，用规则做退出决策。",
+   inputs:["业务数据（现金流、验证记录、集中度）","事前止损规则"],
+   steps:["判别问题性质：可修复 vs 结构性（假设检验法）","对照事前止损规则（触发即执行）","设计三情景：继续经营 / 转型 / 退出（出售或关闭）","每个情景明确关键指标、触发条件、行动方案","设计个人资产隔离红线"],
+   criteria:"三情景各有量化触发条件；止损规则事前写定；例外需书面理由。",
+   misuse:"把结构性问题当执行问题硬扛；退出决策拖到现金断裂。",
+   template:"问题判别清单 + 止损规则表 + 三情景设计（情景、指标、触发条件、行动方案）+ 资产隔离红线。"}
+];
+
+/* ==================== 渲染与交互逻辑 ==================== */
+const $=(s,c=document)=>c.querySelector(s);
+const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+const EV_LABELS={1:"已验证事实",2:"有研究支持",3:"实践方法",4:"存在争议",5:"待验证假设"};
+const STAGE_NAMES={A:"阶段 A",B:"阶段 B",C:"阶段 C",D:"阶段 D"};
+const MOD_BY_ID={}; MODULES.forEach(m=>MOD_BY_ID[m.id]=m);
+const ALL_RES=[]; MODULES.forEach(m=>m.resources.forEach(r=>ALL_RES.push(Object.assign({mod:m.id,modName:m.name},r))));
+const UNIQUE_RES=(()=>{const seen={},out=[];ALL_RES.forEach(r=>{if(!seen[r.url]){seen[r.url]=true;out.push(r);}});return out;})();
+const CONCEPT_COUNT=MODULES.reduce((n,m)=>n+m.topics.reduce((a,t)=>a+t.concepts.length,0),0);
+
+/* ---------- 顶部统计 ---------- */
+function renderStats(){
+  const stats=[
+    [MODULES.length,"知识模块"],[STAGES.length,"学习阶段"],[TOOLS.length,"实践工具"],
+    [CONCEPT_COUNT,"核心概念"],[ALL_RES.length,"学习资源"],[UNIQUE_RES.length,"参考文献"]
+  ];
+  $("#hero-stats").innerHTML=stats.map(s=>`<div class="stat"><b>${s[0]}</b><span>${s[1]}</span></div>`).join("");
+}
+
+/* ---------- 学习路线 ---------- */
+function renderRoadmap(){
+  const c=$("#roadmap-container");
+  c.innerHTML=STAGES.map(s=>{
+    const mods=s.modules.map(id=>`<a class="mod-chip" href="#sec-map" data-goto="${id}">${MOD_BY_ID[id].num} ${esc(MOD_BY_ID[id].name)}</a>`).join("");
+    return `<article class="stage stage-${s.id.toLowerCase()}" id="stage-${s.id}">
+      <button class="stage-head" type="button" aria-expanded="false">
+        <span class="stage-letter">${s.id}</span>
+        <span><h3>${esc(s.name)}</h3><div class="stage-goal">${esc(s.goal)}</div></span>
+        <span class="stage-chev">▾</span>
+      </button>
+      <div class="stage-body">
+        <div class="stage-grid">
+          <div class="sg"><h5>核心模块</h5><div class="mod-chips">${mods}</div></div>
+          <div class="sg"><h5>推荐学习顺序</h5><p>${esc(s.order)}</p></div>
+          <div class="sg"><h5>必学内容</h5><ul>${s.must.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+          <div class="sg"><h5>选学内容</h5><ul>${s.optional.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+          <div class="sg"><h5>建议实践任务</h5><ul>${s.tasks.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+          <div class="sg"><h5>阶段成果</h5><p>${esc(s.outcome)}</p></div>
+        </div>
+        <div class="sg" style="margin-top:12px"><h5>进入下一阶段的条件</h5><p>${esc(s.gate)}</p></div>
+      </div>
+    </article>`;
+  }).join("")+
+  `<div class="card" style="padding:16px 20px;margin-top:6px">
+    <h4 style="font-size:14px;color:var(--primary);margin-bottom:8px">模块间主路径与反馈循环</h4>
+    <div class="flow">${MAIN_FLOW.map((f,i)=>`${i?'<span class="arr">→</span>':""}<b>${esc(f)}</b>`).join("")}</div>
+    <p style="font-size:12.8px;color:var(--muted);margin-top:10px">这不是绝对线性的流程：客户研究、产品调整、销售、财务分析与渠道测试在实践中反复循环。可以通过阅读学习的知识（理论、方法、工具）与必须通过市场实验获取的证据（需求真实性、支付意愿、获客成本）在知识地图中分别标注。</p>
+  </div>`;
+}
+
+/* ---------- 知识地图 ---------- */
+function conceptHTML(cp){
+  const rows=[["定义",cp.d],["解决什么问题",cp.s],["为什么重要",cp.w],["核心原理",cp.m],["应用场景",cp.a],["常见误区",cp.p],["概念辨析",cp.x],["适用条件与局限",cp.l]];
+  return `<div class="concept" data-term="${esc(cp.t)}">
+    <button class="concept-btn" type="button" aria-expanded="false">
+      <span class="dot"></span><span>${esc(cp.t)}</span>
+      <span class="evtag ev ev-${cp.ev}" title="证据等级">${EV_LABELS[cp.ev]}</span>
+    </button>
+    <div class="concept-detail"><div class="cd-grid">${rows.map(r=>`<div class="cd"><h6>${r[0]}</h6><p>${esc(r[1])}</p></div>`).join("")}</div></div>
+  </div>`;
+}
+function moduleHTML(m){
+  const topics=m.topics.map(t=>`<div class="topic">
+    <button class="topic-head" type="button" aria-expanded="false">${esc(t.name)}<span class="topic-chev">▾</span></button>
+    <div class="topic-body">${t.concepts.map(conceptHTML).join("")}</div>
+  </div>`).join("");
+  const rel=[["先修模块",m.prereq.map(id=>MOD_BY_ID[id].name).join("、")||"—"],
+             ["后续模块",m.next.map(id=>MOD_BY_ID[id].name).join("、")||"—"],
+             ["可并行",m.parallel.map(id=>MOD_BY_ID[id].name).join("、")||"—"]];
+  return `<article class="module stage-${m.stage.toLowerCase()}" id="${m.id}" data-search="${esc((m.name+" "+m.en+" "+m.coreQ+" "+m.topics.map(t=>t.name+" "+t.concepts.map(c=>c.t).join(" ")).join(" ")).toLowerCase())}">
+    <button class="module-head" type="button" aria-expanded="false">
+      <span class="mod-num">${m.num}</span>
+      <span><span class="mod-title">${esc(m.name)}</span><span class="mod-en">${esc(m.en)}</span></span>
+      <span class="badge b-${m.stage.toLowerCase()}">${STAGE_NAMES[m.stage]}</span>
+      <span class="mod-chev">▾</span>
+    </button>
+    <div class="module-body">
+      <div class="mod-overview">
+        <div class="ov"><h5>核心问题</h5><p>${esc(m.coreQ)}</p></div>
+        <div class="ov"><h5>模块价值</h5><p>${esc(m.value)}</p></div>
+        <div class="ov"><h5>体系位置</h5><p>${esc(m.position)}</p></div>
+        <div class="ov"><h5>模块关系</h5><p class="rel">${rel.map(r=>`<b>${r[0]}：</b>${esc(r[1])}`).join("<br>")}</p></div>
+      </div>
+      <div class="subhead">知识结构（点击概念查看详细解释）</div>
+      ${topics}
+      <div class="subhead">学习目标与自测</div>
+      <ul class="obj-list">${m.objectives.map(o=>`<li>${esc(o)}</li>`).join("")}</ul>
+      <div class="checks"><b>自测问题：</b>${m.checks.map((q,i)=>`${i+1}. ${esc(q)}`).join("　")}</div>
+      <div class="practice">
+        <h5>实践任务</h5>
+        <p>${esc(m.practice.task)}</p>
+        <div class="tmpl"><b>成果模板：</b>${esc(m.practice.template)}</div>
+        <div class="tmpl"><b>判断标准：</b>${esc(m.practice.criteria)}</div>
+        <div class="gate"><b>进入下一阶段的检查条件：</b>${esc(m.practice.gate)}</div>
+        <div class="done-row">
+          <label><input type="checkbox" class="task-done" data-mod="${m.id}"> 标记本模块实践任务为已完成</label>
+        </div>
+      </div>
+      <div class="subhead">常见错误与反例</div>
+      ${m.mistakes.map(x=>`<div class="mistake"><h6>${esc(x.e)}</h6><p><b>为什么常见：</b>${esc(x.why)}　<b>思维偏差：</b>${esc(x.bias)}</p><p><b>如何识别：</b>${esc(x.detect)}　<b>纠正方法：</b>${esc(x.fix)}</p></div>`).join("")}
+      <div class="subhead">学习资源</div>
+      <div class="res-grid">${m.resources.map(resCard).join("")}</div>
+    </div>
+  </article>`;
+}
+function resCard(r){
+  return `<div class="res" data-search="${esc((r.name+" "+r.org+" "+r.topic+" "+r.why).toLowerCase())}">
+    <h5><a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.name)}</a></h5>
+    <div class="meta"><span>${esc(r.org)}</span><span>·</span><span>${esc(r.date)}</span></div>
+    <div class="tags"><span class="rtag">${esc(r.type)}</span><span class="rtag">${esc(r.level)}</span><span class="rtag">证据：${EV_LABELS[r.ev]}</span><span class="rtag">关联：${esc(r.modName)}</span></div>
+    <div class="why"><b>适用主题：</b>${esc(r.topic)}<br><b>推荐理由：</b>${esc(r.why)}<br><b>学习方式：</b>${esc(r.how)}</div>
+    <div class="limits"><b>证据局限：</b>${esc(r.limits)}</div>
+  </div>`;
+}
+function renderMap(){ $("#map-container").innerHTML=MODULES.map(moduleHTML).join(""); }
+
+/* ---------- 模式比较 ---------- */
+let selectedModels=MODELS.map(m=>m.id);
+function renderModels(){
+  const c=$("#models-container");
+  const tabs=MODELS.map(m=>`<button class="mtab ${selectedModels.includes(m.id)?"on":""}" data-mid="${m.id}" type="button" aria-pressed="${selectedModels.includes(m.id)}">${esc(m.name)}</button>`).join("");
+  const cols=MODELS.filter(m=>selectedModels.includes(m.id));
+  const rows=MODEL_DIMS.map(dk=>`<tr><th>${MODEL_DIM_LABELS[dk]}</th>${cols.map(m=>{
+    const d=m.dims[dk];
+    return `<td><span class="rate">${esc(d.r)}</span><span class="note">${esc(d.n)}</span></td>`;
+  }).join("")}</tr>`).join("");
+  const details=cols.map(m=>`<div class="md-card">
+    <h4>${esc(m.name)}</h4>
+    <p style="font-size:12px;color:var(--muted)">${esc(m.en)}</p>
+    <h5>关键特征</h5>
+    <ul>
+      <li><b>启动资金：</b>${esc(m.dims.capital.r)} — ${esc(m.dims.capital.n)}</li>
+      <li><b>首笔收入时间：</b>${esc(m.dims.timeToRevenue.r)} — ${esc(m.dims.timeToRevenue.n)}</li>
+      <li><b>获客难度：</b>${esc(m.dims.acqDifficulty.r)} — ${esc(m.dims.acqDifficulty.n)}</li>
+      <li><b>交付复杂度：</b>${esc(m.dims.delivery.r)} — ${esc(m.dims.delivery.n)}</li>
+      <li><b>毛利结构：</b>${esc(m.dims.margin.r)} — ${esc(m.dims.margin.n)}</li>
+      <li><b>时间依赖：</b>${esc(m.dims.timeDependence.r)} — ${esc(m.dims.timeDependence.n)}</li>
+    </ul>
+    <h5>主要风险</h5><p>${esc(m.dims.risk.n)}</p>
+    <h5>适合的创始人类型</h5><p>${esc(m.dims.founderFit.n)}</p>
+    <h5>早期验证方式</h5><p>${esc(m.dims.validation.n)}</p>
+  </div>`).join("");
+  const form=DECIDE_INPUTS.map(f=>`<div class="dfield"><label for="d-${f.id}">${esc(f.label)}</label><select id="d-${f.id}">${f.options.map(o=>`<option>${esc(o)}</option>`).join("")}</select></div>`).join("");
+  c.innerHTML=`
+    <p style="font-size:13px;color:#4a5560;margin-bottom:12px">点击下方标签选择要比较的模式（至少保留 2 个）。评级为定性判断，依据见每格注释。</p>
+    <div class="model-tabs">${tabs}</div>
+    <div class="table-wrap"><table class="cmp"><thead><tr><th>维度</th>${cols.map(m=>`<th>${esc(m.name)}</th>`).join("")}</tr></thead><tbody>${rows}</tbody></table></div>
+    <div class="model-detail">${details}</div>
+    <div class="decide">
+      <h3>模式决策框架</h3>
+      <p class="hint">根据个人约束筛选候选模式。规则透明可查；输出是「有依据的候选排序」，不是精确打分——最终选择必须通过市场实验验证。</p>
+      <div class="dform">${form}</div>
+      <button class="btn-primary" id="btn-decide" type="button">生成候选模式</button>
+      <div class="dresult" id="dresult"></div>
+    </div>`;
+}
+function runDecide(){
+  const v={}; DECIDE_INPUTS.forEach(f=>v[f.id]=$("#d-"+f.id).value);
+  const cand=MODELS.map(m=>({m,score:0,reasons:[],excl:[]}));
+  const add=(id,s,r)=>{const c=cand.find(x=>x.m.id===id);if(c){c.score+=s;c.reasons.push(r);}};
+  const excl=(id,r)=>{const c=cand.find(x=>x.m.id===id);if(c){c.excl.push(r);c.score-=100;}};
+  if(v.skills==="专业技能（设计/写作/咨询等）"){add("freelance",2,"专业技能可直接变现，最快获得首笔收入");add("productized",1,"服务经验是产品化的原料");add("knowledge",1,"专业知识可包装为知识产品");}
+  if(v.skills==="技术开发能力"){add("microsaas",3,"开发能力是微型 SaaS 的核心门槛");add("productized",1,"技术能力也可产品化为技术型服务");}
+  if(v.skills==="内容创作能力"){add("content",3,"内容能力直接匹配该模式");add("knowledge",1,"内容积累可转化为知识产品");}
+  if(v.skills==="供应链/选品能力"){add("ecommerce",3,"供应链能力是电商的核心门槛");}
+  if(v.skills==="尚不明确"){cand.forEach(c=>c.reasons.push("技能方向未定：建议先用低成本服务类模式（自由职业）探索，在市场中发现自己"));}
+  if(v.capital==="< ¥5,000"){excl("ecommerce","库存与物流门槛超出资金约束");add("freelance",1,"零启动成本");add("microsaas",1,"工具链月成本通常 $0–100，真实成本是个人跑道");}
+  if(v.capital==="¥5,000–50,000"){add("productized",1,"资金可支撑流程搭建与首批获客测试");}
+  if(v.capital==="> ¥50,000"){add("ecommerce",1,"资金可支撑库存与多渠道测试");add("microsaas",1,"资金可支撑更长验证周期");}
+  if(v.hours==="< 10 小时"){add("freelance",1,"碎片时间即可接单");cand.forEach(c=>{if(["productized","microsaas","ecommerce"].includes(c.m.id))c.reasons.push("每周 <10 小时：该模式需要持续的交付/构建投入，建议先保证时间再进入");});}
+  if(v.hours==="10–25 小时"){add("productized",1,"时间可支撑标准化交付");}
+  if(v.hours==="> 25 小时"){add("microsaas",1,"时间充足可支撑构建与分发双线推进");}
+  if(v.clients==="有可直接联系的潜在客户"){add("freelance",3,"现成客户资源 = 最快的需求验证与首笔收入");add("productized",1,"可直接向现成客户预售服务包");}
+  if(v.clients==="有弱关系人脉"){add("freelance",1,"弱关系可转化为首批客户");}
+  if(v.clients==="基本从零开始"){add("content",1,"无客户资源时，内容建设是积累信任的路径（周期长）");cand.forEach(c=>{if(c.m.id==="freelance")c.reasons.push("冷启动阶段：主动外联与平台接单是主要路径");});}
+  if(v.goal==="补充现有收入"){add("freelance",2,"时间灵活，可与现有工作并行");add("knowledge",1,"数字产品可被动销售，适合副业");}
+  if(v.goal==="替代全职收入"){add("productized",2,"经常性收入结构适合替代工资");add("microsaas",1,"订阅收入可替代工资但需要验证期");}
+  if(v.goal==="追求高收入上限"){add("microsaas",2,"软件边际成本趋近于零，上限最高");add("ecommerce",1,"规模效应存在但受库存约束");}
+  if(v.risk==="低（不能承受亏损）"){excl("ecommerce","库存积压风险与低风险承受力冲突");cand.forEach(c=>{if(c.m.id==="microsaas")c.reasons.push("低风险偏好：微型 SaaS 验证周期长，需确保个人跑道充足");});add("freelance",2,"服务模式亏损风险最低");}
+  if(v.risk==="中（可承受有限亏损）"){add("productized",1,"适中的风险结构");}
+  if(v.risk==="高（可承受较大不确定性）"){add("microsaas",2,"高风险承受力匹配长验证周期");add("ecommerce",1,"可承受库存波动");}
+  cand.sort((a,b)=>b.score-a.score);
+  const top=cand.filter(c=>!c.excl.length).slice(0,3);
+  const out=cand.filter(c=>c.excl.length);
+  $("#dresult").innerHTML=
+    `<div class="subhead" style="margin-top:0">候选模式（按匹配度排序）</div>`+
+    top.map((c,i)=>`<div class="cand"><h5>${i+1}. ${esc(c.m.name)}</h5><p>${c.reasons.length?esc(c.reasons.join("；")):"约束组合下无显著加减分项，属中性候选"}</p></div>`).join("")+
+    (out.length?`<div class="subhead">被约束排除的模式</div>`+out.map(c=>`<div class="cand excl"><h5>${esc(c.m.name)}</h5><p>${esc(c.excl.join("；"))}</p></div>`).join(""):"")+
+    `<div class="dcaveat"><b>必须通过市场实验验证的问题（任何模式都适用）：</b>① 需求是否真实存在（客户行为证据，而非兴趣表达）；② 客户是否愿意按你的价格付费（支付意愿，而非陈述意愿）；③ 获客成本是否低于客户生命周期价值（单位经济）；④ 交付是否可重复且质量稳定（流程验证）。模式选择只是起点——以上四个问题只能由真实市场实验回答。</div>`;
+  $("#dresult").classList.add("show");
+}
+
+/* ---------- 工具箱 ---------- */
+function renderTools(){
+  $("#tools-container").innerHTML=TOOLS.map(t=>`<article class="tool" id="tool-${t.num}">
+    <button class="tool-head" type="button" aria-expanded="false">
+      <span class="tool-num">${String(t.num).padStart(2,"0")}</span>
+      <span><h4>${esc(t.name)}</h4><span class="tmod">关联模块：${esc(MOD_BY_ID[t.mod].num+" "+MOD_BY_ID[t.mod].name)}</span></span>
+      <span class="tool-chev">▾</span>
+    </button>
+    <div class="tool-body">
+      <div class="tool-grid">
+        <div class="tg"><h6>适用场景</h6><p>${esc(t.scene)}</p></div>
+        <div class="tg"><h6>需要输入的信息</h6><ul>${t.inputs.map(i=>`<li>${esc(i)}</li>`).join("")}</ul></div>
+        <div class="tg"><h6>使用步骤</h6><ol>${t.steps.map(s=>`<li>${esc(s)}</li>`).join("")}</ol></div>
+        <div class="tg"><h6>关键判断标准</h6><p>${esc(t.criteria)}</p></div>
+        <div class="tg"><h6>容易出现的误用</h6><p>${esc(t.misuse)}</p></div>
+      </div>
+      <div class="tg" style="margin-top:11px"><h6>模板内容</h6><p>${esc(t.template)}</p></div>
+      ${t.formula?`<div class="formula">${esc(t.formula).replace(/\n/g,"<br>")}</div>`:""}
+    </div>
+  </article>`).join("");
+}
+
+/* ---------- 资源库 ---------- */
+let resFilter={mod:"",type:"",level:"",ev:""};
+function renderResources(){
+  const sel=$("#res-filter-module");
+  sel.innerHTML='<option value="">全部模块</option>'+MODULES.map(m=>`<option value="${m.id}">${m.num} ${esc(m.name)}</option>`).join("");
+  applyResFilter();
+}
+function applyResFilter(){
+  const q=($("#map-search").value||"").trim().toLowerCase();
+  const list=ALL_RES.filter(r=>
+    (!resFilter.mod||r.mod===resFilter.mod)&&
+    (!resFilter.type||r.type===resFilter.type)&&
+    (!resFilter.level||r.level===resFilter.level)&&
+    (!resFilter.ev||String(r.ev)===resFilter.ev)&&
+    (!q||(r.name+" "+r.org+" "+r.topic+" "+r.why).toLowerCase().includes(q))
+  );
+  $("#res-container").innerHTML=list.length?list.map(resCard).join(""):'<p style="color:var(--muted);font-size:13px">没有匹配的资源，请调整筛选条件。</p>';
+  $("#res-count").textContent=`共 ${list.length} 条资源`;
+}
+
+/* ---------- 参考文献与方法 ---------- */
+function renderRefs(){
+  const groups={};
+  UNIQUE_RES.forEach(r=>{(groups[r.type]=groups[r.type]||[]).push(r);});
+  const order=["官方文档与政府资料","学术研究","方法论与工具","行业研究与数据","实践案例"];
+  const html=order.filter(g=>groups[g]).map(g=>`<div class="ref-group"><h4>${esc(g)}（${groups[g].length} 条）</h4>${
+    groups[g].map(r=>`<div class="ref">
+      <h5><a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.name)}</a></h5>
+      <div class="rmeta">${esc(r.org)} · ${esc(r.date)} · ${esc(r.type)} · ${esc(r.level)}</div>
+      <div class="rsup"><b>支持模块：</b>${esc(r.modName)}　<b>适用主题：</b>${esc(r.topic)}</div>
+      <div class="rlim"><b>证据局限：</b>${esc(r.limits)}</div>
+    </div>`).join("")}</div>`).join("");
+  $("#refs-container").innerHTML=`
+    <div class="method-note">
+      <h4>证据分级标准（本知识地图所有知识点与资源均按此分级）</h4>
+      <div class="ev-legend">
+        <span class="ev ev-1">已验证事实</span><span class="ev ev-2">有研究支持的理论</span><span class="ev ev-3">实践方法</span><span class="ev ev-4">存在争议的观点</span><span class="ev ev-5">待验证假设</span>
+      </div>
+      <ul style="margin-top:10px">
+        <li><b>已验证事实：</b>可追溯到明确数据、官方文件或研究（如 SBA/BLS/人口普查局统计）。</li>
+        <li><b>有研究支持的理论：</b>存在相应研究，但可能受条件限制（如精益创业的适用边界研究）。</li>
+        <li><b>实践方法：</b>被专业人士或创业者使用，有效性需结合场景判断（如产品化服务设计）。</li>
+        <li><b>存在争议的观点：</b>不同研究或实践可能得出不同结论（如 LTV:CAC 3:1 规则）。</li>
+        <li><b>待验证假设：</b>不足以得出可靠结论，需通过市场实验验证。</li>
+      </ul>
+    </div>
+    <div class="method-note">
+      <h4>来源评级标准</h4>
+      <p>每项资源按五个维度评级：<b>权威性</b>（发布机构性质）、<b>相关性</b>（与研究主题的匹配度）、<b>证据强度</b>（实证/综述/观点）、<b>时效性</b>（发布日期与数据年份）、<b>可追溯性</b>（能否链接到原始页面）。知名机构的来源也会因研究限制被降级标注。</p>
+    </div>
+    <div class="method-note">
+      <h4>时效性与地域适用性</h4>
+      <ul>
+        <li>检索与核验时间：2026 年 10 月。所有链接在生成时可访问；平台政策、AI 工具与税务规则易变，使用前请核对官方最新页面。</li>
+        <li>统计与法律内容以<b>美国官方来源</b>为主（SBA、BLS、美国人口普查局、IRS 口径），并明确标注适用地域；其他司法辖区需另行核实。</li>
+        <li>跨地域通用的商业原理（需求验证、现金流分析、客户获取、产品化）与特定辖区规则（企业形式、税务、合同、数据隐私）在内容中分开表述。</li>
+      </ul>
+    </div>
+    <div class="method-note">
+      <h4>已知证据局限（如实说明）</h4>
+      <ul>
+        <li>部分统计经二手页面转引（如 SBA 存活率数据经 SBE Council 转引），已在资源条目中标注；引用关键数字时建议核对官方原文。</li>
+        <li>行业调查数据（如 Bookipi、Upwork、Stripe）来自利益相关方或平台口径，存在选择偏差，仅作方向性参考。</li>
+        <li>个体创业者收入分布数据（160 案例样本）来自成功案例库，幸存者偏差显著，不可外推为总体概率。</li>
+        <li>精益创业、JTBD 等方法论的实证证据仍有限，学术批评（适用边界、知识产权风险、先前知识依赖）已在相应模块呈现。</li>
+        <li>AI 相关领域证据演进迅速，本地图收录的研究截至 2026 年年中。</li>
+      </ul>
+    </div>
+    <div class="subhead">来源目录（${UNIQUE_RES.length} 条，按类型分组）</div>
+    ${html}`;
+}
+
+/* ---------- 搜索 ---------- */
+let lastQ="";
+function applySearch(){
+  const q=($("#map-search").value||"").trim().toLowerCase();
+  let modHits=0,conHits=0;
+  $$("#map-container .module").forEach(el=>{
+    const hit=!q||el.dataset.search.includes(q);
+    el.style.display=hit?"":"none";
+    if(hit&&q){modHits++;el.classList.add("open");}
+  });
+  if(q){
+    $$("#map-container .concept").forEach(el=>{
+      const t=(el.dataset.term||"").toLowerCase();
+      if(t.includes(q)){conHits++;el.classList.add("open");}
+    });
+  }else if(lastQ){
+    $$("#map-container .module").forEach(el=>el.classList.remove("open"));
+  }
+  lastQ=q;
+  $("#map-search-count").textContent=q?`匹配 ${modHits} 个模块、${conHits} 个概念`:"";
+  applyResFilter();
+}
+
+/* ---------- 进度 ---------- */
+const PKEY="pekm-progress-v1";
+function loadProgress(){
+  let p={};try{p=JSON.parse(localStorage.getItem(PKEY)||"{}");}catch(e){}
+  $$(".task-done").forEach(cb=>{cb.checked=!!p[cb.dataset.mod];});
+  updateProgress();
+}
+function saveProgress(){
+  const p={};$$(".task-done").forEach(cb=>{if(cb.checked)p[cb.dataset.mod]=1;});
+  try{localStorage.setItem(PKEY,JSON.stringify(p));}catch(e){}
+  updateProgress();
+}
+function updateProgress(){
+  const total=$$(".task-done").length;
+  const done=$$(".task-done").filter(cb=>cb.checked).length;
+  $("#ptext-done").textContent=`已完成 ${done}`;
+  $("#ptext-total").textContent=`/ ${total} 个实践任务`;
+  $("#pbar-fill").style.width=(total?done/total*100:0)+"%";
+}
+
+/* ---------- 导航与交互 ---------- */
+function bindEvents(){
+  // 手风琴（事件委托）
+  document.addEventListener("click",e=>{
+    const head=e.target.closest(".module-head,.topic-head,.concept-btn,.stage-head,.tool-head");
+    if(head){
+      const box=head.parentElement;
+      const open=box.classList.toggle("open");
+      head.setAttribute("aria-expanded",open);
+      return;
+    }
+    const chip=e.target.closest(".mod-chip");
+    if(chip){
+      const id=chip.dataset.goto;
+      const el=document.getElementById(id);
+      if(el){el.classList.add("open");if(el.scrollIntoView)el.scrollIntoView({behavior:"smooth",block:"start"});}
+      $("#sidebar").classList.remove("open");
+      return;
+    }
+    const tab=e.target.closest(".mtab");
+    if(tab){
+      const id=tab.dataset.mid;
+      if(selectedModels.includes(id)){if(selectedModels.length>2)selectedModels=selectedModels.filter(x=>x!==id);}
+      else selectedModels.push(id);
+      renderModels();
+      return;
+    }
+    if(e.target.closest("#btn-decide")){runDecide();return;}
+  });
+  $("#map-search").addEventListener("input",applySearch);
+  $("#res-filter-module").addEventListener("change",e=>{resFilter.mod=e.target.value;applyResFilter();});
+  $("#res-filter-type").addEventListener("change",e=>{resFilter.type=e.target.value;applyResFilter();});
+  $("#res-filter-level").addEventListener("change",e=>{resFilter.level=e.target.value;applyResFilter();});
+  $$("#res-ev-chips .fchip").forEach(ch=>ch.addEventListener("click",()=>{
+    $$("#res-ev-chips .fchip").forEach(x=>x.classList.remove("on"));
+    ch.classList.add("on");resFilter.ev=ch.dataset.ev;applyResFilter();
+  }));
+  document.addEventListener("change",e=>{
+    if(e.target.classList.contains("task-done"))saveProgress();
+  });
+  $("#btn-reset").addEventListener("click",()=>{
+    try{localStorage.removeItem(PKEY);}catch(e){}
+    $$(".task-done").forEach(cb=>cb.checked=false);
+    updateProgress();
+  });
+  $("#hamburger").addEventListener("click",()=>{
+    const sb=$("#sidebar");
+    const open=sb.classList.toggle("open");
+    $("#hamburger").setAttribute("aria-expanded",open);
+  });
+  // 滚动高亮
+  const links=$$(".nav-list a");
+  const secs=links.map(a=>document.querySelector(a.getAttribute("href")));
+  if("IntersectionObserver" in window){
+    const io=new IntersectionObserver(es=>{
+      es.forEach(en=>{
+        if(en.isIntersecting){
+          links.forEach(l=>l.classList.toggle("active",l.getAttribute("href")==="#"+en.target.id));
+        }
+      });
+    },{rootMargin:"-20% 0px -70% 0px"});
+    secs.forEach(s=>s&&io.observe(s));
+  }
+}
+
+/* ---------- 启动 ---------- */
+renderStats();
+renderRoadmap();
+renderMap();
+renderModels();
+renderTools();
+renderResources();
+renderRefs();
+bindEvents();
+loadProgress();
+</script>
+</body>
+</html>
